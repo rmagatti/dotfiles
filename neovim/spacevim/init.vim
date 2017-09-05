@@ -54,7 +54,12 @@ let g:clang2_placeholder_prev = ''
 augroup custom_config
     au!
     au VimEnter * call s:customMappings()
+    au VimEnter * call s:customSettings()
 augroup END
 func s:customMappings()
     nnoremap <C-p> :Files<CR>
+endf
+func s:customSettings()
+    set clipboard+=unnamedplus
+    set keymap=dvorak
 endf
