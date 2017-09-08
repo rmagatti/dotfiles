@@ -20,10 +20,14 @@ call SpaceVim#layers#load('lang#vim')
 call SpaceVim#layers#load('lang#xml')
 call SpaceVim#layers#load('shell')   
 call SpaceVim#layers#load('tools#screensaver')
+" Custom calls
 call SpaceVim#layers#load('autocomplete')
+call SpaceVim#layers#load('tags')
 let g:spacevim_custom_plugins = [
 \ ['wakatime/vim-wakatime'],
 \ ['junegunn/fzf.vim'],
+\ ['keith/swift.vim'],
+\ ['tpope/vim-rails'],
 \ ]
 let g:spacevim_disabled_plugins=[]
 let g:spacevim_enable_vimfiler_welcome = 1
@@ -57,9 +61,16 @@ augroup custom_config
     au VimEnter * call s:customSettings()
 augroup END
 func s:customMappings()
+    " Fuzzy File Finder
     nnoremap <C-p> :Files<CR>
+    " gtags/ctags goto definition
+    nnoremap gd <C-]>
+    " Handy at times
+    nnoremap ; :
+    " vim-rails alternate command (model/rspec)
+    nnoremap <C-k> :A<CR>
 endf
 func s:customSettings()
     set clipboard+=unnamedplus
-    set keymap=dvorak
+    " set keymap=dvorak
 endf
