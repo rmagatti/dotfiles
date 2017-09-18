@@ -23,13 +23,20 @@ call SpaceVim#layers#load('tools#screensaver')
 " Custom calls
 call SpaceVim#layers#load('autocomplete')
 call SpaceVim#layers#load('tags')
+
 let g:spacevim_custom_plugins = [
 \ ['wakatime/vim-wakatime'],
 \ ['junegunn/fzf.vim'],
 \ ['keith/swift.vim'],
+\ ['mitsuse/autocomplete-swift'],
 \ ['tpope/vim-rails'],
+\ ['neoclide/vim-jsx-improve'],
+\ ['tpope/vim-commentary'],
+\ ['christoomey/vim-system-copy'],
 \ ]
-let g:spacevim_disabled_plugins=[]
+
+let g:spacevim_disabled_plugins = [
+\ ]
 let g:spacevim_enable_vimfiler_welcome = 1
 let g:spacevim_enable_debug = 1
 let g:deoplete#auto_complete_delay = 150
@@ -39,9 +46,13 @@ let g:spacevim_enable_os_fileformat_icon = 1
 let g:spacevim_buffer_index_type = 1
 let g:neomake_vim_enabled_makers = []
 let g:spacevim_enable_ycm = 0
+
+" Custom lets
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:loaded_python3_provider = 1
+let g:jsx_ext_required = 0
+
 if executable('vimlint')
     call add(g:neomake_vim_enabled_makers, 'vimlint') 
 endif
@@ -71,6 +82,8 @@ func s:customMappings()
     nnoremap <C-k> :A<CR>
 endf
 func s:customSettings()
-    set clipboard+=unnamedplus
+    set splitright
+    set splitbelow
+    set ts=2 sw=2 expandtab
     " set keymap=dvorak
 endf
