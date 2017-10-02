@@ -52,6 +52,7 @@ let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:loaded_python3_provider = 1
 let g:jsx_ext_required = 0
+let g:spacevim_filemanager = 'nerdtree'
 
 if executable('vimlint')
     call add(g:neomake_vim_enabled_makers, 'vimlint') 
