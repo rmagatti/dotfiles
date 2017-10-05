@@ -33,6 +33,7 @@ let g:spacevim_custom_plugins = [
 \ ['neoclide/vim-jsx-improve'],
 \ ['tpope/vim-commentary'],
 \ ['christoomey/vim-system-copy'],
+\ ['nelstrom/vim-textobj-rubyblock'],
 \ ]
 
 let g:spacevim_disabled_plugins = [
