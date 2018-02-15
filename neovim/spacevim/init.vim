@@ -24,6 +24,10 @@ call SpaceVim#layers#load('tools#screensaver')
 call SpaceVim#layers#load('autocomplete')
 call SpaceVim#layers#load('tags')
 
+set nocompatible
+set path+=**
+set wildmenu
+
 let g:spacevim_custom_plugins = [
 \ ['wakatime/vim-wakatime'],
 \ ['junegunn/fzf.vim'],
@@ -34,6 +38,8 @@ let g:spacevim_custom_plugins = [
 \ ['tpope/vim-commentary'],
 \ ['christoomey/vim-system-copy'],
 \ ['nelstrom/vim-textobj-rubyblock'],
+\ ['posva/vim-vue'],
+\ ['udalov/kotlin-vim'],
 \ ]
 
 let g:spacevim_disabled_plugins = [
