@@ -1,3 +1,6 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
 Rails:
   Enabled: true
 
@@ -34,6 +37,7 @@ Style/SymbolArray:
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
+  Enabled: false
 
 # Mixing the styles looks just silly.
 Style/HashSyntax:
@@ -138,3 +142,6 @@ Style/MethodDefParentheses:
 # Stop complaining about Module::Class syntax
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+
+Style/RedundantSelf:
+  Enabled: false
