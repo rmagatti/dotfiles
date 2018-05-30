@@ -1,0 +1,30 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = Ronnie Andrew
+#	email = ronnie.magatti@noverde.com.br
+[user]
+	name = Ronnie Andrew Magatti
+	email = ronniemagatti@gmail.com
+[alias]
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  hide = update-index --assume-unchanged
+  unhide = update-index --no-assume-unchanged
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  f = "!git ls-files | grep -i"
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+
+[diff]
+  tool = vimrdiff
+[difftool "vimrdiff"]
+  cmd = vimr --nvim --wait -d $LOCAL $REMOTE
+[merge]
+  tool = vimrdiff
+[mergetool "vimrdiff"]
+  cmd = vimr --nvim --wait -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
