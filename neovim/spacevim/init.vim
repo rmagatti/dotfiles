@@ -45,6 +45,8 @@ let g:spacevim_custom_plugins = [
 \ ['udalov/kotlin-vim'],
 \ ]
 
+set rtp+=/usr/local/opt/fzf
+
 let g:spacevim_disabled_plugins = [
 \ ]
 let g:spacevim_enable_vimfiler_welcome = 1
