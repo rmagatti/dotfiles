@@ -3703,10 +3703,24 @@ zrclocal
 eval "$(rbenv init -)"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
+# Git commit with branch name before customized message
+function gitc() {
+    if [ -z "$1" ];
+    then
+        echo ERROR: No commit message was given. Please enter a commit message 1>&2
+        echo gitc \"Add something somewhere because of something\"
+    else
+        git commit -m "$(git symbolic-ref --short HEAD): $1"
+    fi
+}
+
+function config_skip_git() {
+    for d in $(ls); do; cd $d; git config user.name "Ronnie Magatti" && git config user.email ronnie.magatti@skipthedishes.ca && echo "Done" || pwd; cd ..; done
+}
+
 # Aliases
 alias l="ls -lh"
 alias gits="git status"
-alias gitc="git commit -m"
 alias gitch="git checkout"
 alias gitchb="git checkout \$(git branch --sort=committerdate | fzf)"
 alias gitchr="git checkout --track \$(git branch --sort=committerdate -r | fzf)"
@@ -3717,6 +3731,7 @@ alias gitps="git push"
 alias gitpl="git pull"
 alias gitd="git diff"
 alias gitb="git branch --sort=committerdate"
+alias gitcb="git branch | grep -v "staging" | xargs git branch -D"
 
 # Rails
 alias be="bundle exec"
@@ -3738,6 +3753,9 @@ function nv() {
 # ebolso
 alias eb="cd /Users/ronnie/Projects/Nashy/ebolso/ebolso; source venv/bin/activate; cd ebolso"
 
+# Delivery Team
+alias dv="cd ~/Projects/SkipTheDishes/delivery"
+
 # Vim
 # alias vi='nvim'
 # alias vim="nvim"
@@ -3753,16 +3771,50 @@ export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 export PATH=/Users/ronnie/Flutter/flutter/bin:$PATH
 export LANG=en_US
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
 # export GTAGSLABEL=pygments >> .profile
 export GTAGSLABEL=pygments
 export PATH=$PATH:/Users/ronnie/Flutter/flutter/bin/cache/dart-sdk/bin
 export GOPATH=$HOME/go
 export EBOLSO_DB_ENGINE=postgresql
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ronnie/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/ronnie/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+export PATH=/Users/ronnie/.maven/apache-maven-3.5.4/bin:$PATH
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/ronnie/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/ronnie/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# SkipTheDishes
+export GOOGLE_APP_ENGINE_DIR=/usr/local/google_appengine
+export LESS_COMPILER=/usr/local/bin/lessc
+export SASS_COMPILER=/usr/local/bin/sass
+export COMPASS_COMPILER=/usr/local/bin/compass
+export JASMINE=/usr/local/bin/jasmine
+export JSHINT=/usr/local/bin/jshint
+export UGLIFYJS_COMPILER=/usr/local/bin/uglifyjs
+export PHANTOMJS=/usr/local/bin/phantomjs
+export SCSS_LINT=/usr/local/bin/scss-lint
+export PYTHONPATH="$PYTHONPATH:/usr/local/google_appengine"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --nocolor --ignore node_modules -g ""'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ronnie/.google-cloud-sdk/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/ronnie/.google-cloud-sdk/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ronnie/.google-cloud-sdk/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/ronnie/.google-cloud-sdk/google-cloud-sdk/completion.zsh.inc'; fi
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/ronnie/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/ronnie/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/ronnie/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/ronnie/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/ronnie/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/ronnie/.config/yarn/global/node_modules/tabtab/.completions/slss.zsh
+source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme

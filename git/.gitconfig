@@ -28,3 +28,5 @@
   tool = vimrdiff
 [mergetool "vimrdiff"]
   cmd = vimr --nvim --wait -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[core]
+	editor = nvim
