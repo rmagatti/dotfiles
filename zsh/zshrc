@@ -3718,6 +3718,24 @@ function config_skip_git() {
     for d in $(ls); do; cd $d; git config user.name "Ronnie Magatti" && git config user.email ronnie.magatti@skipthedishes.ca && echo "Done" || pwd; cd ..; done
 }
 
+function gitm() {
+    if [ -z "$1" ];
+    then
+        echo ERROR: No branch specified. Please enter a branch 1>&2
+        echo gitm branch-name
+    else
+        BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout $1 && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+    fi
+}
+
+function gitmdev() {
+    BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout develop && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+}
+
+function gitmalpha() {
+    BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout alpha && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+}
+
 # Aliases
 alias l="ls -lh"
 alias gits="git status"
@@ -3732,6 +3750,9 @@ alias gitpl="git pull"
 alias gitd="git diff"
 alias gitb="git branch --sort=committerdate"
 alias gitcb="git branch | grep -v "staging" | xargs git branch -D"
+# alias gitmdev="&& git checkout develop && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE"
+alias gitst="git stash"
+alias gitstp="git stash pop"
 
 # Rails
 alias be="bundle exec"
