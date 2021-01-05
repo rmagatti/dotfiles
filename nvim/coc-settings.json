@@ -1,0 +1,4 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  "yank.highlight.duration": 100
+}
