@@ -23,5 +23,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'puremourning/vimspector'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-eunuch'
+Plug 'justinmk/vim-sneak'
 call plug#end()
 

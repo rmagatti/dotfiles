@@ -20,3 +20,14 @@ tnoremap <silent> <C-o><C-i> <C-\><C-n>
 " Clear search highlight
 map <leader>cs :noh<CR>
 
+" Map command-v in normal insert and command modes to paste from clipboard
+nnoremap <D-v> a<C-r>+<Esc>
+inoremap <D-v> <C-r>+
+cnoremap <D-v> <C-r>+
+
+" Map command-s to save
+nnoremap <D-s> :w<CR>
+inoremap <D-s> <C-]> :w<CR>
+
+" Re-ource init.vim
+noremap <leader>rr :source $HOME/.config/nvim/init.vim<CR>
