@@ -53,3 +53,7 @@ tnoremap <silent> <D-J> <C-\><C-n> :CocCommand terminal.Destroy<CR>
 " Enter REPL mode relative to current working dir
 nnoremap <leader>rp :CocCommand terminal.REPL<CR>
 
+" Map Ctrl D (down) F (up) for smooth scrolling
+map <C-d> <Plug>(SmoothieDownwards)
+map <C-f> <Plug>(SmoothieUpwards)
+

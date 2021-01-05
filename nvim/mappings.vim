@@ -5,7 +5,6 @@ map <C-h> :wincmd h<CR>
 map <C-j> :wincmd j<CR>
 map <C-k> :wincmd k<CR>
 map <C-l> :wincmd l<CR>
-map <C-o> :wincmd o<CR>
 
 " Move selection up and down plus formatting
 vnoremap J :m '>+1<CR>gv=gv
