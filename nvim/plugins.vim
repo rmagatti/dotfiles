@@ -25,4 +25,3 @@ Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-eunuch'
 call plug#end()
 
-
