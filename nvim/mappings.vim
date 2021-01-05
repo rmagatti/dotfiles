@@ -15,7 +15,7 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Go to normal mode in terminal window
-tnoremap <silent> <C-[><C-[> <C-\><C-n>
+tnoremap <silent> <C-o><C-i> <C-\><C-n>
 
 " Clear search highlight
 map <leader>cs :noh<CR>
