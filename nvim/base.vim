@@ -10,14 +10,15 @@ autocmd FileType typescript set commentstring=//\ %s
 set background=dark
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 set ts=2 sw=2 expandtab
-" performance tweaks
+
+" " performance tweaks
 set nocursorline
 set nocursorcolumn
 set scrolljump=5
-set lazyredraw
+" set lazyredraw
 set redrawtime=10000
-set synmaxcol=180
-set re=1
+" set synmaxcol=180
+" set re=1
 
 set emoji
 set undofile                                            " enable persistent undo

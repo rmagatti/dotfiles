@@ -133,16 +133,16 @@ augroup end
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <buffer> <silent>[g <Plug>(coc-diagnostic-prev)
-nmap <buffer> <silent>]g <Plug>(coc-diagnostic-next)
+nmap <silent>[g <Plug>(coc-diagnostic-prev)
+nmap <silent>]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <buffer> <silent><nowait>gd <Plug>(coc-definition)
-nmap <buffer> <silent>gt :CocCommand fzf-preview.CocTypeDefinitions<CR>
-nmap <buffer> <silent>gi <Plug>(coc-implementation)
-nmap <buffer> <silent>gr :CocCommand fzf-preview.CocReferences<CR>
-nmap <buffer> <leader>i :CocCommand tsserver.organizeImports<CR>
-nnoremap <buffer> <leader>cr :CocRestart
+nmap <silent><nowait>gd <Plug>(coc-definition)
+nmap <silent>gt :CocCommand fzf-preview.CocTypeDefinitions<CR>
+nmap <silent>gi <Plug>(coc-implementation)
+nmap <silent>gr :CocCommand fzf-preview.CocReferences<CR>
+nmap <leader>i :CocCommand tsserver.organizeImports<CR>
+nnoremap <leader>cr :CocRestart
 nnoremap <leader>sh :call CocActionAsync('showSignatureHelp')<CR>
 
 " Open undo tree
