@@ -1,10 +1,13 @@
 set relativenumber
+set number
 set encoding=UTF-8
 set splitright
 set splitbelow
 set noswapfile
-" Goneovim options
-set guifont=Fira\ Code:h12
+set termguicolors
+set mouse=a
+" Goneovim options TODO: figure out a way to no repeat font name for presentation mode
+set guifont=FiraCode\ Nerd\ Font"
 let mapleader = " "
 autocmd FileType typescript set commentstring=//\ %s
 set background=dark
@@ -16,7 +19,8 @@ set nocursorline
 set nocursorcolumn
 set scrolljump=5
 " set lazyredraw
-set redrawtime=10000
+" set ttyfast
+" set redrawtime=10000
 " set synmaxcol=180
 " set re=1
 
@@ -36,4 +40,38 @@ au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto com
 if has("termguicolors")
   set termguicolors
 endif
+
+" Custom autocmds
+augroup goyocmds
+  autocmd!
+  autocmd User GoyoEnter Limelight
+  autocmd User GoyoLeave Limelight!
+augroup end
+
+" Presentation Mode
+let g:in_presentation_mode = 0
+function! TogglePresentationMode()
+  if g:in_presentation_mode
+    let g:in_presentation_mode = 0
+    set guifont=FiraCode\ Nerd\ Font:h12
+    Goyo!
+  else
+    let g:in_presentation_mode = 1
+    set guifont=FiraCode\ Nerd\ Font:h30
+    " Default Goyo options, just need to use them since I don't want the toggling behaviour to trigger at all.
+    Goyo 80x85%
+  endif
+endfunction
+
+command! TogglePresentationMode :call TogglePresentationMode()<CR>
+
+" Session stuff
+let SaveSession = luaeval('require("sessions").SaveSession')
+let RestoreSession = luaeval('require("sessions").RestoreSession')
+
+augroup sessioncmds
+  autocmd!
+  autocmd! VimLeave * call SaveSession()
+  autocmd! VimEnter * nested call RestoreSession()
+augroup end
 

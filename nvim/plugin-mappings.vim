@@ -20,8 +20,8 @@ nmap <silent> <C-P> :call OpenFuzzyFinder()<CR>
 
 " ======== Fugitive Conflict Resolution
 nnoremap <leader>dd :Gdiffsplit!<CR>
-nnoremap gh :diffget //2<CR>
-nnoremap gl :diffget //3<CR>
+nnoremap gj :diffget //2<CR>
+nnoremap g; :diffget //3<CR>
 
 " ====== Zen mode (Goyo)
 nnoremap <leader>zz :Goyo<CR>
@@ -42,18 +42,48 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 
+
 " ======== Terminal ========
-nnoremap <silent> <D-j> :CocCommand terminal.Toggle<CR>
+let g:term_buf = 0
+let g:term_win = 0
+
+function! TermToggle(height)
+  if win_gotoid(g:term_win)
+    hide
+  else
+    botright new
+    exec "resize " . a:height ? a:height : 25
+    try
+      exec "buffer " . g:term_buf
+    catch
+      call termopen($SHELL, {"detach": 0})
+      let g:term_buf = bufnr("")
+    endtry
+    startinsert!
+    let g:term_win = win_getid()
+  endif
+endfunction
+
+nnoremap <D-j> :call TermToggle(25)<CR>
+tnoremap <D-j> <C-\><C-n> :call TermToggle(25)<CR>
+
 " Go to normal mode in terminal window
 " tnoremap <silent> <C-[><C-[> <C-\><C-n>
 " Go to normal mode in terminal window and toggle terminal
-tnoremap <silent> <D-j> <C-\><C-n> :CocCommand terminal.Toggle<CR>
+" tnoremap <silent> <D-j> <C-\><C-n> :CocCommand terminal.Toggle<CR>
 " Destroy terminal
 tnoremap <silent> <D-J> <C-\><C-n> :CocCommand terminal.Destroy<CR>
 " Enter REPL mode relative to current working dir
 nnoremap <leader>rp :CocCommand terminal.REPL<CR>
 
-" Map Ctrl D (down) F (up) for smooth scrolling
-map <C-d> <Plug>(SmoothieDownwards)
-map <C-f> <Plug>(SmoothieUpwards)
+" Command history mapping, depends on fzf.vim
+" cnoremap <Tab> History:<CR>
 
+" " Map Ctrl D (down) F (up) for smooth scrolling
+" map <C-d> <Plug>(SmoothieDownwards)
+" map <C-f> <Plug>(SmoothieUpwards)
+
+" Map presentation mode toggle
+nnoremap <leader>pm :TogglePresentationMode<CR>
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>

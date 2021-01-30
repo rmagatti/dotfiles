@@ -138,6 +138,7 @@ nmap <silent>]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent><nowait>gd <Plug>(coc-definition)
+nmap <silent><nowait>gvd :vsp<CR><Plug>(coc-definition)
 nmap <silent>gt :CocCommand fzf-preview.CocTypeDefinitions<CR>
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr :CocCommand fzf-preview.CocReferences<CR>
@@ -155,5 +156,7 @@ nnoremap <silent> <leader>gb :<C-u>Git blame<CR>
 
 " Project search
 nnoremap <leader>ps :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+" TODO: Fix this search word command
+" nnoremap <leader>sw :<C-u>CocCommand fzf-preview.ProjectGrep<Space> :call expand('<cword>')
 
 

@@ -1,4 +1,5 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": ["typescript"],
-  "yank.highlight.duration": 100
+  "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  "yank.highlight.duration": 100,
+  "list.source.symbols.excludes": ["**/node_modules/**"]
 }

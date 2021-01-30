@@ -51,4 +51,49 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " F11        vimspector#StepInto()
 " F12        vimspector#StepOut()
 
+" The theme used in the bat preview
+" let g:fzf_preview_command = 'bat --color=always --plain {-1}'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'gruvbox'
+let $BAT_THEME = 'gruvbox'
+
 colorscheme gruvbox
+
+" Sneak
+let g:sneak#s_next = 1
+let g:sneak#label = 1
+let g:sneak#user_ic_scs = 1
+
+" Tree sitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+  },
+}
+EOF
+
+" Firenvim
+let g:firenvim_config = { 
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'neovim',
+            \ 'content': 'text',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'always',
+        \ },
+    \ }
+\ }
+let fc = g:firenvim_config['localSettings']
+let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
+
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
