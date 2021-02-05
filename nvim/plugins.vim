@@ -28,11 +28,15 @@ Plug 'tommcdo/vim-exchange'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
 Plug 'rafcamlet/coc-nvim-lua'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Lazy
 Plug 'sotte/presenting.vim', { 'on': 'PresentationStart'}
 Plug 'puremourning/vimspector', {'on': '<Plug>VimspectorContinue'}
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 Plug 'junegunn/limelight.vim', {'on': 'Limelight'}
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " <leader> keymap presentation
+" Local
+Plug '~/Projects/auto-session'
 call plug#end()
 

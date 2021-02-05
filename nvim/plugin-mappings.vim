@@ -52,7 +52,7 @@ function! TermToggle(height)
     hide
   else
     botright new
-    exec "resize " . a:height ? a:height : 25
+    exec "resize" a:height != 0 ? a:height : 20
     try
       exec "buffer " . g:term_buf
     catch
@@ -63,8 +63,11 @@ function! TermToggle(height)
     let g:term_win = win_getid()
   endif
 endfunction
+command! -nargs=* TermToggle let height = str2nr(expand('<args>')) <bar> call TermToggle(height)
 
-nnoremap <D-j> :call TermToggle(25)<CR>
+nnoremap <D-CR> call TermToggle(20)
+
+nnoremap <D-j> :call TermToggle(20)<CR>
 tnoremap <D-j> <C-\><C-n> :call TermToggle(25)<CR>
 
 " Go to normal mode in terminal window

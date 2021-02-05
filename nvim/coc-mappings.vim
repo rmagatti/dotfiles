@@ -49,14 +49,6 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -104,24 +96,24 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><leader>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>cm  :<C-u>CocList commands<cr>
+nnoremap <silent><leader>cm  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>pr  :<C-u>CocListResume<CR>
+nnoremap <silent><leader>pr  :<C-u>CocListResume<CR>
 " ========= CoC VIM =========
 augroup mygroup
   autocmd!
@@ -143,7 +135,6 @@ nmap <silent>gt :CocCommand fzf-preview.CocTypeDefinitions<CR>
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr :CocCommand fzf-preview.CocReferences<CR>
 nmap <leader>i :CocCommand tsserver.organizeImports<CR>
-nnoremap <leader>cr :CocRestart
 nnoremap <leader>sh :call CocActionAsync('showSignatureHelp')<CR>
 
 " Open undo tree
@@ -155,8 +146,7 @@ nnoremap <silent> <leader>gs :<C-u>CocCommand fzf-preview.GitStatus<CR>
 nnoremap <silent> <leader>gb :<C-u>Git blame<CR>
 
 " Project search
-nnoremap <leader>ps :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
-" TODO: Fix this search word command
-" nnoremap <leader>sw :<C-u>CocCommand fzf-preview.ProjectGrep<Space> :call expand('<cword>')
-
+" command! -nargs=0 ProjectSearchWord :<C-u>CocCommand fzf-preview.ProjectGrep echo expand('<cword>')
+nnoremap <leader>ps :<C-u>CocCommand fzf-preview.ProjectGrep 
+nnoremap <leader>sw yiw :<C-u>CocCommand fzf-preview.ProjectGrep <C-r>0
 

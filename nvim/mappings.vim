@@ -49,3 +49,39 @@ noremap <leader>rr :source $HOME/.config/nvim/init.vim<CR>
 " Paste without yanking for easier paste repetition
 vnoremap p "_dP
 
+" Search from visual selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" Copy file name or path
+nmap <leader>cfn :let @+=expand("%")<CR>
+nmap <leader>cfp :let @+=expand("%:p")<CR>
+
+" Open init.vim in a split
+map <leader>fvd :vsp ~/.config/nvim/init.vim<CR>
+map <leader>fsd :sp ~/.config/nvim/init.vim<CR>
+
+" Run a given vim command on the results of alt from a given path.
+" See usage below.
+function! AltCommand(path, vim_command)
+  let l:alternate = system("alt " . a:path)
+  if empty(l:alternate)
+    echo "No alternate file for " . a:path . " exists!"
+  else
+    exec a:vim_command . " " . l:alternate
+  endif
+endfunction
+
+" Open alternate - powered by https://github.com/uptech/alt
+" Mnemonic open alternate
+" Mnemonic Open Vertical split Alternate
+" Mnemonic Open Split Alternate
+nnoremap <leader>oa :w<CR>:call AltCommand(expand('%'), ':e')<CR>
+nnoremap <leader>ova :w<CR>:call AltCommand(expand('%'), ':vsp')<CR>
+nnoremap <leader>osa :w<CR>:call AltCommand(expand('%'), ':sp')<CR>
+
+" Close all buffers but current
+nnoremap <leader>ca :%bd <bar> e# <bar> bd#<CR>
+
+" Leader mappings for split and vertical split
+nnoremap <leader>vsp :vsp<CR>
+nnoremap <leader>sp :sp<CR>

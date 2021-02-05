@@ -5,7 +5,9 @@ set splitright
 set splitbelow
 set noswapfile
 set termguicolors
+
 set mouse=a
+" set shada
 " Goneovim options TODO: figure out a way to no repeat font name for presentation mode
 set guifont=FiraCode\ Nerd\ Font"
 let mapleader = " "
@@ -64,14 +66,3 @@ function! TogglePresentationMode()
 endfunction
 
 command! TogglePresentationMode :call TogglePresentationMode()<CR>
-
-" Session stuff
-let SaveSession = luaeval('require("sessions").SaveSession')
-let RestoreSession = luaeval('require("sessions").RestoreSession')
-
-augroup sessioncmds
-  autocmd!
-  autocmd! VimLeave * call SaveSession()
-  autocmd! VimEnter * nested call RestoreSession()
-augroup end
-

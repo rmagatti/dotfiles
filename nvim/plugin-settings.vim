@@ -87,7 +87,7 @@ let g:firenvim_config = {
             \ 'content': 'text',
             \ 'priority': 0,
             \ 'selector': 'textarea',
-            \ 'takeover': 'always',
+            \ 'takeover': 'never',
         \ },
     \ }
 \ }
@@ -95,5 +95,13 @@ let fc = g:firenvim_config['localSettings']
 let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
 let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
 
+" " Already defaults to this dir
+" let g:auto_session_root_dir = "~/.config/nvim/sessions"
+let g:auto_session_pre_save_cmds = ["echo 'IM FLYING'"]
+
 " set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
+" set foldexpr=nvim_treesitter#flexpr()
+
+" FZF Preview
+let g:fzf_preview_floating_window_rate = 0.5
+
