@@ -7,10 +7,20 @@ map <C-k> :wincmd j<CR>
 map <C-l> :wincmd k<CR>
 map <C-;> :wincmd l<CR>
 
+" Move splits
+map <A-j> :wincmd H<CR>
+map <A-k> :wincmd J<CR>
+map <A-l> :wincmd K<CR>
+map <A-;> :wincmd L<CR>
+
 noremap j h
 noremap k j
 noremap l k
 noremap ; l
+
+" Copy to system clipboard mapping
+nnoremap cp "+y
+vnoremap cp "+y
 
 xnoremap <leader>p "_dP
 
@@ -35,7 +45,10 @@ cmap <D-v> <C-r>+
 nnoremap <D-v> a<C-r>+<Esc>
 inoremap <D-v> <C-r>+
 cnoremap <D-v> <C-r>+
-tnoremap <D-v> <C-\><C-n> <C-r>+
+
+" Paste from external keyboard
+tnoremap <D-v> <C-\><C-n>"+pa
+
 
 ":set paste<CR> i<C-r>+ <Esc>:set nopaste<CR>
 
@@ -53,12 +66,14 @@ vnoremap p "_dP
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Copy file name or path
-nmap <leader>cfn :let @+=expand("%")<CR>
-nmap <leader>cfp :let @+=expand("%:p")<CR>
+nmap <leader>cfn :let @+=expand("%")<CR>:echo "Copied: ".@+<CR>
+nmap <leader>cfp :let @+=expand("%:p")<<CR>:echo "Copied: ".@+<CR>
 
 " Open init.vim in a split
-map <leader>fvd :vsp ~/.config/nvim/init.vim<CR>
-map <leader>fsd :sp ~/.config/nvim/init.vim<CR>
+" Mnemonic Open Init Vertical split
+" Mnemonic Open Init Split
+map <leader>oiv :vsp ~/.config/nvim/init.vim<CR>
+map <leader>ois :sp ~/.config/nvim/init.vim<CR>
 
 " Run a given vim command on the results of alt from a given path.
 " See usage below.
@@ -80,8 +95,13 @@ nnoremap <leader>ova :w<CR>:call AltCommand(expand('%'), ':vsp')<CR>
 nnoremap <leader>osa :w<CR>:call AltCommand(expand('%'), ':sp')<CR>
 
 " Close all buffers but current
-nnoremap <leader>ca :%bd <bar> e# <bar> bd#<CR>
+nnoremap <leader>cab :%bd <bar> e# <bar> bd#<CR>
+nnoremap <leader>cab! :%bd! <bar> e# <bar> bd#<CR>
 
 " Leader mappings for split and vertical split
 nnoremap <leader>vsp :vsp<CR>
 nnoremap <leader>sp :sp<CR>
+nnoremap <leader>q :q<CR>
+
+" Delete all commented lines then save to reformat
+nnoremap <leader>dac :g/\v^(\/\/<bar>.*\/\/)/d_<CR>:w<CR>:noh<CR>

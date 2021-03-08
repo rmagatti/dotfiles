@@ -13,7 +13,6 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'mbbill/undotree'
 Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
-Plug 'christoomey/vim-system-copy'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-test/vim-test'
 Plug 'itchyny/lightline.vim'
@@ -30,6 +29,9 @@ Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
 Plug 'rafcamlet/coc-nvim-lua'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'heavenshell/vim-jsdoc', {'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
+
+" Plug 'ayu-theme/ayu-vim'
 " Lazy
 Plug 'sotte/presenting.vim', { 'on': 'PresentationStart'}
 Plug 'puremourning/vimspector', {'on': '<Plug>VimspectorContinue'}

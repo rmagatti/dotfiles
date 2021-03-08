@@ -1,24 +1,8 @@
 " =================== COC VIM =====================
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" TextEdit might fail if hidden is not set.
-set hidden
 " Had to set this so Goneovim would still pick it up
 let g:coc_node_path = '/Users/ronnieandrewmagatti/.nvm/versions/node/v14.7.0/bin/node'
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -56,6 +40,8 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'gruvbox'
 let $BAT_THEME = 'gruvbox'
 
+" Theme settings
+let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
 " Sneak
@@ -63,6 +49,7 @@ let g:sneak#s_next = 1
 let g:sneak#label = 1
 let g:sneak#user_ic_scs = 1
 
+if has('nvim')
 " Tree sitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -76,32 +63,55 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" Firenvim
-let g:firenvim_config = { 
-    \ 'globalSettings': {
-        \ 'alt': 'all',
-    \  },
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'cmdline': 'neovim',
-            \ 'content': 'text',
-            \ 'priority': 0,
-            \ 'selector': 'textarea',
-            \ 'takeover': 'never',
-        \ },
-    \ }
-\ }
-let fc = g:firenvim_config['localSettings']
-let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
-let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
+  " Firenvim
+  let g:firenvim_config = { 
+      \ 'globalSettings': {
+          \ 'alt': 'all',
+      \  },
+      \ 'localSettings': {
+          \ '.*': {
+              \ 'cmdline': 'neovim',
+              \ 'content': 'text',
+              \ 'priority': 0,
+              \ 'selector': 'textarea',
+              \ 'takeover': 'never',
+          \ },
+      \ }
+  \ }
+  let fc = g:firenvim_config['localSettings']
+  let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
+  let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
+endif
 
 " " Already defaults to this dir
 " let g:auto_session_root_dir = "~/.config/nvim/sessions"
-let g:auto_session_pre_save_cmds = ["echo 'IM FLYING'"]
+" let g:auto_session_pre_save_cmds = ["1close"]
 
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#flexpr()
 
 " FZF Preview
-let g:fzf_preview_floating_window_rate = 0.5
+let g:fzf_preview_floating_window_rate = 0.7
+
+
+" " vim-dirvish-dovish
+" unmap all default mappings
+let g:dirvish_dovish_map_keys = 0
+
+augroup dirvish_config
+  autocmd!
+  " unmap dirvish default
+  autocmd FileType dirvish silent! unmap <buffer><C-p>
+  autocmd FileType dirvish silent! unmap <buffer>p
+
+  " My mappings
+  autocmd FileType dirvish silent! map <buffer>i <Plug>(dovish_create_file)
+  autocmd FileType dirvish silent! map <buffer>I <Plug>(dovish_create_directory)
+  autocmd FileType dirvish silent! map <buffer>dd <Plug>(dovish_delete)
+  autocmd FileType dirvish silent! map <buffer>r <Plug>(dovish_rename)
+  autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
+  autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
+  autocmd FileType dirvish silent! map <buffer>p <Plug>(dovish_copy)
+  autocmd FileType dirvish silent! map <buffer>P <Plug>(dovish_move)
+augroup END
 

@@ -1,5 +1,8 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  "typescript.updateImportsOnFileMove.enable": true,
   "yank.highlight.duration": 100,
-  "list.source.symbols.excludes": ["**/node_modules/**"]
+  "list.source.symbols.excludes": ["**/node_modules/**"],
+  "typescript.preferences.importModuleSpecifier":"relative",
+  "tsserver.log": "normal"
 }
