@@ -217,8 +217,6 @@ export PATH="/Applications/goneovim.app/Contents/MacOS:$PATH"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-export CH_API_TOKEN="5f6d7d53-4c10-44fa-8afb-0a8508bf3f68"
-
 # ====== Brew
 # Uninstall
 function brr() {
