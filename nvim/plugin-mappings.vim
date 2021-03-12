@@ -62,3 +62,5 @@ nnoremap <leader>rp :CocCommand terminal.REPL<CR>
 nnoremap <leader>pm :TogglePresentationMode<CR>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
+nnoremap <leader>ta :ToggleAlternate<CR>

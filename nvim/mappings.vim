@@ -38,11 +38,11 @@ tnoremap <silent> <C-o><C-i> <C-\><C-n>
 map <leader>cs :noh<CR>
 
 " Map command-v in normal insert and command modes to paste from clipboard
-noremap <D-v> :set paste<CR> i<C-r>+<Esc> :set nopaste<CR>
+noremap <D-v> :set paste<CR> a<C-r>+<Esc> :set nopaste<CR>
 inoremap <D-v> <Esc> :set paste<CR> i<C-r>+<Esc> :set nopaste<CR>
 cmap <D-v> <C-r>+
 
-nnoremap <D-v> a<C-r>+<Esc>
+" nnoremap <D-v> a<C-r>+<Esc>
 inoremap <D-v> <C-r>+
 cnoremap <D-v> <C-r>+
 
@@ -105,3 +105,6 @@ nnoremap <leader>q :q<CR>
 
 " Delete all commented lines then save to reformat
 nnoremap <leader>dac :g/\v^(\/\/<bar>.*\/\/)/d_<CR>:w<CR>:noh<CR>
+
+" Select line
+nnoremap vv V

@@ -11,7 +11,8 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'mbbill/undotree'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-test/vim-test'
@@ -40,5 +41,6 @@ Plug 'junegunn/limelight.vim', {'on': 'Limelight'}
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " <leader> keymap presentation
 " Local
 Plug '~/Projects/auto-session'
+Plug '~/Projects/alternate-toggler'
 call plug#end()
 
