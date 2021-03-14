@@ -10,10 +10,14 @@ set mouse=a
 " Goneovim options TODO: figure out a way to no repeat font name for presentation mode
 set guifont=FiraCode\ Nerd\ Font"
 let mapleader = " "
-autocmd FileType typescript set commentstring=//\ %s
 set background=dark
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 set ts=2 sw=2 expandtab
+
+augroup typescript
+  au!
+  autocmd FileType typescript set commentstring=//\ %s
+  autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+augroup end
 
 " " performance tweaks
 set nocursorline
@@ -53,7 +57,11 @@ set noshowcmd                                           " to get rid of display 
 let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
-au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new lines
+
+augroup annoying
+  au!
+  au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new lines
+augroup end
 
 if has("termguicolors")
   set termguicolors

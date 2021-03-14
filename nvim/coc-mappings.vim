@@ -109,9 +109,9 @@ nnoremap <silent><leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><leader>j  :<C-u>CocNext<CR>
+nnoremap <silent><leader>k  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><leader>k  :<C-u>CocPrev<CR>
+nnoremap <silent><leader>l  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><leader>pr  :<C-u>CocListResume<CR>
 " ========= CoC VIM =========
@@ -125,8 +125,8 @@ augroup end
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent>[g <Plug>(coc-diagnostic-prev)
-nmap <silent>]g <Plug>(coc-diagnostic-next)
+nmap <silent>gp <Plug>(coc-diagnostic-prev)
+nmap <silent>gn <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent><nowait>gd <Plug>(coc-definition)

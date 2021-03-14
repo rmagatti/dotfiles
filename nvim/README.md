@@ -1,28 +1,5 @@
 ## Neovim config
 
-### Plugins
-- 'tpope/vim-commentary'
-- 'tpope/vim-surround'
-- 'tpope/vim-fugitive'
-- 'junegunn/fzf'
-- 'neoclide/coc.nvim'
-- 'neoclide/coc-tsserver'
-- 'HerringtonDarkholme/yats.vim'
-- 'dbeniamine/cheat.sh-vim'
-- 'mbbill/undotree'
-- 'morhetz/gruvbox'
-- 'jremmen/vim-ripgrep'
-- 'christoomey/vim-system-copy'
-- 'ryanoasis/vim-devicons'
-- 'wincent/vcs-jump'
-- 'junegunn/goyo.vim'
-- 'vim-test/vim-test'
-- 'itchyny/lightline.vim'
-- 'jiangmiao/auto-pairs'
-- 'puremourning/vimspector'
-- 'justinmk/vim-dirvish'
-- 'tpope/vim-eunuch'
-
 ### Description
 A Neovim configuration primarily targetting typescript development.
 

@@ -93,6 +93,7 @@ endif
 " FZF Preview
 let g:fzf_preview_floating_window_rate = 0.7
 
+" Alternate Toggler custom alternates
 let g:at_custom_alternates = {'Yes': 'No'}
 
 " " vim-dirvish-dovish
