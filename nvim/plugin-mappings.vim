@@ -1,4 +1,5 @@
 source $HOME/.config/nvim/coc-mappings.vim
+source $HOME/.config/nvim/telescope.vim
 
 " ================ vim-dirvish ================
 " File exploring - Dirvish
@@ -16,7 +17,7 @@ function! OpenFuzzyFinder()
   endif
 endfunction
 
-nmap <silent> <C-P> :call OpenFuzzyFinder()<CR>
+nmap <silent> <C-p> :call OpenFuzzyFinder()<CR>
 
 " ======== Fugitive Conflict Resolution
 nnoremap <leader>dd :Gdiffsplit!<CR>
@@ -63,4 +64,11 @@ nnoremap <leader>pm :TogglePresentationMode<CR>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
-nnoremap <leader>ta :ToggleAlternate<CR>
+augroup AlternateToggles
+  au!
+  au FileType typescript,viml,lua nnoremap <buffer> <CR> :ToggleAlternate<CR>
+augroup end
+
+" TODO: not ready yet, it can't reach LuaRestoreSession for some reason!
+nnoremap <leader>p :call fzf#run({'source': 'ls -d $HOME/.config/nvim/sessions/*', 'sink':'lua require('auto-session').RestoreSession()', 'window': { 'width': 0.8, 'height': 0.8 }})<CR>
+

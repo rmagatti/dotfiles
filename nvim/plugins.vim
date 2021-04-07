@@ -2,9 +2,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'HerringtonDarkholme/yats.vim'
@@ -19,7 +16,8 @@ Plug 'vim-test/vim-test'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-dirvish'
-Plug 'tpope/vim-eunuch' " TODO: remove if unused!!
+Plug 'kristijanhusak/vim-dirvish-git'
+" Plug 'tpope/vim-eunuch' " TODO: remove if unused!!
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -31,6 +29,17 @@ Plug 'rafcamlet/coc-nvim-lua'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'heavenshell/vim-jsdoc', {'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" Fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/rpc' }
 
 " Plug 'ayu-theme/ayu-vim'
 " Lazy

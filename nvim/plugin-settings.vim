@@ -84,17 +84,19 @@ EOF
 endif
 
 " " Already defaults to this dir
-" let g:auto_session_root_dir = "~/.config/nvim/sessions"
+let g:auto_session_root_dir = "~/.config/nvim/session/"
 " let g:auto_session_pre_save_cmds = ["1close"]
 
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#flexpr()
 
 " FZF Preview
-let g:fzf_preview_floating_window_rate = 0.7
+" let g:fzf_preview_floating_window_rate = 0.7
 
 " Alternate Toggler custom alternates
-let g:at_custom_alternates = {'Yes': 'No'}
+let g:at_custom_alternates = {
+      \'===': '!=='
+      \}
 
 " " vim-dirvish-dovish
 " unmap all default mappings

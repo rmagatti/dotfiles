@@ -48,9 +48,12 @@ set shortmess+=c
 
 set emoji
 set undofile                                            " enable persistent undo
-set undodir=/tmp                                        " undo temp file directory
+set undodir=~/.config/undodir                      " undo temp file directory
 set grepprg=rg\ --vimgrep                               " use rg as default grepper
 set noshowcmd                                           " to get rid of display of last command
+
+" Show search match counter
+set shortmess-=S
 
 " Plugin configs
 " let loaded_netrw = 0                                    " diable netew -- enabling it so gx can work

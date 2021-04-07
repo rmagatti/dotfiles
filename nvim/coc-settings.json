@@ -31,5 +31,8 @@
 		"constructor": "  ",
 		"value": "  ",
 		"enumMember": "  "
-	}
+	},
+  "Lua.runtime.version":"LuaJIT",
+  "Lua.workspace.library": {"/usr/local/Cellar/neovim/HEAD-9b2d4ff_2/share/nvim/runtime/lua":true}
 }
+

@@ -38,7 +38,7 @@ tnoremap <silent> <C-o><C-i> <C-\><C-n>
 map <leader>cs :noh<CR>
 
 " Map command-v in normal insert and command modes to paste from clipboard
-noremap <D-v> :set paste<CR> a<C-r>+<Esc> :set nopaste<CR>
+nnoremap <D-v> :set paste<CR> a<C-r>+<Esc> :set nopaste<CR>
 inoremap <D-v> <Esc> :set paste<CR> i<C-r>+<Esc> :set nopaste<CR>
 cmap <D-v> <C-r>+
 
