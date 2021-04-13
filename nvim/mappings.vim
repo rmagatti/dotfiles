@@ -66,8 +66,9 @@ vnoremap p "_dP
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Copy file name or path
-nmap <leader>cfn :let @+=expand("%")<CR>:echo "Copied: ".@+<CR>
-nmap <leader>cfp :let @+=expand("%:p")<CR>:echo "Copied: ".@+<CR>
+nmap <leader>crp :let @+=expand("%")<CR>:echo "Copied relativepath: ".@+<CR>
+nmap <leader>cap :let @+=expand("%:p")<CR>:echo "Copied absolutepath: ".@+<CR>
+nmap <leader>cfn :let @+=expand("%:t")<CR>:echo "Copied filename: ".@+<CR>
 
 " Open init.vim in a split
 " Mnemonic Open Init Vertical split

@@ -21,6 +21,8 @@ Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/playground'
 Plug 'unblevable/quick-scope'
 Plug 'tommcdo/vim-exchange'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -40,6 +42,9 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/rpc' }
+
+" Terraform
+Plug 'hashivim/vim-terraform'
 
 " Plug 'ayu-theme/ayu-vim'
 " Lazy

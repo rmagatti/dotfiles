@@ -85,10 +85,16 @@ endif
 
 " " Already defaults to this dir
 let g:auto_session_root_dir = "~/.config/nvim/session/"
-" let g:auto_session_pre_save_cmds = ["1close"]
+" let g:auto_session_pre_save_cmds = ["bd ".g:term_buf."!"]
 
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#flexpr()
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=8
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :set foldlevel=0
+command! -nargs=? Unfold :set foldlevel=8
+
 
 " FZF Preview
 " let g:fzf_preview_floating_window_rate = 0.7
@@ -118,4 +124,16 @@ augroup dirvish_config
   autocmd FileType dirvish silent! map <buffer>p <Plug>(dovish_copy)
   autocmd FileType dirvish silent! map <buffer>P <Plug>(dovish_move)
 augroup END
+
+" Neovide configs
+let g:neovide_cursor_trail_size=0.7
+let g:neovide_window_floating_opacity=0.7
+let g:neovide_cursor_trail_length=0.1
+let g:neovide_refresh_rate=60
+let g:neovide_window_floating_blur=v:true
+let g:neovide_cursor_animate_in_insert_mode=v:false
+let g:neovide_cursor_antialiasing=v:true
+let g:neovide_cursor_animation_length=0.1
+let g:neovide_cursor_vfx_particle_density=7.0
+let g:neovide_transparency=0.95
 
