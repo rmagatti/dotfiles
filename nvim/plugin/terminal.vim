@@ -27,3 +27,4 @@ nnoremap <D-CR> call TermToggle(20)
 
 nnoremap <D-j> :call TermToggle(20)<CR>
 tnoremap <D-j> <C-\><C-n> :call TermToggle(20)<CR>
+tnoremap <D-k> <C-\><C-n> :bd! g:term_buf<CR>

@@ -8,7 +8,7 @@ set noswapfile
 set mouse=a
 " set shada
 " Goneovim options TODO: figure out a way to no repeat font name for presentation mode
-set guifont=FiraCode\ Nerd\ Font"
+set guifont=FiraCode\ Nerd\ Font:14
 let mapleader = " "
 set background=dark
 set ts=2 sw=2 expandtab
@@ -48,7 +48,8 @@ set shortmess+=c
 
 set emoji
 set undofile                                            " enable persistent undo
-set undodir=~/.config/undodir                      " undo temp file directory
+
+let &undodir = expand(stdpath('data')."/undodir")
 set grepprg=rg\ --vimgrep                               " use rg as default grepper
 set noshowcmd                                           " to get rid of display of last command
 
@@ -87,7 +88,7 @@ augroup goyocmds
   autocmd User GoyoLeave Limelight!
 augroup end
 
-augroup mycmds
+augroup AutoAdjustResize
   autocmd!
   autocmd VimResized * execute "normal! \<C-w>="
 augroup end
@@ -108,3 +109,8 @@ function! TogglePresentationMode()
 endfunction
 
 command! TogglePresentationMode :call TogglePresentationMode()<CR>
+
+augroup highlight_yank
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+augroup end

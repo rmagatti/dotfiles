@@ -1,5 +1,5 @@
-local actions = require('telescope.actions')
-require('telescope').setup{
+local telescope = require('telescope')
+telescope.setup{
   defaults = {
     vimgrep_arguments = {
       'rg',
@@ -44,20 +44,16 @@ require('telescope').setup{
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
     extensions = {
-      fzy_native = {
-        override_generic_sorter = false,
-        override_file_sorter = true
+      fzf = {
+        override_generic_sorter = false, -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
       }
     },
-
-    -- mappings = {
-    --   i = {
-    --     ["<C-n>"] = actions.move_selection_next,
-    --     ["<C-p>"] = actions.move_selection_previous
-    --   }
-    -- }
   }
 }
 
-require('telescope').load_extension('fzy_native')
-
+telescope.load_extension('session-lens')
+telescope.load_extension("git_worktree")
+telescope.load_extension('lsp_handlers')
+telescope.load_extension('fzf')

@@ -1,5 +1,3 @@
-source $HOME/.config/nvim/coc-mappings.vim
-
 " ================ vim-dirvish ================
 " File exploring - Dirvish
 " TODO: figure out opening highlighted dirvish file in splits
@@ -8,15 +6,6 @@ command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish
 nnoremap <leader>fs :VLeftDirvish<CR>
 nnoremap <leader>ff :VLeftDirvishFile<CR>
 
-function! OpenFuzzyFinder()
-  if isdirectory(getcwd()."/.git")
-    exec ":CocCommand fzf-preview.ProjectFiles"
-  else
-    exec ":CocCommand fzf-preview.DirectoryFiles"
-  endif
-endfunction
-
-nmap <silent> <C-p> :call OpenFuzzyFinder()<CR>
 
 " ======== Fugitive Conflict Resolution
 nnoremap <leader>gd :Gvdiffsplit!<CR>
@@ -42,14 +31,6 @@ endfunction
 let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
 let g:test#strategy = 'terminal_split'
 
-" Go to normal mode in terminal window
-" tnoremap <silent> <C-[><C-[> <C-\><C-n>
-" Go to normal mode in terminal window and toggle terminal
-" tnoremap <silent> <D-j> <C-\><C-n> :CocCommand terminal.Toggle<CR>
-" Destroy terminal
-tnoremap <silent> <D-J> <C-\><C-n> :CocCommand terminal.Destroy<CR>
-" Enter REPL mode relative to current working dir
-nnoremap <leader>rp :CocCommand terminal.REPL<CR>
 
 " Command history mapping, depends on fzf.vim
 " cnoremap <Tab> History:<CR>
@@ -67,3 +48,19 @@ augroup AlternateToggles
   au!
   au FileType typescript,viml,lua nnoremap <buffer> <CR> :ToggleAlternate<CR>
 augroup end
+
+" Open undo tree
+nnoremap <leader>u :UndotreeShow<CR>
+
+nnoremap <silent> <leader>gb :<C-u>Git blame<CR>
+
+function! OpenFuzzyFinder()
+  if isdirectory(getcwd()."/.git")
+    exec ":Telescope git_files"
+  else
+    exec ":Telescope find_files"
+  endif
+endfunction
+
+nmap <silent> <C-p> :call OpenFuzzyFinder()<CR>
+

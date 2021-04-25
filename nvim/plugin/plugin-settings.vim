@@ -1,6 +1,5 @@
 " =================== COC VIM =====================
 
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Had to set this so Goneovim would still pick it up
 let g:coc_node_path = '/Users/ronnieandrewmagatti/.nvm/versions/node/v14.7.0/bin/node'
 
@@ -12,13 +11,6 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-
-" ================== Lightline statusline config ===========
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
-      \ }
-      \ }
 
 " Debugger options
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -41,7 +33,7 @@ let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'gruvbox'
 let $BAT_THEME = 'gruvbox'
 
 " Theme settings
-let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
 " Sneak
@@ -50,18 +42,6 @@ let g:sneak#label = 1
 let g:sneak#user_ic_scs = 1
 
 if has('nvim')
-" Tree sitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-  },
-}
-EOF
 
   " Firenvim
   let g:firenvim_config = { 
@@ -83,9 +63,9 @@ EOF
   let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
 endif
 
-" " Already defaults to this dir
-let g:auto_session_root_dir = "~/.config/nvim/session/"
-" let g:auto_session_pre_save_cmds = ["bd ".g:term_buf."!"]
+" " " Already defaults to this dir
+" let g:auto_session_root_dir = "~/.config/nvim/session/"
+" let g:auto_session_pre_save_cmds = ["silent! bd! terminal"]
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
