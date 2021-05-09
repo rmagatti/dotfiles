@@ -1,4 +1,6 @@
 local telescope = require('telescope')
+local actions = require('telescope.actions')
+
 telescope.setup{
   defaults = {
     vimgrep_arguments = {
@@ -26,9 +28,7 @@ telescope.setup{
         mirror = false,
       },
     },
-    file_sorter =  require'telescope.sorters'.get_fzy_sorter,
     file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
     width = 0.25,
@@ -43,9 +43,15 @@ telescope.setup{
     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    mappings = {
+      i = {
+        -- Close on first esc instead of gonig to normal mode
+        ["<esc>"] = actions.close,
+      }
+    },
     extensions = {
       fzf = {
-        override_generic_sorter = false, -- override the generic sorter
+        override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true,     -- override the file sorter
         case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
       }
@@ -53,7 +59,11 @@ telescope.setup{
   }
 }
 
+
 telescope.load_extension('session-lens')
 telescope.load_extension("git_worktree")
 telescope.load_extension('lsp_handlers')
 telescope.load_extension('fzf')
+telescope.load_extension('dap')
+
+require('rmagatti.buffers')

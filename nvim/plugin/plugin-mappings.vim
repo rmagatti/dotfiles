@@ -17,32 +17,10 @@ nnoremap <leader>zz :Goyo<CR>
 let g:goyo_width=120
 let g:goyo_height=90
 
-" ======== vim-test configs =======
-nmap <leader>tt :TestNearest<CR>
-nmap <leader>tf :TestFile<CR>
-nmap <leader>ts :TestSuite<CR>
-nmap <leader>tl :TestLast<CR>
-nmap <leader>tv :TestVisit<CR>
-nmap <leader>tx :TestLast --onlyFailures<CR>
-
-function! SplitStrategy(cmd)
-  vertical new | call termopen(a:cmd) | startinsert
-endfunction
-let g:test#custom_strategies = {'terminal_split': function('SplitStrategy')}
-let g:test#strategy = 'terminal_split'
-
-
-" Command history mapping, depends on fzf.vim
-" cnoremap <Tab> History:<CR>
-
-" " Map Ctrl D (down) F (up) for smooth scrolling
-" map <C-d> <Plug>(SmoothieDownwards)
-" map <C-f> <Plug>(SmoothieUpwards)
-
 " Map presentation mode toggle
 nnoremap <leader>pm :TogglePresentationMode<CR>
 
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 augroup AlternateToggles
   au!
@@ -64,3 +42,18 @@ endfunction
 
 nmap <silent> <C-p> :call OpenFuzzyFinder()<CR>
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Align GitHub-flavored Markdown tables
+augroup aligning
+  au!
+  au FileType markdown vmap <leader><Bslash> :EasyAlign*<bar><CR>
+augroup end
+
+" Diff mappings
+nnoremap <leader>ddo :DiffviewOpen<CR>
+nnoremap <leader>ddc :DiffviewClose<CR>

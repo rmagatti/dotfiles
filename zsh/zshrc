@@ -175,6 +175,7 @@ alias gitb="git branch --sort=committerdate"
 alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
+alias v=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

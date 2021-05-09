@@ -32,9 +32,12 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'gruvbox'
 let $BAT_THEME = 'gruvbox'
 
-" Theme settings
+" " Theme settings
+" let g:tokyonight_style = "storm"
+" let g:tokyonight_italic_functions = true
+" let g:tokyonight_sidebars = [ "qf", "terminal", "plug" ]
+" colorscheme tokyonight
 " let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
 
 " Sneak
 let g:sneak#s_next = 1
@@ -116,4 +119,6 @@ let g:neovide_cursor_antialiasing=v:true
 let g:neovide_cursor_animation_length=0.1
 let g:neovide_cursor_vfx_particle_density=7.0
 let g:neovide_transparency=0.95
+
+let g:smoothie_experimental_mappings=1
 

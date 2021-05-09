@@ -1,4 +1,6 @@
 require('lualine').setup{
-  theme = 'gruvbox',
-  extensions = { 'fzf', 'fugitive' }
+  options = {
+    theme = 'tokyonight',
+  },
+  extensions = { 'fzf', 'fugitive' },
 }

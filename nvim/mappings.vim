@@ -109,3 +109,24 @@ nnoremap <leader>dac :g/\v^(\/\/<bar>.*\/\/)/d_<CR>:w<CR>:noh<CR>
 
 " Select line
 nnoremap vv V
+
+" Buffer next/previous
+nnoremap <leader>; <cmd>bn<CR>
+nnoremap <leader>j <cmd>bp<CR>
+
+" Tab navigation numbered
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 5gt
+nnoremap <leader>7 5gt
+nnoremap <leader>8 5gt
+nnoremap <leader>9 5gt
+
+" Tab navigation
+nnoremap tj :tabprev<CR>
+nnoremap t; :tabnext<CR>
+nnoremap tn :tabnew<CR>
+nnoremap td :tabclose<CR>

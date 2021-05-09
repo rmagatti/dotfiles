@@ -47,15 +47,17 @@ lsp.typescript.setup {
       no_save_after_format = false
     }
 
+    ts_utils.setup_client(client)
+
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>i", ":TSLspOrganize<CR>", {silent = true})
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>fc", ":TSLspFixCurrent<CR>", {silent = true})
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rf", ":TSLspRenameFile<CR>", {silent = true})
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ia", ":TSLspImportAll<CR>", {silent = true})
 
     mappings.on_attach(client, bufnr)
-  end
+  end,
+  cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio", "--tsserver-user-preferences", "{\"importModuleSpecifierPreference\":\"relative\"}"}
 }
-vim.lsp.buf_request = ts_utils.buf_request
 
 -- LSP diagnostics | Folke
 require("trouble").setup()
@@ -66,3 +68,17 @@ require('symbols-outline').setup {
   show_guides = true,
 }
 
+-- require'lsp_signature'.on_attach({
+--   bind = true, -- This is mandatory, otherwise border config won't get registered.
+--   -- If you want to hook lspsaga or other signature handler, pls set to false
+--   doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
+
+--   hint_enable = true, -- virtual hint enable
+--   hint_prefix = "🐼 ",  -- Panda for parameter
+--   hint_scheme = "String",
+
+--   handler_opts = {
+--     border = "shadow"   -- double, single, shadow, none
+--   },
+--   decorator = {"`", "`"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
+-- })

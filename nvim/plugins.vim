@@ -1,20 +1,17 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'mbbill/undotree'
-Plug 'gruvbox-community/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 " Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'vim-test/vim-test'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
-" Plug 'tpope/vim-eunuch' " TODO: remove if unused!!
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
 Plug 'unblevable/quick-scope'
@@ -30,6 +27,13 @@ Plug 'heavenshell/vim-jsdoc', {'for': ['javascript', 'javascript.jsx','typescrip
 " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'rafcamlet/coc-nvim-lua'
 
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'sindrets/diffview.nvim'
+Plug 'ThePrimeagen/git-worktree.nvim'
+
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
@@ -40,6 +44,10 @@ Plug 'hrsh7th/nvim-compe'
 
 " Diagnostics
 Plug 'folke/lsp-trouble.nvim'
+Plug 'kosayoda/nvim-lightbulb'
+
+" " Signatures
+" Plug 'ray-x/lsp_signature.nvim'
 
 " Snippets
 Plug 'hrsh7th/vim-vsnip'
@@ -50,13 +58,12 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'gbrlsnchs/telescope-lsp-handlers.nvim'
 
-" Tabline
-" Plug 'akinsho/nvim-bufferline.lua'
+" Themes
+Plug 'gruvbox-community/gruvbox'
+Plug 'folke/tokyonight.nvim'
 
 " Tree-sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -82,7 +89,23 @@ Plug 'wellle/targets.vim'
 " Symbols
 Plug 'simrat39/symbols-outline.nvim'
 
+" Typescript utils
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+
+" Quickfix
+Plug 'kevinhwang91/nvim-bqf'
+
+" Algning
+Plug 'junegunn/vim-easy-align'
+
+" DAP
+Plug 'mfussenegger/nvim-dap'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-telescope/telescope-dap.nvim'
+" Plug 'rcarriga/nvim-dap-ui'
+
+" Bufferize commands
+Plug 'AndrewRadev/bufferize.vim'
 
 " Plug 'ayu-theme/ayu-vim'
 " Lazy
@@ -90,7 +113,12 @@ Plug 'sotte/presenting.vim', { 'on': 'PresentationStart'}
 Plug 'puremourning/vimspector', {'on': '<Plug>VimspectorContinue'}
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 Plug 'junegunn/limelight.vim', {'on': 'Limelight'}
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " <leader> keymap presentation
+" Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " <leader> keymap presentation
+
+" Temporarily disabled, hanging Neovim on certain operations"
+" Plug 'folke/which-key.nvim'
+
+Plug 'dstein64/vim-startuptime'
 
 " Local
 Plug '~/Projects/auto-session'
