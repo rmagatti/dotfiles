@@ -42,7 +42,7 @@ lsp.typescript.setup {
       -- formatting
       enable_formatting = true,
       formatter = "prettier_d_slim",
-      formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME"},
+      formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME", "--config", ".prettierrc", "--arrow-parens", "always"},
       format_on_save = true,
       no_save_after_format = false
     }
@@ -60,13 +60,13 @@ lsp.typescript.setup {
 }
 
 -- LSP diagnostics | Folke
-require("trouble").setup()
+-- require("trouble").setup()
 
--- Symbols
-require('symbols-outline').setup {
-  highlight_hovered_item = true,
-  show_guides = true,
-}
+-- -- Symbols
+-- require('symbols-outline').setup {
+--   highlight_hovered_item = true,
+--   show_guides = true,
+-- }
 
 -- require'lsp_signature'.on_attach({
 --   bind = true, -- This is mandatory, otherwise border config won't get registered.

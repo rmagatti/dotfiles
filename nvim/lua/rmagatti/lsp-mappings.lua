@@ -11,6 +11,11 @@ do
       on = true
     end
   end
+
+  function M.highlight_symbol()
+    if not on then return end
+    vim.lsp.buf.document_highlight()
+  end
 end
 
 M.on_attach = function(client, bufnr)
@@ -70,7 +75,7 @@ M.on_attach = function(client, bufnr)
     hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
     augroup lsp_document_highlight
     autocmd! * <buffer>
-    " autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    autocmd CursorHold <buffer> lua require('rmagatti.lsp-mappings').highlight_symbol()
     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
     ]], false)
@@ -78,5 +83,4 @@ M.on_attach = function(client, bufnr)
 end
 
 return M
-
 
