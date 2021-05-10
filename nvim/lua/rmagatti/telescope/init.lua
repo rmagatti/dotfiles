@@ -59,11 +59,15 @@ telescope.setup{
   }
 }
 
+require('rmagatti.telescope.buffers')
 
-telescope.load_extension('session-lens')
-telescope.load_extension("git_worktree")
-telescope.load_extension('lsp_handlers')
-telescope.load_extension('fzf')
-telescope.load_extension('dap')
+-- Mappings
+-- nnoremap <leader>wt <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+vim.cmd[[
+" Search sessions
+nnoremap <leader>ss <cmd>Telescope session-lens search_session<CR>
+nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>
 
-require('rmagatti.buffers')
+nnoremap <leader>ps <cmd>Telescope live_grep<CR>
+nnoremap <leader>b <cmd>lua require('rmagatti.telescope.buffers').custom_buffers()<CR>
+]]

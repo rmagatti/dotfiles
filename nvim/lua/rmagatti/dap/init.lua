@@ -92,6 +92,9 @@ M.debug_jest = function(_)
   print("==== TODO: Debug Jest")
 end
 
+-- Hover mapping
+vim.cmd[[nnoremap <leader>dh <cmd>lua require('dap.ui.widgets').hover()<CR>]]
+
 -- Disabled, use nvim-dap widgets instead
 -- require('rmagatti.dap.dap-ui')
 
