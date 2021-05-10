@@ -3,10 +3,6 @@ let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee
 let test#javascript#mocha#executable = 'yarn test'
 let test#javascript#jest#executable = 'yarn test'
 
-" function! MochaDebugStrategy(cmd)
-"   call luaeval("require('rmagatti.dap').debug_mocha")(a:cmd)
-" endfunction
-
 function! DebugStrategy(cmd)
   let runner = test#determine_runner(expand('%'))
   call luaeval("require('rmagatti.dap').debug")(runner, a:cmd)
