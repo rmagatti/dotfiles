@@ -66,8 +66,11 @@ require('rmagatti.telescope.buffers')
 vim.cmd[[
 " Search sessions
 nnoremap <leader>ss <cmd>Telescope session-lens search_session<CR>
+
+" Git Worktrees
 nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>
 
 nnoremap <leader>ps <cmd>Telescope live_grep<CR>
+nnoremap <leader>sw <cmd>Telescope grep_string<CR>
 nnoremap <leader>b <cmd>lua require('rmagatti.telescope.buffers').custom_buffers()<CR>
 ]]

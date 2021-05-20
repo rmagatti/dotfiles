@@ -75,8 +75,8 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=8
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :set foldlevel=0
-command! -nargs=? Unfold :set foldlevel=8
+command! -nargs=? Fold :set foldlevel=0 | :normal zM
+command! -nargs=? Unfold :set foldlevel=8 | :normal zR
 
 
 " FZF Preview

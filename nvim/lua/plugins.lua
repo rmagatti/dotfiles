@@ -5,9 +5,19 @@ return packer.startup(function()
   use { 'tpope/vim-commentary' }
   use { 'tpope/vim-surround' }
   use { 'HerringtonDarkholme/yats.vim' }
-  use { 'jparise/vim-graphql' }
-  use { 'dbeniamine/cheat.sh-vim' }
-  use { 'mbbill/undotree' }
+  use { 'jparise/vim-graphql' } -- TODO: remove me? What do I need this for?
+  use {
+    'dbeniamine/cheat.sh-vim',
+    keys = {'n', '<leader>KB', 'n', '<leader>KK', 'n', '<leader>KP'},
+    cmd = {'Cheat', 'CheatPaste'}
+  }
+  use {
+    'mbbill/undotree',
+    config = function ()
+      vim.cmd[[nnoremap <leader>u :UndotreeShow<CR>]]
+    end,
+    keys = '<leader>u'
+  }
   use { 'jremmen/vim-ripgrep' }
   use {
     'kyazdani42/nvim-web-devicons',
@@ -19,22 +29,73 @@ return packer.startup(function()
   use { 'windwp/nvim-autopairs', config = function()
     require('rmagatti.nvim-autopairs')
   end }
-  use { 'justinmk/vim-dirvish' }
-  use { 'justinmk/vim-sneak' }
+  use {
+    'oustinmk/vim-dirvish',
+    config = function ()
+      vim.cmd[[
+      command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
+      command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish %
+      nnoremap <leader>fs :VLeftDirvish<CR>
+      nnoremap <leader>ff :VLeftDirvishFile<CR>
+      ]]
+    end
+  }
+  use {
+    'roginfarrer/vim-dirvish-dovish',
+    branch = 'main',
+    requires = {'justinmk/vim-dirvish'}
+  }
+  use {
+    'kristijanhusak/vim-dirvish-git',
+    opt = true,
+    requires = {'justinmk/vim-dirvish'}
+  }
+
+  use {
+    'justinmk/vim-sneak',
+    keys = {'n', 's', 'n', 'S'}
+  }
   use { 'mhinz/vim-startify' }
   use { 'unblevable/quick-scope' }
   use { 'tommcdo/vim-exchange' }
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
-  use { 'roginfarrer/vim-dirvish-dovish', branch = 'main', requires = {'justinmk/vim-dirvish'} }
   use { 'michaeljsmith/vim-indent-object' }
   use { 'mg979/vim-visual-multi', branch = 'master' }
   -- use { 'heavenshell/vim-jsdoc' }, {'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
 
   -- LSP
-  use { 'neovim/nvim-lspconfig' }
-  use { 'kabouzeid/nvim-lspinstall', requires = {'neovim/nvim-lspconfig'}, config = function()
-    require('rmagatti.lsp')
-  end }
+  use {
+    'neovim/nvim-lspconfig'
+  }
+  use {
+    'kabouzeid/nvim-lspinstall',
+    requires = {'neovim/nvim-lspconfig'},
+    config = function()
+      require('rmagatti.lsp-server-configs')
+    end,
+    after = 'nvim-lspconfig'
+  }
+
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require'lsp_signature'.on_attach {
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        -- If you want to hook lspsaga or other signature handler, pls set to false
+        doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
+
+        hint_enable = true, -- virtual hint enable
+        hint_prefix = "🐼 ",  -- Panda for parameter
+        hint_scheme = "String",
+
+        handler_opts = {
+          border = "shadow"   -- double, single, shadow, none
+        },
+        decorator = {"`", "`"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
+
+      }
+    end
+  }
 
   -- Completion
   use {
@@ -49,7 +110,16 @@ return packer.startup(function()
     'folke/lsp-trouble.nvim',
     config = function()
       require("trouble").setup()
-      vim.cmd[[nnoremap <leader>xx <cmd>LspTroubleToggle<CR>]]
+      vim.cmd[[nnoremap <leader>xx <cmd>LspTrouble<CR>]]
+    end,
+    keys = '<leader>xx',
+    cmd = {'LspTrouble'}
+  }
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
     end
   }
   use { 'kosayoda/nvim-lightbulb', config = function() require('rmagatti.nvim-lightbulb') end }
@@ -60,8 +130,8 @@ return packer.startup(function()
   use { 'rafamadriz/friendly-snippets' }
 
   -- Telescope
-  use { 'nvim-lua/popup.nvim' }
-  use { 'nvim-lua/plenary.nvim' }
+  -- use { 'nvim-lua/popup.nvim' }
+  -- use { 'nvim-lua/plenary.nvim' }
   use {
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
@@ -86,23 +156,51 @@ return packer.startup(function()
   }
 
   -- Git
-  use {
-    { 'tpope/vim-fugitive', cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull'} },
-    {
-      'lewis6991/gitsigns.nvim',
-      requires = {'nvim-lua/plenary.nvim'},
-      config = function() require('rmagatti.gitsigns') end,
-      event = 'BufEnter'
-    },
-    { 'TimUntersberger/neogit', opt = true },
-    { 'kristijanhusak/vim-dirvish-git', opt = true, requires = {'justinmk/vim-dirvish'}, event = "BufEnter" }
+  use
+  {
+    'tpope/vim-fugitive',
+    cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gvdiffsplit'},
+    config = function ()
+      vim.cmd[[
+        nnoremap <silent> <leader>gb :<C-u>Git blame<CR>
+        nnoremap <leader>gd :Gvdiffsplit!<CR>
+        nnoremap gj :diffget //2<CR>
+        nnoremap g; :diffget //3<CR>
+      ]]
+    end,
+    keys = {'n', '<leader>gd', 'n', '<leader>gb', 'n', '<leader>hp'}
   }
-  use { 'sindrets/diffview.nvim', config = function() require('rmagatti.diffview') end }
+  use {
+    'TimUntersberger/neogit',
+    opt = true,
+    cmd = {'Neogit'},
+    config = function()
+      require('neogit').setup{}
+    end
+  }
+  use {
+    'sindrets/diffview.nvim',
+    config = function()
+      require('rmagatti.diffview')
+    end,
+    cmd = {'DiffviewOpen'},
+    keys = '<leader>ddo'
+  }
   use {
     'ThePrimeagen/git-worktree.nvim',
     requires = {'nvim-telescope/telescope.nvim'},
     config = function()
       require('telescope').load_extension("git_worktree")
+      vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
+    end,
+    keys = '<leader>wt'
+  }
+
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function()
+      require('rmagatti.gitsigns')
     end
   }
 
@@ -117,17 +215,20 @@ return packer.startup(function()
     config = function()
       require('rmagatti.treesitter')
     end,
-    {
-      'nvim-treesitter/playground',
-      requires = {'nvim-treesitter/nvim-treesitter'},
-      cmd = "TSPlaygroundToggle"
-    }
+  }
+  use {
+    'nvim-treesitter/playground',
+    requires = {'nvim-treesitter/nvim-treesitter'},
+    cmd = "TSPlaygroundToggle"
   }
   -- Rainbow parentheses
   use { 'p00f/nvim-ts-rainbow' }
 
   -- Fzf
-  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
+  use {
+    'junegunn/fzf',
+    run = function() vim.fn['fzf#install']() end
+  }
   use { 'junegunn/fzf.vim' }
   use { 'yuki-ycino/fzf-preview.vim', branch = 'release/rpc' }
 
@@ -137,7 +238,10 @@ return packer.startup(function()
   end }
 
   -- Terraform
-  use { 'hashivim/vim-terraform' }
+  -- use {
+  --   'hashivim/vim-terraform',
+  --   ft = {'terraform'}
+  -- }
 
   -- Text objects
   use { 'wellle/targets.vim' }
@@ -148,19 +252,32 @@ return packer.startup(function()
   }
 
   -- Symbols
-  use { 'simrat39/symbols-outline.nvim', config = function()
-    require('symbols-outline').setup {
-      highlight_hovered_item = true,
-      show_guides = true,
-    }
-  end }
+  use {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require('symbols-outline').setup {
+        highlight_hovered_item = true,
+        show_guides = true,
+      }
+    end
+  }
 
   -- Typescript utils
-  use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
+  use {
+    'jose-elias-alvarez/nvim-lsp-ts-utils',
+    requires = {'neovim/nvim-lspconfig'},
+    config = function()
+      require('rmagatti.nvim-lsp-ts-utils')
+    end,
+    after = 'nvim-lspinstall'
+  }
   use {'heavenshell/vim-jsdoc', ft = { 'javascript', 'javascript.jsx','typescript' }, run='make install' }
 
   -- Quickfix enhancements
-  use { 'kevinhwang91/nvim-bqf' }
+  use {
+    'kevinhwang91/nvim-bqf',
+    disable = false
+  }
 
   -- Aligning
   use { 'junegunn/vim-easy-align', config = function() require('rmagatti.easyalign') end }
@@ -181,7 +298,17 @@ return packer.startup(function()
   use { 'AndrewRadev/bufferize.vim' }
 
   -- Focus
-  use { 'junegunn/goyo.vim', cmd = {'Goyo'} }
+  use {
+    'junegunn/goyo.vim',
+    cmd = {'Goyo'},
+    config = function()
+      vim.cmd[[
+      let g:goyo_width=120
+      let g:goyo_height=90
+      ]]
+    end,
+    keys = '<leader>zz'
+  }
   use { 'junegunn/limelight.vim', cmd = {'Limelight'} }
 
   -- Profiling

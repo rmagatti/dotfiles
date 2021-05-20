@@ -130,3 +130,14 @@ nnoremap tj :tabprev<CR>
 nnoremap t; :tabnext<CR>
 nnoremap tn :tabnew<CR>
 nnoremap td :tabclose<CR>
+
+function! CompilePacker()
+  echo "Compiling packer..."
+  exec ":PackerCompile"
+  echo "Compiling done!"
+endfunction
+
+augroup plugins
+  au!
+  autocmd BufWritePost plugins.lua :call CompilePacker()
+augroup end

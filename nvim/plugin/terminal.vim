@@ -17,7 +17,7 @@ function! TermToggle(height)
       let g:term_buf = bufnr("")
       exec "file terminal"
     endtry
-    startinsert!
+    " startinsert!
     let g:term_win = win_getid()
   endif
 endfunction
@@ -28,3 +28,5 @@ nnoremap <D-CR> call TermToggle(20)
 nnoremap <D-j> :call TermToggle(20)<CR>
 tnoremap <D-j> <C-\><C-n> :call TermToggle(20)<CR>
 tnoremap <D-k> <C-\><C-n> :bd! g:term_buf<CR>
+
+nnoremap <leader><space> :call TermToggle(20)<CR>

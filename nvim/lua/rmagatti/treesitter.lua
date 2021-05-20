@@ -39,3 +39,25 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 
+-- Custom parser
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.terraform = {
+  install_info = {
+    url = "~/Projects/tree-sitter-terraform", -- local path or git repo
+    files = {"src/parser.c"},
+  },
+  filetype = "terraform", -- if filetype does not agrees with parser name
+  used_by = {"hcl2", "tf"} -- additional filetypes that use this parser
+}
+
+require "nvim-treesitter.configs".setup {
+  query_linter = {
+    enable = true,
+    use_virtual_text = true,
+    lint_events = {"BufWrite", "CursorHold"},
+  },
+  terraform = {
+    enable = true,
+    highlight = true
+  }
+}
