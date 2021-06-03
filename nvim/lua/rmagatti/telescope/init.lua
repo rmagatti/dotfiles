@@ -60,6 +60,7 @@ telescope.setup{
 }
 
 require('rmagatti.telescope.buffers')
+require('rmagatti.telescope.dotfiles')
 
 -- Mappings
 -- nnoremap <leader>wt <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>

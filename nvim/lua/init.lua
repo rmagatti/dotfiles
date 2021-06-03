@@ -10,3 +10,4 @@
 -- require('rmagatti.lualine')
 -- require('rmagatti.tokyonight')
 -- require('rmagatti.dap')
+require('rmagatti.floating')

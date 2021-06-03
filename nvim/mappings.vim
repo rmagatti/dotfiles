@@ -22,8 +22,6 @@ noremap ; l
 nnoremap cp "+y
 vnoremap cp "+y
 
-xnoremap <leader>p "_dP
-
 " Move selection up and down plus formatting
 vnoremap K :m '>+1<CR>gv=gv
 vnoremap L :m '<-2<CR>gv=gv
@@ -49,18 +47,21 @@ cnoremap <D-v> <C-r>+
 " Paste from external keyboard
 tnoremap <D-v> <C-\><C-n>"+pa
 
+" Force close
+nnoremap <leader>Q :q!<CR>
 
 ":set paste<CR> i<C-r>+ <Esc>:set nopaste<CR>
 
 " Map command-s to save
 nnoremap <D-s> :w<CR>
-inoremap <D-s> <C-]> :w<CR>
+inoremap <D-s> <esc> :w<CR>
 
 " Re-ource init.vim
 noremap <leader>rr :source $HOME/.config/nvim/init.vim<CR>
 
 " Paste without yanking for easier paste repetition
 vnoremap p "_dP
+xnoremap p "_dP
 
 " Search from visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -69,12 +70,6 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nmap <leader>crp :let @+=expand("%")<CR>:echo "Copied relativepath: ".@+<CR>
 nmap <leader>cap :let @+=expand("%:p")<CR>:echo "Copied absolutepath: ".@+<CR>
 nmap <leader>cfn :let @+=expand("%:t")<CR>:echo "Copied filename: ".@+<CR>
-
-" Open init.vim in a split
-" Mnemonic Open Init Vertical split
-" Mnemonic Open Init Split
-map <leader>oiv :vsp ~/.config/nvim/init.vim<CR>
-map <leader>ois :sp ~/.config/nvim/init.vim<CR>
 
 " Run a given vim command on the results of alt from a given path.
 " See usage below.

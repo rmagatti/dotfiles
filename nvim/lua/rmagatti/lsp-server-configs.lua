@@ -11,14 +11,10 @@ for _, server in pairs(servers) do
   }
 end
 
-lsp.lua.setup {
-  on_attach = mappings.on_attach,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' }
-      }
-    }
+local luadev = require("lua-dev").setup {
+  lspconfig = {
+    on_attach = mappings.on_attach
   }
 }
 
+lsp.lua.setup(luadev)

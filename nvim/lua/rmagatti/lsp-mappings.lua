@@ -34,7 +34,7 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
   -- Type helpers
-  buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   -- Not too sure what this does
@@ -68,6 +68,8 @@ M.on_attach = function(client, bufnr)
   end
 
   -- Set autocommands conditional on server_capabilities
+
+  -- TODO: uncomment me after plenary issue is fixed
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
     hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow

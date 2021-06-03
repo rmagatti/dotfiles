@@ -13,12 +13,28 @@ return packer.startup(function()
   }
   use {
     'mbbill/undotree',
-    config = function ()
+    config = function()
       vim.cmd[[nnoremap <leader>u :UndotreeShow<CR>]]
     end,
     keys = '<leader>u'
   }
+
+  -- Grepping
   use { 'jremmen/vim-ripgrep' }
+  use {
+    'mhinz/vim-grepper',
+    config = function()
+      vim.cmd[[
+        nmap gs <plug>(GrepperOperator)
+        xmap gs <plug>(GrepperOperator)
+      ]]
+    end
+  }
+
+  use {
+    'tpope/vim-repeat'
+  }
+
   use {
     'kyazdani42/nvim-web-devicons',
     config = function()
@@ -26,11 +42,16 @@ return packer.startup(function()
     end
   }
   use { 'vim-test/vim-test' }
-  use { 'windwp/nvim-autopairs', config = function()
-    require('rmagatti.nvim-autopairs')
-  end }
+
   use {
-    'oustinmk/vim-dirvish',
+    'windwp/nvim-autopairs',
+    config = function()
+      require('rmagatti.nvim-autopairs')
+    end
+  }
+
+  use {
+    'justinmk/vim-dirvish',
     config = function ()
       vim.cmd[[
       command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
@@ -57,7 +78,10 @@ return packer.startup(function()
   }
   use { 'mhinz/vim-startify' }
   use { 'unblevable/quick-scope' }
-  use { 'tommcdo/vim-exchange' }
+  use {
+    'tommcdo/vim-exchange',
+    keys = {'n', 'cx'}
+  }
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
   use { 'michaeljsmith/vim-indent-object' }
   use { 'mg979/vim-visual-multi', branch = 'master' }
@@ -82,7 +106,7 @@ return packer.startup(function()
       require'lsp_signature'.on_attach {
         bind = true, -- This is mandatory, otherwise border config won't get registered.
         -- If you want to hook lspsaga or other signature handler, pls set to false
-        doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
+        -- doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
 
         hint_enable = true, -- virtual hint enable
         hint_prefix = "🐼 ",  -- Panda for parameter
@@ -91,7 +115,7 @@ return packer.startup(function()
         handler_opts = {
           border = "shadow"   -- double, single, shadow, none
         },
-        decorator = {"`", "`"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
+        -- decorator = {"`", "`"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
 
       }
     end
@@ -105,24 +129,12 @@ return packer.startup(function()
     end
   }
 
-  -- Diagnostics
+  -- Lua plugin dev
   use {
-    'folke/lsp-trouble.nvim',
-    config = function()
-      require("trouble").setup()
-      vim.cmd[[nnoremap <leader>xx <cmd>LspTrouble<CR>]]
-    end,
-    keys = '<leader>xx',
-    cmd = {'LspTrouble'}
+    "folke/lua-dev.nvim"
   }
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup {}
-    end
-  }
-  use { 'kosayoda/nvim-lightbulb', config = function() require('rmagatti.nvim-lightbulb') end }
+
+  use { 'svermeulen/vimpeccable' }
 
   -- Snippets
   use { 'hrsh7th/vim-vsnip' }
@@ -130,8 +142,8 @@ return packer.startup(function()
   use { 'rafamadriz/friendly-snippets' }
 
   -- Telescope
-  -- use { 'nvim-lua/popup.nvim' }
-  -- use { 'nvim-lua/plenary.nvim' }
+  use { 'nvim-lua/popup.nvim' }
+  use { 'nvim-lua/plenary.nvim' }
   use {
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
@@ -155,9 +167,37 @@ return packer.startup(function()
     end,
   }
 
+  use {
+    'nvim-telescope/telescope-packer.nvim',
+    config = function()
+      require('telescope').load_extension('packer')
+      vim.cmd[[nnoremap <leader>pl :lua require('telescope').extensions.packer.plugins()<CR>]]
+    end,
+    keys = {'n', '<leader>pl'}
+  }
+
+  -- Diagnostics
+  use {
+    'folke/lsp-trouble.nvim',
+    config = function()
+      require("trouble").setup()
+      vim.cmd[[nnoremap <leader>xx <cmd>LspTrouble<CR>]]
+    end,
+    keys = '<leader>xx',
+    cmd = {'LspTrouble'}
+  }
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
+    end
+  }
+  -- use { 'kosayoda/nvim-lightbulb', config = function() require('rmagatti.nvim-lightbulb') end }
+
+
   -- Git
-  use
-  {
+  use {
     'tpope/vim-fugitive',
     cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gvdiffsplit'},
     config = function ()
@@ -166,16 +206,31 @@ return packer.startup(function()
         nnoremap <leader>gd :Gvdiffsplit!<CR>
         nnoremap gj :diffget //2<CR>
         nnoremap g; :diffget //3<CR>
-      ]]
+        ]]
     end,
-    keys = {'n', '<leader>gd', 'n', '<leader>gb', 'n', '<leader>hp'}
+    keys = {
+      'n', '<leader>gd',
+      'n', '<leader>gb',
+      'n', '<leader>hp',
+      'n', '<leader>hs',
+      'n', '<leader>hu',
+      'n', '<leader>hr',
+      'n', '<leader>hR',
+      'n', '<leader>hp',
+      'n', '<leader>hb',
+    }
   }
+
   use {
     'TimUntersberger/neogit',
     opt = true,
     cmd = {'Neogit'},
     config = function()
-      require('neogit').setup{}
+      require('neogit').setup{
+        integrations = {
+          diffview = true
+        }
+      }
     end
   }
   use {
@@ -216,13 +271,17 @@ return packer.startup(function()
       require('rmagatti.treesitter')
     end,
   }
+
   use {
     'nvim-treesitter/playground',
     requires = {'nvim-treesitter/nvim-treesitter'},
     cmd = "TSPlaygroundToggle"
   }
+
   -- Rainbow parentheses
-  use { 'p00f/nvim-ts-rainbow' }
+  use {
+    'p00f/nvim-ts-rainbow'
+  }
 
   -- Fzf
   use {
@@ -238,13 +297,14 @@ return packer.startup(function()
   end }
 
   -- Terraform
-  -- use {
-  --   'hashivim/vim-terraform',
-  --   ft = {'terraform'}
-  -- }
+  use {
+    'hashivim/vim-terraform',
+    ft = {'terraform'}
+  }
 
   -- Text objects
   use { 'wellle/targets.vim' }
+
   use {
     'nvim-treesitter/nvim-treesitter-textobjects',
     requires = {'nvim-treesitter/nvim-treesitter' },
@@ -271,6 +331,7 @@ return packer.startup(function()
     end,
     after = 'nvim-lspinstall'
   }
+
   use {'heavenshell/vim-jsdoc', ft = { 'javascript', 'javascript.jsx','typescript' }, run='make install' }
 
   -- Quickfix enhancements
@@ -288,14 +349,41 @@ return packer.startup(function()
     config = function()
       require('telescope').load_extension('dap')
       require('rmagatti.dap')
+    end,
+    keys = {'n', '<leader>db', 'n', '<leader>dB'}
+  }
+  use {
+    'theHamsta/nvim-dap-virtual-text',
+    after = 'nvim-dap'
+  }
+  use {
+    'nvim-telescope/telescope-dap.nvim',
+    requires = {'mfussenegger/nvim-dap', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('telescope').load_extension('dap')
+    end,
+    after = 'nvim-dap'
+  }
+
+  -- WhichKey
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require('rmagatti.which-key')
     end
   }
-  use { 'theHamsta/nvim-dap-virtual-text' }
-  use { 'nvim-telescope/telescope-dap.nvim', requires = {'mfussenegger/nvim-dap', 'nvim-telescope/telescope.nvim'} }
 
+  -- Indent Blankline
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    branch = 'lua'
+  }
 
   -- Bufferize commands
-  use { 'AndrewRadev/bufferize.vim' }
+  use {
+    'AndrewRadev/bufferize.vim',
+    cmd = {'Bufferize'}
+  }
 
   -- Focus
   use {
@@ -305,6 +393,7 @@ return packer.startup(function()
       vim.cmd[[
       let g:goyo_width=120
       let g:goyo_height=90
+      nnoremap <leader>zz :Goyo
       ]]
     end,
     keys = '<leader>zz'
@@ -322,6 +411,7 @@ return packer.startup(function()
       require('rmagatti.auto-session')
     end
   }
+
   use {
     '~/Projects/alternate-toggler',
     as = 'alternate-toggler'

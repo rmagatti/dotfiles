@@ -6,24 +6,36 @@ require('lspconfig').typescript.setup {
   on_attach = function (client, bufnr)
 
     ts_utils.setup {
+      debug = false,
       disable_commands = false,
       enable_import_on_completion = false,
       import_on_completion_timeout = 5000,
       -- eslint
       eslint_bin = "eslint_d",
-      -- eslint_args = {"-f", "json", "--stdin", "--stdin-filename", "$FILENAME"},
+      eslint_args = {"-f", "json", "--stdin", "--stdin-filename", "$FILENAME"},
       eslint_enable_disable_comments = true,
 
       -- experimental settings!
       -- eslint diagnostics
       eslint_enable_diagnostics = true,
-      eslint_diagnostics_debounce = 250,
+      eslint_diagnostics_debounce = 2500,
       -- formatting
       enable_formatting = true,
       formatter = "prettier_d_slim",
-      formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME", "--config", ".prettierrc", "--arrow-parens", "always", "--trailing-commas", "all"},
+      formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME"},
+      -- formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME", "--config", ".prettierrc", "--arrow-parens", "always", "--trailing-commas", "all"},
       format_on_save = true,
-      no_save_after_format = false
+      no_save_after_format = false,
+
+      -- parentheses completion
+      complete_parens = false,
+      signature_help_in_parens = false,
+
+      -- update imports on file move
+      update_imports_on_move = true,
+      require_confirmation_on_move = true,
+      watch_dir = "/src",
+
     }
 
     ts_utils.setup_client(client)
