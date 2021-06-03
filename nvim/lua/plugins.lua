@@ -4,7 +4,10 @@ return packer.startup(function()
   use { 'wbthomason/packer.nvim' }
   use { 'tpope/vim-commentary' }
   use { 'tpope/vim-surround' }
-  use { 'HerringtonDarkholme/yats.vim' }
+  use {
+    'HerringtonDarkholme/yats.vim',
+    disable = true
+  }
   use { 'jparise/vim-graphql' } -- TODO: remove me? What do I need this for?
   use {
     'dbeniamine/cheat.sh-vim',
@@ -79,8 +82,7 @@ return packer.startup(function()
   use { 'mhinz/vim-startify' }
   use { 'unblevable/quick-scope' }
   use {
-    'tommcdo/vim-exchange',
-    keys = {'n', 'cx'}
+    'tommcdo/vim-exchange'
   }
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
   use { 'michaeljsmith/vim-indent-object' }
@@ -101,24 +103,7 @@ return packer.startup(function()
   }
 
   use {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require'lsp_signature'.on_attach {
-        bind = true, -- This is mandatory, otherwise border config won't get registered.
-        -- If you want to hook lspsaga or other signature handler, pls set to false
-        -- doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
-
-        hint_enable = true, -- virtual hint enable
-        hint_prefix = "🐼 ",  -- Panda for parameter
-        hint_scheme = "String",
-
-        handler_opts = {
-          border = "shadow"   -- double, single, shadow, none
-        },
-        -- decorator = {"`", "`"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
-
-      }
-    end
+    "ray-x/lsp_signature.nvim"
   }
 
   -- Completion
@@ -295,6 +280,10 @@ return packer.startup(function()
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}, config = function()
     require('rmagatti.lualine')
   end }
+
+  use {
+    'nvim-lua/lsp-status.nvim'
+  }
 
   -- Terraform
   use {

@@ -1,5 +1,9 @@
 local lsp = require('lspconfig')
 local mappings = require('rmagatti.lsp-mappings')
+local signature = require('rmagatti.lsp-signature')
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
 local lspinstall = require('lspinstall')
 lspinstall.setup()
 
@@ -7,13 +11,20 @@ lspinstall.setup()
 local servers = lspinstall.installed_servers()
 for _, server in pairs(servers) do
   lsp[server].setup{
-    on_attach = mappings.on_attach
+    on_attach = function (client, bufnr)
+      mappings.on_attach(client, bufnr)
+      lsp_status.on_attach(client)
+    end,
+    capabilities = lsp_status.capabilities
   }
 end
 
 local luadev = require("lua-dev").setup {
   lspconfig = {
-    on_attach = mappings.on_attach
+    on_attach = function (client, bufnr)
+      mappings.on_attach(client, bufnr)
+      signature.on_attach()
+    end
   }
 }
 
