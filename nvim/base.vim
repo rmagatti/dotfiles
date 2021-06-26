@@ -29,7 +29,6 @@ set scrolljump=5
 " set synmaxcol=180
 " set re=1
 
-" TextEdit might fail if hidden is not set.
 set hidden
 
 " Some servers have issues with backup files, see #649.

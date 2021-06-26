@@ -2,16 +2,50 @@ local packer = require('packer')
 return packer.startup(function()
   local use = packer.use
   use { 'wbthomason/packer.nvim' }
-  use { 'tpope/vim-commentary' }
-  use { 'tpope/vim-surround' }
   use {
-    'HerringtonDarkholme/yats.vim',
-    disable = true
+   'tpope/vim-commentary',
+    keys = 'gc'
   }
-  use { 'jparise/vim-graphql' } -- TODO: remove me? What do I need this for?
+  use {
+   'tpope/vim-surround',
+   keys = {
+     {'n', 'cs'},
+     {'n', 'ds'},
+     {'x', 'S'},
+     {'n', 'ys'}
+   }
+  }
+
+  use {
+    'tpope/vim-repeat'
+  }
+  use {
+    "akinsho/nvim-toggleterm.lua",
+    config = function()
+      require("toggleterm").setup {
+        open_mapping = '<leader>m',
+        size =function(term)
+          if term.direction == "horizontal" then
+            return 25
+          elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+          end
+        end,
+        insert_mappings = false
+      }
+    end,
+    keys = '<leader>m',
+    cmd = {'ToggleTerm', 'ToggleTermOpenAll', 'ToggleTermCloseAll'}
+  }
+
+  --==== Lazy loaded
   use {
     'dbeniamine/cheat.sh-vim',
-    keys = {'n', '<leader>KB', 'n', '<leader>KK', 'n', '<leader>KP'},
+    keys = {
+      {'n', '<leader>KB'},
+      {'n', '<leader>KK'},
+      {'n', '<leader>KP'},
+    },
     cmd = {'Cheat', 'CheatPaste'}
   }
   use {
@@ -23,7 +57,10 @@ return packer.startup(function()
   }
 
   -- Grepping
-  use { 'jremmen/vim-ripgrep' }
+  use {
+   'jremmen/vim-ripgrep',
+   cmd = { 'Rg' }
+  }
   use {
     'mhinz/vim-grepper',
     config = function()
@@ -31,26 +68,79 @@ return packer.startup(function()
         nmap gs <plug>(GrepperOperator)
         xmap gs <plug>(GrepperOperator)
       ]]
-    end
-  }
-
-  use {
-    'tpope/vim-repeat'
+    end,
+    keys = {
+      {'n', 'gs'},
+      {'x', 'gs'}
+    }
   }
 
   use {
     'kyazdani42/nvim-web-devicons',
     config = function()
       require('rmagatti.nvim-web-devicons')
-    end
+    end,
+    module = 'nvim-web-devicons'
   }
-  use { 'vim-test/vim-test' }
+
+  use {
+   'vim-test/vim-test',
+   config = function()
+    vim.cmd[[
+      let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee|ts)$'
+      let test#javascript#mocha#executable = 'yarn test'
+      let test#javascript#jest#executable = 'yarn test'
+
+      function! DebugStrategy(cmd)
+        let runner = test#determine_runner(expand('%'))
+        call luaeval("require('rmagatti.dap').debug")(runner, a:cmd)
+      endfunction
+
+      function! SplitStrategy(cmd)
+        vertical new | call termopen(a:cmd) | startinsert
+      endfunction
+      let g:test#custom_strategies = {'terminal_split': function('SplitStrategy'), 'debug': function('DebugStrategy')}
+      let g:test#strategy = 'terminal_split'
+
+      " Regular mappings
+      nmap <leader>tt :TestNearest<CR>
+      nmap <leader>tf :TestFile<CR>
+      nmap <leader>ts :TestSuite<CR>
+      nmap <leader>tl :TestLast<CR>
+      nmap <leader>tv :TestVisit<CR>
+
+      " Debug mappings
+      nmap <leader>tdt :TestNearest -strategy=debug<CR>
+      nmap <leader>tdf :TestFile -strategy=debug<CR>
+      nmap <leader>tds :TestSuite -strategy=debug<CR>
+      nmap <leader>tdl :TestLast -strategy=debug<CR>
+      nmap <leader>tdv :TestVisit -strategy=debug<CR>
+    ]]
+   end,
+   keys = {
+     {'n', '<leader>tf'},
+     {'n', '<leader>tt'},
+     {'n', '<leader>ts'},
+     {'n', '<leader>tf'},
+     {'n', '<leader>tt'},
+     {'n', '<leader>tf'},
+     {'n', '<leader>ts'},
+     {'n', '<leader>tl'},
+     {'n', '<leader>tv'},
+     {'n', '<leader>tdt'},
+     {'n', '<leader>tdf'},
+     {'n', '<leader>tds'},
+     {'n', '<leader>tdl'},
+     {'n', '<leader>tdv'},
+   }
+  }
 
   use {
     'windwp/nvim-autopairs',
     config = function()
       require('rmagatti.nvim-autopairs')
-    end
+    end,
+    event = "BufReadPre"
   }
 
   use {
@@ -67,7 +157,29 @@ return packer.startup(function()
   use {
     'roginfarrer/vim-dirvish-dovish',
     branch = 'main',
-    requires = {'justinmk/vim-dirvish'}
+    requires = {'justinmk/vim-dirvish'},
+    config = function ()
+      vim.cmd[[
+        let g:dirvish_dovish_map_keys = 0
+
+        augroup dirvish_config
+        autocmd!
+        " unmap dirvish default
+        autocmd FileType dirvish silent! unmap <buffer><C-p>
+        autocmd FileType dirvish silent! unmap <buffer>p
+
+        " My mappings
+        autocmd FileType dirvish silent! map <buffer>i <Plug>(dovish_create_file)
+        autocmd FileType dirvish silent! map <buffer>I <Plug>(dovish_create_directory)
+        autocmd FileType dirvish silent! map <buffer>dd <Plug>(dovish_delete)
+        autocmd FileType dirvish silent! map <buffer>r <Plug>(dovish_rename)
+        autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
+        autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
+        autocmd FileType dirvish silent! map <buffer>p <Plug>(dovish_copy)
+        autocmd FileType dirvish silent! map <buffer>P <Plug>(dovish_move)
+        augroup END
+      ]]
+    end
   }
   use {
     'kristijanhusak/vim-dirvish-git',
@@ -76,22 +188,75 @@ return packer.startup(function()
   }
 
   use {
-    'justinmk/vim-sneak',
-    keys = {'n', 's', 'n', 'S'}
+    'ggandor/lightspeed.nvim',
+    config = function ()
+      require('lightspeed').setup {
+        jump_to_first_match = true,
+        jump_on_partial_input_safety_timeout = 400,
+        highlight_unique_chars = false,
+        grey_out_search_area = true,
+        match_only_the_start_of_same_char_seqs = true,
+        limit_ft_matches = 5,
+        full_inclusive_prefix_key = '<c-x>',
+      }
+    end,
+    module = {'lightspeed'},
+    keys = {
+      {'n', 's'},
+      {'n', 'S'},
+      {'n', 'f'},
+      {'n', 'F'},
+    }
   }
-  use { 'mhinz/vim-startify' }
-  use { 'unblevable/quick-scope' }
+
   use {
-    'tommcdo/vim-exchange'
+    'vimwiki/vimwiki',
+    branch = 'dev',
+    setup = function()
+        -- let gwiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}
+      vim.cmd("let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'nested_syntaxes':{'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}}]")
+      vim.cmd[[
+        let g:vimwiki_listsyms = '✗○◐●✓'
+      ]]
+    end,
+    keys = {
+      {'n', '<leader>ww'},
+      {'n', '<leader>wi'},
+      {'n', '<leader>w<leader>w'},
+      {'n', '<leader>ws'},
+    },
+    ft = {'vimwiki', 'markdown'},
   }
-  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
-  use { 'michaeljsmith/vim-indent-object' }
-  use { 'mg979/vim-visual-multi', branch = 'master' }
+
+  use {
+    'tommcdo/vim-exchange',
+    keys = {
+      {'n', 'cx'},
+      {'x', 'X'}
+    }
+  }
+
+  use {
+    'glacambre/firenvim',
+    run = function()
+      vim.fn['firenvim#install'](0)
+    end
+  }
+  use {
+   'michaeljsmith/vim-indent-object',
+   event = 'BufReadPost'
+  }
+  use {
+    'mg979/vim-visual-multi',
+    branch = 'master',
+    keys = '<C-n>'
+  }
   -- use { 'heavenshell/vim-jsdoc' }, {'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
 
   -- LSP
   use {
-    'neovim/nvim-lspconfig'
+    'neovim/nvim-lspconfig',
+    event = 'BufReadPre'
   }
   use {
     'kabouzeid/nvim-lspinstall',
@@ -99,11 +264,13 @@ return packer.startup(function()
     config = function()
       require('rmagatti.lsp-server-configs')
     end,
+    event = 'BufReadPost',
     after = 'nvim-lspconfig'
   }
 
   use {
-    "ray-x/lsp_signature.nvim"
+    "ray-x/lsp_signature.nvim",
+    module = {'lsp_signature'}
   }
 
   -- Completion
@@ -111,20 +278,36 @@ return packer.startup(function()
     'hrsh7th/nvim-compe',
     config = function()
       require('rmagatti.nvim-compe')
-    end
+    end,
+    module = {'compe'},
+    event = "BufReadPre"
   }
 
   -- Lua plugin dev
   use {
-    "folke/lua-dev.nvim"
+    "folke/lua-dev.nvim",
+    disable = false, -- FIXME: causing high cpu usage
+    module = "lua-dev"
   }
 
-  use { 'svermeulen/vimpeccable' }
+  use {
+    'svermeulen/vimpeccable',
+    module = 'vimp'
+  }
 
   -- Snippets
-  use { 'hrsh7th/vim-vsnip' }
-  use { 'hrsh7th/vim-vsnip-integ' }
-  use { 'rafamadriz/friendly-snippets' }
+  use {
+    'hrsh7th/vim-vsnip',
+    event = {'BufReadPre'}
+  }
+  use {
+    'hrsh7th/vim-vsnip-integ',
+    event = {'BufReadPre'}
+  }
+  use {
+    'rafamadriz/friendly-snippets',
+    event = {'BufReadPre'}
+  }
 
   -- Telescope
   use { 'nvim-lua/popup.nvim' }
@@ -135,7 +318,14 @@ return packer.startup(function()
     config = function()
       require('rmagatti.telescope')
     end,
-    opt = false
+    cmd = "Telescope",
+		module = {'telescope'},
+    keys = {
+      {'n', '<C-p>'},
+      {'n', '<leader>b'},
+      {'n', '<leader>sd'},
+      {'n', '<leader>ps'},
+    }
   }
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -144,12 +334,15 @@ return packer.startup(function()
     config = function()
       require('telescope').load_extension('fzf')
     end,
+    event = 'BufReadPre',
+    module = 'telescope.builtin'
   }
   use {
     'gbrlsnchs/telescope-lsp-handlers.nvim',
     config = function()
       require('telescope').load_extension('lsp_handlers')
     end,
+    event = 'BufReadPost'
   }
 
   use {
@@ -158,7 +351,7 @@ return packer.startup(function()
       require('telescope').load_extension('packer')
       vim.cmd[[nnoremap <leader>pl :lua require('telescope').extensions.packer.plugins()<CR>]]
     end,
-    keys = {'n', '<leader>pl'}
+    keys = '<leader>pl'
   }
 
   -- Diagnostics
@@ -176,9 +369,17 @@ return packer.startup(function()
     requires = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup {}
-    end
+    end,
+    cmd = { 'TodoQuickFix', 'TodoTrouble', 'TodoTelescope' }
   }
-  -- use { 'kosayoda/nvim-lightbulb', config = function() require('rmagatti.nvim-lightbulb') end }
+
+  use {
+    'kosayoda/nvim-lightbulb',
+    config = function()
+      require('rmagatti.nvim-lightbulb')
+    end,
+    event = 'BufReadPost'
+  }
 
 
   -- Git
@@ -194,15 +395,15 @@ return packer.startup(function()
         ]]
     end,
     keys = {
-      'n', '<leader>gd',
-      'n', '<leader>gb',
-      'n', '<leader>hp',
-      'n', '<leader>hs',
-      'n', '<leader>hu',
-      'n', '<leader>hr',
-      'n', '<leader>hR',
-      'n', '<leader>hp',
-      'n', '<leader>hb',
+      {'n', '<leader>gd'},
+      {'n', '<leader>gb'},
+      {'n', '<leader>hp'},
+      {'n', '<leader>hs'},
+      {'n', '<leader>hu'},
+      {'n', '<leader>hr'},
+      {'n', '<leader>hR'},
+      {'n', '<leader>hp'},
+      {'n', '<leader>hb'},
     }
   }
 
@@ -231,7 +432,7 @@ return packer.startup(function()
     requires = {'nvim-telescope/telescope.nvim'},
     config = function()
       require('telescope').load_extension("git_worktree")
-      vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
+      -- vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
     end,
     keys = '<leader>wt'
   }
@@ -241,20 +442,34 @@ return packer.startup(function()
     requires = {'nvim-lua/plenary.nvim'},
     config = function()
       require('rmagatti.gitsigns')
-    end
+    end,
+    event = "BufRead"
+  }
+
+  use  {
+    'pwntester/octo.nvim',
+    config = function()
+      require"octo".setup()
+    end,
+    cmd = {'Octo'}
   }
 
   -- Themes
   -- use { 'gruvbox-community/gruvbox' }
-  use { 'folke/tokyonight.nvim', config = function() require('rmagatti.tokyonight') end }
+  use {
+    'folke/tokyonight.nvim',
+    config = function()
+      require('rmagatti.tokyonight')
+    end
+  }
 
   -- Tree-sitter
   use {
-    'nvim-treesitter/nvim-treesitter',
-    run = 'TSUpdate',
+    'nvim-treesitter/nvim-treesitter', -- TODO: lazy load me! (maybe)
+    run = ':TSUpdate',
     config = function()
       require('rmagatti.treesitter')
-    end,
+    end
   }
 
   use {
@@ -271,10 +486,22 @@ return packer.startup(function()
   -- Fzf
   use {
     'junegunn/fzf',
-    run = function() vim.fn['fzf#install']() end
+    run = function()
+      vim.fn['fzf#install']()
+    end,
+    event = {'BufReadPost'}
   }
-  use { 'junegunn/fzf.vim' }
-  use { 'yuki-ycino/fzf-preview.vim', branch = 'release/rpc' }
+  use {
+    'junegunn/fzf.vim',
+    requires = 'junegunn/fzf',
+    after = {'nvim-bqf'}
+  }
+
+  -- use {
+  --    'yuki-ycino/fzf-preview.vim',
+  --    branch = 'release/rpc',
+  --    disable = true
+  -- }
 
   -- Lualine
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}, config = function()
@@ -288,6 +515,7 @@ return packer.startup(function()
   -- Terraform
   use {
     'hashivim/vim-terraform',
+    disable = true,
     ft = {'terraform'}
   }
 
@@ -297,7 +525,13 @@ return packer.startup(function()
   use {
     'nvim-treesitter/nvim-treesitter-textobjects',
     requires = {'nvim-treesitter/nvim-treesitter' },
-    after = {'nvim-treesitter'}
+    after = "nvim-treesitter",
+  }
+
+  use {
+    'RRethy/nvim-treesitter-textsubjects',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    after = "nvim-treesitter",
   }
 
   -- Symbols
@@ -308,13 +542,22 @@ return packer.startup(function()
         highlight_hovered_item = true,
         show_guides = true,
       }
-    end
+    end,
+    cmd = {'SymbolsOutline', 'SymbolsOutlineOpen', 'SymbolsOutlineClose'}
   }
 
   -- Typescript utils
   use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('null-ls').setup {}
+    end,
+    module = {'null-ls'}
+  }
+
+  use {
     'jose-elias-alvarez/nvim-lsp-ts-utils',
-    requires = {'neovim/nvim-lspconfig'},
+    requires = {'neovim/nvim-lspconfig', 'jose-elias-alvarez/null-ls.nvim'},
     config = function()
       require('rmagatti.nvim-lsp-ts-utils')
     end,
@@ -326,11 +569,23 @@ return packer.startup(function()
   -- Quickfix enhancements
   use {
     'kevinhwang91/nvim-bqf',
-    disable = false
+    requires = {{'junegunn/fzf', opt = true}, {'junegunn/fzf.vim', opt = true}},
+    ft = {'qf'},
+    config = function()
+      require('bqf').setup {
+        auto_enable = true
+      }
+    end
   }
 
   -- Aligning
-  use { 'junegunn/vim-easy-align', config = function() require('rmagatti.easyalign') end }
+  use {
+    'junegunn/vim-easy-align',
+    config = function()
+      require('rmagatti.easyalign')
+    end,
+    cmd = { 'EasyAlign' }
+  }
 
   -- DAP
   use {
@@ -339,7 +594,7 @@ return packer.startup(function()
       require('telescope').load_extension('dap')
       require('rmagatti.dap')
     end,
-    keys = {'n', '<leader>db', 'n', '<leader>dB'}
+    keys = {{'n', '<leader>db'}, {'n', '<leader>dB'}}
   }
   use {
     'theHamsta/nvim-dap-virtual-text',
@@ -351,7 +606,8 @@ return packer.startup(function()
     config = function()
       require('telescope').load_extension('dap')
     end,
-    after = 'nvim-dap'
+    after = 'nvim-dap',
+    module = 'telescope._extensions.dap'
   }
 
   -- WhichKey
@@ -365,7 +621,8 @@ return packer.startup(function()
   -- Indent Blankline
   use {
     'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua'
+    branch = 'lua',
+    event = {'BufReadPost'}
   }
 
   -- Bufferize commands
@@ -382,7 +639,7 @@ return packer.startup(function()
       vim.cmd[[
       let g:goyo_width=120
       let g:goyo_height=90
-      nnoremap <leader>zz :Goyo
+      nnoremap <leader>zz :Goyo<CR>
       ]]
     end,
     keys = '<leader>zz'
@@ -395,7 +652,6 @@ return packer.startup(function()
   -- Local
   use {
     '~/Projects/auto-session',
-    as = 'auto-session',
     config = function()
       require('rmagatti.auto-session')
     end
@@ -403,14 +659,47 @@ return packer.startup(function()
 
   use {
     '~/Projects/alternate-toggler',
-    as = 'alternate-toggler'
+    config = function()
+      vim.api.nvim_set_keymap('n', '<CR>', "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>", {noremap = true})
+      vim.cmd[[
+        let g:at_custom_alternates = {
+          \'===': '!=='
+          \}
+      ]]
+    end,
+    event = {'BufReadPost'},
   }
+
+  use {
+    '~/Projects/goto-preview',
+    as = 'goto-preview',
+    config = function()
+      require('goto-preview').setup {
+        default_mappings = true,
+        winblend = 10,
+        debug = false,
+        post_open_hook = function(buffer, _)
+          vim.api.nvim_buf_set_keymap(buffer, 'n', 'q', ':q<CR>', {noremap = true})
+        end
+      }
+      -- Mapping to cycle between windows
+      vim.cmd[[nnoremap <C-h> <C-w>w]]
+    end,
+    keys = {
+      {'n', 'gpd'},
+      {'n', 'gpi'},
+      {'n', 'gP'},
+    }
+  }
+
+  -- TODO: figure out why this can't be lazy loaded?
   use {
     '~/Projects/session-lens',
-    as = 'session-lens',
-    requires = {{'~/Projects/auto-session'}, {'nvim-telescope/telescope.nvim'}},
+    requires = {'~/Projects/auto-session', 'nvim-telescope/telescope.nvim'},
     config = function()
       require('rmagatti.session-lens')
-    end
+      require('telescope').load_extension('session-lens')
+    end,
+    keys = '<leader>ss'
   }
 end)

@@ -54,7 +54,8 @@ M.on_attach = function(client, bufnr)
 
   -- Symbols
   buf_set_keymap('n', '<leader>o', '<cmd>SymbolsOutline<CR>', opts)
-  buf_set_keymap('n', '<leader>s', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({file_ignore_patterns={"node_modules/**"}})<CR>', opts)
+  buf_set_keymap('n', '<leader>ws', '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols({file_ignore_patterns={"node_modules/**"}})<CR>', opts)
+  buf_set_keymap('n', '<leader>ds', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
   if client.resolved_capabilities.document_highlight then
     buf_set_keymap('n', 'h', '<cmd>lua require("rmagatti.lsp-mappings").toggle_symbol_highlight()<CR>', opts)
   end

@@ -13,11 +13,17 @@ local on_attach_mappings = function(_, map)
 end
 
 local M = {}
+
 M.custom_buffers = function()
   require'telescope.builtin'.buffers {
     show_all_buffers=true,
     attach_mappings = on_attach_mappings
   }
+end
+
+M.setup = function ()
+  vim.cmd[[nnoremap <leader>b <cmd>lua require('rmagatti.telescope.buffers').custom_buffers()<CR>]]
+  -- require('vimp').nnoremap('<leader>b', M.custom_buffers)
 end
 
 return M

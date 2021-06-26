@@ -127,6 +127,8 @@ nnoremap tn :tabnew<CR>
 nnoremap td :tabclose<CR>
 
 function! CompilePacker()
+  echo "Removing packer_compiled.vim"
+  exec "!rm ~/.config/nvim/plugin/packer_compiled.vim"
   echo "Compiling packer..."
   exec ":PackerCompile"
   echo "Compiling done!"
@@ -136,3 +138,16 @@ augroup plugins
   au!
   autocmd BufWritePost plugins.lua :call CompilePacker()
 augroup end
+
+" Paste today's date 
+nnoremap <leader>. "=strftime('%a %d %b %Y')<CR>P
+inoremap <C-d> <C-r>=strftime('%a %d %b %Y')<CR>
+
+" Vimwiki
+augroup vimwikigroup
+    au!
+    " automatically update links on read diary
+    au BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
+augroup end
+
+

@@ -3,5 +3,5 @@ require('lualine').setup{
     theme = 'tokyonight',
   },
   extensions = { 'fzf', 'fugitive' },
-  sections = {lualine_a = {require'lsp-status'.status}}
+  sections = {lualine_c = {require'lsp-status'.status}}
 }

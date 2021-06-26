@@ -88,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+#   export EDITOR='nvim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -176,6 +176,13 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v=nvim
+alias ui="/Users/ronnieandrewmagatti/Projects/uivonim/dist/mac/uivonim.app"
+
+function gitsqa() {
+  git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD)) &&
+  git add -A && git commit
+}
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -263,6 +270,8 @@ bindkey -a k down-history
 bindkey -a l up-history
 bindkey -a ';' forward-char
 
+bindkey "ç" fzf-cd-widget
+
 # https://github.com/ohmyzsh/ohmyzsh/issues/1720#issuecomment-286366959
 # Start typing + [Up-Arrow] - fuzzy find history forward
 if [[ -n "${terminfo[kcuu1]}" ]]; then
@@ -283,5 +292,10 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
+# FZF
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME/Projects"
+
 export VISUAL=nvim
-export EDITOR="$VISUAL"
+export EDITOR=nvim

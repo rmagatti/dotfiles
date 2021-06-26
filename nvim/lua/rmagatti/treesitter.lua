@@ -30,13 +30,15 @@ require'nvim-treesitter.configs'.setup {
         ["ir"] = "@parameter.inner",
         ["ar"] = "@parameter.outer",
         -- [""] = "@scopename.inner",
-        -- [""] = "@statement.outer",
       },
     },
   },
   autopairs = {
     { enable = true }
-  }
+  },
+  textsubjects = {
+    enable = true
+  },
 }
 
 -- Custom parser
@@ -50,6 +52,15 @@ parser_config.terraform = {
   used_by = {"hcl2", "tf"} -- additional filetypes that use this parser
 }
 
+-- parser_config.typescript = {
+--   install_info = {
+--     url = "~/Projects/tree-sitter-typescript/typescript",
+--     files = {"src/parser.c", "src/scanner.c"},
+--     -- location = "tree-sitter-typescript/typescript",
+--     generate_requires_npm = true,
+--   }
+-- }
+
 require "nvim-treesitter.configs".setup {
   query_linter = {
     enable = true,
@@ -59,5 +70,14 @@ require "nvim-treesitter.configs".setup {
   terraform = {
     enable = true,
     highlight = true
+  },
+  typescript = {
+    enable = true,
+    highlight = true
   }
 }
+
+-- Reset treesitter
+vim.cmd[[
+  nnoremap <leader>rt <cmd>w <bar> e <bar> TSBufEnable highlight <bar> set syntax=off<CR>
+]]
