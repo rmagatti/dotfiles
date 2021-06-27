@@ -23,18 +23,21 @@ return packer.startup(function()
     "akinsho/nvim-toggleterm.lua",
     config = function()
       require("toggleterm").setup {
-        open_mapping = '<leader>m',
-        size =function(term)
+        open_mapping = [[<C-\>]],
+        size = function(term)
           if term.direction == "horizontal" then
             return 25
           elseif term.direction == "vertical" then
             return vim.o.columns * 0.4
           end
         end,
-        insert_mappings = false
+        insert_mappings = true
       }
     end,
-    keys = '<leader>m',
+    keys = {
+      {'n', [[<C-\>]]},
+      {'i', [[<C-\>]]}
+    },
     cmd = {'ToggleTerm', 'ToggleTermOpenAll', 'ToggleTermCloseAll'}
   }
 
@@ -432,7 +435,7 @@ return packer.startup(function()
     requires = {'nvim-telescope/telescope.nvim'},
     config = function()
       require('telescope').load_extension("git_worktree")
-      -- vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
+      vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
     end,
     keys = '<leader>wt'
   }
@@ -661,11 +664,7 @@ return packer.startup(function()
     '~/Projects/alternate-toggler',
     config = function()
       vim.api.nvim_set_keymap('n', '<CR>', "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>", {noremap = true})
-      vim.cmd[[
-        let g:at_custom_alternates = {
-          \'===': '!=='
-          \}
-      ]]
+      vim.cmd[[ let g:at_custom_alternates = {'===': '!=='} ]]
     end,
     event = {'BufReadPost'},
   }
