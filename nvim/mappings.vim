@@ -128,7 +128,7 @@ nnoremap td :tabclose<CR>
 
 function! CompilePacker()
   echo "Removing packer_compiled.vim"
-  exec "!rm ~/.config/nvim/plugin/packer_compiled.vim"
+  exec "!rm ~/.config/nvim/plugin/packer_compiled.lua"
   echo "Compiling packer..."
   exec ":PackerCompile"
   echo "Compiling done!"
@@ -150,4 +150,5 @@ augroup vimwikigroup
     au BufRead,BufNewFile diary.md VimwikiDiaryGenerateLinks
 augroup end
 
-
+nnoremap <leader>mk "ayy
+nnoremap <leader>rk @a

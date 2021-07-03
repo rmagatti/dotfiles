@@ -37,8 +37,51 @@ require'nvim-treesitter.configs'.setup {
     { enable = true }
   },
   textsubjects = {
-    enable = true
+    enable = true,
+    keymaps = {
+      ['.'] = 'textsubjects-smart',
+      ['\''] = 'textsubjects-big',
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
+      },
+    },
+    lsp_interop = { -- TODO: Not sure how this works or if it's useful, figure it out or remove
+      enable = true,
+      peek_definition_code = {
+        ["df"] = "@function.outer",
+        ["dF"] = "@class.outer",
+      },
+    },
   },
+  context_commentstring = {
+    enable = true
+  }
 }
 
 -- Custom parser
@@ -74,7 +117,18 @@ require "nvim-treesitter.configs".setup {
   typescript = {
     enable = true,
     highlight = true
-  }
+  },
+  -- tree_docs = {
+  --   enable = true,
+  --   -- keymap = ,
+  --   spec_config = {
+  --     jsdoc = {
+  --       slots = {
+  --         class = {author = true}
+  --       }
+  --     }
+  --   }
+  -- }
 }
 
 -- Reset treesitter

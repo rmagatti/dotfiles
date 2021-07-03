@@ -183,6 +183,9 @@ function gitsqa() {
   git add -A && git commit
 }
 
+function gitsqi() {
+  git rebase -i $(git merge-base master $(git rev-parse --abbrev-ref HEAD)) &&
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -299,3 +302,6 @@ export FZF_ALT_C_COMMAND="fd -t d . $HOME/Projects"
 
 export VISUAL=nvim
 export EDITOR=nvim
+
+# Set open file limit so packer.nvim does not hang
+ulimit -S -n 2048

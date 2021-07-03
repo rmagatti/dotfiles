@@ -13,11 +13,11 @@ let mapleader = " "
 set background=dark
 set ts=2 sw=2 expandtab
 
-augroup typescript
-  au!
-  autocmd FileType typescript set commentstring=//\ %s
-  autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-augroup end
+" augroup typescript
+"   au!
+"   autocmd FileType typescript set commentstring=//\ %s
+"   autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+" augroup end
 
 " " performance tweaks
 set nocursorline

@@ -5,7 +5,13 @@ local signature = require('rmagatti.lsp-signature')
 local lsp_status = require('lsp-status')
 
 require('lspconfig').typescript.setup {
+  init_options = {
+    preferences = {
+      importModuleSpecifierPreference = "relative"
+    }
+  },
   on_attach = function (client, bufnr)
+    -- client.resolved_capabilities.document_formatting = false
 
     ts_utils.setup {
       debug = false,
@@ -14,8 +20,11 @@ require('lspconfig').typescript.setup {
       import_on_completion_timeout = 5000,
       -- eslint
       eslint_bin = "eslint_d",
+      -- eslint_bin = "eslint",
       eslint_args = {"-f", "json", "--stdin", "--stdin-filename", "$FILENAME"},
       eslint_enable_disable_comments = true,
+      eslint_enable_code_actions = true,
+      eslint_config_fallback = nil,
 
       -- experimental settings!
       -- eslint diagnostics
@@ -30,14 +39,13 @@ require('lspconfig').typescript.setup {
       no_save_after_format = false,
 
       -- parentheses completion
-      complete_parens = false,
+      complete_parens = true,
       signature_help_in_parens = false,
 
       -- update imports on file move
       update_imports_on_move = true,
       require_confirmation_on_move = true,
       watch_dir = "/src",
-
     }
 
     ts_utils.setup_client(client)
@@ -53,5 +61,6 @@ require('lspconfig').typescript.setup {
   end,
   capabilities = lsp_status.capabilities,
   -- TODO: get the PR for this change merged upstream
-  cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio", "--tsserver-user-preferences", "{\"importModuleSpecifierPreference\":\"relative\"}"}
+  cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio"}
+  -- cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio", "--tsserver-user-preferences", "{\"importModuleSpecifierPreference\":\"relative\"}"}
 }

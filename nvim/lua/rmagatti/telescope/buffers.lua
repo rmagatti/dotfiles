@@ -15,15 +15,15 @@ end
 local M = {}
 
 M.custom_buffers = function()
-  require'telescope.builtin'.buffers {
+  require'telescope.builtin'.buffers(require('telescope.themes').get_dropdown({
+    sort_lastused = true,
     show_all_buffers=true,
-    attach_mappings = on_attach_mappings
-  }
+    attach_mappings = on_attach_mappings,
+  }))
 end
 
 M.setup = function ()
   vim.cmd[[nnoremap <leader>b <cmd>lua require('rmagatti.telescope.buffers').custom_buffers()<CR>]]
-  -- require('vimp').nnoremap('<leader>b', M.custom_buffers)
 end
 
 return M

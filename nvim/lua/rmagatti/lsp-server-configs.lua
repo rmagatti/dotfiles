@@ -19,6 +19,7 @@ for _, server in pairs(servers) do
   }
 end
 
+-- FIXME: removed because seems to be causing high cpu usage
 -- lsp.lua.setup {
 --   on_attach = function (client, bufnr)
 --     mappings.on_attach(client, bufnr)
@@ -26,7 +27,6 @@ end
 --   end
 -- }
 
--- FIXME: removed because seems to be causing high cpu usage
 local luadev = require("lua-dev").setup {
   lspconfig = {
     on_attach = function (client, bufnr)

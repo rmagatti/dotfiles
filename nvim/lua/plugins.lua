@@ -22,21 +22,38 @@ return packer.startup(function()
   use {
     "akinsho/nvim-toggleterm.lua",
     config = function()
-      require("toggleterm").setup {
-        open_mapping = [[<C-\>]],
+      local toggleterm = require("toggleterm")
+      toggleterm.setup {
+        open_mapping = [[<c-\>]],
         size = function(term)
           if term.direction == "horizontal" then
             return 25
           elseif term.direction == "vertical" then
-            return vim.o.columns * 0.4
+            return 40
           end
         end,
+        start_in_insert = false,
         insert_mappings = true
       }
+
+      vim.api.nvim_set_keymap('n', [[<leader>2s]], "<cmd>2ToggleTerm direction='horizontal'<CR>", {noremap = true})
+      vim.api.nvim_set_keymap('n', [[<leader>3s]], "<cmd>3ToggleTerm direction='horizontal'<CR>", {noremap = true})
+      vim.api.nvim_set_keymap('n', [[<leader>4s]], "<cmd>4ToggleTerm direction='horizontal'<CR>", {noremap = true})
+
+      vim.api.nvim_set_keymap('n', [[<leader>2v]], "<cmd>2ToggleTerm direction='vertical'<CR>", {noremap = true})
+      vim.api.nvim_set_keymap('n', [[<leader>3v]], "<cmd>3ToggleTerm direction='vertical'<CR>", {noremap = true})
+      vim.api.nvim_set_keymap('n', [[<leader>4v]], "<cmd>4ToggleTerm direction='vertical'<CR>", {noremap = true})
+
     end,
     keys = {
       {'n', [[<C-\>]]},
-      {'i', [[<C-\>]]}
+      {'i', [[<C-\>]]},
+      {'n', [[<leader>2s]]},
+      {'n', [[<leader>3s]]},
+      {'n', [[<leader>4s]]},
+      {'n', [[<leader>2v]]},
+      {'n', [[<leader>3v]]},
+      {'n', [[<leader>4v]]},
     },
     cmd = {'ToggleTerm', 'ToggleTermOpenAll', 'ToggleTermCloseAll'}
   }
@@ -254,7 +271,6 @@ return packer.startup(function()
     branch = 'master',
     keys = '<C-n>'
   }
-  -- use { 'heavenshell/vim-jsdoc' }, {'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
 
   -- LSP
   use {
@@ -481,6 +497,11 @@ return packer.startup(function()
     cmd = "TSPlaygroundToggle"
   }
 
+  use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    after = 'nvim-treesitter'
+  }
+
   -- Rainbow parentheses
   use {
     'p00f/nvim-ts-rainbow'
@@ -567,7 +588,12 @@ return packer.startup(function()
     after = 'nvim-lspinstall'
   }
 
-  use {'heavenshell/vim-jsdoc', ft = { 'javascript', 'javascript.jsx','typescript' }, run='make install' }
+  use {
+    'heavenshell/vim-jsdoc',
+    ft = { 'javascript', 'javascript.jsx', 'typescript' },
+    cmd = 'JsDoc',
+    run='make install'
+  }
 
   -- Quickfix enhancements
   use {
