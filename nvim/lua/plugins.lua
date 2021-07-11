@@ -539,7 +539,7 @@ return packer.startup(function()
   -- Terraform
   use {
     'hashivim/vim-terraform',
-    disable = true,
+    disable = false,
     ft = {'terraform'}
   }
 
@@ -650,7 +650,6 @@ return packer.startup(function()
   -- Indent Blankline
   use {
     'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua',
     event = {'BufReadPost'}
   }
 
@@ -660,20 +659,51 @@ return packer.startup(function()
     cmd = {'Bufferize'}
   }
 
-  -- Focus
+  -- -- Focus
+  -- use {
+  --   'junegunn/goyo.vim',
+  --   cmd = {'Goyo'},
+  --   config = function()
+  --     vim.cmd[[
+  --     let g:goyo_width=120
+  --     let g:goyo_height=90
+  --     nnoremap <leader>zz :Goyo<CR>
+  --     ]]
+  --   end,
+  --   keys = '<leader>zz'
+  -- }
+  -- use { 'junegunn/limelight.vim', cmd = {'Limelight'} }
+
   use {
-    'junegunn/goyo.vim',
-    cmd = {'Goyo'},
+    "folke/zen-mode.nvim",
     config = function()
+      require("zen-mode").setup {
+        plugins = {
+          -- to make this work, you need to set the following kitty options:
+          -- - allow_remote_control socket-only
+          -- - listen_on unix:/tmp/kitty
+          kitty = {
+            enabled = true,
+            font = "+4", -- font size increment
+          },
+        }
+      }
       vim.cmd[[
-      let g:goyo_width=120
-      let g:goyo_height=90
-      nnoremap <leader>zz :Goyo<CR>
+        nnoremap <leader>zz :lua require("zen-mode").toggle({ window = { width = .50 }})<CR>
       ]]
     end,
     keys = '<leader>zz'
   }
-  use { 'junegunn/limelight.vim', cmd = {'Limelight'} }
+
+  use {
+    'kristijanhusak/orgmode.nvim',
+    config = function()
+      require('orgmode').setup{
+        org_agenda_file = '~/Documents/org/*',
+        org_default_notes_file = '~/Documents/org/refile.org',
+      }
+    end
+  }
 
   -- Profiling
   use {'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 10]]}
@@ -689,7 +719,7 @@ return packer.startup(function()
   use {
     '~/Projects/alternate-toggler',
     config = function()
-      vim.api.nvim_set_keymap('n', '<CR>', "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>", {noremap = true})
+      vim.api.nvim_set_keymap('n', '<leader><space>', "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>", {noremap = true})
       vim.cmd[[ let g:at_custom_alternates = {'===': '!=='} ]]
     end,
     event = {'BufReadPost'},
