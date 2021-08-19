@@ -4,6 +4,9 @@ local mappings = require('rmagatti.lsp-mappings')
 local signature = require('rmagatti.lsp-signature')
 local lsp_status = require('lsp-status')
 
+require("null-ls").config {}
+require("lspconfig")["null-ls"].setup {}
+
 require('lspconfig').typescript.setup {
   init_options = {
     preferences = {
@@ -17,35 +20,35 @@ require('lspconfig').typescript.setup {
       debug = false,
       disable_commands = false,
       enable_import_on_completion = false,
-      import_on_completion_timeout = 5000,
-      -- eslint
-      eslint_bin = "eslint_d",
-      -- eslint_bin = "eslint",
-      eslint_args = {"-f", "json", "--stdin", "--stdin-filename", "$FILENAME"},
-      eslint_enable_disable_comments = true,
-      eslint_enable_code_actions = true,
-      eslint_config_fallback = nil,
 
-      -- experimental settings!
-      -- eslint diagnostics
-      eslint_enable_diagnostics = true,
-      eslint_diagnostics_debounce = 2000,
+      -- import all
+      import_all_timeout = 100, -- ms
+      import_all_priorities = {
+        buffers = 4, -- loaded buffer names
+        buffer_content = 3, -- loaded buffer content
+        local_files = 2, -- git files or files with relative path markers
+        same_file = 1, -- add to existing import statement
+      },
+      import_all_scan_buffers = 100,
+      import_all_select_source = false,
+
+      -- eslint
+      eslint_enable_code_actions = true,
+      eslint_enable_disable_comments = true,
+      eslint_bin = "eslint",
+      eslint_config_fallback = nil,
+      eslint_enable_diagnostics = false,
+      eslint_show_rule_id = false,
+
       -- formatting
       enable_formatting = true,
-      formatter = "prettier_d_slim",
-      -- formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME"},
-      formatter_args = {"--stdin", "--stdin-filepath", "$FILENAME", "--config", ".prettierrc", "--arrow-parens", "always", "--trailing-commas", "all"},
-      format_on_save = true,
-      no_save_after_format = false,
-
-      -- parentheses completion
-      complete_parens = true,
-      signature_help_in_parens = false,
+      formatter = "prettier",
+      formatter_config_fallback = nil,
 
       -- update imports on file move
       update_imports_on_move = true,
       require_confirmation_on_move = true,
-      watch_dir = "/src",
+      watch_dir = nil,
     }
 
     ts_utils.setup_client(client)
@@ -61,6 +64,6 @@ require('lspconfig').typescript.setup {
   end,
   capabilities = lsp_status.capabilities,
   -- TODO: get the PR for this change merged upstream
-  cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio"}
+  -- cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v14.7.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio"}
   -- cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio", "--tsserver-user-preferences", "{\"importModuleSpecifierPreference\":\"relative\"}"}
 }

@@ -1,3 +1,5 @@
+" TODO: convert this to lua
+
 set relativenumber
 set number
 set encoding=UTF-8
@@ -12,6 +14,8 @@ set guifont=FiraCode\ Nerd\ Font:14
 let mapleader = " "
 set background=dark
 set ts=2 sw=2 expandtab
+set signcolumn=yes
+set sessionoptions+=options,resize,winpos,terminal
 
 " augroup typescript
 "   au!

@@ -85,7 +85,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- -- Custom parser
--- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 -- parser_config.hcl = {
 --   install_info = {
 --     url = "https://github.com/MichaHoffmann/tree-sitter-hcl", -- local path or git repo
@@ -95,14 +95,14 @@ require'nvim-treesitter.configs'.setup {
 --   used_by = {"hcl", "tf", "terraform"} -- additional filetypes that use this parser
 -- }
 
--- parser_config.typescript = {
---   install_info = {
---     url = "~/Projects/tree-sitter-typescript/typescript",
---     files = {"src/parser.c", "src/scanner.c"},
---     -- location = "tree-sitter-typescript/typescript",
---     generate_requires_npm = true,
---   }
--- }
+parser_config.typescript = {
+  install_info = {
+    url = "~/Projects/tree-sitter-typescript/typescript",
+    files = {"src/parser.c", "src/scanner.c"},
+    -- location = "tree-sitter-typescript/typescript",
+    generate_requires_npm = true,
+  }
+}
 
 require "nvim-treesitter.configs".setup {
   query_linter = {
@@ -134,4 +134,12 @@ require "nvim-treesitter.configs".setup {
 -- Reset treesitter
 vim.cmd[[
   nnoremap <leader>rt <cmd>w <bar> e <bar> TSBufEnable highlight <bar> set syntax=off<CR>
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+  set foldlevel=8
+
+  " Add `:Fold` command to fold current buffer.
+  command! -nargs=? Fold :set foldlevel=0 | :normal zM
+  command! -nargs=? Unfold :set foldlevel=8 | :normal zR
 ]]
+

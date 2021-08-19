@@ -1,5 +1,5 @@
 require('session-lens').setup {
-  shorten_path = true,
+  path_display = {'shorten'},
   theme_conf = { border = true },
   previewer = false
 }

@@ -152,3 +152,6 @@ augroup end
 
 nnoremap <leader>mk "ayy
 nnoremap <leader>rk @a
+
+" Generate test
+nnoremap <leader>gt <cmd>!yarn generate:test %<CR>

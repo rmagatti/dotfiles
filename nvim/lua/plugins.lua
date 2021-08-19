@@ -117,7 +117,7 @@ return packer.startup(function()
       endfunction
 
       function! SplitStrategy(cmd)
-        vertical new | call termopen(a:cmd) | startinsert
+        vertical new | call termopen(a:cmd)
       endfunction
       let g:test#custom_strategies = {'terminal_split': function('SplitStrategy'), 'debug': function('DebugStrategy')}
       let g:test#strategy = 'terminal_split'
@@ -260,8 +260,18 @@ return packer.startup(function()
     'glacambre/firenvim',
     run = function()
       vim.fn['firenvim#install'](0)
+    end,
+    module = 'firenvim',
+    config = function ()
+      vim.cmd[[
+        let g:firenvim_config = {'globalSettings': {'alt': 'all', },'localSettings': {'.*': {'cmdline': 'neovim','content': 'text','priority': 0,'selector': 'textarea','takeover': 'never'}}}
+        let fc = g:firenvim_config['localSettings']
+        let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
+        let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
+      ]]
     end
   }
+
   use {
    'michaeljsmith/vim-indent-object',
    event = 'BufReadPost'
@@ -430,12 +440,16 @@ return packer.startup(function()
     'TimUntersberger/neogit',
     opt = true,
     cmd = {'Neogit'},
+    keys = {
+      {'n', '<leader>gg'}
+    },
     config = function()
       require('neogit').setup{
         integrations = {
           diffview = true
         }
       }
+      vim.cmd[[nnoremap <leader>gg <cmd>Neogit<CR>]]
     end
   }
   use {
@@ -454,6 +468,20 @@ return packer.startup(function()
       vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
     end,
     keys = '<leader>wt'
+  }
+
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      {"nvim-lua/plenary.nvim"},
+      {"nvim-treesitter/nvim-treesitter"}
+    },
+    config = function()
+      require('rmagatti.refactoring')
+    end,
+    keys = {
+      {'v', '<leader>re'}
+    }
   }
 
   use {
@@ -488,7 +516,7 @@ return packer.startup(function()
     run = ':TSUpdate',
     config = function()
       require('rmagatti.treesitter')
-    end
+    end,
   }
 
   use {
@@ -499,7 +527,7 @@ return packer.startup(function()
 
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-    after = 'nvim-treesitter'
+    event = {'BufReadPost'}
   }
 
   -- Rainbow parentheses
@@ -544,18 +572,21 @@ return packer.startup(function()
   }
 
   -- Text objects
-  use { 'wellle/targets.vim' }
+  use {
+    'wellle/targets.vim',
+    event = {'BufReadPost'}
+  }
 
   use {
     'nvim-treesitter/nvim-treesitter-textobjects',
     requires = {'nvim-treesitter/nvim-treesitter' },
-    after = "nvim-treesitter",
+    event = {'BufReadPost'}
   }
 
   use {
     'RRethy/nvim-treesitter-textsubjects',
     requires = { 'nvim-treesitter/nvim-treesitter' },
-    after = "nvim-treesitter",
+    event = {'BufReadPost'}
   }
 
   -- Symbols
@@ -650,7 +681,11 @@ return packer.startup(function()
   -- Indent Blankline
   use {
     'lukas-reineke/indent-blankline.nvim',
-    event = {'BufReadPost'}
+    event = {'BufReadPost'},
+    setup = function()
+      vim.g.indent_blankline_buftype_exclude = {"terminal"}
+      vim.g.indent_blankline_filetype_exclude = {"toggleterm"}
+    end
   }
 
   -- Bufferize commands
@@ -689,24 +724,41 @@ return packer.startup(function()
         }
       }
       vim.cmd[[
-        nnoremap <leader>zz :lua require("zen-mode").toggle({ window = { width = .50 }})<CR>
+        nnoremap <leader>zz :lua require("zen-mode").toggle({ window = { width = .40 }})<CR>
       ]]
     end,
     keys = '<leader>zz'
   }
 
-  use {
-    'kristijanhusak/orgmode.nvim',
-    config = function()
-      require('orgmode').setup{
-        org_agenda_file = '~/Documents/org/*',
-        org_default_notes_file = '~/Documents/org/refile.org',
-      }
-    end
-  }
+  -- use {
+  --   'kristijanhusak/orgmode.nvim',
+  --   disable = true,
+  --   config = function()
+  --     require('orgmode').setup{
+  --       org_agenda_file = '~/Documents/org/*',
+  --       org_default_notes_file = '~/Documents/org/refile.org',
+  --     }
+  --   end,
+  --   module = 'orgmode',
+  --   ft = 'org',
+  --   keys = {
+  --     {'n', '<leader>oa'} -- TODO: this is supposed to be 'open alternate'. Really don't like this current mapping.
+  --   }
+  -- }
 
   -- Profiling
   use {'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 10]]}
+
+  use {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+      require('neoclip').setup()
+      vim.cmd[[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
+    end,
+    keys = {
+      {'n', '<leader>y'}
+    }
+  }
 
   -- Local
   use {
