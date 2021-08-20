@@ -179,7 +179,7 @@ alias v=nvim
 alias ui="/Users/ronnieandrewmagatti/Projects/uivonim/dist/mac/uivonim.app"
 
 function gitsqa() {
-  git reset $(git merge-base master $(git rev-parse --abbrev-ref HEAD)) &&
+  git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&
   git add -A && git commit
 }
 
