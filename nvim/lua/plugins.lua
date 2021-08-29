@@ -4,7 +4,7 @@ return packer.startup(function()
   use { 'wbthomason/packer.nvim' }
   use {
    'tpope/vim-commentary',
-    keys = 'gc'
+    -- keys = 'gc'
   }
   use {
    'tpope/vim-surround',
@@ -19,6 +19,7 @@ return packer.startup(function()
   use {
     'tpope/vim-repeat'
   }
+
   use {
     "akinsho/nvim-toggleterm.lua",
     config = function()
@@ -160,7 +161,9 @@ return packer.startup(function()
     config = function()
       require('rmagatti.nvim-autopairs')
     end,
-    event = "BufReadPre"
+    -- event = "BufReadPost"
+    -- FIXME: disabled lazy loading, it was apparently causing issues all around.
+    -- Doing this does affect startup time by about 25ms!!
   }
 
   use {
@@ -285,7 +288,7 @@ return packer.startup(function()
   -- LSP
   use {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPre'
+    event = 'BufReadPost'
   }
   use {
     'kabouzeid/nvim-lspinstall',

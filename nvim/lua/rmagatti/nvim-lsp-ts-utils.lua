@@ -22,7 +22,7 @@ require('lspconfig').typescript.setup {
       enable_import_on_completion = false,
 
       -- import all
-      import_all_timeout = 100, -- ms
+      import_all_timeout = 3000, -- ms
       import_all_priorities = {
         buffers = 4, -- loaded buffer names
         buffer_content = 3, -- loaded buffer content
@@ -35,9 +35,9 @@ require('lspconfig').typescript.setup {
       -- eslint
       eslint_enable_code_actions = true,
       eslint_enable_disable_comments = true,
-      eslint_bin = "eslint",
+      eslint_bin = "eslint_d",
       eslint_config_fallback = nil,
-      eslint_enable_diagnostics = false,
+      eslint_enable_diagnostics = true,
       eslint_show_rule_id = false,
 
       -- formatting

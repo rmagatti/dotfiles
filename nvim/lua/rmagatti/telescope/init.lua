@@ -43,6 +43,8 @@ telescope.setup{
       i = {
         -- Close on first esc instead of gonig to normal mode
         ["<esc>"] = actions.close,
+        ["<C-i>"] = require('telescope.actions').cycle_history_next,
+        ["<C-o>"] = require('telescope.actions').cycle_history_prev
       }
     },
     extensions = {

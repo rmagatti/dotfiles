@@ -1,3 +1,3 @@
 require('auto-session').setup {
-  log_level = 'info',
+  log_level = 'error',
 }
