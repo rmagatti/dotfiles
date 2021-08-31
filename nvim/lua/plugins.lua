@@ -689,7 +689,7 @@ use {
   -- Indent Blankline
   use {
     'lukas-reineke/indent-blankline.nvim',
-    event = {'BufReadPost'},
+    event = {'InsertEnter'},
     setup = function()
       vim.g.indent_blankline_buftype_exclude = {"terminal"}
       vim.g.indent_blankline_filetype_exclude = {"toggleterm"}
