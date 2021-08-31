@@ -6,6 +6,9 @@ return packer.startup(function(use)
     -- keys = 'gc'
   }
 
+  -- TODO: trying this out. Faster startup for "free" but I'm skeptical that it wouldn't cause any issues for now.
+  use { 'lewis6991/impatient.nvim' }
+
   use {
    'tpope/vim-surround',
    keys = {
