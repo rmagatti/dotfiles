@@ -1,11 +1,11 @@
 local packer = require('packer')
-return packer.startup(function()
-  local use = packer.use
+return packer.startup(function(use)
   use { 'wbthomason/packer.nvim' }
   use {
    'tpope/vim-commentary',
     -- keys = 'gc'
   }
+
   use {
    'tpope/vim-surround',
    keys = {
@@ -59,7 +59,8 @@ return packer.startup(function()
     cmd = {'ToggleTerm', 'ToggleTermOpenAll', 'ToggleTermCloseAll'}
   }
 
-  --==== Lazy loaded
+  ----==== Lazy loaded
+
   use {
     'dbeniamine/cheat.sh-vim',
     keys = {
@@ -77,7 +78,7 @@ return packer.startup(function()
     keys = '<leader>u'
   }
 
-  -- Grepping
+   -- Grepping
   use {
    'jremmen/vim-ripgrep',
    cmd = { 'Rg' }
@@ -86,17 +87,18 @@ return packer.startup(function()
     'mhinz/vim-grepper',
     config = function()
       vim.cmd[[
-        nmap gs <plug>(GrepperOperator)
-        xmap gs <plug>(GrepperOperator)
+        nmap gs <Plug>(GrepperOperator)
+        xmap gs <Plug>(GrepperOperator)
       ]]
     end,
+    cmd = {'Grepper', '<Plug>(GrepperOperator)'},
     keys = {
       {'n', 'gs'},
       {'x', 'gs'}
     }
   }
 
-  use {
+   use {
     'kyazdani42/nvim-web-devicons',
     config = function()
       require('rmagatti.nvim-web-devicons')
@@ -161,9 +163,7 @@ return packer.startup(function()
     config = function()
       require('rmagatti.nvim-autopairs')
     end,
-    -- event = "BufReadPost"
-    -- FIXME: disabled lazy loading, it was apparently causing issues all around.
-    -- Doing this does affect startup time by about 25ms!!
+    event = "InsertEnter"
   }
 
   use {
@@ -204,6 +204,7 @@ return packer.startup(function()
       ]]
     end
   }
+
   use {
     'kristijanhusak/vim-dirvish-git',
     opt = true,
@@ -259,26 +260,28 @@ return packer.startup(function()
     }
   }
 
-  use {
-    'glacambre/firenvim',
-    run = function()
-      vim.fn['firenvim#install'](0)
-    end,
-    module = 'firenvim',
-    config = function ()
-      vim.cmd[[
-        let g:firenvim_config = {'globalSettings': {'alt': 'all', },'localSettings': {'.*': {'cmdline': 'neovim','content': 'text','priority': 0,'selector': 'textarea','takeover': 'never'}}}
-        let fc = g:firenvim_config['localSettings']
-        let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
-        let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
-      ]]
-    end
-  }
+  --use {
+  --  'glacambre/firenvim',
+  --  run = function()
+  --    vim.fn['firenvim#install'](0)
+  --  end,
+  --  module = 'firenvim',
+  --  config = function ()
+  --    vim.cmd[[
+  --      let g:firenvim_config = {'globalSettings': {'alt': 'all', },'localSettings': {'.*': {'cmdline': 'neovim','content': 'text','priority': 0,'selector': 'textarea','takeover': 'never'}}}
+  --      let fc = g:firenvim_config['localSettings']
+  --      let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
+  --      let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
+  --    ]]
+  --  end
+  --}
 
-  use {
-   'michaeljsmith/vim-indent-object',
-   event = 'BufReadPost'
-  }
+  -- TODO: do I really use this?
+  --use {
+  -- 'michaeljsmith/vim-indent-object',
+  -- event = 'BufReadPost'
+  --}
+
   use {
     'mg979/vim-visual-multi',
     branch = 'master',
@@ -288,8 +291,9 @@ return packer.startup(function()
   -- LSP
   use {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPost'
+    module = 'lspconfig'
   }
+
   use {
     'kabouzeid/nvim-lspinstall',
     requires = {'neovim/nvim-lspconfig'},
@@ -305,7 +309,7 @@ return packer.startup(function()
     module = {'lsp_signature'}
   }
 
-  -- Completion
+   -- Completion
   use {
     'hrsh7th/nvim-compe',
     config = function()
@@ -327,7 +331,7 @@ return packer.startup(function()
     module = 'vimp'
   }
 
-  -- Snippets
+  -- -- Snippets
   use {
     'hrsh7th/vim-vsnip',
     event = {'BufReadPre'}
@@ -341,7 +345,7 @@ return packer.startup(function()
     event = {'BufReadPre'}
   }
 
-  -- Telescope
+  -- -- Telescope
   use { 'nvim-lua/popup.nvim' }
   use { 'nvim-lua/plenary.nvim' }
   use {
@@ -359,6 +363,7 @@ return packer.startup(function()
       {'n', '<leader>ps'},
     }
   }
+
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make',
@@ -366,15 +371,15 @@ return packer.startup(function()
     config = function()
       require('telescope').load_extension('fzf')
     end,
-    event = 'BufReadPre',
-    module = 'telescope.builtin'
+    after = 'telescope.nvim'
   }
+
   use {
     'gbrlsnchs/telescope-lsp-handlers.nvim',
     config = function()
       require('telescope').load_extension('lsp_handlers')
     end,
-    event = 'BufReadPost'
+    after = 'telescope.nvim'
   }
 
   use {
@@ -413,8 +418,7 @@ return packer.startup(function()
     event = 'BufReadPost'
   }
 
-
-  -- Git
+  ---- Git
   use {
     'tpope/vim-fugitive',
     cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gvdiffsplit'},
@@ -455,6 +459,7 @@ return packer.startup(function()
       vim.cmd[[nnoremap <leader>gg <cmd>Neogit<CR>]]
     end
   }
+
   use {
     'sindrets/diffview.nvim',
     config = function()
@@ -463,15 +468,16 @@ return packer.startup(function()
     cmd = {'DiffviewOpen'},
     keys = '<leader>ddo'
   }
-  use {
-    'ThePrimeagen/git-worktree.nvim',
-    requires = {'nvim-telescope/telescope.nvim'},
-    config = function()
-      require('telescope').load_extension("git_worktree")
-      vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
-    end,
-    keys = '<leader>wt'
-  }
+
+  -- use {
+  --   'ThePrimeagen/git-worktree.nvim',
+  --   requires = {'nvim-telescope/telescope.nvim'},
+  --   config = function()
+  --     require('telescope').load_extension("git_worktree")
+  --     vim.cmd[[nnoremap <leader>wt <cmd>Telescope git_worktree git_worktrees<CR>]]
+  --   end,
+  --   keys = '<leader>wt'
+  -- }
 
   use {
     "ThePrimeagen/refactoring.nvim",
@@ -485,23 +491,6 @@ return packer.startup(function()
     keys = {
       {'v', '<leader>re'}
     }
-  }
-
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('rmagatti.gitsigns')
-    end,
-    event = "BufRead"
-  }
-
-  use  {
-    'pwntester/octo.nvim',
-    config = function()
-      require"octo".setup()
-    end,
-    cmd = {'Octo'}
   }
 
   -- Themes
@@ -519,8 +508,10 @@ return packer.startup(function()
     run = ':TSUpdate',
     config = function()
       require('rmagatti.treesitter')
-    end,
+    end
   }
+
+--   -- TODO: uncomment me!!!
 
   use {
     'nvim-treesitter/playground',
@@ -530,13 +521,42 @@ return packer.startup(function()
 
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-    event = {'BufReadPost'}
   }
 
   -- Rainbow parentheses
   use {
     'p00f/nvim-ts-rainbow'
   }
+
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    requires = {'nvim-treesitter/nvim-treesitter' },
+    event = {'BufReadPost'}
+  }
+
+  use {
+    'RRethy/nvim-treesitter-textsubjects',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    event = {'BufReadPost'}
+  }
+
+-- GitHub
+  use  {
+    'pwntester/octo.nvim',
+    config = function()
+      require"octo".setup()
+    end,
+    cmd = {'Octo'}
+  }
+
+use {
+  'lewis6991/gitsigns.nvim',
+  requires = {'nvim-lua/plenary.nvim'},
+  config = function()
+    require('rmagatti.gitsigns')
+  end,
+  event = "BufRead"
+}
 
   -- Fzf
   use {
@@ -551,12 +571,6 @@ return packer.startup(function()
     requires = 'junegunn/fzf',
     after = {'nvim-bqf'}
   }
-
-  -- use {
-  --    'yuki-ycino/fzf-preview.vim',
-  --    branch = 'release/rpc',
-  --    disable = true
-  -- }
 
   -- Lualine
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}, config = function()
@@ -577,18 +591,6 @@ return packer.startup(function()
   -- Text objects
   use {
     'wellle/targets.vim',
-    event = {'BufReadPost'}
-  }
-
-  use {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    requires = {'nvim-treesitter/nvim-treesitter' },
-    event = {'BufReadPost'}
-  }
-
-  use {
-    'RRethy/nvim-treesitter-textsubjects',
-    requires = { 'nvim-treesitter/nvim-treesitter' },
     event = {'BufReadPost'}
   }
 
@@ -697,21 +699,6 @@ return packer.startup(function()
     cmd = {'Bufferize'}
   }
 
-  -- -- Focus
-  -- use {
-  --   'junegunn/goyo.vim',
-  --   cmd = {'Goyo'},
-  --   config = function()
-  --     vim.cmd[[
-  --     let g:goyo_width=120
-  --     let g:goyo_height=90
-  --     nnoremap <leader>zz :Goyo<CR>
-  --     ]]
-  --   end,
-  --   keys = '<leader>zz'
-  -- }
-  -- use { 'junegunn/limelight.vim', cmd = {'Limelight'} }
-
   use {
     "folke/zen-mode.nvim",
     config = function()
@@ -733,6 +720,7 @@ return packer.startup(function()
     keys = '<leader>zz'
   }
 
+  -- TODO: learn to use!!!
   -- use {
   --   'kristijanhusak/orgmode.nvim',
   --   disable = true,
@@ -802,7 +790,6 @@ return packer.startup(function()
     }
   }
 
-  -- TODO: figure out why this can't be lazy loaded?
   use {
     '~/Projects/session-lens',
     requires = {'~/Projects/auto-session', 'nvim-telescope/telescope.nvim'},
@@ -812,4 +799,5 @@ return packer.startup(function()
     end,
     keys = '<leader>ss'
   }
+
 end)

@@ -1,4 +1,5 @@
 require'nvim-treesitter.configs'.setup {
+  enable = false,
   highlight = {
     enable = true,
   },
@@ -131,8 +132,8 @@ require "nvim-treesitter.configs".setup {
   -- }
 }
 
--- Reset treesitter
 vim.cmd[[
+  " Reset treesitter
   nnoremap <leader>rt <cmd>w <bar> e <bar> TSBufEnable highlight <bar> set syntax=off<CR>
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()

@@ -69,8 +69,6 @@ M.on_attach = function(client, bufnr)
   end
 
   -- Set autocommands conditional on server_capabilities
-
-  -- TODO: uncomment me after plenary issue is fixed
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
     hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
