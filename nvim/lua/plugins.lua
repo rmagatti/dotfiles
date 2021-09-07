@@ -330,8 +330,7 @@ return packer.startup(function(use)
   }
 
   use {
-    'svermeulen/vimpeccable',
-    module = 'vimp'
+    'svermeulen/vimpeccable'
   }
 
   -- -- Snippets
@@ -378,7 +377,7 @@ return packer.startup(function(use)
   }
 
   use {
-    'gbrlsnchs/telescope-lsp-handlers.nvim',
+    '~/Projects/telescope-lsp-handlers.nvim',
     config = function()
       require('telescope').load_extension('lsp_handlers')
     end,
@@ -580,9 +579,11 @@ use {
     require('rmagatti.lualine')
   end }
 
-  use {
-    'nvim-lua/lsp-status.nvim'
-  }
+
+  -- TODO: table index is null issue when this is enabled
+  -- use {
+  --   'nvim-lua/lsp-status.nvim',
+  -- }
 
   -- Terraform
   use {
@@ -778,10 +779,7 @@ use {
       require('goto-preview').setup {
         default_mappings = true,
         winblend = 10,
-        debug = false,
-        post_open_hook = function(buffer, _)
-          vim.api.nvim_buf_set_keymap(buffer, 'n', 'q', ':q<CR>', {noremap = true})
-        end
+        debug = false
       }
       -- Mapping to cycle between windows
       vim.cmd[[nnoremap <C-h> <C-w>w]]

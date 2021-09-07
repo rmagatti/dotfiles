@@ -2,7 +2,7 @@
 local ts_utils = require("nvim-lsp-ts-utils")
 local mappings = require('rmagatti.lsp-mappings')
 local signature = require('rmagatti.lsp-signature')
-local lsp_status = require('lsp-status')
+-- local lsp_status = require('lsp-status')
 
 require("null-ls").config {}
 require("lspconfig")["null-ls"].setup {}
@@ -60,10 +60,7 @@ require('lspconfig').typescript.setup {
 
     mappings.on_attach(client, bufnr)
     signature.on_attach()
-    lsp_status.on_attach(client)
+    -- lsp_status.on_attach(client)
   end,
-  capabilities = lsp_status.capabilities,
-  -- TODO: get the PR for this change merged upstream
-  -- cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v14.7.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio"}
-  -- cmd = {"/Users/ronnieandrewmagatti/.nvm/versions/node/v12.20.0/bin/node", "/Users/ronnieandrewmagatti/Projects/typescript-language-server/server/lib/cli.js", "--stdio", "--tsserver-user-preferences", "{\"importModuleSpecifierPreference\":\"relative\"}"}
+  -- capabilities = lsp_status.capabilities,
 }

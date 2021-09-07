@@ -1,7 +1,7 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 
-telescope.setup{
+telescope.setup {
   defaults = {
     vimgrep_arguments = {
       'rg',
@@ -41,7 +41,7 @@ telescope.setup{
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
     mappings = {
       i = {
-        -- Close on first esc instead of gonig to normal mode
+        -- Close on first esc instead of going to normal mode
         ["<esc>"] = actions.close,
         ["<C-i>"] = require('telescope.actions').cycle_history_next,
         ["<C-o>"] = require('telescope.actions').cycle_history_prev
@@ -56,8 +56,8 @@ telescope.setup{
       },
       lsp_handlers = {
         code_action = {
-          telescope = require('telescope.themes').get_dropdown()
-        },
+          telescope = require('telescope.themes').get_cursor()
+        }
       }
     },
   }
