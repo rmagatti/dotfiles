@@ -378,6 +378,7 @@ return packer.startup(function(use)
 
   use {
     '~/Projects/telescope-lsp-handlers.nvim',
+    requires = {'telescope.nvim'},
     config = function()
       require('telescope').load_extension('lsp_handlers')
     end,

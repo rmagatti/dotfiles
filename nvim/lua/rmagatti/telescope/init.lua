@@ -56,6 +56,7 @@ telescope.setup {
       },
       lsp_handlers = {
         code_action = {
+          -- FIXME: setting this does not do what it should.
           telescope = require('telescope.themes').get_cursor()
         }
       }
