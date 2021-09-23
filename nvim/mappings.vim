@@ -126,18 +126,18 @@ nnoremap t; :tabnext<CR>
 nnoremap tn :tabnew<CR>
 nnoremap td :tabclose<CR>
 
-function! CompilePacker()
-  echo "Removing packer_compiled.vim"
-  exec "!rm ~/.config/nvim/plugin/packer_compiled.lua"
-  echo "Compiling packer..."
-  exec ":PackerCompile"
-  echo "Compiling done!"
-endfunction
+" function! CompilePacker()
+"   echo "Removing packer_compiled.vim"
+"   exec "!rm ~/.config/nvim/plugin/packer_compiled.lua"
+"   echo "Compiling packer..."
+"   exec ":PackerCompile"
+"   echo "Compiling done!"
+" endfunction
 
-augroup plugins
-  au!
-  autocmd BufWritePost plugins.lua :call CompilePacker()
-augroup end
+" augroup plugins
+"   au!
+"   autocmd BufWritePost plugins.lua :call CompilePacker()
+" augroup end
 
 " Paste today's date 
 nnoremap <leader>. "=strftime('%a %d %b %Y')<CR>P

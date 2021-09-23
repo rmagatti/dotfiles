@@ -3,6 +3,7 @@ if exists('g:vscode')
 else
   source $HOME/.config/nvim/base.vim
   lua require('impatient') -- Faster startup
+  lua require('packer_compiled')
   lua require('plugins')
   lua require('init')
   source $HOME/.config/nvim/mappings.vim

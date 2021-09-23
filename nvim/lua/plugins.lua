@@ -1,13 +1,18 @@
 local packer = require('packer')
-return packer.startup(function(use)
-  use { 'wbthomason/packer.nvim' }
+return packer.startup {function(use)
+  use {
+    'wbthomason/packer.nvim',
+    -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
+  }
   use {
    'tpope/vim-commentary',
-    -- keys = 'gc'
   }
 
   -- TODO: trying this out. Faster startup for "free" but I'm skeptical that it wouldn't cause any issues for now.
-  use { 'lewis6991/impatient.nvim' }
+  use {
+   'lewis6991/impatient.nvim',
+  }
+
 
   use {
    'tpope/vim-surround',
@@ -33,7 +38,7 @@ return packer.startup(function(use)
           if term.direction == "horizontal" then
             return 25
           elseif term.direction == "vertical" then
-            return 40
+            return 80
           end
         end,
         start_in_insert = false,
@@ -325,8 +330,8 @@ return packer.startup(function(use)
   -- Lua plugin dev
   use {
     "folke/lua-dev.nvim",
-    disable = false, -- FIXME: causing high cpu usage
-    module = "lua-dev"
+    module = "lua-dev",
+    ft = 'lua'
   }
 
   use {
@@ -357,13 +362,7 @@ return packer.startup(function(use)
       require('rmagatti.telescope')
     end,
     cmd = "Telescope",
-		module = {'telescope'},
-    keys = {
-      {'n', '<C-p>'},
-      {'n', '<leader>b'},
-      {'n', '<leader>sd'},
-      {'n', '<leader>ps'},
-    }
+		module = {'telescope'}
   }
 
   use {
@@ -775,21 +774,25 @@ use {
 
   use {
     '~/Projects/goto-preview',
-    as = 'goto-preview',
     config = function()
       require('goto-preview').setup {
         default_mappings = true,
+        resizing_mappings = true,
         winblend = 10,
-        debug = false
+        debug = false,
+        -- references = {
+        --   telescope = require('telescope.themes').get_cursor({hide_preview = false, width=120, height=10})
+        -- }
       }
       -- Mapping to cycle between windows
       vim.cmd[[nnoremap <C-h> <C-w>w]]
     end,
-    keys = {
-      {'n', 'gpd'},
-      {'n', 'gpi'},
-      {'n', 'gP'},
-    }
+    -- keys = {
+    --   {'n', 'gpd'},
+    --   {'n', 'gpi'},
+    --   {'n', 'gpr'},
+    --   {'n', 'gP'},
+    -- }
   }
 
   use {
@@ -802,4 +805,6 @@ use {
     keys = '<leader>ss'
   }
 
-end)
+end, config = {
+  compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
+}}

@@ -87,14 +87,15 @@ require'nvim-treesitter.configs'.setup {
 
 -- -- Custom parser
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
--- parser_config.hcl = {
---   install_info = {
---     url = "https://github.com/MichaHoffmann/tree-sitter-hcl", -- local path or git repo
---     files = {"src/parser.c"},
---   },
---   filetype = "tf", -- if filetype does not agrees with parser name
---   used_by = {"hcl", "tf", "terraform"} -- additional filetypes that use this parser
--- }
+
+parser_config.hcl = {
+  install_info = {
+    url = "https://github.com/MichaHoffmann/tree-sitter-hcl", -- local path or git repo
+    files = {"src/parser.c"},
+  },
+  filetype = "tf", -- if filetype does not agrees with parser name
+  used_by = {"hcl", "tf", "terraform"} -- additional filetypes that use this parser
+}
 
 parser_config.typescript = {
   install_info = {
