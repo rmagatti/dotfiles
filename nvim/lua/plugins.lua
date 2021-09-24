@@ -1,5 +1,13 @@
 local packer = require('packer')
-return packer.startup {function(use)
+local config = {
+  compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua',
+  -- profile = {
+  --   enable = true,
+  --   threshold = 1 -- the amount in ms that a plugins load time must be over for it to be included in the profile
+  -- }
+}
+
+return packer.startup({function(use)
   use {
     'wbthomason/packer.nvim',
     -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
@@ -12,7 +20,6 @@ return packer.startup {function(use)
   use {
    'lewis6991/impatient.nvim',
   }
-
 
   use {
    'tpope/vim-surround',
@@ -78,6 +85,7 @@ return packer.startup {function(use)
     },
     cmd = {'Cheat', 'CheatPaste'}
   }
+
   use {
     'mbbill/undotree',
     config = function()
@@ -91,6 +99,7 @@ return packer.startup {function(use)
    'jremmen/vim-ripgrep',
    cmd = { 'Rg' }
   }
+
   use {
     'mhinz/vim-grepper',
     config = function()
@@ -185,6 +194,7 @@ return packer.startup {function(use)
       ]]
     end
   }
+
   use {
     'roginfarrer/vim-dirvish-dovish',
     branch = 'main',
@@ -362,6 +372,12 @@ return packer.startup {function(use)
       require('rmagatti.telescope')
     end,
     cmd = "Telescope",
+    keys = {
+      {'n', '<C-p>'},
+      {'n', '<leader>ps'},
+      {'n', '<leader>pg'},
+      {'n', '<leader>pl'},
+    },
 		module = {'telescope'}
   }
 
@@ -390,7 +406,7 @@ return packer.startup {function(use)
       require('telescope').load_extension('packer')
       vim.cmd[[nnoremap <leader>pl :lua require('telescope').extensions.packer.plugins()<CR>]]
     end,
-    keys = '<leader>pl'
+    after = 'telescope.nvim'
   }
 
   -- Diagnostics
@@ -489,6 +505,7 @@ return packer.startup {function(use)
     },
     config = function()
       require('rmagatti.refactoring')
+      vim.api.nvim_set_keymap("v", "<leader>re", [[<cmd>call v:lua.list_refactors()<CR>]], {noremap = true, silent = true, expr = true})
     end,
     keys = {
       {'v', '<leader>re'}
@@ -523,6 +540,7 @@ return packer.startup {function(use)
 
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
+    event = 'BufEnter'
   }
 
   -- Rainbow parentheses
@@ -787,12 +805,12 @@ use {
       -- Mapping to cycle between windows
       vim.cmd[[nnoremap <C-h> <C-w>w]]
     end,
-    -- keys = {
-    --   {'n', 'gpd'},
-    --   {'n', 'gpi'},
-    --   {'n', 'gpr'},
-    --   {'n', 'gP'},
-    -- }
+    keys = {
+      {'n', 'gpd'},
+      {'n', 'gpi'},
+      {'n', 'gpr'},
+      {'n', 'gP'},
+    }
   }
 
   use {
@@ -805,6 +823,4 @@ use {
     keys = '<leader>ss'
   }
 
-end, config = {
-  compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
-}}
+end, config = config})
