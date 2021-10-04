@@ -155,3 +155,18 @@ nnoremap <leader>rk @a
 
 " Generate test
 nnoremap <leader>gt <cmd>!yarn generate:test %<CR>
+
+let g:diff_is_open = 0
+
+function! ToggleDiff()
+  if g:diff_is_open
+    windo diffoff
+    let g:diff_is_open = 0
+  else
+    windo diffthis
+    let g:diff_is_open = 1
+  endif
+endfunction
+
+" Diff this
+nnoremap <leader>dt <cmd>call ToggleDiff()<CR>

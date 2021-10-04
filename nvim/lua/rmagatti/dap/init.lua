@@ -88,8 +88,22 @@ M.debug = function(runner, cmd)
 end
 
 -- TODO: setup jest debugging
-M.debug_jest = function(_)
-  print("==== TODO: Debug Jest")
+M.debug_jest = function(cmd)
+  local test_cmd = './node_modules/jest/bin/jest.js'
+  local args = cmd and {'npx node', '--inspect-brk', test_cmd, '--runInBand', (cmd:gsub('yarn test ', ''))} or {test_cmd, '--inspect-brk'}
+  print(vim.inspect(table.concat(args, ' ')))
+
+  dap.run({
+    type='node2',
+    request='launch',
+    cwd = vim.fn.getcwd(),
+    runtimeArgs = args,
+    sourceMaps = true,
+    protocol = 'inspector',
+    skipFiles = {'<node_internals>/**/*.js'},
+    console = 'integratedTerminal',
+    port = 9229
+  })
 end
 
 -- Hover mapping
