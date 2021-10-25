@@ -55,7 +55,7 @@ set undofile                                            " enable persistent undo
 
 let &undodir = expand(stdpath('data')."/undodir")
 set grepprg=rg\ --vimgrep                               " use rg as default grepper
-set noshowcmd                                           " to get rid of display of last command
+set showcmd                                           " to get rid of display of last command
 
 " augroup RemoveNoNameBufs
 "   au!

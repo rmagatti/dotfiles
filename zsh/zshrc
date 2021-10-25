@@ -113,7 +113,7 @@ function gitc() {
     echo gitc \"Add something somewhere because of something\"
   else
     branch="$(git symbolic-ref --short HEAD)"
-    ticket="$(grep -Eo '(?i)ch[0-9]+|ch-[0-9]+' <<< \"$branch\")"
+    ticket="$(grep -Eo '(?i)sc[0-9]+|sc-[0-9]+' <<< \"$branch\")"
     pair=($(grep -Eo '[[:alpha:]]+|[0-9]+' <<< \"$ticket\"))
     prefix="$pair[1]:u-$pair[2]"
     if [ -z "$ticket" ];
@@ -124,6 +124,15 @@ function gitc() {
     fi
   fi
 }
+
+function gitcan() {
+  git commit --amend --no-edit
+}
+
+function gitca() {
+  git commit --amend
+}
+
 
 # function gitm() {
 #     if [ -z "$1" ];

@@ -327,14 +327,31 @@ return packer.startup({function(use)
     module = {'lsp_signature'}
   }
 
-   -- Completion
   use {
-    'hrsh7th/nvim-compe',
+    'hrsh7th/nvim-cmp',
     config = function()
-      require('rmagatti.nvim-compe')
-    end,
-    module = {'compe'},
-    event = "BufReadPre"
+      require('rmagatti.nvim-cmp')
+    end
+  }
+  use { 'hrsh7th/cmp-vsnip' }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-path' }
+  use { 'hrsh7th/cmp-nvim-lua' }
+
+  use {
+    'David-Kunz/cmp-npm',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('cmp-npm').setup({})
+    end
+  }
+
+  use {
+    'onsails/lspkind-nvim',
+    module = 'lspkind'
   }
 
   -- Lua plugin dev
@@ -353,10 +370,10 @@ return packer.startup({function(use)
     'hrsh7th/vim-vsnip',
     event = {'BufReadPre'}
   }
-  use {
-    'hrsh7th/vim-vsnip-integ',
-    event = {'BufReadPre'}
-  }
+  -- use {
+  --   'hrsh7th/vim-vsnip-integ',
+  --   event = {'BufReadPre'}
+  -- }
   use {
     'rafamadriz/friendly-snippets',
     event = {'BufReadPre'}
@@ -560,14 +577,14 @@ return packer.startup({function(use)
     event = {'BufReadPost'}
   }
 
--- GitHub
-  use  {
-    'pwntester/octo.nvim',
-    config = function()
-      require"octo".setup()
-    end,
-    cmd = {'Octo'}
-  }
+-- -- GitHub
+--   use  {
+--     'pwntester/octo.nvim',
+--     config = function()
+--       require"octo".setup()
+--     end,
+--     cmd = {'Octo'}
+--   }
 
 use {
   'lewis6991/gitsigns.nvim',

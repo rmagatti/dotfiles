@@ -39,7 +39,7 @@ dap.configurations.typescript = {
   {
     type = 'node2',
     request = 'launch',
-    program = '${workspaceFolder}/${file}',
+    program = '${file}',
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
     protocol = 'inspector',
@@ -66,14 +66,19 @@ end
 
 M.debug_mocha = function(cmd)
   local test_cmd = './node_modules/ts-mocha/bin/ts-mocha'
-  local args = cmd and {test_cmd, '--inspect-brk', '--no-parallel', (cmd:gsub('yarn test ', ''))} or {test_cmd, '--inspect-brk'}
-  print(vim.inspect(table.concat(args, ' ')))
+  local prefix_removed = (cmd:gsub('yarn test ', ''))
+  local final_cmd = test_cmd..' '..prefix_removed
+  print('==== cmd', final_cmd)
+  -- local split_cmd = vim.split(prefix_removed, '--grep')
+  -- local file_or_grep_split = split_cmd[2] and { vim.trim(split_cmd[1]), '--grep', vim.trim(split_cmd[2]) } or split_cmd[1]
+  -- local args = cmd and {test_cmd, '--inspect-brk', '--no-parallel', file_or_grep_split} or {test_cmd, '--inspect-brk'}
 
   dap.run({
     type='node2',
     request='launch',
     cwd = vim.fn.getcwd(),
-    runtimeArgs = args,
+    cmd = final_cmd,
+    -- runtimeArgs = args,
     sourceMaps = true,
     protocol = 'inspector',
     skipFiles = {'<node_internals>/**/*.js'},

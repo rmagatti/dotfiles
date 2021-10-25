@@ -9,6 +9,8 @@ local signature = require('rmagatti.lsp-signature')
 local lspinstall = require('lspinstall')
 lspinstall.setup()
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 -- Initial setup
 local servers = lspinstall.installed_servers()
 for _, server in pairs(servers) do
@@ -17,7 +19,7 @@ for _, server in pairs(servers) do
       mappings.on_attach(client, bufnr)
       -- lsp_status.on_attach(client)
     end,
-    -- capabilities = lsp_status.capabilities
+    capabilities = capabilities
   }
 end
 
