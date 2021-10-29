@@ -14,6 +14,7 @@ nnoremap <silent> <leader>db :lua require'dap'.toggle_breakpoint()<CR>
 nnoremap <silent> <leader>dB :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
 nnoremap <silent> <leader>dl :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>du :lua require'dapui'.toggle()<CR>
 ]])
 
 -- Configs
@@ -22,18 +23,6 @@ dap.adapters.node2 = {
   command = 'node',
   args = {os.getenv('HOME') .. '/Projects/vscode-node-debug2/out/src/nodeDebug.js'},
 }
-
--- dap.configurations.javascript = {
---   {
---     type = 'node2',
---     request = 'launch',
---     program = '${file}',
---     cwd = vim.fn.getcwd(),
---     sourceMaps = true,
---     protocol = 'inspector',
---     console = 'integratedTerminal',
---   },
--- }
 
 dap.configurations.typescript = {
   {
@@ -68,17 +57,20 @@ M.debug_mocha = function(cmd)
   local test_cmd = './node_modules/ts-mocha/bin/ts-mocha'
   local prefix_removed = (cmd:gsub('yarn test ', ''))
   local final_cmd = test_cmd..' '..prefix_removed
+
   print('==== cmd', final_cmd)
-  -- local split_cmd = vim.split(prefix_removed, '--grep')
-  -- local file_or_grep_split = split_cmd[2] and { vim.trim(split_cmd[1]), '--grep', vim.trim(split_cmd[2]) } or split_cmd[1]
-  -- local args = cmd and {test_cmd, '--inspect-brk', '--no-parallel', file_or_grep_split} or {test_cmd, '--inspect-brk'}
+
+  local split_cmd = vim.split(prefix_removed, '--grep')
+  local file_or_grep_split = split_cmd[2] and { vim.trim(split_cmd[1]), '--grep', vim.trim(split_cmd[2]) } or split_cmd[1]
+  local args = cmd and {test_cmd, '--inspect-brk', '--no-parallel', file_or_grep_split} or {test_cmd, '--inspect-brk'}
+
+  print('args', args)
 
   dap.run({
     type='node2',
     request='launch',
     cwd = vim.fn.getcwd(),
-    cmd = final_cmd,
-    -- runtimeArgs = args,
+    runtimeArgs = args,
     sourceMaps = true,
     protocol = 'inspector',
     skipFiles = {'<node_internals>/**/*.js'},
@@ -113,8 +105,5 @@ end
 
 -- Hover mapping
 vim.cmd[[nnoremap <leader>dh <cmd>lua require('dap.ui.widgets').hover()<CR>]]
-
--- Disabled, use nvim-dap widgets instead
--- require('rmagatti.dap.dap-ui')
 
 return M

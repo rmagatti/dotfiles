@@ -649,7 +649,10 @@ use {
   use {
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
-      require('null-ls').setup {}
+      require("null-ls").config {
+        sources = { require("null-ls").builtins.formatting.stylua }
+      }
+      require("lspconfig")["null-ls"].setup({})
     end,
     module = {'null-ls'}
   }
@@ -712,6 +715,17 @@ use {
     end,
     after = 'nvim-dap',
     module = 'telescope._extensions.dap'
+  }
+
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = {"mfussenegger/nvim-dap"},
+    config = function()
+      require('rmagatti.dap.dap-ui')
+    end,
+    keys = {
+      {'n', '<leader>du'}
+    }
   }
 
   -- WhichKey

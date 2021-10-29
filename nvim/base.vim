@@ -15,7 +15,7 @@ let mapleader = " "
 set background=dark
 set ts=2 sw=2 expandtab
 set signcolumn=yes
-set sessionoptions+=resize,winpos,terminal
+set sessionoptions+=winpos,terminal
 
 " augroup typescript
 "   au!
