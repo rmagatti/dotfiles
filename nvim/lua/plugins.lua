@@ -12,6 +12,17 @@ return packer.startup({function(use)
     'wbthomason/packer.nvim',
     -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
   }
+
+  use {
+    '~/Projects/session-lens',
+    requires = {'~/Projects/auto-session', 'nvim-telescope/telescope.nvim'},
+    config = function()
+      require('rmagatti.session-lens')
+      require('telescope').load_extension('session-lens')
+    end,
+    keys = '<leader>ss'
+  }
+
   use {
    'tpope/vim-commentary',
   }
@@ -610,9 +621,13 @@ use {
   }
 
   -- Lualine
-  use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}, config = function()
-    require('rmagatti.lualine')
-  end }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    config = function()
+      require('rmagatti.lualine')
+    end
+  }
 
 
   -- TODO: table index is null issue when this is enabled
@@ -841,15 +856,4 @@ use {
       {'n', 'gP'},
     }
   }
-
-  use {
-    '~/Projects/session-lens',
-    requires = {'~/Projects/auto-session', 'nvim-telescope/telescope.nvim'},
-    config = function()
-      require('rmagatti.session-lens')
-      require('telescope').load_extension('session-lens')
-    end,
-    keys = '<leader>ss'
-  }
-
 end, config = config})

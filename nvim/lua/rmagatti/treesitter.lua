@@ -136,12 +136,5 @@ require "nvim-treesitter.configs".setup {
 vim.cmd[[
   " Reset treesitter
   nnoremap <leader>rt <cmd>w <bar> e <bar> TSBufEnable highlight <bar> set syntax=off<CR>
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-  set foldlevel=8
-
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :set foldlevel=0 | :normal zM
-  command! -nargs=? Unfold :set foldlevel=8 | :normal zR
 ]]
 

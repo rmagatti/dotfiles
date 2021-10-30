@@ -119,6 +119,28 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
 augroup end
 
+" Fold defaults
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=99
+set nofoldenable " do not fold by default
+
+" Protip: zi toggles folding
+function! Fold()
+  set foldenable
+  " normal zM
+endfunction
+
+function! Unfold()
+  " normal zR
+  set nofoldenable
+endfunction
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call Fold()
+command! -nargs=? Unfold :call Unfold()
+
+"" Figure out if I'll use this or not
 " function! s:CompareQuickfixEntries(i1, i2)
 "   if bufname(a:i1.bufnr) == bufname(a:i2.bufnr)
 "     return a:i1.lnum == a:i2.lnum ? 0 : (a:i1.lnum < a:i2.lnum ? -1 : 1)
