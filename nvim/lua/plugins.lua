@@ -723,9 +723,7 @@ use {
     config = function()
       require('rmagatti.dap.dap-ui')
     end,
-    keys = {
-      {'n', '<leader>du'}
-    }
+    after = 'nvim-dap'
   }
 
   -- WhichKey
