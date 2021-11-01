@@ -8,5 +8,4 @@ require('lualine').setup{
   },
   extensions = { 'fzf', 'fugitive' },
   sections = {lualine_c = {current_session}}
-  -- sections = {lualine_c = {require'lsp-status'.status}}
 }

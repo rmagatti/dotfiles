@@ -786,23 +786,6 @@ use {
     keys = '<leader>zz'
   }
 
-  -- TODO: learn to use!!!
-  -- use {
-  --   'kristijanhusak/orgmode.nvim',
-  --   disable = true,
-  --   config = function()
-  --     require('orgmode').setup{
-  --       org_agenda_file = '~/Documents/org/*',
-  --       org_default_notes_file = '~/Documents/org/refile.org',
-  --     }
-  --   end,
-  --   module = 'orgmode',
-  --   ft = 'org',
-  --   keys = {
-  --     {'n', '<leader>oa'} -- TODO: this is supposed to be 'open alternate'. Really don't like this current mapping.
-  --   }
-  -- }
-
   -- Profiling
   use {'dstein64/vim-startuptime', cmd = 'StartupTime', config = [[vim.g.startuptime_tries = 10]]}
 
@@ -837,17 +820,7 @@ use {
   use {
     '~/Projects/goto-preview',
     config = function()
-      require('goto-preview').setup {
-        default_mappings = true,
-        resizing_mappings = true,
-        winblend = 10,
-        debug = false,
-        -- references = {
-        --   telescope = require('telescope.themes').get_cursor({hide_preview = false, width=120, height=10})
-        -- }
-      }
-      -- Mapping to cycle between windows
-      vim.cmd[[nnoremap <C-h> <C-w>w]]
+      require('rmagatti.goto-preview')
     end,
     keys = {
       {'n', 'gpd'},
