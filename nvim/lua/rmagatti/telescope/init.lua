@@ -89,6 +89,10 @@ nnoremap(
   "<cmd>lua require('telescope.builtin').live_grep()<CR>"
 )
 nnoremap(
+  '<leader>fb',
+  "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>"
+)
+nnoremap(
   '<leader>pg',
   "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>"
 )

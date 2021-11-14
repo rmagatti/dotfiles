@@ -61,12 +61,8 @@ M.on_attach = function(client, bufnr)
   end
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  end
-  if client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("v", "<leader>fo", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
+  buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("v", "<leader>fo", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then

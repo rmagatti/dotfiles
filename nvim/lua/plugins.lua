@@ -25,6 +25,9 @@ return packer.startup({function(use)
 
   use {
    'tpope/vim-commentary',
+   keys = {
+     {'n','gc'}
+   }
   }
 
   -- TODO: trying this out. Faster startup for "free" but I'm skeptical that it wouldn't cause any issues for now.
@@ -289,21 +292,15 @@ return packer.startup({function(use)
     }
   }
 
-  --use {
-  --  'glacambre/firenvim',
-  --  run = function()
-  --    vim.fn['firenvim#install'](0)
-  --  end,
-  --  module = 'firenvim',
-  --  config = function ()
-  --    vim.cmd[[
-  --      let g:firenvim_config = {'globalSettings': {'alt': 'all', },'localSettings': {'.*': {'cmdline': 'neovim','content': 'text','priority': 0,'selector': 'textarea','takeover': 'never'}}}
-  --      let fc = g:firenvim_config['localSettings']
-  --      let fc['https?://docs.google.com/spreadsheets/'] = { 'takeover': 'never', 'priority': 1 }
-  --      let fc['https?://meet.google.com/'] = { 'takeover': 'never', 'priority': 1 }
-  --    ]]
-  --  end
-  --}
+  use {
+    'glacambre/firenvim',
+    run = function()
+      vim.fn['firenvim#install'](0)
+    end,
+    config = function ()
+      require('rmagatti.firenvim')
+    end
+  }
 
   -- TODO: do I really use this?
   --use {
@@ -340,15 +337,17 @@ return packer.startup({function(use)
 
   use {
     'hrsh7th/nvim-cmp',
+    event = "InsertEnter",
     config = function()
       require('rmagatti.nvim-cmp')
     end
   }
-  use { 'hrsh7th/cmp-vsnip' }
-  use { 'hrsh7th/cmp-nvim-lsp' }
-  use { 'hrsh7th/cmp-buffer' }
-  use { 'hrsh7th/cmp-path' }
-  use { 'hrsh7th/cmp-nvim-lua' }
+
+  use { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
+  use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
+  use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+  use { 'hrsh7th/cmp-path', after = 'nvim-cmp'}
+  use { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'}
 
   use {
     'David-Kunz/cmp-npm',
@@ -357,7 +356,8 @@ return packer.startup({function(use)
     },
     config = function()
       require('cmp-npm').setup({})
-    end
+    end,
+    after = 'nvim-cmp'
   }
 
   use {
@@ -373,7 +373,8 @@ return packer.startup({function(use)
   }
 
   use {
-    'svermeulen/vimpeccable'
+    'svermeulen/vimpeccable',
+    module = 'vimp',
   }
 
   -- -- Snippets
@@ -558,8 +559,6 @@ return packer.startup({function(use)
     end
   }
 
---   -- TODO: uncomment me!!!
-
   use {
     'nvim-treesitter/playground',
     requires = {'nvim-treesitter/nvim-treesitter'},
@@ -568,7 +567,7 @@ return packer.startup({function(use)
 
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-    event = 'BufEnter'
+    event = 'BufReadPost'
   }
 
   -- Rainbow parentheses
@@ -665,7 +664,10 @@ use {
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
       require("null-ls").config {
-        sources = { require("null-ls").builtins.formatting.stylua }
+        sources = {
+          require("null-ls").builtins.formatting.stylua,
+          require("null-ls").builtins.completion.spell,
+        }
       }
       require("lspconfig")["null-ls"].setup({})
     end,
@@ -791,8 +793,11 @@ use {
 
   use {
     "AckslD/nvim-neoclip.lua",
+    requires = {'tami5/sqlite.lua', module = 'sqlite'},
     config = function()
-      require('neoclip').setup()
+      require('neoclip').setup {
+        enable_persistant_history = true
+      }
       vim.cmd[[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
     end,
     keys = {
@@ -828,5 +833,22 @@ use {
       {'n', 'gpr'},
       {'n', 'gP'},
     }
+  }
+
+  -- use {
+  --   'kristijanhusak/vim-dadbod-ui',
+  --   requires = {
+  --     {'tpope/vim-dadbod'},
+  --     {'kristijanhusak/vim-dadbod-completion'}
+  --   },
+  --   cmd = {'DB'},
+  --   config = function()
+  --     require('rmagatti.dadbod')
+  --   end
+  -- }
+
+  use {
+    'github/copilot.vim',
+    event = {'InsertEnter'},
   }
 end, config = config})
