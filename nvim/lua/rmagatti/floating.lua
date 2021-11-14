@@ -106,6 +106,3 @@
 -- vimp.nnoremap('<down>', '<C-w>+')
 
 -- return M
-
-
-
