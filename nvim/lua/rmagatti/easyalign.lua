@@ -1,4 +1,4 @@
-vim.cmd([[
+vim.cmd [[
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -10,4 +10,4 @@ augroup aligning
   au!
   au FileType markdown vmap <leader><Bslash> :EasyAlign*<bar><CR>
 augroup end
-]])
+]]

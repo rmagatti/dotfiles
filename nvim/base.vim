@@ -10,7 +10,7 @@ set noswapfile
 set mouse=a
 " set shada
 " Goneovim options TODO: figure out a way to no repeat font name for presentation mode
-set guifont=FiraCode\ Nerd\ Font:18
+set guifont=JetBrains_Mono:12
 let mapleader = " "
 set background=dark
 set ts=2 sw=2 expandtab

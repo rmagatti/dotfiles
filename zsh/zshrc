@@ -271,7 +271,7 @@ function bri() {
 }
 
 alias gnvim=goneovim
-alias gn=goneovim
+alias gn=goneovim --exttabline --extcmdline --extmessages --extpopupmenu
 if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
   export COLORTERM="truecolor"
 fi
