@@ -140,6 +140,11 @@ endfunction
 command! -nargs=? Fold :call Fold()
 command! -nargs=? Unfold :call Unfold()
 
+" Attempt to fix press enter message on starting Firenvim
+if exists('g:started_by_firenvim')
+  let g:auto_session_enabled = v:false
+endif
+
 "" Figure out if I'll use this or not
 " function! s:CompareQuickfixEntries(i1, i2)
 "   if bufname(a:i1.bufnr) == bufname(a:i2.bufnr)
