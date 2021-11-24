@@ -30,6 +30,10 @@ return packer.startup {
         { "n", "gc" },
       },
     }
+    
+    use {
+      'tpope/vim-eunuch',
+    }
 
     -- TODO: trying this out. Faster startup for "free" but I'm skeptical that it wouldn't cause any issues for now.
     use {
