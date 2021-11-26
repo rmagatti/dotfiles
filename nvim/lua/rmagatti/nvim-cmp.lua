@@ -21,6 +21,7 @@ cmp.setup {
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm { select = true },
+    -- Disabled tab because of copilot conflict on tab
     -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
   },
   sources = cmp.config.sources({
@@ -33,3 +34,17 @@ cmp.setup {
     { name = "buffer" },
   }),
 }
+
+-- TODO: This completion is not working properly?
+cmp.setup.cmdline("/", {
+  sources = {
+    { name = "buffer" },
+  },
+})
+
+cmp.setup.cmdline(":", {
+  sources = cmp.config.sources {
+    { name = "cmdline" },
+    { name = "path" },
+  },
+})
