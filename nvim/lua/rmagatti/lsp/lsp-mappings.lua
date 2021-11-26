@@ -68,7 +68,7 @@ M.on_attach = function(client, bufnr)
   )
   buf_set_keymap("n", "<leader>ds", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
   if client.resolved_capabilities.document_highlight then
-    buf_set_keymap("n", "h", '<cmd>lua require("rmagatti.lsp-mappings").toggle_symbol_highlight()<CR>', opts)
+    buf_set_keymap("n", "h", '<cmd>lua require("rmagatti.lsp.lsp-mappings").toggle_symbol_highlight()<CR>', opts)
   end
 
   -- Set some keybinds conditional on server capabilities
@@ -84,7 +84,7 @@ M.on_attach = function(client, bufnr)
     hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
     augroup lsp_document_highlight
     autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua require('rmagatti.lsp-mappings').highlight_symbol()
+    autocmd CursorHold <buffer> lua require('rmagatti.lsp.lsp-mappings').highlight_symbol()
     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
     ]],

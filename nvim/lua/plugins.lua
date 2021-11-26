@@ -30,9 +30,9 @@ return packer.startup {
         { "n", "gc" },
       },
     }
-    
+
     use {
-      'tpope/vim-eunuch',
+      "tpope/vim-eunuch",
     }
 
     -- TODO: trying this out. Faster startup for "free" but I'm skeptical that it wouldn't cause any issues for now.
@@ -302,7 +302,7 @@ return packer.startup {
         vim.fn["firenvim#install"](0)
       end,
       config = function()
-        require("rmagatti.firenvim")
+        require "rmagatti.firenvim"
       end,
     }
 
@@ -324,14 +324,21 @@ return packer.startup {
       module = "lspconfig",
     }
 
+    -- use {
+    --   "kabouzeid/nvim-lspinstall",
+    --   requires = { "neovim/nvim-lspconfig" },
+    --   config = function()
+    --     require "rmagatti.lsp-server-configs"
+    --   end,
+    --   event = "BufReadPost",
+    --   after = "nvim-lspconfig",
+    -- }
+
     use {
-      "kabouzeid/nvim-lspinstall",
-      requires = { "neovim/nvim-lspconfig" },
+      "williamboman/nvim-lsp-installer",
       config = function()
-        require "rmagatti.lsp-server-configs"
+        require "rmagatti.lsp"
       end,
-      event = "BufReadPost",
-      after = "nvim-lspconfig",
     }
 
     use {
@@ -352,6 +359,7 @@ return packer.startup {
     use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }
     use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }
 
     use {
       "David-Kunz/cmp-npm",
@@ -411,6 +419,7 @@ return packer.startup {
         { "n", "<leader>pg" },
         { "n", "<leader>pl" },
         { "n", "<leader>b" },
+        { "n", "<M-CR>" },
       },
       module = { "telescope" },
     }
@@ -671,25 +680,11 @@ return packer.startup {
     -- Typescript utils
     use {
       "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        require("null-ls").config {
-          sources = {
-            require("null-ls").builtins.formatting.stylua,
-            require("null-ls").builtins.completion.spell,
-          },
-        }
-        require("lspconfig")["null-ls"].setup {}
-      end,
-      module = { "null-ls" },
     }
 
     use {
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       requires = { "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim" },
-      config = function()
-        require "rmagatti.nvim-lsp-ts-utils"
-      end,
-      after = "nvim-lspinstall",
     }
 
     use {
