@@ -3,7 +3,7 @@ local b = null_ls.builtins
 
 local eslint_opts = {
   condition = function(utils)
-    return utils.root_has_file ".eslintrc.js"
+    return utils.root_has_file ".eslintrc.js" or utils.root_has_file ".eslintrc"
   end,
   diagnostics_format = "#{m} [#{c}]",
   prefer_local = "node_modules/.bin",

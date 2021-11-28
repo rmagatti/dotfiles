@@ -360,6 +360,7 @@ return packer.startup {
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }
     use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
     use { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }
+    use { "lukas-reineke/cmp-rg", after = "nvim-cmp" }
 
     use {
       "David-Kunz/cmp-npm",

@@ -30,6 +30,7 @@ cmp.setup {
     { name = "path" },
     { name = "npm", keyword_length = 4 },
     { name = "nvim_lua" },
+    { name = "rg" },
   }, {
     { name = "buffer" },
   }),
