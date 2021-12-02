@@ -867,6 +867,15 @@ return packer.startup {
     }
 
     use {
+      "~/Projects/igs.nvim",
+      config = function()
+        require("igs").setup {
+          default_mappings = true,
+        }
+      end,
+    }
+
+    use {
       "github/copilot.vim",
       event = { "InsertEnter" },
     }
