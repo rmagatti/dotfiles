@@ -21,6 +21,7 @@ return packer.startup {
         require "rmagatti.session-lens"
         require("telescope").load_extension "session-lens"
       end,
+
       keys = "<leader>ss",
     }
 
@@ -878,6 +879,13 @@ return packer.startup {
     use {
       "github/copilot.vim",
       event = { "InsertEnter" },
+    }
+
+    use {
+      "michaelb/sniprun",
+      run = "bash ./install.sh",
+      cmd = { "SnipRun" },
+      module = "sniprun",
     }
   end,
   config = config,
