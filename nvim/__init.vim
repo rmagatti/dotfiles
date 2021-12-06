@@ -1,7 +1,7 @@
 if exists('g:vscode')
   " VSCode extension
 else
-  source $HOME/.config/nvim/base.vim
+  " source $HOME/.config/nvim/base.vim
   lua require('impatient')
   lua require('packer_compiled')
   lua require('plugins')

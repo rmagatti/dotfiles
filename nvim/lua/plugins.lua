@@ -594,6 +594,7 @@ return packer.startup {
     -- Rainbow parentheses
     use {
       "p00f/nvim-ts-rainbow",
+      event = "BufReadPost",
     }
 
     use {
