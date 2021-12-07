@@ -151,6 +151,11 @@ if vim.g.started_by_firenvim == 1 then
   vim.g.auto_session_enabled = false
 end
 
+-- load mappings
+vim.cmd [[
+  source $HOME/.config/nvim/mappings.vim
+]]
+
 --" Figure out if I'll use this or not
 -- function! s:CompareQuickfixEntries(i1, i2)
 --   if bufname(a:i1.bufnr) == bufname(a:i2.bufnr)
@@ -174,8 +179,3 @@ end
 --   call setqflist(uniqedList)
 -- endfunction
 -- autocmd! QuickfixCmdPost * call s:SortUniqQFList()
-
--- load mappings
-vim.cmd [[
-  source $HOME/.config/nvim/mappings.vim
-]]
