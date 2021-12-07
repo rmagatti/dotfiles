@@ -1,6 +1,6 @@
 require "impatient"
-require "packer_compiled"
 require "plugins"
+require "packer_compiled"
 
 vim.o.relativenumber = true
 vim.o.number = true
@@ -20,12 +20,6 @@ vim.o.sw = 2
 vim.o.expandtab = true
 vim.o.signcolumn = "yes"
 vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,winsize,winpos,terminal"
-
--- augroup typescript
---   au!
---   autocmd FileType typescript set commentstring=//\ %s
---   autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
--- augroup end
 
 -- " performance tweaks
 vim.o.cursorline = false
@@ -153,7 +147,7 @@ vim.cmd [[
 ]]
 
 -- Attempt to fix press enter message on starting Firenvim
-if vim.fn.exists "g:started_by_firenvim" then
+if vim.g.started_by_firenvim == 1 then
   vim.g.auto_session_enabled = false
 end
 
