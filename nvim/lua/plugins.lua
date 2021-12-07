@@ -15,17 +15,6 @@ return packer.startup {
     }
 
     use {
-      "~/Projects/session-lens",
-      requires = { "~/Projects/auto-session", "nvim-telescope/telescope.nvim" },
-      config = function()
-        require "rmagatti.session-lens"
-        require("telescope").load_extension "session-lens"
-      end,
-
-      keys = "<leader>ss",
-    }
-
-    use {
       "tpope/vim-commentary",
       keys = {
         { "n", "gc" },
@@ -847,17 +836,15 @@ return packer.startup {
       },
     }
 
-    -- use {
-    --   'kristijanhusak/vim-dadbod-ui',
-    --   requires = {
-    --     {'tpope/vim-dadbod'},
-    --     {'kristijanhusak/vim-dadbod-completion'}
-    --   },
-    --   cmd = {'DB'},
-    --   config = function()
-    --     require('rmagatti.dadbod')
-    --   end
-    -- }
+    use {
+      "~/Projects/session-lens",
+      requires = { "~/Projects/auto-session", "nvim-telescope/telescope.nvim" },
+      config = function()
+        require "rmagatti.session-lens"
+        require("telescope").load_extension "session-lens"
+      end,
+      keys = "<C-s>",
+    }
 
     use {
       "~/Projects/telescope-ui-select.nvim",
