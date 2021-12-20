@@ -37,10 +37,15 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", opts, luadev)
   end
 
-  if server.name == "tsserver" then
-    local options = require("rmagatti.lsp.nvim-lsp-ts-utils").setup(on_attach)
-    opts = options
-  end
+  -- -- I had this added to test out https://github.com/typescript-language-server/typescript-language-server/issues/206
+  -- -- No need for it if things are working properly
+  -- if server.name == "tsserver" then
+  --   local options = require("rmagatti.lsp.nvim-lsp-ts-utils").setup(on_attach)
+  --   opts = options
+  --   opts = vim.tbl_deep_extend("force", opts, {
+  --     cmd = { "/Users/ronnieandrewmagatti/Projects/typescript-language-server/lib/cli.js", "--stdio" },
+  --   })
+  -- end
 
   -- This setup() function is exactly the same as lspconfig's setup function.
   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

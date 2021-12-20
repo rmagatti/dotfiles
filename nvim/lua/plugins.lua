@@ -477,12 +477,14 @@ return packer.startup {
       config = function()
         vim.cmd [[
         nnoremap <silent> <leader>gb :<C-u>Git blame<CR>
+        nnoremap <silent> gb :<C-u>Git blame<CR>
         nnoremap <leader>gd :Gvdiffsplit!<CR>
         nnoremap gj :diffget //2<CR>
         nnoremap g; :diffget //3<CR>
         ]]
       end,
       keys = {
+        { "n", "gb" },
         { "n", "<leader>gd" },
         { "n", "<leader>gb" },
         { "n", "<leader>hp" },
@@ -869,12 +871,12 @@ return packer.startup {
       event = { "InsertEnter" },
     }
 
-    use {
-      "michaelb/sniprun",
-      run = "bash ./install.sh",
-      cmd = { "SnipRun" },
-      module = "sniprun",
-    }
+    -- use {
+    --   "michaelb/sniprun",
+    --   run = "bash ./install.sh",
+    --   cmd = { "SnipRun" },
+    --   module = "sniprun",
+    -- }
   end,
   config = config,
 }

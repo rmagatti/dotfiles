@@ -1,6 +1,5 @@
 require "impatient"
-require "plugins"
-require "packer_compiled"
+vim.g.mapleader = " "
 
 vim.o.relativenumber = true
 vim.o.number = true
@@ -13,7 +12,6 @@ vim.o.mouse = "a"
 -- set shada
 -- Goneovim options TODO: figure out a way to no repeat font name for presentation mode
 vim.o.guifont = "JetBrains_Mono:12"
-vim.g.mapleader = " "
 vim.o.background = "dark"
 vim.o.ts = 2
 vim.o.sw = 2
@@ -156,26 +154,5 @@ vim.cmd [[
   source $HOME/.config/nvim/mappings.vim
 ]]
 
---" Figure out if I'll use this or not
--- function! s:CompareQuickfixEntries(i1, i2)
---   if bufname(a:i1.bufnr) == bufname(a:i2.bufnr)
---     return a:i1.lnum == a:i2.lnum ? 0 : (a:i1.lnum < a:i2.lnum ? -1 : 1)
---   else
---     return bufname(a:i1.bufnr) < bufname(a:i2.bufnr) ? -1 : 1
---   endif
--- endfunction
-
--- function! s:SortUniqQFList()
---   let sortedList = sort(getqflist(), 's:CompareQuickfixEntries')
---   let uniqedList = []
---   let last = ''
---   for item in sortedList
---     let this = bufname(item.bufnr) . "\t" . item.lnum
---     if this !=# last
---       call add(uniqedList, item)
---       let last = this
---     endif
---   endfor
---   call setqflist(uniqedList)
--- endfunction
--- autocmd! QuickfixCmdPost * call s:SortUniqQFList()
+require "packer_compiled"
+require "plugins"

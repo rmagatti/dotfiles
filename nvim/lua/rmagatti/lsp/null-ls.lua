@@ -18,7 +18,7 @@ local sources = {
   b.formatting.stylua,
   b.formatting.trim_whitespace.with { filetypes = { "tmux", "teal", "zsh" } },
   b.formatting.shfmt,
-  b.diagnostics.write_good,
+  -- b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
   b.diagnostics.teal,
   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
@@ -29,14 +29,12 @@ local sources = {
 
 local M = {}
 M.setup = function(on_attach)
-  null_ls.config {
+  require("null-ls").setup {
     sources = sources,
-  }
-  require("lspconfig")["null-ls"].setup {
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       -- Format on save
-      vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+      vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
     end,
   }
 end
