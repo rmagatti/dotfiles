@@ -67,18 +67,18 @@ M.on_attach = function(client, bufnr)
     opts
   )
   buf_set_keymap("n", "<leader>ds", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
-  if client.resolved_capabilities.document_highlight then
-    buf_set_keymap("n", "h", '<cmd>lua require("rmagatti.lsp.lsp-mappings").toggle_symbol_highlight()<CR>', opts)
-  end
+  -- if client.resolved_capabilities.document_highlight then
+  buf_set_keymap("n", "h", '<cmd>lua require("rmagatti.lsp.lsp-mappings").toggle_symbol_highlight()<CR>', opts)
+  -- end
 
   -- Set some keybinds conditional on server capabilities
   buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   buf_set_keymap("v", "<leader>fo", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
+  -- if client.resolved_capabilities.document_highlight then
+  vim.api.nvim_exec(
+    [[
     hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
     hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
     hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
@@ -88,9 +88,9 @@ M.on_attach = function(client, bufnr)
     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
     ]],
-      false
-    )
-  end
+    false
+  )
+  -- end
 end
 
 return M
