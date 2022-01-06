@@ -743,10 +743,13 @@ return packer.startup {
 
     -- WhichKey
     use {
-      "folke/which-key.nvim",
+      -- "folke/which-key.nvim",
+      "zeertzjq/which-key.nvim",
       config = function()
         require "rmagatti.which-key"
       end,
+      branch = "patch-1",
+      -- using fork until this is merged https://github.com/folke/which-key.nvim/pull/227
     }
 
     -- Indent Blankline
@@ -869,6 +872,32 @@ return packer.startup {
     use {
       "github/copilot.vim",
       event = { "InsertEnter" },
+      config = function()
+        vim.g.copilot_filetypes = {
+          ["*"] = false,
+          ["c"] = true,
+          ["cpp"] = true,
+          ["c++"] = true,
+          ["c#"] = true,
+          ["csharp"] = true,
+          ["cs"] = true,
+          ["css"] = true,
+          ["html"] = true,
+          ["js"] = true,
+          ["javascript"] = true,
+          ["typescript"] = true,
+          ["json"] = true,
+          ["lua"] = true,
+          ["php"] = true,
+          ["py"] = true,
+          ["python"] = true,
+          ["ruby"] = true,
+          ["rust"] = true,
+          ["sh"] = true,
+          ["vim"] = true,
+          ["yaml"] = true,
+        }
+      end,
     }
 
     -- use {
