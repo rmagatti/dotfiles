@@ -61,13 +61,13 @@ return packer.startup {
           insert_mappings = true,
         }
 
-        vim.api.nvim_set_keymap("n", [[<leader>2s]], "<cmd>2ToggleTerm direction='horizontal'<CR>", { noremap = true })
-        vim.api.nvim_set_keymap("n", [[<leader>3s]], "<cmd>3ToggleTerm direction='horizontal'<CR>", { noremap = true })
-        vim.api.nvim_set_keymap("n", [[<leader>4s]], "<cmd>4ToggleTerm direction='horizontal'<CR>", { noremap = true })
+        vim.keymap.set("n", [[<leader>2s]], "<cmd>2ToggleTerm direction='horizontal'<CR>")
+        vim.keymap.set("n", [[<leader>3s]], "<cmd>3ToggleTerm direction='horizontal'<CR>")
+        vim.keymap.set("n", [[<leader>4s]], "<cmd>4ToggleTerm direction='horizontal'<CR>")
 
-        vim.api.nvim_set_keymap("n", [[<leader>2v]], "<cmd>2ToggleTerm direction='vertical'<CR>", { noremap = true })
-        vim.api.nvim_set_keymap("n", [[<leader>3v]], "<cmd>3ToggleTerm direction='vertical'<CR>", { noremap = true })
-        vim.api.nvim_set_keymap("n", [[<leader>4v]], "<cmd>4ToggleTerm direction='vertical'<CR>", { noremap = true })
+        vim.keymap.set("n", [[<leader>2v]], "<cmd>2ToggleTerm direction='vertical'<CR>")
+        vim.keymap.set("n", [[<leader>3v]], "<cmd>3ToggleTerm direction='vertical'<CR>")
+        vim.keymap.set("n", [[<leader>4v]], "<cmd>4ToggleTerm direction='vertical'<CR>")
       end,
       keys = {
         { "n", [[<C-\>]] },
@@ -306,6 +306,9 @@ return packer.startup {
       "mg979/vim-visual-multi",
       branch = "master",
       keys = "<C-n>",
+      config = function()
+        vim.cmd[[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
+      end
     }
 
     -- LSP
@@ -541,11 +544,11 @@ return packer.startup {
       },
       config = function()
         require "rmagatti.refactoring"
-        vim.api.nvim_set_keymap(
+        vim.keymap.set(
           "v",
           "<leader>re",
           [[<cmd>call v:lua.list_refactors()<CR>]],
-          { noremap = true, silent = true, expr = true }
+          { silent = true, expr = true }
         )
       end,
       keys = {
@@ -817,11 +820,10 @@ return packer.startup {
     use {
       "~/Projects/alternate-toggler",
       config = function()
-        vim.api.nvim_set_keymap(
+        vim.keymap.set(
           "n",
           "<leader><space>",
-          "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>",
-          { noremap = true }
+          "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>"
         )
         vim.cmd [[ let g:at_custom_alternates = {'===': '!=='} ]]
       end,

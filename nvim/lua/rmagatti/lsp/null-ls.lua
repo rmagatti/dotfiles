@@ -20,10 +20,10 @@ local sources = {
   b.formatting.shfmt,
   -- b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
-  b.diagnostics.teal,
+  -- b.diagnostics.teal,
   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
-  b.code_actions.gitsigns,
-  b.code_actions.gitrebase,
+  -- b.code_actions.gitsigns,
+  -- b.code_actions.gitrebase,
   b.hover.dictionary,
 }
 
