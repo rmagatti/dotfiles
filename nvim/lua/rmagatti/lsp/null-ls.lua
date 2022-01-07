@@ -34,7 +34,7 @@ M.setup = function(on_attach)
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       -- Format on save
-      vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
+      -- vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
     end,
   }
 end

@@ -63,18 +63,18 @@ require("telescope").setup {
 require("rmagatti.telescope.buffers").setup()
 require("rmagatti.telescope.dotfiles").setup()
 
--- Mappings
-local nnoremap = function(map, cmd)
-  vim.api.nvim_set_keymap("n", map, cmd, { noremap = true })
-end
-
-nnoremap(
+vim.keymap.set(
+  "n",
   "<D-f>",
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>"
 )
-nnoremap("<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>")
-nnoremap("<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>")
-nnoremap("<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
-nnoremap("<leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>")
-nnoremap("<leader>pg", "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>")
-nnoremap("<leader>wt", "<cmd>lua require('telescope.extensions').git_worktree.git_worktrees()<CR>")
+vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>")
+vim.keymap.set("n", "<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
+vim.keymap.set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>")
+vim.keymap.set(
+  "n",
+  "<leader>pg",
+  "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>"
+)
+vim.keymap.set("n", "<leader>wt", "<cmd>lua require('telescope.extensions').git_worktree.git_worktrees()<CR>")

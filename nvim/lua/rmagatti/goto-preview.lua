@@ -5,11 +5,16 @@ require("goto-preview").setup {
   debug = false,
 }
 -- Mapping to cycle between windows
-vim.cmd [[nnoremap <C-h> <C-w>w]]
+-- TODO: remove me after testing out vim.keymap.set
+-- vim.cmd [[nnoremap <C-h> <C-w>w]]
+vim.keymap.set('n', '<C-h>', '<C-w>w')
+vim.keymap.set('n', '<leader>pk', "<cmd>lua require('goto-preview').goto_preview_definition(false, true)<CR>")
+
 -- "Peek" mapping
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>pk",
-  "<cmd>lua require('goto-preview').goto_preview_definition(false, true)<CR>",
-  { noremap = true }
-)
+-- TODO: remove me after testing out vim.keymap.set
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>pk",
+--   "<cmd>lua require('goto-preview').goto_preview_definition(false, true)<CR>",
+--   { noremap = true }
+-- )
