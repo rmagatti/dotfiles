@@ -398,7 +398,8 @@ return packer.startup {
     }
 
     -- -- Telescope
-    use { "nvim-lua/popup.nvim" }
+    -- popup.nvim is somewhat a legacy dependency, plenary includes popup nowadays
+    -- use { "nvim-lua/popup.nvim" }
     use { "nvim-lua/plenary.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
@@ -746,13 +747,10 @@ return packer.startup {
 
     -- WhichKey
     use {
-      -- "folke/which-key.nvim",
-      "zeertzjq/which-key.nvim",
+      "folke/which-key.nvim",
       config = function()
         require "rmagatti.which-key"
       end,
-      branch = "patch-1",
-      -- using fork until this is merged https://github.com/folke/which-key.nvim/pull/227
     }
 
     -- Indent Blankline
