@@ -136,8 +136,8 @@ return packer.startup {
       config = function()
         vim.cmd [[
       let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee|ts)$'
-      let test#javascript#mocha#executable = 'yarn test'
-      let test#javascript#jest#executable = 'yarn test'
+      let test#javascript#mocha#executable = 'npm run test'
+      let test#javascript#jest#executable = 'npm run test'
 
       function! DebugStrategy(cmd)
         let runner = test#determine_runner(expand('%'))

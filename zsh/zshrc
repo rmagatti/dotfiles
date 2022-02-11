@@ -229,7 +229,6 @@ enable-fzf-tab
 export SDKMAN_DIR="/Users/ronnieandrewmagatti/.sdkman"
 [[ -s "/Users/ronnieandrewmagatti/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ronnieandrewmagatti/.sdkman/bin/sdkman-init.sh"
 alias awsx="source _awsx"
-eval "$(pyenv init -)"
 
 # Add goneovim to path
 export PATH="/Applications/goneovim.app/Contents/MacOS:$PATH"
@@ -336,3 +335,13 @@ load-nvmrc
 
 # Set open file limit so packer.nvim does not hang
 ulimit -S -n 2048
+
+# Pyenv
+eval "$(pyenv init -)"
+export PATH="/Users/ronnieandrewmagatti/.pyenv/shims:${PATH}"
+
+# Data stuff
+export PATH=$PATH:~/.local/bin
+export PYSPARK_DRIVER_PYTHON="jupyter"
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+

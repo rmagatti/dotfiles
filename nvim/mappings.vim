@@ -90,9 +90,10 @@ nnoremap <leader>oa :w<CR>:call AltCommand(expand('%'), ':e')<CR>
 nnoremap <leader>ova :w<CR>:call AltCommand(expand('%'), ':vsp')<CR>
 nnoremap <leader>osa :w<CR>:call AltCommand(expand('%'), ':sp')<CR>
 
+" Commented out in favour of lua _G.delete_hidden_buffers
 " Close all buffers but current
-nnoremap <leader>cab :%bd <bar> e# <bar> bd#<CR>
-nnoremap <leader>cab! :%bd! <bar> e# <bar> bd#<CR>
+" nnoremap <leader>cab :%bd <bar> e# <bar> bd#<CR>
+" nnoremap <leader>cab! :%bd! <bar> e# <bar> bd#<CR>
 
 " Leader mappings for split and vertical split
 nnoremap <leader>vsp :vsp<CR>
