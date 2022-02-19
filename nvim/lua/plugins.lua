@@ -317,16 +317,6 @@ return packer.startup {
       module = "lspconfig",
     }
 
-    -- use {
-    --   "kabouzeid/nvim-lspinstall",
-    --   requires = { "neovim/nvim-lspconfig" },
-    --   config = function()
-    --     require "rmagatti.lsp-server-configs"
-    --   end,
-    --   event = "BufReadPost",
-    --   after = "nvim-lspconfig",
-    -- }
-
     use {
       "williamboman/nvim-lsp-installer",
       config = function()

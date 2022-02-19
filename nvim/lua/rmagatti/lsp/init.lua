@@ -1,6 +1,7 @@
 -- local lsp = require "lspconfig"
 local mappings = require "rmagatti.lsp.lsp-mappings"
 local signature = require "rmagatti.lsp.lsp-signature"
+local something = 'bla'
 
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>i", ":TSLspOrganize<CR>", { silent = true })
