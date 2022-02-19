@@ -171,3 +171,8 @@ endfunction
 
 " Diff this
 nnoremap <leader>dt <cmd>call ToggleDiff()<CR>
+
+" Quickfix next/prev/open
+nnoremap [q :cnext<CR>
+nnoremap ]q :cprev<CR>
+nnoremap <localleader>q :copen<CR>

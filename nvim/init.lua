@@ -1,5 +1,6 @@
 require "impatient"
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.o.relativenumber = true
 vim.o.number = true
@@ -9,9 +10,13 @@ vim.o.splitbelow = true
 vim.o.swapfile = false
 
 vim.o.mouse = "a"
--- set shada
--- Goneovim options TODO: figure out a way to no repeat font name for presentation mode
-vim.o.guifont = "JetBrains_Mono:12"
+-- set shada (print shada file contents)
+if vim.g.started_by_firenvim then
+  vim.o.guifont = "JetBrains_Mono:18"
+else
+  vim.o.guifont = "JetBrains_Mono:12"
+end
+
 vim.o.background = "dark"
 vim.o.ts = 2
 vim.o.sw = 2
