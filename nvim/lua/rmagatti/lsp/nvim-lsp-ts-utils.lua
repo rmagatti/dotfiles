@@ -26,8 +26,8 @@ local ts_utils_settings = {
   inlay_hints_highlight = "Comment",
 
   -- update imports on file move
-  update_imports_on_move = true,
-  require_confirmation_on_move = true,
+  update_imports_on_move = false,
+  require_confirmation_on_move = false,
   watch_dir = nil,
 
   -- Null-ls setup seems to be working, so setting this to false.

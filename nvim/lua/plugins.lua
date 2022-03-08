@@ -481,13 +481,13 @@ return packer.startup {
         { "n", "gb" },
         { "n", "<leader>gd" },
         { "n", "<leader>gb" },
-        { "n", "<leader>hp" },
-        { "n", "<leader>hs" },
-        { "n", "<leader>hu" },
-        { "n", "<leader>hr" },
-        { "n", "<leader>hR" },
-        { "n", "<leader>hp" },
-        { "n", "<leader>hb" },
+        -- { "n", "<leader>hp" },
+        -- { "n", "<leader>hs" },
+        -- { "n", "<leader>hu" },
+        -- { "n", "<leader>hr" },
+        -- { "n", "<leader>hR" },
+        -- { "n", "<leader>hp" },
+        -- { "n", "<leader>hb" },
       },
     }
 
@@ -855,6 +855,7 @@ return packer.startup {
       config = function()
         require("igs").setup {
           default_mappings = true,
+          debug = true
         }
       end,
     }

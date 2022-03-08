@@ -38,11 +38,13 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap("n", "gd", vim.lsp.buf.definition, opts)
   buf_set_keymap("n", "K", vim.lsp.buf.hover, opts)
   buf_set_keymap("n", "gi", vim.lsp.buf.implementation, opts)
-  buf_set_keymap("n", "gr", vim.lsp.buf.references, opts)
+  buf_set_keymap("n", "gr", function()
+    require('telescope.builtin.lsp').references()
+  end, opts)
 
   -- Type helpers
   buf_set_keymap("n", "<leader>gs", vim.lsp.buf.signature_help, opts)
-  buf_set_keymap("n", "<leader>gt", vim.lsp.buf.type_definition, opts)
+  -- buf_set_keymap("n", "<leader>gt", vim.lsp.buf.type_definition, opts)
 
   -- Not too sure what this does
   buf_set_keymap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)

@@ -2,64 +2,64 @@ require "impatient"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.o.relativenumber = true
-vim.o.number = true
-vim.o.encoding = "UTF-8"
-vim.o.splitright = true
-vim.o.splitbelow = true
-vim.o.swapfile = false
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.encoding = "UTF-8"
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.swapfile = false
 
-vim.o.mouse = "a"
+vim.opt.mouse = "a"
 -- set shada (print shada file contents)
 if vim.g.started_by_firenvim then
-  vim.o.guifont = "JetBrains_Mono:18"
+  vim.opt.guifont = "JetBrains_Mono:18"
 else
-  vim.o.guifont = "JetBrains_Mono:12"
+  vim.opt.guifont = "JetBrains_Mono:12"
 end
 
-vim.o.background = "dark"
-vim.o.ts = 2
-vim.o.sw = 2
-vim.o.expandtab = true
-vim.o.signcolumn = "yes"
-vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,folds"
+vim.opt.background = "dark"
+vim.opt.ts = 2
+vim.opt.sw = 2
+vim.opt.expandtab = true
+vim.opt.signcolumn = "yes"
+vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos", "folds" }
 
 -- " performance tweaks
-vim.o.cursorline = false
-vim.o.cursorcolumn = false
-vim.o.scrolljump = 5
+vim.opt.cursorline = false
+vim.opt.cursorcolumn = false
+vim.opt.scrolljump = 5
 -- set lazyredraw
 -- set ttyfast
-vim.o.redrawtime = 3000
+vim.opt.redrawtime = 3000
 -- set synmaxcol=180
 -- set re=1
 
-vim.o.hidden = true
-vim.o.syntax = "on"
+vim.opt.hidden = true
+vim.opt.syntax = "on"
 
 -- Some servers have issues with backup files, see #649.
-vim.o.backup = false
-vim.o.writebackup = false
+vim.opt.backup = false
+vim.opt.writebackup = false
 
 -- Give more space for displaying messages.
-vim.o.cmdheight = 3
+vim.opt.cmdheight = 3
 
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 -- delays and poor user experience.
-vim.o.updatetime = 300
+vim.opt.updatetime = 300
 
 -- Don't pass messages to |ins-completion-menu|.
 -- Show search match counter
-vim.o.shortmess = "filnxtToOFc"
+vim.opt.shortmess = "filnxtToOFc"
 
-vim.o.emoji = true
-vim.o.undofile = true
+vim.opt.emoji = true
+vim.opt.undofile = true
 
 vim.g.undodir = vim.fn.stdpath "data" .. "/undodir"
 -- let &undodir = expand(stdpath('data')."/undodir")
-vim.o.grepprg = "rg"
+vim.opt.grepprg = "rg"
 --to get rid of display of last command
-vim.o.showcmd = true
+vim.opt.showcmd = true
 
 -- Store global vars in sessions
 -- set sessionoptions+=globals
@@ -78,7 +78,7 @@ vim.cmd [[
 ]]
 
 if vim.fn.has "termguicolors" then
-  vim.o.termguicolors = true
+  vim.opt.termguicolors = true
 end
 
 -- Custom autocmds
@@ -125,10 +125,10 @@ augroup highlight_yank
 augroup end
 ]]
 
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevel = 99
-vim.o.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldenable = true
 
 -- Protip: zi toggles folding
 vim.cmd [[
