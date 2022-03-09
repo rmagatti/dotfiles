@@ -442,10 +442,10 @@ return packer.startup {
       "folke/lsp-trouble.nvim",
       config = function()
         require("trouble").setup()
-        vim.cmd [[nnoremap <leader>xx <cmd>LspTrouble<CR>]]
+        vim.cmd [[nnoremap <leader>xx <cmd>Trouble<CR>]]
       end,
       keys = "<leader>xx",
-      cmd = { "LspTrouble" },
+      cmd = { "Trouble" },
     }
     use {
       "folke/todo-comments.nvim",
