@@ -47,7 +47,8 @@ M.setup = function(on_attach)
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
 
-      client.resolved_capabilities.document_formatting = false
+      print('server_capabilities:', client.server_capabilities)
+      -- client.server_capabilities.document_formatting = false
 
       ts_utils.setup(ts_utils_settings)
       ts_utils.setup_client(client)

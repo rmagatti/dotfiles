@@ -93,7 +93,7 @@ end
 -- TODO: setup jest debugging
 M.debug_jest = function(cmd)
   local test_cmd = "./node_modules/jest/bin/jest.js"
-  local args = cmd and { "npx node", "--inspect-brk", test_cmd, "--runInBand", (cmd:gsub("yarn test ", "")) }
+  local args = cmd and { "./node_modules/ts-node/dist/bin.js", "--inspect-brk", test_cmd, "--runInBand", (cmd:gsub("yarn test ", "")) }
     or { test_cmd, "--inspect-brk" }
   print(vim.inspect(table.concat(args, " ")))
 

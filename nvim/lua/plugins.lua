@@ -49,7 +49,7 @@ return packer.startup {
       config = function()
         local toggleterm = require "toggleterm"
         toggleterm.setup {
-          open_mapping = [[<c-\>]],
+          open_mapping = [[<C-\>]],
           size = function(term)
             if term.direction == "horizontal" then
               return 25
@@ -307,8 +307,8 @@ return packer.startup {
       branch = "master",
       keys = "<C-n>",
       config = function()
-        vim.cmd[[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
-      end
+        vim.cmd [[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
+      end,
     }
 
     -- LSP
@@ -535,12 +535,7 @@ return packer.startup {
       },
       config = function()
         require "rmagatti.refactoring"
-        vim.keymap.set(
-          "v",
-          "<leader>re",
-          [[<cmd>call v:lua.list_refactors()<CR>]],
-          { silent = true, expr = true }
-        )
+        vim.keymap.set("v", "<leader>re", [[<cmd>call v:lua.list_refactors()<CR>]], { silent = true, expr = true })
       end,
       keys = {
         { "v", "<leader>re" },
@@ -853,10 +848,7 @@ return packer.startup {
     use {
       "~/Projects/igs.nvim",
       config = function()
-        require("igs").setup {
-          default_mappings = true,
-          debug = true
-        }
+        require "rmagatti.igs"
       end,
     }
 
@@ -890,6 +882,10 @@ return packer.startup {
         }
       end,
     }
+
+    -- use {
+    --   "mattn/emmet-vim",
+    -- }
 
     -- use {
     --   "michaelb/sniprun",
