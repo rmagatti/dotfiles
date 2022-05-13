@@ -31,6 +31,7 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Go to normal mode in terminal window
 tnoremap <silent> <C-o><C-i> <C-\><C-n>
+tnoremap <silent> <C-_> <C-\><C-n>
 " Clear search highlight
 map <leader>cs :noh<CR>
 

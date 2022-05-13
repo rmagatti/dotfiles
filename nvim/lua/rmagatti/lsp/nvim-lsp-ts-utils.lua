@@ -47,8 +47,8 @@ M.setup = function(on_attach)
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
 
-      print('server_capabilities:', client.server_capabilities)
-      -- client.server_capabilities.document_formatting = false
+      -- client.server_capabilities.documentHighlightProvider = false
+      -- print(vim.inspect(client.server_capabilities))
 
       ts_utils.setup(ts_utils_settings)
       ts_utils.setup_client(client)

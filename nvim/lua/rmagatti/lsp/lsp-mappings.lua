@@ -75,7 +75,7 @@ M.on_attach = function(client, bufnr)
     return require("telescope.builtin").lsp_document_symbols()
   end, opts)
 
-  if client.server_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     buf_set_keymap("n", "h", function()
       return require("rmagatti.lsp.lsp-mappings").toggle_symbol_highlight()
     end, opts)
@@ -85,7 +85,7 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap("v", "<leader>fo", vim.lsp.buf.range_formatting, opts)
 
   -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
         hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
