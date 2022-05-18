@@ -39,7 +39,7 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap("n", "K", vim.lsp.buf.hover, opts)
   buf_set_keymap("n", "gi", vim.lsp.buf.implementation, opts)
   buf_set_keymap("n", "gr", function()
-    require('telescope.builtin').lsp_references()
+    require("telescope.builtin").lsp_references()
   end, opts)
 
   -- Type helpers
@@ -81,7 +81,7 @@ M.on_attach = function(client, bufnr)
     end, opts)
   end
 
-  buf_set_keymap("n", "<leader>fo", vim.lsp.buf.formatting, opts)
+  buf_set_keymap("n", "<leader>fo", vim.lsp.buf.format, opts)
   buf_set_keymap("v", "<leader>fo", vim.lsp.buf.range_formatting, opts)
 
   -- Set autocommands conditional on server_capabilities

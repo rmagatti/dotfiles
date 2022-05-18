@@ -29,19 +29,27 @@ cmp.setup {
     { name = "vsnip" },
     { name = "path" },
     { name = "npm", keyword_length = 4 },
-    { name = "nvim_lua" },
-    { name = "rg" },
+    -- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
+    -- { name = "nvim_lua" },
+    -- { name = "rg" },
   }, {
     { name = "buffer" },
   }),
 }
 
--- TODO: This completion is not working properly?
-cmp.setup.cmdline("/", {
-  sources = {
-    { name = "buffer" },
-  },
+cmp.setup.filetype('lua', {
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
+  }),
 })
+
+-- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
+-- cmp.setup.cmdline("/", {
+--   sources = {
+--     { name = "buffer" },
+--   },
+-- })
 
 cmp.setup.cmdline(":", {
   sources = cmp.config.sources {
