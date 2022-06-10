@@ -78,3 +78,4 @@ vim.keymap.set(
   "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>"
 )
 vim.keymap.set("n", "<leader>wt", "<cmd>lua require('telescope.extensions').git_worktree.git_worktrees()<CR>")
+vim.keymap.set("n", "<C-b>", require("telescope.builtin").git_branches)
