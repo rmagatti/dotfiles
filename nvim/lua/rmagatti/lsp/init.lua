@@ -1,4 +1,3 @@
--- Lua
 local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
 require("nvim-lsp-installer").setup {}

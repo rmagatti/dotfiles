@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 local M = {}
 
 do
@@ -23,8 +24,8 @@ end
 M.on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
     vim.keymap.set(...)
-    -- vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
+
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
@@ -88,11 +89,15 @@ M.on_attach = function(client, bufnr)
 
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlightProvider then
+    local colors = require("tokyonight.colors").setup {}
+
+    -- Says fg_gutter is not a valid color but it either exists or nil is handled as what I want here.
+    vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = colors.fg_gutter })
+    vim.api.nvim_set_hl(0, "LspReferenceText", { bg = colors.fg_gutter })
+    vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = colors.bg_visual })
+
     vim.api.nvim_exec(
       [[
-        hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-        hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-        hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
         augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua require('rmagatti.lsp.lsp-mappings').highlight_symbol()
