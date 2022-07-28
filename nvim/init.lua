@@ -11,10 +11,27 @@ vim.opt.swapfile = false
 
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
-if vim.g.started_by_firenvim then
-  vim.opt.guifont = "JetBrains_Mono:18"
-else
-  vim.opt.guifont = "JetBrains_Mono:12"
+-- if vim.g.started_by_firenvim then
+--   vim.opt.guifont = "JetBrains Mono:18"
+-- end
+
+if vim.g.neovide then
+  vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h12"
+  -- vim.opt.guifont = "JetBrains Mono:h12,FiraCode Nerd Font Mono:h12,Hack:h12,JetBrainsMono Nerd Font Mono:h12"
+  -- vim.opt.guifontwide = "JetBrains Mono:h12,FiraCode Nerd Font Mono Regular:h12,Hack:h12,JetBrainsMono Nerd Font Mono Regular:h12"
+
+  vim.g.neovide_cursor_animation_length = 0.015
+  vim.g.neovide_cursor_trail_length = 0.15
+  vim.g.neovide_input_macos_alt_is_meta = true
+  vim.g.neovide_floating_blur_amount_x = 3.0
+  vim.g.neovide_floating_blur_amount_y = 3.0
+
+  -- Allow clipboard copy paste in Neovide
+  vim.g.neovide_input_use_logo = 1
+  -- vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true})
+  -- vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+  -- vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+  -- vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
 end
 
 vim.opt.background = "dark"
@@ -154,11 +171,11 @@ vim.cmd [[
   set foldlevelstart=99
 ]]
 
--- Attempt to fix press enter message on starting Firenvim
-if vim.g.started_by_firenvim == 1 then
-  vim.g.auto_session_enabled = false
-  vim.cmd [[set guifont=JetBrains_Mono:h18]]
-end
+-- -- Attempt to fix press enter message on starting Firenvim
+-- if vim.g.started_by_firenvim == 1 then
+--   vim.g.auto_session_enabled = false
+--   vim.cmd [[set guifont=JetBrains_Mono:h18]]
+-- end
 
 -- load mappings
 vim.cmd [[

@@ -155,7 +155,7 @@ nnoremap <leader>mk "ayy
 nnoremap <leader>rk @a
 
 " Generate test
-nnoremap <leader>gt <cmd>!yarn generate:test %<CR>
+nnoremap <leader>gt <cmd>!npm run generate:test %<CR>
 
 let g:diff_is_open = 0
 

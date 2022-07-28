@@ -123,13 +123,12 @@ return packer.startup {
       },
     }
 
-    use {
-      "kyazdani42/nvim-web-devicons",
-      config = function()
-        require "rmagatti.nvim-web-devicons"
-      end,
-      module = "nvim-web-devicons",
-    }
+    -- use {
+    --   "kyazdani42/nvim-web-devicons",
+    --   config = function()
+    --     require "rmagatti.nvim-web-devicons"
+    --   end,
+    -- }
 
     use {
       "vim-test/vim-test",
@@ -240,15 +239,7 @@ return packer.startup {
     use {
       "ggandor/lightspeed.nvim",
       config = function()
-        require("lightspeed").setup {
-          jump_to_first_match = true,
-          jump_on_partial_input_safety_timeout = 400,
-          highlight_unique_chars = false,
-          grey_out_search_area = true,
-          match_only_the_start_of_same_char_seqs = true,
-          limit_ft_matches = 5,
-          full_inclusive_prefix_key = "<c-x>",
-        }
+         require("lightspeed").setup {}
       end,
       module = { "lightspeed" },
       keys = {
@@ -666,7 +657,7 @@ return packer.startup {
     }
 
     use {
-      "jose-elias-alvarez/nvim-lsp-ts-utils",
+      "jose-elias-alvarez/typescript.nvim",
       requires = { "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim" },
     }
 

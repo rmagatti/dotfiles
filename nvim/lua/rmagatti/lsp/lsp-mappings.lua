@@ -55,7 +55,9 @@ M.on_attach = function(client, bufnr)
 
   -- Refactoring and actions
   buf_set_keymap("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  buf_set_keymap("n", "<localleader>a", vim.lsp.buf.code_action, opts)
   buf_set_keymap("n", "<M-CR>", vim.lsp.buf.code_action, opts)
+  buf_set_keymap("n", "<CR>", vim.lsp.buf.code_action, opts)
 
   -- Diagnostics
   buf_set_keymap("n", "<leader>e", vim.diagnostic.open_float, opts) -- not mneumonic
