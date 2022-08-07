@@ -176,3 +176,6 @@ nnoremap <leader>dt <cmd>call ToggleDiff()<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprev<CR>
 nnoremap <localleader>q :copen<CR>
+
+" Global statusline
+set laststatus=3

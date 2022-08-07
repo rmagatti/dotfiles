@@ -181,8 +181,9 @@ vim.cmd [[
 vim.cmd [[
   source $HOME/.config/nvim/mappings.vim
 ]]
--- TODO: this mappingg isn't working, conflicts with global toggleterm mapping, fix it
-vim.keymap.set('t', [[<C-_>]], [[<C-\><C-n>]], { noremap = true })
+
+-- -- TODO: this mappingg isn't working, conflicts with global toggleterm mapping, fix it
+-- vim.keymap.set('t', [[<C-_>]], [[<C-\><C-n>]], { noremap = true })
 
 function _G.delete_hidden_buffers(force)
   local buffers = vim.api.nvim_list_bufs()

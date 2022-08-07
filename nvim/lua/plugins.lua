@@ -45,41 +45,11 @@ return packer.startup {
     }
 
     use {
-      "akinsho/nvim-toggleterm.lua",
+      "akinsho/toggleterm.nvim",
+      tag = "v2.*",
       config = function()
-        local toggleterm = require "toggleterm"
-        toggleterm.setup {
-          open_mapping = [[<C-\>]],
-          size = function(term)
-            if term.direction == "horizontal" then
-              return 25
-            elseif term.direction == "vertical" then
-              return 80
-            end
-          end,
-          start_in_insert = false,
-          insert_mappings = true,
-        }
-
-        vim.keymap.set("n", [[<leader>2s]], "<cmd>2ToggleTerm direction='horizontal'<CR>")
-        vim.keymap.set("n", [[<leader>3s]], "<cmd>3ToggleTerm direction='horizontal'<CR>")
-        vim.keymap.set("n", [[<leader>4s]], "<cmd>4ToggleTerm direction='horizontal'<CR>")
-
-        vim.keymap.set("n", [[<leader>2v]], "<cmd>2ToggleTerm direction='vertical'<CR>")
-        vim.keymap.set("n", [[<leader>3v]], "<cmd>3ToggleTerm direction='vertical'<CR>")
-        vim.keymap.set("n", [[<leader>4v]], "<cmd>4ToggleTerm direction='vertical'<CR>")
+        require "rmagatti.toggleterm"
       end,
-      keys = {
-        { "n", [[<C-\>]] },
-        { "i", [[<C-\>]] },
-        { "n", [[<leader>2s]] },
-        { "n", [[<leader>3s]] },
-        { "n", [[<leader>4s]] },
-        { "n", [[<leader>2v]] },
-        { "n", [[<leader>3v]] },
-        { "n", [[<leader>4v]] },
-      },
-      cmd = { "ToggleTerm", "ToggleTermOpenAll", "ToggleTermCloseAll" },
     }
 
     ----==== Lazy loaded
@@ -239,7 +209,7 @@ return packer.startup {
     use {
       "ggandor/lightspeed.nvim",
       config = function()
-         require("lightspeed").setup {}
+        require("lightspeed").setup {}
       end,
       module = { "lightspeed" },
       keys = {
