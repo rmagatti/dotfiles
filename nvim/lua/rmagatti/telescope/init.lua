@@ -62,6 +62,7 @@ require("telescope").setup {
 
 require("rmagatti.telescope.buffers").setup()
 require("rmagatti.telescope.dotfiles").setup()
+require("rmagatti.telescope.session-lens").setup()
 
 vim.keymap.set(
   "n",

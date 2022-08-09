@@ -4,9 +4,6 @@ require("session-lens").setup {
   previewer = false,
 }
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<C-s>",
-  "<cmd>lua require('telescope').extensions['session-lens'].search_session()<CR>",
-  { noremap = true }
-)
+vim.keymap.set("n", "<C-s>", require("session-lens").search_session, {
+  noremap = true,
+})

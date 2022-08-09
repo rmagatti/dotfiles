@@ -358,16 +358,16 @@ return packer.startup {
       config = function()
         require "rmagatti.telescope"
       end,
-      cmd = "Telescope",
-      keys = {
-        { "n", "<C-p>" },
-        { "n", "<leader>ps" },
-        { "n", "<leader>pg" },
-        { "n", "<leader>pl" },
-        { "n", "<leader>b" },
-        { "n", "<M-CR>" },
-      },
-      module = { "telescope" },
+      -- cmd = "Telescope",
+      -- keys = {
+      --   { "n", "<C-p>" },
+      --   { "n", "<leader>ps" },
+      --   { "n", "<leader>pg" },
+      --   { "n", "<leader>pl" },
+      --   { "n", "<leader>b" },
+      --   { "n", "<M-CR>" },
+      -- },
+      -- module = { "telescope" },
     }
 
     use {
@@ -389,14 +389,14 @@ return packer.startup {
     --   after = "telescope.nvim",
     -- })
 
-    use {
-      "nvim-telescope/telescope-packer.nvim",
-      config = function()
-        require("telescope").load_extension "packer"
-        vim.cmd [[nnoremap <leader>pl :lua require('telescope').extensions.packer.plugins()<CR>]]
-      end,
-      after = "telescope.nvim",
-    }
+    -- use {
+    --   "nvim-telescope/telescope-packer.nvim",
+    --   config = function()
+    --     require("telescope").load_extension "packer"
+    --     vim.cmd [[nnoremap <leader>pl :lua require('telescope').extensions.packer.plugins()<CR>]]
+    --   end,
+    --   after = "telescope.nvim",
+    -- }
 
     -- Diagnostics
     use {
@@ -758,6 +758,7 @@ return packer.startup {
       "~/Projects/auto-session",
       config = function()
         require "rmagatti.auto-session"
+        require "rmagatti.session-lens"
       end,
     }
 
@@ -787,15 +788,15 @@ return packer.startup {
       },
     }
 
-    use {
-      "~/Projects/session-lens",
-      requires = { "~/Projects/auto-session", "nvim-telescope/telescope.nvim" },
-      config = function()
-        require "rmagatti.session-lens"
-        require("telescope").load_extension "session-lens"
-      end,
-      keys = "<C-s>",
-    }
+    -- use {
+    --   "~/Projects/session-lens",
+    --   requires = { "~/Projects/auto-session", "nvim-telescope/telescope.nvim" },
+    --   config = function()
+    --     require "rmagatti.session-lens"
+    --     require("telescope").load_extension "session-lens"
+    --   end,
+    --   keys = "<C-s>",
+    -- }
 
     use {
       "~/Projects/telescope-ui-select.nvim",
@@ -813,35 +814,50 @@ return packer.startup {
       end,
     }
 
+    -- use {
+    --   "github/copilot.vim",
+    --   event = { "InsertEnter" },
+    --   config = function()
+    --     vim.g.copilot_filetypes = {
+    --       ["*"] = false,
+    --       ["c"] = true,
+    --       ["cpp"] = true,
+    --       ["c++"] = true,
+    --       ["c#"] = true,
+    --       ["csharp"] = true,
+    --       ["cs"] = true,
+    --       ["css"] = true,
+    --       ["html"] = true,
+    --       ["js"] = true,
+    --       ["javascript"] = true,
+    --       ["typescript"] = true,
+    --       ["json"] = true,
+    --       ["lua"] = true,
+    --       ["php"] = true,
+    --       ["py"] = true,
+    --       ["python"] = true,
+    --       ["ruby"] = true,
+    --       ["rust"] = true,
+    --       ["sh"] = true,
+    --       ["vim"] = true,
+    --       ["yaml"] = true,
+    --     }
+    --   end,
+    -- }
+
     use {
-      "github/copilot.vim",
-      event = { "InsertEnter" },
+      "zbirenbaum/copilot.lua",
+      event = "InsertEnter",
       config = function()
-        vim.g.copilot_filetypes = {
-          ["*"] = false,
-          ["c"] = true,
-          ["cpp"] = true,
-          ["c++"] = true,
-          ["c#"] = true,
-          ["csharp"] = true,
-          ["cs"] = true,
-          ["css"] = true,
-          ["html"] = true,
-          ["js"] = true,
-          ["javascript"] = true,
-          ["typescript"] = true,
-          ["json"] = true,
-          ["lua"] = true,
-          ["php"] = true,
-          ["py"] = true,
-          ["python"] = true,
-          ["ruby"] = true,
-          ["rust"] = true,
-          ["sh"] = true,
-          ["vim"] = true,
-          ["yaml"] = true,
-        }
+        vim.schedule(function()
+          require("copilot").setup()
+        end)
       end,
+    }
+
+    use {
+      "zbirenbaum/copilot-cmp",
+      module = "copilot_cmp",
     }
 
     -- use {

@@ -1,5 +1,13 @@
 vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
+-- local has_words_before = function()
+--   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+--     return false
+--   end
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
+-- end
+
 local cmp = require "cmp"
 local lspkind = require "lspkind"
 local mapping = cmp.mapping.preset.insert {
@@ -12,11 +20,25 @@ local mapping = cmp.mapping.preset.insert {
   ["<C-n>"] = cmp.mapping.select_next_item(),
   -- Disabled tab because of copilot conflict on tab
   -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+  -- ["<Tab>"] = vim.schedule_wrap(function(fallback)
+  --   if cmp.visible() and has_words_before() then
+  --     cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+  --   else
+  --     fallback()
+  --   end
+  -- end),
 }
 
 cmp.setup {
   formatting = {
-    format = lspkind.cmp_format { with_text = true, maxwidth = 50 },
+    format = function(entry, vim_item)
+      if entry.source.name == "copilot" then
+        vim_item.kind = "[] Copilot"
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+        return vim_item
+      end
+      return lspkind.cmp_format { with_text = true, maxwidth = 50 }(entry, vim_item)
+    end,
   },
   experimental = {
     ghost_text = true,
@@ -35,10 +57,13 @@ cmp.setup {
     -- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
     -- { name = "nvim_lua" },
     -- { name = "rg" },
+    { name = "copilot", group_index = 2 },
   }, {
     { name = "buffer" },
   }),
 }
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 cmp.setup.filetype("lua", {
   sources = cmp.config.sources {
