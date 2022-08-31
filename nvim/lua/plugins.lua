@@ -25,7 +25,6 @@ return packer.startup {
       "tpope/vim-eunuch",
     }
 
-    -- TODO: trying this out. Faster startup for "free" but I'm skeptical that it wouldn't cause any issues for now.
     use {
       "lewis6991/impatient.nvim",
     }
@@ -853,11 +852,13 @@ return packer.startup {
           require("copilot").setup()
         end)
       end,
+      enabled = false
     }
 
     use {
       "zbirenbaum/copilot-cmp",
       module = "copilot_cmp",
+      enabled = false
     }
 
     -- use {

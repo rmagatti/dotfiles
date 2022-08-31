@@ -1,5 +1,4 @@
 " !IMPORTANT! Config maps HJKL to JKL:
-" I've been trying to shift to these mappings so my brain does not get confused when typing versus using VIM as far as hand position goes.
 
 " Move between splits
 map <C-j> :wincmd h<CR>
@@ -100,7 +99,7 @@ nnoremap <leader>vsp :vsp<CR>
 nnoremap <leader>sp :sp<CR>
 nnoremap <leader>q :q<CR>
 
-" Delete all commented lines then save to reformat
+" " Delete all commented lines then save to reformat
 nnoremap <leader>dac :g/\v^(\/\/<bar>.*\/\/)/d_<CR>:w<CR>:noh<CR>
 
 " Select line

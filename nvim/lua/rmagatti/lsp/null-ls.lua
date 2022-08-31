@@ -28,9 +28,11 @@ local sources = {
 }
 
 local M = {}
+
 M.setup = function(on_attach)
   require("null-ls").setup {
     sources = sources,
+    debug = false,
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       -- Format on save

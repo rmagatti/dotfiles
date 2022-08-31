@@ -60,6 +60,10 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap("n", "<M-CR>", vim.lsp.buf.code_action, opts)
 
   if not vim.tbl_isempty(client.server_capabilities.codeActionProvider) then
+    if vim.bo.filetype == "vimwiki" then
+      return
+    end
+
     buf_set_keymap("n", "<CR>", vim.lsp.buf.code_action, opts)
   end
 
@@ -90,6 +94,10 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>fo", vim.lsp.buf.format, opts)
   buf_set_keymap("v", "<leader>fo", vim.lsp.buf.range_formatting, opts)
 
+  -- buf_set_keymap("n", "<leader>dac", function()
+  --   vim.cmd "g/\v^(//<bar>.*//)/d_<CR>:w<CR>:noh<CR>"
+  -- end, opts)
+
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlightProvider then
     local colors = require("tokyonight.colors").setup {}
@@ -106,7 +114,7 @@ M.on_attach = function(client, bufnr)
         autocmd CursorHold <buffer> lua require('rmagatti.lsp.lsp-mappings').highlight_symbol()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
         augroup END
-    ]],
+    ]] ,
       false
     )
   end
