@@ -521,6 +521,11 @@ return packer.startup {
     }
 
     use {
+      "nvim-treesitter/nvim-treesitter-context",
+      requires = "nvim-treesitter/nvim-treesitter-context",
+    }
+
+    use {
       "nvim-treesitter/playground",
       requires = { "nvim-treesitter/nvim-treesitter" },
       cmd = "TSPlaygroundToggle",
@@ -852,13 +857,13 @@ return packer.startup {
           require("copilot").setup()
         end)
       end,
-      enabled = false
+      enabled = false,
     }
 
     use {
       "zbirenbaum/copilot-cmp",
       module = "copilot_cmp",
-      enabled = false
+      enabled = false,
     }
 
     -- use {

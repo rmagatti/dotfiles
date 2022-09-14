@@ -59,7 +59,11 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap("n", "<localleader>a", vim.lsp.buf.code_action, opts)
   buf_set_keymap("n", "<M-CR>", vim.lsp.buf.code_action, opts)
 
-  if not vim.tbl_isempty(client.server_capabilities.codeActionProvider) then
+  if
+    type(client.server_capabilities.codeActionProvider) == "table"
+      and not vim.tbl_isempty(client.server_capabilities.codeActionProvider)
+    or client.server_capabilities.codeActionProvider ~= nil
+  then
     if vim.bo.filetype == "vimwiki" then
       return
     end
@@ -114,7 +118,7 @@ M.on_attach = function(client, bufnr)
         autocmd CursorHold <buffer> lua require('rmagatti.lsp.lsp-mappings').highlight_symbol()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
         augroup END
-    ]] ,
+    ]],
       false
     )
   end
