@@ -849,22 +849,24 @@ return packer.startup {
     --   end,
     -- }
 
-    use {
-      "zbirenbaum/copilot.lua",
-      event = "InsertEnter",
-      config = function()
-        vim.schedule(function()
-          require("copilot").setup()
-        end)
-      end,
-      enabled = false,
-    }
+    --- ===== copilot =====
+    -- use {
+    --   "zbirenbaum/copilot.lua",
+    --   event = "InsertEnter",
+    --   config = function()
+    --     vim.schedule(function()
+    --       require("copilot").setup()
+    --     end)
+    --   end,
+    --   enabled = false,
+    -- }
 
-    use {
-      "zbirenbaum/copilot-cmp",
-      module = "copilot_cmp",
-      enabled = false,
-    }
+    -- use {
+    --   "zbirenbaum/copilot-cmp",
+    --   module = "copilot_cmp",
+    --   enabled = false,
+    -- }
+    --- ===== copilot =====
 
     -- use {
     --   "mattn/emmet-vim",

@@ -11,9 +11,10 @@ vim.opt.swapfile = false
 
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
--- if vim.g.started_by_firenvim then
---   vim.opt.guifont = "JetBrains Mono:18"
--- end
+
+if vim.g.started_by_firenvim then
+  vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
+end
 
 if vim.g.neovide then
   vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h12"
@@ -39,7 +40,7 @@ vim.opt.ts = 2
 vim.opt.sw = 2
 vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
-vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos" }
+vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos", "folds"}
 
 -- " performance tweaks
 vim.opt.cursorline = false
@@ -162,8 +163,8 @@ vim.cmd [[
 
 -- Add `:Fold` command to fold current buffer.
 vim.cmd [[
-  " command! -nargs=? Fold :call Fold()
-  " command! -nargs=? Unfold :call Unfold()
+  command! -nargs=? Fold :call Fold()
+  command! -nargs=? Unfold :call Unfold()
 
   " TODO: testing https://github.com/rmagatti/auto-session/issues/109
   set foldmethod=expr
