@@ -96,7 +96,7 @@ M.on_attach = function(client, bufnr)
   end
 
   buf_set_keymap("n", "<leader>fo", vim.lsp.buf.format, opts)
-  buf_set_keymap("v", "<leader>fo", vim.lsp.buf.range_formatting, opts)
+  buf_set_keymap("v", "<leader>fo", vim.lsp.buf.format, opts)
 
   -- buf_set_keymap("n", "<leader>dac", function()
   --   vim.cmd "g/\v^(//<bar>.*//)/d_<CR>:w<CR>:noh<CR>"

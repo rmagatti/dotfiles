@@ -15,6 +15,7 @@ M.setup = function()
       vim.keymap.set("n", "<leader>ai", typescript.actions.addMissingImports, { silent = true, buffer = bufnr })
       vim.keymap.set("n", "<leader>fa", typescript.actions.fixAll, { silent = true, buffer = bufnr })
       vim.keymap.set("n", "<leader>rf", "TypescriptRenameFile", { silent = true, buffer = bufnr })
+      vim.keymap.set("n", "<leader>ru", "TypescriptRemoveUnused", { silent = true, buffer = bufnr })
 
       common_on_attach(client, bufnr)
     end,

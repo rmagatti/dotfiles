@@ -1,6 +1,6 @@
 local mappings = require "rmagatti.lsp.lsp-mappings"
 local signature = require "rmagatti.lsp.lsp-signature"
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 --- function already defines common mappings and `lsp_signature.nvim`
 -- @param client the lsp client

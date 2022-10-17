@@ -323,8 +323,8 @@ return packer.startup {
 
     -- Lua plugin dev
     use {
-      "folke/lua-dev.nvim",
-      module = "lua-dev",
+      "folke/neodev.nvim",
+      module = "neodev",
       ft = "lua",
     }
 
