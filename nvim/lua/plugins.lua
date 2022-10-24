@@ -206,11 +206,11 @@ return packer.startup {
     }
 
     use {
-      "ggandor/lightspeed.nvim",
+      "ggandor/leap.nvim",
       config = function()
-        require("lightspeed").setup {}
+        require('leap').add_default_mappings()
       end,
-      module = { "lightspeed" },
+      module = { "leap" },
       keys = {
         { "n", "s" },
         { "n", "S" },
