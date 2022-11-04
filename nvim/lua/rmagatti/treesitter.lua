@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup {
-  enable = false,
+  enable = true,
   highlight = {
     enable = true,
   },
@@ -88,23 +88,23 @@ require("nvim-treesitter.configs").setup {
 -- -- Custom parser
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-parser_config.hcl = {
-  install_info = {
-    url = "~/Projects/tree-sitter-hcl", -- local path or git repo
-    files = { "src/parser.c", "src/scanner.cc" },
-  },
-  filetype = "tf", -- if filetype does not agrees with parser name
-  used_by = { "hcl", "tf", "terraform" }, -- additional filetypes that use this parser
-}
+-- parser_config.hcl = {
+--   install_info = {
+--     url = "~/Projects/tree-sitter-hcl", -- local path or git repo
+--     files = { "src/parser.c", "src/scanner.cc" },
+--   },
+--   filetype = "tf", -- if filetype does not agrees with parser name
+--   used_by = { "hcl", "tf", "terraform" }, -- additional filetypes that use this parser
+-- }
 
-parser_config.typescript = {
-  install_info = {
-    url = "~/Projects/tree-sitter-typescript/typescript",
-    files = { "src/parser.c", "src/scanner.c" },
-    -- location = "tree-sitter-typescript/typescript",
-    generate_requires_npm = true,
-  },
-}
+-- parser_config.typescript = {
+--   install_info = {
+--     url = "~/Projects/tree-sitter-typescript/typescript",
+--     files = { "src/parser.c", "src/scanner.c" },
+--     -- location = "tree-sitter-typescript/typescript",
+--     generate_requires_npm = true,
+--   },
+-- }
 
 require("nvim-treesitter.configs").setup {
   query_linter = {

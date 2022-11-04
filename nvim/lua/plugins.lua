@@ -548,11 +548,11 @@ return packer.startup {
       event = { "BufReadPost" },
     }
 
-    use {
-      "RRethy/nvim-treesitter-textsubjects",
-      requires = { "nvim-treesitter/nvim-treesitter" },
-      event = { "BufReadPost" },
-    }
+    -- use {
+    --   "RRethy/nvim-treesitter-textsubjects",
+    --   requires = { "nvim-treesitter/nvim-treesitter" },
+    --   event = { "BufReadPost" },
+    -- }
 
     -- -- GitHub
     --   use  {
