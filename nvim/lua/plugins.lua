@@ -208,7 +208,7 @@ return packer.startup {
     use {
       "ggandor/leap.nvim",
       config = function()
-        require('leap').add_default_mappings()
+        require("leap").add_default_mappings()
       end,
       module = { "leap" },
       keys = {
@@ -769,14 +769,18 @@ return packer.startup {
     use {
       "~/Projects/alternate-toggler",
       config = function()
+        require("alternate-toggler").setup {
+          alternates = {
+            ["=="] = "!=",
+          },
+        }
         vim.keymap.set(
           "n",
-          "<leader><space>",
-          "<cmd>lua require('alternate-toggler').toggleAlternate(vim.fn.expand('<cword>'))<CR>"
+          "<leader><space>", -- <space><space>
+          "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>"
         )
-        vim.cmd [[ let g:at_custom_alternates = {'===': '!=='} ]]
       end,
-      event = { "BufReadPost" },
+      event = { "BufReadPost" }, -- lazy load after reading a buffer
     }
 
     use {

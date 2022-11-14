@@ -18,6 +18,7 @@ local sources = {
   b.formatting.stylua,
   b.formatting.trim_whitespace.with { filetypes = { "tmux", "teal", "zsh" } },
   b.formatting.shfmt,
+  -- b.formatting.rome,
   -- b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
   -- b.diagnostics.teal,

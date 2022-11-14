@@ -185,6 +185,7 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v=nvim
+alias vv="neovide --multigrid"
 alias ui="/Users/ronnieandrewmagatti/Projects/uivonim/dist/mac/uivonim.app"
 
 function gitsqa() {
