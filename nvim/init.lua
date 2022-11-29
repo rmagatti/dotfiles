@@ -40,7 +40,7 @@ vim.opt.ts = 2
 vim.opt.sw = 2
 vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
-vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos", "folds"}
+vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos" }
 
 -- " performance tweaks
 vim.opt.cursorline = false
@@ -161,16 +161,16 @@ vim.cmd [[
   endfunction
 ]]
 
--- Add `:Fold` command to fold current buffer.
-vim.cmd [[
-  command! -nargs=? Fold :call Fold()
-  command! -nargs=? Unfold :call Unfold()
+-- -- Add `:Fold` command to fold current buffer.
+-- vim.cmd [[
+--   command! -nargs=? Fold :call Fold()
+--   command! -nargs=? Unfold :call Unfold()
 
-  " TODO: testing https://github.com/rmagatti/auto-session/issues/109
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-  set foldlevelstart=99
-]]
+--   " TODO: testing https://github.com/rmagatti/auto-session/issues/109
+--   set foldmethod=expr
+--   set foldexpr=nvim_treesitter#foldexpr()
+--   set foldlevelstart=99
+-- ]]
 
 -- -- Attempt to fix press enter message on starting Firenvim
 -- if vim.g.started_by_firenvim == 1 then

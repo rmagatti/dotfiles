@@ -817,41 +817,52 @@ return packer.startup {
 
     use {
       "~/Projects/igs.nvim",
+      event = { "BufReadPost" },
       config = function()
         require "rmagatti.igs"
       end,
     }
 
-    -- use {
-    --   "github/copilot.vim",
-    --   event = { "InsertEnter" },
-    --   config = function()
-    --     vim.g.copilot_filetypes = {
-    --       ["*"] = false,
-    --       ["c"] = true,
-    --       ["cpp"] = true,
-    --       ["c++"] = true,
-    --       ["c#"] = true,
-    --       ["csharp"] = true,
-    --       ["cs"] = true,
-    --       ["css"] = true,
-    --       ["html"] = true,
-    --       ["js"] = true,
-    --       ["javascript"] = true,
-    --       ["typescript"] = true,
-    --       ["json"] = true,
-    --       ["lua"] = true,
-    --       ["php"] = true,
-    --       ["py"] = true,
-    --       ["python"] = true,
-    --       ["ruby"] = true,
-    --       ["rust"] = true,
-    --       ["sh"] = true,
-    --       ["vim"] = true,
-    --       ["yaml"] = true,
-    --     }
-    --   end,
-    -- }
+    use {
+      "github/copilot.vim",
+      event = { "InsertEnter" },
+      config = function()
+        vim.g.copilot_filetypes = {
+          ["*"] = false,
+          ["c"] = true,
+          ["cpp"] = true,
+          ["c++"] = true,
+          ["c#"] = true,
+          ["csharp"] = true,
+          ["cs"] = true,
+          ["css"] = true,
+          ["html"] = true,
+          ["js"] = true,
+          ["javascript"] = true,
+          ["typescript"] = true,
+          ["json"] = true,
+          ["lua"] = true,
+          ["php"] = true,
+          ["py"] = true,
+          ["python"] = true,
+          ["ruby"] = true,
+          ["rust"] = true,
+          ["sh"] = true,
+          ["vim"] = true,
+          ["yaml"] = true,
+        }
+      end,
+    }
+
+    use {
+      "eandrju/cellular-automaton.nvim",
+      config = function()
+        vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { noremap = true })
+      end,
+      keys = {
+        { "n", "<leader>fml" },
+      },
+    }
 
     --- ===== copilot =====
     -- use {
