@@ -53,7 +53,6 @@ vim.opt.redrawtime = 3000
 -- set re=1
 
 vim.opt.hidden = true
-vim.opt.syntax = "on"
 
 -- Some servers have issues with backup files, see #649.
 vim.opt.backup = false
@@ -201,6 +200,9 @@ end
 
 vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
 vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
+
+-- TODO: remove me?
+vim.opt.syntax = "off"
 
 require "packer_compiled"
 require "plugins"

@@ -4,7 +4,7 @@ M.setup = function()
   local capabilities = require("rmagatti.lsp.lsp-common").capabilities
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
-  require("neodev").setup { }
+  require("neodev").setup {}
 
   local sumneko_lua_opts = {
     on_attach = common_on_attach,

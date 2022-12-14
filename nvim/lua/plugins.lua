@@ -14,20 +14,34 @@ return packer.startup {
       -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
     }
 
+    -- TODO: trying out Comment.nvim, remove if not working out
+    -- use {
+    --   "tpope/vim-commentary",
+    --   keys = {
+    --     { "n", "gc" },
+    --   },
+    -- }
+
     use {
-      "tpope/vim-commentary",
-      keys = {
-        { "n", "gc" },
-      },
+      "numToStr/Comment.nvim",
+      config = function()
+        require "rmagatti.comment"
+      end,
     }
 
     use {
-      "tpope/vim-eunuch",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      before = "Comment.nvim",
     }
+
+    --    use {
+    --      "tpope/vim-eunuch",
+    --    }
 
     use {
       "lewis6991/impatient.nvim",
     }
+
 
     use {
       "tpope/vim-surround",
@@ -51,17 +65,15 @@ return packer.startup {
       end,
     }
 
-    ----==== Lazy loaded
-
-    use {
-      "dbeniamine/cheat.sh-vim",
-      keys = {
-        { "n", "<leader>KB" },
-        { "n", "<leader>KK" },
-        { "n", "<leader>KP" },
-      },
-      cmd = { "Cheat", "CheatPaste" },
-    }
+    --    use {
+    --      "dbeniamine/cheat.sh-vim",
+    --      keys = {
+    --        { "n", "<leader>KB" },
+    --        { "n", "<leader>KK" },
+    --        { "n", "<leader>KP" },
+    --      },
+    --      cmd = { "Cheat", "CheatPaste" },
+    --    }
 
     use {
       "mbbill/undotree",
@@ -81,9 +93,9 @@ return packer.startup {
       "mhinz/vim-grepper",
       config = function()
         vim.cmd [[
-        nmap gs <Plug>(GrepperOperator)
-        xmap gs <Plug>(GrepperOperator)
-      ]]
+           nmap gs <Plug>(GrepperOperator)
+           xmap gs <Plug>(GrepperOperator)
+         ]]
       end,
       cmd = { "Grepper", "<Plug>(GrepperOperator)" },
       keys = {
@@ -92,20 +104,20 @@ return packer.startup {
       },
     }
 
-    -- use {
-    --   "kyazdani42/nvim-web-devicons",
-    --   config = function()
-    --     require "rmagatti.nvim-web-devicons"
-    --   end,
-    -- }
+    use {
+      "nvim-tree/nvim-web-devicons",
+      config = function()
+        require "rmagatti.nvim-web-devicons"
+      end,
+    }
 
     use {
       "vim-test/vim-test",
       config = function()
         vim.cmd [[
-      let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee|ts)$'
-      let test#javascript#mocha#executable = 'npm run test'
-      let test#javascript#jest#executable = 'npm run test'
+         let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee|ts)$'
+         let test#javascript#mocha#executable = 'npm run test'
+         let test#javascript#jest#executable = 'npm run test'
 
       function! DebugStrategy(cmd)
         let runner = test#determine_runner(expand('%'))
@@ -163,11 +175,11 @@ return packer.startup {
       "justinmk/vim-dirvish",
       config = function()
         vim.cmd [[
-      command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
-      command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish %
-      nnoremap <leader>fs :VLeftDirvish<CR>
-      nnoremap <leader>ff :VLeftDirvishFile<CR>
-      ]]
+             command! VLeftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
+             command! VLeftDirvishFile leftabove vsplit | vertical resize 50 | silent Dirvish %
+             nnoremap <leader>fs :VLeftDirvish<CR>
+             nnoremap <leader>ff :VLeftDirvishFile<CR>
+           ]]
       end,
     }
 
@@ -177,33 +189,33 @@ return packer.startup {
       requires = { "justinmk/vim-dirvish" },
       config = function()
         vim.cmd [[
-        let g:dirvish_dovish_map_keys = 0
+           let g:dirvish_dovish_map_keys = 0
 
-        augroup dirvish_config
-        autocmd!
-        " unmap dirvish default
-        autocmd FileType dirvish silent! unmap <buffer><C-p>
-        autocmd FileType dirvish silent! unmap <buffer>p
+           augroup dirvish_config
+           autocmd!
+           " unmap dirvish default
+           autocmd FileType dirvish silent! unmap <buffer><C-p>
+           autocmd FileType dirvish silent! unmap <buffer>p
 
-        " My mappings
-        autocmd FileType dirvish silent! map <buffer>i <Plug>(dovish_create_file)
-        autocmd FileType dirvish silent! map <buffer>I <Plug>(dovish_create_directory)
-        autocmd FileType dirvish silent! map <buffer>dd <Plug>(dovish_delete)
-        autocmd FileType dirvish silent! map <buffer>r <Plug>(dovish_rename)
-        autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
-        autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
-        autocmd FileType dirvish silent! map <buffer>p <Plug>(dovish_copy)
-        autocmd FileType dirvish silent! map <buffer>P <Plug>(dovish_move)
-        augroup END
-      ]]
+           " My mappings
+           autocmd FileType dirvish silent! map <buffer>i <Plug>(dovish_create_file)
+           autocmd FileType dirvish silent! map <buffer>I <Plug>(dovish_create_directory)
+           autocmd FileType dirvish silent! map <buffer>dd <Plug>(dovish_delete)
+           autocmd FileType dirvish silent! map <buffer>r <Plug>(dovish_rename)
+           autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
+           autocmd FileType dirvish silent! map <buffer>yy <Plug>(dovish_yank)
+           autocmd FileType dirvish silent! map <buffer>p <Plug>(dovish_copy)
+           autocmd FileType dirvish silent! map <buffer>P <Plug>(dovish_move)
+           augroup END
+         ]]
       end,
     }
 
-    use {
-      "kristijanhusak/vim-dirvish-git",
-      opt = true,
-      requires = { "justinmk/vim-dirvish" },
-    }
+    --    use {
+    --      "kristijanhusak/vim-dirvish-git",
+    --      opt = true,
+    --      requires = { "justinmk/vim-dirvish" },
+    --    }
 
     use {
       "ggandor/leap.nvim",
@@ -226,8 +238,8 @@ return packer.startup {
         -- let gwiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}
         vim.cmd "let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'nested_syntaxes':{'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}}]"
         vim.cmd [[
-        let g:vimwiki_listsyms = '✗○◐●✓'
-      ]]
+           let g:vimwiki_listsyms = '✗○◐●✓'
+         ]]
       end,
       keys = {
         { "n", "<leader>ww" },
@@ -256,11 +268,11 @@ return packer.startup {
       end,
     }
 
-    -- TODO: do I really use this?
-    --use {
-    -- 'michaeljsmith/vim-indent-object',
-    -- event = 'BufReadPost'
-    --}
+    --    -- TODO: do I really use this?
+    --    --use {
+    --    -- 'michaeljsmith/vim-indent-object',
+    --    -- event = 'BufReadPost'
+    --    --}
 
     use {
       "mg979/vim-visual-multi",
@@ -273,15 +285,14 @@ return packer.startup {
 
     -- LSP
     use {
-      "neovim/nvim-lspconfig",
-      module = "lspconfig",
-    }
-
-    use {
-      "williamboman/nvim-lsp-installer",
-      config = function()
-        require "rmagatti.lsp"
-      end,
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require "rmagatti.lsp"
+        end,
+      },
     }
 
     use {
@@ -291,17 +302,16 @@ return packer.startup {
 
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
       config = function()
         require "rmagatti.nvim-cmp"
       end,
     }
 
     use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }
+    use { "hrsh7th/cmp-nvim-lsp" }
     use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }
-    use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
+    -- use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
     use { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }
     use { "lukas-reineke/cmp-rg", after = "nvim-cmp" }
 
@@ -328,28 +338,12 @@ return packer.startup {
       ft = "lua",
     }
 
-    use {
-      "svermeulen/vimpeccable",
-      module = "vimp",
-    }
-
     -- -- Snippets
     use {
       "hrsh7th/vim-vsnip",
-      event = { "BufReadPre" },
-    }
-    -- use {
-    --   'hrsh7th/vim-vsnip-integ',
-    --   event = {'BufReadPre'}
-    -- }
-    use {
-      "rafamadriz/friendly-snippets",
-      event = { "BufReadPre" },
     }
 
     -- -- Telescope
-    -- popup.nvim is somewhat a legacy dependency, plenary includes popup nowadays
-    -- use { "nvim-lua/popup.nvim" }
     use { "nvim-lua/plenary.nvim" }
     use {
       "nvim-telescope/telescope.nvim",
@@ -379,75 +373,14 @@ return packer.startup {
       after = "telescope.nvim",
     }
 
-    -- use({
-    --   "~/Projects/telescope-lsp-handlers.nvim",
-    --   requires = { "telescope.nvim" },
-    --   config = function()
-    --     require("telescope").load_extension("lsp_handlers")
-    --   end,
-    --   after = "telescope.nvim",
-    -- })
-
-    -- use {
-    --   "nvim-telescope/telescope-packer.nvim",
-    --   config = function()
-    --     require("telescope").load_extension "packer"
-    --     vim.cmd [[nnoremap <leader>pl :lua require('telescope').extensions.packer.plugins()<CR>]]
-    --   end,
-    --   after = "telescope.nvim",
-    -- }
-
-    -- Diagnostics
-    use {
-      "folke/lsp-trouble.nvim",
-      config = function()
-        require("trouble").setup()
-        vim.cmd [[nnoremap <leader>xx <cmd>Trouble<CR>]]
-      end,
-      keys = "<leader>xx",
-      cmd = { "Trouble" },
-    }
-    use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("todo-comments").setup {}
-      end,
-      cmd = { "TodoQuickFix", "TodoTrouble", "TodoTelescope" },
-    }
-
-    use {
-      "kosayoda/nvim-lightbulb",
-      config = function()
-        require "rmagatti.nvim-lightbulb"
-      end,
-      event = "BufReadPost",
-    }
-
     ---- Git
     use {
       "tpope/vim-fugitive",
       cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
-      config = function()
-        vim.cmd [[
-        nnoremap <silent> <leader>gb :<C-u>Git blame<CR>
-        nnoremap <silent> gb :<C-u>Git blame<CR>
-        nnoremap <leader>gd :Gvdiffsplit!<CR>
-        nnoremap gj :diffget //2<CR>
-        nnoremap g; :diffget //3<CR>
-        ]]
-      end,
+      config = require("rmagatti.fugitive").setup,
       keys = {
-        { "n", "gb" },
         { "n", "<leader>gd" },
         { "n", "<leader>gb" },
-        -- { "n", "<leader>hp" },
-        -- { "n", "<leader>hs" },
-        -- { "n", "<leader>hu" },
-        -- { "n", "<leader>hr" },
-        -- { "n", "<leader>hR" },
-        -- { "n", "<leader>hp" },
-        -- { "n", "<leader>hb" },
       },
     }
 
@@ -487,23 +420,24 @@ return packer.startup {
     --   keys = '<leader>wt'
     -- }
 
-    use {
-      "ThePrimeagen/refactoring.nvim",
-      requires = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-treesitter/nvim-treesitter" },
-      },
-      config = function()
-        require "rmagatti.refactoring"
-        vim.keymap.set("v", "<leader>re", [[<cmd>call v:lua.list_refactors()<CR>]], { silent = true, expr = true })
-      end,
-      keys = {
-        { "v", "<leader>re" },
-      },
-    }
+    -- use {
+    --   "ThePrimeagen/refactoring.nvim",
+    --   requires = {
+    --     { "nvim-lua/plenary.nvim" },
+    --     { "nvim-treesitter/nvim-treesitter" },
+    --   },
+    --   config = function()
+    --     require "rmagatti.refactoring"
+    --     vim.keymap.set("v", "<leader>re", [[<cmd>call v:lua.list_refactors()<CR>]], { silent = true, expr = true })
+    --   end,
+    --   keys = {
+    --     { "v", "<leader>re" },
+    --   },
+    -- }
 
     -- Themes
     -- use { 'gruvbox-community/gruvbox' }
+
     use {
       "folke/tokyonight.nvim",
       config = function()
@@ -531,11 +465,6 @@ return packer.startup {
       cmd = "TSPlaygroundToggle",
     }
 
-    use {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      event = "BufReadPost",
-    }
-
     -- Rainbow parentheses
     use {
       "p00f/nvim-ts-rainbow",
@@ -548,11 +477,11 @@ return packer.startup {
       event = { "BufReadPost" },
     }
 
-    -- use {
-    --   "RRethy/nvim-treesitter-textsubjects",
-    --   requires = { "nvim-treesitter/nvim-treesitter" },
-    --   event = { "BufReadPost" },
-    -- }
+    use {
+      "RRethy/nvim-treesitter-textsubjects",
+      requires = { "nvim-treesitter/nvim-treesitter" },
+      event = { "BufReadPost" },
+    }
 
     -- -- GitHub
     --   use  {
@@ -580,6 +509,7 @@ return packer.startup {
       end,
       event = { "BufReadPost" },
     }
+
     use {
       "junegunn/fzf.vim",
       requires = "junegunn/fzf",
@@ -885,13 +815,6 @@ return packer.startup {
 
     -- use {
     --   "mattn/emmet-vim",
-    -- }
-
-    -- use {
-    --   "michaelb/sniprun",
-    --   run = "bash ./install.sh",
-    --   cmd = { "SnipRun" },
-    --   module = "sniprun",
     -- }
   end,
   config = config,
