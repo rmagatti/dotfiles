@@ -63,22 +63,4 @@ require("telescope").setup {
 require("rmagatti.telescope.buffers").setup()
 require("rmagatti.telescope.dotfiles").setup()
 require("rmagatti.telescope.session-searching").setup()
-
-vim.keymap.set(
-  "n",
-  "<D-f>",
-  "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
-  {}
-)
-vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
-vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>", {})
-vim.keymap.set("n", "<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>", {})
-vim.keymap.set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {})
-vim.keymap.set(
-  "n",
-  "<leader>pg",
-  "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>",
-  {}
-)
-vim.keymap.set("n", "<leader>wt", "<cmd>lua require('telescope.extensions').git_worktree.git_worktrees()<CR>", {})
-vim.keymap.set("n", "<C-b>", require("telescope.builtin").git_branches, {})
+require("rmagatti.telescope.mappings")
