@@ -8,9 +8,9 @@ M.search_dotfiles = function()
 end
 
 M.setup = function()
-  vim.api.nvim_set_keymap(
+  vim.keymap.set(
     "n",
-    "<leader>sd",
+    "<leader>sdf",
     ":lua require('rmagatti.telescope.dotfiles').search_dotfiles()<CR>",
     { noremap = true }
   )

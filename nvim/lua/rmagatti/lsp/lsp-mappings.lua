@@ -22,10 +22,6 @@ do
 end
 
 M.on_attach = function(client, bufnr)
-  local function buf_set_keymap(...)
-    vim.keymap.set(...)
-  end
-
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
@@ -35,29 +31,29 @@ M.on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { buffer = bufnr, silent = true }
   -- Code navigation
-  buf_set_keymap("n", "gD", vim.lsp.buf.declaration, opts)
-  buf_set_keymap("n", "gd", vim.lsp.buf.definition, opts)
-  buf_set_keymap("n", "K", vim.lsp.buf.hover, opts)
-  buf_set_keymap("n", "gi", vim.lsp.buf.implementation, opts)
-  buf_set_keymap("n", "gr", function()
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "gr", function()
     require("telescope.builtin").lsp_references()
   end, opts)
 
   -- Type helpers
-  buf_set_keymap("n", "<leader>gs", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<leader>gs", vim.lsp.buf.signature_help, opts)
   -- buf_set_keymap("n", "<leader>gt", vim.lsp.buf.type_definition, opts)
 
   -- Not too sure what this does
-  buf_set_keymap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-  buf_set_keymap("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-  buf_set_keymap("n", "<leader>wl", function()
+  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>wl", function()
     return print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts)
 
   -- Refactoring and actions
-  buf_set_keymap("n", "<leader>rn", vim.lsp.buf.rename, opts)
-  buf_set_keymap("n", "<localleader>a", vim.lsp.buf.code_action, opts)
-  buf_set_keymap("n", "<M-CR>", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "<localleader>a", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<M-CR>", vim.lsp.buf.code_action, opts)
 
   if
     type(client.server_capabilities.codeActionProvider) == "table"
@@ -68,35 +64,41 @@ M.on_attach = function(client, bufnr)
       return
     end
 
-    buf_set_keymap("n", "<CR>", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<CR>", vim.lsp.buf.code_action, opts)
   end
 
   -- Diagnostics
-  buf_set_keymap("n", "<leader>e", vim.diagnostic.open_float, opts) -- not mneumonic
-  buf_set_keymap("n", "[d", vim.diagnostic.goto_next, opts) -- diagnostic next (not mneumonic but [ and ] work as next/previous)
-  buf_set_keymap("n", "]d", vim.diagnostic.goto_prev, opts) -- diagnostic previous (not mneumonic)
-  buf_set_keymap("n", "<leader>dl", function()
+  vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts) -- not mneumonic
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts) -- diagnostic next (not mneumonic but [ and ] work as next/previous)
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts) -- diagnostic previous (not mneumonic)
+  vim.keymap.set("n", "<leader>dl", function()
     require("telescope.builtin").diagnostics()
   end, opts) -- diagnostics telescope list
-  buf_set_keymap("n", "<leader>dq", vim.diagnostic.setqflist, opts) -- diagnostic quickfix list
+  vim.keymap.set("n", "<leader>dq", vim.diagnostic.setqflist, opts) -- diagnostic quickfix list
 
   -- Symbols
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>o", "<cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
-  buf_set_keymap("n", "<leader>ws", function()
+  vim.keymap.set("n", "<leader>ws", function()
     return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" } }
   end, opts)
-  buf_set_keymap("n", "<leader>ds", function()
+  vim.keymap.set("n", "<leader>ws", function()
+    return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" } }
+  end, opts)
+  vim.keymap.set("n", "<leader>wsf", function()
+    return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" }, tag = { "function" } }
+  end, opts)
+  vim.keymap.set("n", "<leader>ds", function()
     return require("telescope.builtin").lsp_document_symbols()
   end, opts)
 
   if client.server_capabilities.documentHighlightProvider then
-    buf_set_keymap("n", "h", function()
+    vim.keymap.set("n", "h", function()
       return require("rmagatti.lsp.lsp-mappings").toggle_symbol_highlight()
     end, opts)
   end
 
-  buf_set_keymap("n", "<leader>fo", vim.lsp.buf.format, opts)
-  buf_set_keymap("v", "<leader>fo", vim.lsp.buf.format, opts)
+  vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format, opts)
+  vim.keymap.set("v", "<leader>fo", vim.lsp.buf.format, opts)
 
   -- buf_set_keymap("n", "<leader>dac", function()
   --   vim.cmd "g/\v^(//<bar>.*//)/d_<CR>:w<CR>:noh<CR>"

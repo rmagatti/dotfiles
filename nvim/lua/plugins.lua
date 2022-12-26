@@ -42,7 +42,6 @@ return packer.startup {
       "lewis6991/impatient.nvim",
     }
 
-
     use {
       "tpope/vim-surround",
       keys = {
@@ -293,6 +292,12 @@ return packer.startup {
           require "rmagatti.lsp"
         end,
       },
+      {
+        "j-hui/fidget.nvim",
+        config = function()
+          require "rmagatti.fidget"
+        end,
+      },
     }
 
     use {
@@ -377,10 +382,16 @@ return packer.startup {
     use {
       "tpope/vim-fugitive",
       cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
-      config = require("rmagatti.fugitive").setup,
+      config = function()
+        require("rmagatti.fugitive").setup()
+      end,
       keys = {
         { "n", "<leader>gd" },
         { "n", "<leader>gb" },
+      },
+      {
+        "tpope/vim-rhubarb",
+        after = "vim-fugitive",
       },
     }
 
@@ -524,11 +535,6 @@ return packer.startup {
         require "rmagatti.lualine"
       end,
     }
-
-    -- TODO: table index is null issue when this is enabled
-    -- use {
-    --   'nvim-lua/lsp-status.nvim',
-    -- }
 
     -- Terraform
     use {

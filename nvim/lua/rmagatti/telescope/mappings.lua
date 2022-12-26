@@ -7,7 +7,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
 vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>", {})
 vim.keymap.set("n", "<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>", {})
-vim.keymap.set("n", "<leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {})
 vim.keymap.set(
   "n",
   "<leader>pg",
@@ -37,7 +36,10 @@ vim.keymap.set("n", "<localleader>ss", require("telescope.builtin").spell_sugges
 vim.keymap.set("n", "<localleader>km", require("telescope.builtin").keymaps, {})
 vim.keymap.set("n", "<localleader>ft", require("telescope.builtin").filetypes, {})
 vim.keymap.set("n", "<localleader>hl", require("telescope.builtin").highlights, {})
-vim.keymap.set("n", "<localleader>ff", require("telescope.builtin").current_buffer_fuzzy_find, {})
+vim.keymap.set("n", "<localleader>/", require("telescope.builtin").current_buffer_fuzzy_find, {})
+vim.keymap.set("n", "<localleader>/", function()
+  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown())
+end, {})
 vim.keymap.set("n", "<localleader>bt", require("telescope.builtin").current_buffer_tags, {})
 vim.keymap.set("n", "<localleader>res", require("telescope.builtin").resume, {})
 vim.keymap.set("n", "<localleader>p", require("telescope.builtin").pickers, {})
