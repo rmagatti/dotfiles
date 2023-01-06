@@ -12,7 +12,7 @@ vim.keymap.set("n", "<leader>pk", "<cmd>lua require('goto-preview').goto_preview
 
 -- "Peek" mapping
 -- TODO: remove me after testing out vim.keymap.set
-vim.api.nvim_set_keymap(
+vim.keymap.set(
   "n",
   "L", -- for "look"
   "<cmd>lua require('goto-preview').goto_preview_definition({focus_on_open=false, dismiss_on_move=true})<CR>",
