@@ -729,6 +729,7 @@ return packer.startup {
         { "n", "gpi" },
         { "n", "gpr" },
         { "n", "gP" },
+        { "n", "L" },
       },
     }
 
