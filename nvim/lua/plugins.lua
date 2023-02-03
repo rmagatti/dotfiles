@@ -713,7 +713,7 @@ return packer.startup {
         vim.keymap.set(
           "n",
           "<leader><space>", -- <space><space>
-          "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>"
+          require('alternate-toggler').toggleAlternate
         )
       end,
       event = { "BufReadPost" }, -- lazy load after reading a buffer
