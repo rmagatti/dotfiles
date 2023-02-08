@@ -133,6 +133,10 @@ function gitca() {
   git commit --amend
 }
 
+function gclone() {
+  git clone git@github.com:neofinancial/$1.git ~/Projects/Neo/$1
+}
+
 
 # function gitm() {
 #     if [ -z "$1" ];
