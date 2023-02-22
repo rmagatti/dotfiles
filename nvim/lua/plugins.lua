@@ -52,9 +52,9 @@ return packer.startup {
       },
     }
 
-    use {
-      "tpope/vim-repeat",
-    }
+    -- use {
+    --   "tpope/vim-repeat",
+    -- }
 
     use {
       "akinsho/toggleterm.nvim",
@@ -381,14 +381,9 @@ return packer.startup {
     ---- Git
     use {
       "tpope/vim-fugitive",
-      cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull", "Gvdiffsplit" },
       config = function()
-        require("rmagatti.fugitive").setup()
+        require("rmagatti.fugitive")
       end,
-      keys = {
-        { "n", "<leader>gd" },
-        { "n", "<leader>gb" },
-      },
       {
         "tpope/vim-rhubarb",
         after = "vim-fugitive",
@@ -713,7 +708,7 @@ return packer.startup {
         vim.keymap.set(
           "n",
           "<leader><space>", -- <space><space>
-          require('alternate-toggler').toggleAlternate
+          require("alternate-toggler").toggleAlternate
         )
       end,
       event = { "BufReadPost" }, -- lazy load after reading a buffer
@@ -799,6 +794,13 @@ return packer.startup {
       keys = {
         { "n", "<leader>fml" },
       },
+    }
+
+    use {
+      "tjdevries/sg.nvim",
+      config = require("rmagatti.sg").setup,
+      run = "cargo build --workspace",
+      requires = { "nvim-lua/plenary.nvim" },
     }
 
     --- ===== copilot =====

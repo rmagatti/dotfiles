@@ -85,7 +85,10 @@ M.on_attach = function(client, bufnr)
     return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" } }
   end, opts)
   vim.keymap.set("n", "<leader>wsf", function()
-    return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" }, tag = { "function" } }
+    return require("telescope.builtin").lsp_dynamic_workspace_symbols {
+      file_ignore_patterns = { "node_modules/**" },
+      tag = { "function" },
+    }
   end, opts)
   vim.keymap.set("n", "<leader>ds", function()
     return require("telescope.builtin").lsp_document_symbols()

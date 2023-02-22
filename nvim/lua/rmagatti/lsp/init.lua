@@ -8,5 +8,6 @@ require("rmagatti.lsp.lsp-typescript").setup()
 require("rmagatti.lsp.lsp-yaml").setup()
 require("rmagatti.lsp.lsp-json").setup()
 require("rmagatti.lsp.lsp-vimscript").setup()
+require("rmagatti.lsp.lsp-rust").setup()
 
 require("rmagatti.lsp.null-ls").setup(common_on_attach)

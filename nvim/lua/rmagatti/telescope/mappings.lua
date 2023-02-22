@@ -4,16 +4,16 @@ vim.keymap.set(
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
   {}
 )
-vim.keymap.set("n", "<C-p>", "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
-vim.keymap.set("n", "<C-f>", "<cmd>lua require('telescope.builtin').find_files()<CR>", {})
-vim.keymap.set("n", "<leader>ps", "<cmd>lua require('telescope.builtin').live_grep()<CR>", {})
+vim.keymap.set("n", "<C-p>", require("telescope.builtin").git_files, {})
+vim.keymap.set("n", "<C-f>", require("telescope.builtin").find_files, {})
+vim.keymap.set("n", "<leader>ps", require("telescope.builtin").live_grep, {})
 vim.keymap.set(
   "n",
   "<leader>pg",
   "<cmd>lua require('telescope.builtin').grep_string({search=vim.fn.input('Search: ')})<CR>",
   {}
 )
-vim.keymap.set("n", "<leader>wt", "<cmd>lua require('telescope.extensions').git_worktree.git_worktrees()<CR>", {})
+-- vim.keymap.set("n", "<leader>wt", require('telescope.extensions').git_worktree.git_worktrees, {})
 vim.keymap.set("n", "<C-b>", require("telescope.builtin").git_branches, {})
 
 vim.keymap.set("n", "<localleader>of", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", {})
@@ -42,6 +42,7 @@ vim.keymap.set("n", "<localleader>/", function()
 end, {})
 vim.keymap.set("n", "<localleader>bt", require("telescope.builtin").current_buffer_tags, {})
 vim.keymap.set("n", "<localleader>res", require("telescope.builtin").resume, {})
+vim.keymap.set("n", "<C-M>p", require("telescope.builtin").resume, {})
 vim.keymap.set("n", "<localleader>p", require("telescope.builtin").pickers, {})
 vim.keymap.set("n", "<localleader>r", require("telescope.builtin").lsp_references, {})
 vim.keymap.set("n", "<localleader>ic", require("telescope.builtin").lsp_incoming_calls, {})

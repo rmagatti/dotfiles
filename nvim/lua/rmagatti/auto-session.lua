@@ -6,6 +6,7 @@ require("auto-session").setup {
   cwd_change_handling = false, -- Should be false if you use session-lens
 
   auto_session_enable_last_session = false,
+
   -- cwd_change_handling = {
   --   restore_upcoming_session = true,
   --   -- pre_cwd_changed_hook = nil,

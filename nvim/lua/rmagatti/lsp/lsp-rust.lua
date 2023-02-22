@@ -11,7 +11,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").rust_analyzer.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M
