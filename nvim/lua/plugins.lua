@@ -382,7 +382,7 @@ return packer.startup {
     use {
       "tpope/vim-fugitive",
       config = function()
-        require("rmagatti.fugitive")
+        require "rmagatti.fugitive"
       end,
       {
         "tpope/vim-rhubarb",
@@ -803,28 +803,7 @@ return packer.startup {
       requires = { "nvim-lua/plenary.nvim" },
     }
 
-    --- ===== copilot =====
-    -- use {
-    --   "zbirenbaum/copilot.lua",
-    --   event = "InsertEnter",
-    --   config = function()
-    --     vim.schedule(function()
-    --       require("copilot").setup()
-    --     end)
-    --   end,
-    --   enabled = false,
-    -- }
-
-    -- use {
-    --   "zbirenbaum/copilot-cmp",
-    --   module = "copilot_cmp",
-    --   enabled = false,
-    -- }
-    --- ===== copilot =====
-
-    -- use {
-    --   "mattn/emmet-vim",
-    -- }
+    use "wakatime/vim-wakatime"
   end,
   config = config,
 }

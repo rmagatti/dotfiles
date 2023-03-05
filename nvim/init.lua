@@ -11,15 +11,14 @@ vim.opt.swapfile = false
 
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
+local font = "JetBrains_Mono:h"
 
 if vim.g.started_by_firenvim then
-  vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
+  vim.opt.guifont = font .. tostring(13)
 end
 
 if vim.g.neovide then
-  vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h12"
-  -- vim.opt.guifont = "JetBrains Mono:h12,FiraCode Nerd Font Mono:h12,Hack:h12,JetBrainsMono Nerd Font Mono:h12"
-  -- vim.opt.guifontwide = "JetBrains Mono:h12,FiraCode Nerd Font Mono Regular:h12,Hack:h12,JetBrainsMono Nerd Font Mono Regular:h12"
+  vim.opt.guifont = font .. tostring(13)
 
   vim.g.neovide_cursor_animation_length = 0.015
   vim.g.neovide_cursor_trail_length = 0.15
@@ -33,6 +32,23 @@ if vim.g.neovide then
   -- vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true})
   -- vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true})
   -- vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+
+  local function increment_font_size()
+    local curr_font = vim.o.guifont
+    local size = tostring(tonumber(curr_font:match "h(%d+)") + 1)
+
+    vim.o.guifont = font .. size
+  end
+
+  local function decrement_font_size()
+    local curr_font = vim.o.guifont
+    local size = tostring(tonumber(curr_font:match "h(%d+)") - 1)
+
+    vim.o.guifont = font .. size
+  end
+
+  vim.keymap.set("n", "<D-=>", increment_font_size, { noremap = true, silent = true })
+  vim.keymap.set("n", "<D-->", decrement_font_size, { noremap = true, silent = true })
 end
 
 vim.opt.background = "dark"
@@ -100,46 +116,46 @@ end
 
 -- Custom autocmds
 vim.cmd [[
-augroup goyocmds
-  autocmd!
-  autocmd User GoyoEnter Limelight
-  autocmd User GoyoLeave Limelight!
+  augroup goyocmds
+    autocmd!
+    autocmd User GoyoEnter Limelight
+    autocmd User GoyoLeave Limelight!
 
-augroup end
+  augroup end
 ]]
 
 vim.cmd [[
-augroup AutoAdjustResize
-  autocmd!
-  autocmd VimResized * execute "normal! \<C-w>="
-augroup end
+  augroup AutoAdjustResize
+    autocmd!
+    autocmd VimResized * execute "normal! \<C-w>="
+  augroup end
 ]]
 
 -- Presentation Mode
 vim.g.in_presentation_mode = 0
 
 vim.cmd [[
-function! TogglePresentationMode()
-  if g:in_presentation_mode
-    let g:in_presentation_mode = 0
-    set guifont=FiraCode\ Nerd\ Font:h12
-    Goyo!
-  else
-    let g:in_presentation_mode = 1
-    set guifont=FiraCode\ Nerd\ Font:h30
-    " Default Goyo options, just need to use them since I don't want the toggling behaviour to trigger at all.
-    Goyo 80x85%
-  endif
-endfunction
+  function! TogglePresentationMode()
+    if g:in_presentation_mode
+      let g:in_presentation_mode = 0
+      set guifont=FiraCode\ Nerd\ Font:h12
+      Goyo!
+    else
+      let g:in_presentation_mode = 1
+      set guifont=FiraCode\ Nerd\ Font:h30
+      " Default Goyo options, just need to use them since I don't want the toggling behaviour to trigger at all.
+      Goyo 80x85%
+    endif
+  endfunction
 ]]
 
 vim.cmd [[command! TogglePresentationMode :call TogglePresentationMode()<CR>]]
 
 vim.cmd [[
-augroup highlight_yank
-  autocmd!
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
-augroup end
+  augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+  augroup end
 ]]
 
 vim.opt.foldmethod = "expr"
@@ -206,3 +222,4 @@ vim.opt.syntax = "off"
 
 require "packer_compiled"
 require "plugins"
+require "rmagatti.mappings"
