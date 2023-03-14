@@ -14,20 +14,14 @@ return packer.startup {
       -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
     }
 
-    -- TODO: trying out Comment.nvim, remove if not working out
-    -- use {
-    --   "tpope/vim-commentary",
-    --   keys = {
-    --     { "n", "gc" },
-    --   },
-    -- }
+    use { "tpope/vim-commentary" }
 
-    use {
-      "numToStr/Comment.nvim",
-      config = function()
-        require "rmagatti.comment"
-      end,
-    }
+    -- use {
+    --   "numToStr/Comment.nvim",
+    --   config = function()
+    --     require "rmagatti.comment"
+    --   end,
+    -- }
 
     use {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -382,12 +376,13 @@ return packer.startup {
     use {
       "tpope/vim-fugitive",
       config = function()
-        require "rmagatti.fugitive"
+        require("rmagatti.fugitive").setup()
       end,
-      {
-        "tpope/vim-rhubarb",
-        after = "vim-fugitive",
-      },
+    }
+
+    use {
+      "tpope/vim-rhubarb",
+      after = "vim-fugitive",
     }
 
     use {
@@ -738,15 +733,15 @@ return packer.startup {
     --   keys = "<C-s>",
     -- }
 
-    use {
-      "~/Projects/telescope-ui-select.nvim",
-      requires = { "nvim-telescope/telescope.nvim" },
-      after = "telescope.nvim",
-      config = function()
-        require("telescope").load_extension "ui-select"
-      end,
-    }
-
+    -- use {
+    --   "~/Projects/telescope-ui-select.nvim",
+    --   requires = { "nvim-telescope/telescope.nvim" },
+    --   after = "telescope.nvim",
+    --   config = function()
+    --     require("telescope").load_extension "ui-select"
+    --   end,
+    -- }
+    --
     use {
       "~/Projects/igs.nvim",
       event = { "BufReadPost" },
@@ -759,30 +754,7 @@ return packer.startup {
       "github/copilot.vim",
       event = { "InsertEnter" },
       config = function()
-        vim.g.copilot_filetypes = {
-          ["*"] = false,
-          ["c"] = true,
-          ["cpp"] = true,
-          ["c++"] = true,
-          ["c#"] = true,
-          ["csharp"] = true,
-          ["cs"] = true,
-          ["css"] = true,
-          ["html"] = true,
-          ["js"] = true,
-          ["javascript"] = true,
-          ["typescript"] = true,
-          ["json"] = true,
-          ["lua"] = true,
-          ["php"] = true,
-          ["py"] = true,
-          ["python"] = true,
-          ["ruby"] = true,
-          ["rust"] = true,
-          ["sh"] = true,
-          ["vim"] = true,
-          ["yaml"] = true,
-        }
+        require("rmagatti.copilot").setup()
       end,
     }
 
@@ -804,6 +776,13 @@ return packer.startup {
     }
 
     use "wakatime/vim-wakatime"
+
+    use {
+      "stevearc/dressing.nvim",
+      config = function()
+        require("rmagatti.dressing").setup()
+      end,
+    }
   end,
   config = config,
 }
