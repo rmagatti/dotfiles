@@ -107,47 +107,19 @@ return packer.startup {
     use {
       "vim-test/vim-test",
       config = function()
-        vim.cmd [[
-         let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee|ts)$'
-         let test#javascript#mocha#executable = 'npm run test'
-         let test#javascript#jest#executable = 'npm run test'
-
-      function! DebugStrategy(cmd)
-        let runner = test#determine_runner(expand('%'))
-        call luaeval("require('rmagatti.dap').debug")(runner, a:cmd)
-      endfunction
-
-      function! SplitStrategy(cmd)
-        vertical new | call termopen(a:cmd)
-      endfunction
-      let g:test#custom_strategies = {'terminal_split': function('SplitStrategy'), 'debug': function('DebugStrategy')}
-      let g:test#strategy = 'terminal_split'
-
-      " Regular mappings
-      nmap <leader>tt :TestNearest<CR>
-      nmap <leader>tf :TestFile<CR>
-      nmap <leader>ts :TestSuite<CR>
-      nmap <leader>tl :TestLast<CR>
-      nmap <leader>tv :TestVisit<CR>
-
-      " Debug mappings
-      nmap <leader>tdt :TestNearest -strategy=debug<CR>
-      nmap <leader>tdf :TestFile -strategy=debug<CR>
-      nmap <leader>tds :TestSuite -strategy=debug<CR>
-      nmap <leader>tdl :TestLast -strategy=debug<CR>
-      nmap <leader>tdv :TestVisit -strategy=debug<CR>
-    ]]
+        require("rmagatti.vim-test").setup()
       end,
       keys = {
         { "n", "<leader>tf" },
         { "n", "<leader>tt" },
         { "n", "<leader>ts" },
-        { "n", "<leader>tf" },
-        { "n", "<leader>tt" },
-        { "n", "<leader>tf" },
-        { "n", "<leader>ts" },
         { "n", "<leader>tl" },
         { "n", "<leader>tv" },
+        { "n", "<leader>wtf" },
+        { "n", "<leader>wtt" },
+        { "n", "<leader>wts" },
+        { "n", "<leader>wtl" },
+        { "n", "<leader>wtv" },
         { "n", "<leader>tdt" },
         { "n", "<leader>tdf" },
         { "n", "<leader>tds" },
@@ -306,7 +278,22 @@ return packer.startup {
       end,
     }
 
-    use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
+    use {
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      tag = "v1.*",
+      -- install jsregexp (optional!:).
+      run = "make install_jsregexp",
+      config = function()
+        require "rmagatti.luasnip"
+      end
+    }
+
+    use "rafamadriz/friendly-snippets"
+
+    use { "saadparwaiz1/cmp_luasnip" }
+
+    -- use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
     use { "hrsh7th/cmp-nvim-lsp" }
     use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }
@@ -337,10 +324,10 @@ return packer.startup {
       ft = "lua",
     }
 
-    -- -- Snippets
-    use {
-      "hrsh7th/vim-vsnip",
-    }
+    -- -- -- Snippets
+    -- use {
+    --   "hrsh7th/vim-vsnip",
+    -- }
 
     -- -- Telescope
     use { "nvim-lua/plenary.nvim" }
@@ -750,11 +737,28 @@ return packer.startup {
       end,
     }
 
+    -- use {
+    --   "github/copilot.vim",
+    --   event = { "InsertEnter" },
+    --   config = function()
+    --     require("rmagatti.copilot").setup()
+    --   end,
+    -- }
+
     use {
-      "github/copilot.vim",
-      event = { "InsertEnter" },
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
       config = function()
         require("rmagatti.copilot").setup()
+      end,
+    }
+
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua" },
+      config = function()
+        require("rmagatti.copilot-cmp").setup()
       end,
     }
 

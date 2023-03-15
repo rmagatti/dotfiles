@@ -31,32 +31,25 @@ local mapping = cmp.mapping.preset.insert {
 
 cmp.setup {
   formatting = {
-    format = function(entry, vim_item)
-      if entry.source.name == "copilot" then
-        vim_item.kind = "[] Copilot"
-        vim_item.kind_hl_group = "CmpItemKindCopilot"
-        return vim_item
-      end
-      return lspkind.cmp_format { with_text = true, maxwidth = 50 }(entry, vim_item)
-    end,
-  },
-  experimental = {
-    ghost_text = true,
+    format = lspkind.cmp_format {
+      mode = "symbol_text",
+      max_width = 50,
+      symbol_map = { Copilot = "" },
+    },
   },
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      -- vim.fn["vsnip#anonymous"](args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   mapping = mapping,
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "vsnip" },
+    -- { name = "vsnip" },
+    { name = "luasnip" },
     { name = "path" },
     { name = "npm", keyword_length = 4 },
-    -- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
-    -- { name = "nvim_lua" },
-    -- { name = "rg" },
     { name = "copilot", group_index = 2 },
   }, {
     { name = "buffer" },
