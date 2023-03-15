@@ -52,7 +52,7 @@ return packer.startup {
 
     use {
       "akinsho/toggleterm.nvim",
-      tag = "v2.*",
+      tag = "*",
       config = function()
         require "rmagatti.toggleterm"
       end,
