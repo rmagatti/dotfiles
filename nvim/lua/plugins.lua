@@ -15,6 +15,7 @@ return packer.startup {
     }
 
     use { "tpope/vim-commentary" }
+    use { "tpope/vim-abolish" }
 
     -- use {
     --   "numToStr/Comment.nvim",

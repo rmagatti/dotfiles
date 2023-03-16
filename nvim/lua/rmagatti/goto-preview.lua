@@ -2,6 +2,7 @@ local mapping_func = function(wincmd_direction, bufr)
   local function close()
     vim.cmd("wincmd " .. wincmd_direction)
     require("goto-preview").close_all_win { skip_curr_window = true }
+    -- vim.lsp.buf.definition()
   end
 
   vim.keymap.set("n", "<C-w>" .. wincmd_direction, close, {
