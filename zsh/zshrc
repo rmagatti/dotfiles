@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ronnieandrewmagatti/.oh-my-zsh"
+export ZSH="/Users/rmagatti/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -191,7 +191,6 @@ alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v=nvim
 alias vv="neovide --multigrid"
-alias ui="/Users/ronnieandrewmagatti/Projects/uivonim/dist/mac/uivonim.app"
 
 function gitsqa() {
   git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&
@@ -207,24 +206,24 @@ function gitsqi() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Nvm stuff
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# # Nvm stuff
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/ronnieandrewmagatti/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "/Users/ronnieandrewmagatti/.miniconda3/etc/profile.d/conda.sh" ]; then
-    . "/Users/ronnieandrewmagatti/.miniconda3/etc/profile.d/conda.sh"
-  else
-    export PATH="/Users/ronnieandrewmagatti/.miniconda3/bin:$PATH"
-  fi
-fi
-unset __conda_setup
+# __conda_setup="$('/Users/ronnieandrewmagatti/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+  # eval "$__conda_setup"
+# else
+  # if [ -f "/Users/ronnieandrewmagatti/.miniconda3/etc/profile.d/conda.sh" ]; then
+#     . "/Users/ronnieandrewmagatti/.miniconda3/etc/profile.d/conda.sh"
+#   else
+#     export PATH="/Users/ronnieandrewmagatti/.miniconda3/bin:$PATH"
+#   fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
 # Set fzf installation directory path
@@ -232,9 +231,9 @@ export FZF_BASE=/usr/local/bin/fzf
 enable-fzf-tab
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/ronnieandrewmagatti/.sdkman"
-[[ -s "/Users/ronnieandrewmagatti/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ronnieandrewmagatti/.sdkman/bin/sdkman-init.sh"
-alias awsx="source _awsx"
+# export SDKMAN_DIR="/Users/ronnieandrewmagatti/.sdkman"
+# [[ -s "/Users/ronnieandrewmagatti/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ronnieandrewmagatti/.sdkman/bin/sdkman-init.sh"
+# alias awsx="source _awsx"
 
 # Add goneovim to path
 export PATH="/Applications/goneovim.app/Contents/MacOS:$PATH"
@@ -318,37 +317,41 @@ export VISUAL=nvim
 export EDITOR=nvim
 
 # place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# autoload -U add-zsh-hook
+# load-nvmrc() {
+#   local node_version="$(nvm version)"
+#   local nvmrc_path="$(nvm_find_nvmrc)"
+# 
+#   if [ -n "$nvmrc_path" ]; then
+#     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+# 
+#     if [ "$nvmrc_node_version" = "N/A" ]; then
+#       nvm install
+#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
+#       nvm use
+#     fi
+#   elif [ "$node_version" != "$(nvm version default)" ]; then
+#     echo "Reverting to nvm default version"
+#     nvm use default
+#   fi
+# }
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
 
 # Set open file limit so packer.nvim does not hang
 ulimit -S -n 2048
 
 # Pyenv
-eval "$(pyenv init -)"
-export PATH="/Users/ronnieandrewmagatti/.pyenv/shims:${PATH}"
+# eval "$(pyenv init -)"
+# export PATH="/Users/ronnieandrewmagatti/.pyenv/shims:${PATH}"
 
 # Data stuff
-export PATH=$PATH:~/.local/bin
-export PYSPARK_DRIVER_PYTHON="jupyter"
-export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+# export PATH=$PATH:~/.local/bin
+# export PYSPARK_DRIVER_PYTHON="jupyter"
+# export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
 # eval $(thefuck --alias)
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+

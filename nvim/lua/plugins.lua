@@ -1,13 +1,24 @@
-local packer = require "packer"
+local ensure_packer = function()
+  local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 local config = {
-  compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+  -- compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
   -- profile = {
   --   enable = true,
   --   threshold = 1 -- the amount in ms that a plugins load time must be over for it to be included in the profile
   -- }
 }
 
-return packer.startup {
+return require("packer").startup {
   function(use)
     use {
       "wbthomason/packer.nvim",
@@ -672,7 +683,8 @@ return packer.startup {
 
     -- Local
     use {
-      "~/Projects/auto-session",
+      "rmagatti/auto-session",
+      branch = "merge-session-lens",
       config = function()
         require "rmagatti.auto-session"
         require "rmagatti.session-lens"
@@ -680,7 +692,7 @@ return packer.startup {
     }
 
     use {
-      "~/Projects/alternate-toggler",
+      "rmagatti/alternate-toggler",
       config = function()
         require("alternate-toggler").setup {
           alternates = {
@@ -697,7 +709,7 @@ return packer.startup {
     }
 
     use {
-      "~/Projects/goto-preview",
+      "rmagatti/goto-preview",
       config = function()
         require "rmagatti.goto-preview"
       end,
@@ -711,8 +723,8 @@ return packer.startup {
     }
 
     -- use {
-    --   "~/Projects/session-lens",
-    --   requires = { "~/Projects/auto-session", "nvim-telescope/telescope.nvim" },
+    --   "rmagatti/session-lens",
+    --   requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
     --   config = function()
     --     require "rmagatti.session-lens"
     --     require("telescope").load_extension "session-lens"
@@ -721,7 +733,7 @@ return packer.startup {
     -- }
 
     -- use {
-    --   "~/Projects/telescope-ui-select.nvim",
+    --   "rmagatti/telescope-ui-select.nvim",
     --   requires = { "nvim-telescope/telescope.nvim" },
     --   after = "telescope.nvim",
     --   config = function()
@@ -730,7 +742,7 @@ return packer.startup {
     -- }
     --
     use {
-      "~/Projects/igs.nvim",
+      "rmagatti/igs.nvim",
       event = { "BufReadPost" },
       config = function()
         require "rmagatti.igs"
@@ -787,6 +799,13 @@ return packer.startup {
         require("rmagatti.dressing").setup()
       end,
     }
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+
   end,
   config = config,
 }
