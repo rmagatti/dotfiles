@@ -220,6 +220,5 @@ vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
 -- TODO: remove me?
 vim.opt.syntax = "off"
 
-require "packer_compiled"
 require "plugins"
 require "rmagatti.mappings"
