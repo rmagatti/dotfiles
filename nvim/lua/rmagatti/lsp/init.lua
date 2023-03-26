@@ -1,3 +1,5 @@
+require("neodev").setup()
+
 local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
 require("mason").setup {}

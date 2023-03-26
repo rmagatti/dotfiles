@@ -189,7 +189,7 @@ alias gitb="git branch --sort=committerdate"
 alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
-alias v=nvim
+alias v="CC=gcc-12 nvim"
 alias vv="neovide --multigrid"
 
 function gitsqa() {
@@ -351,7 +351,9 @@ ulimit -S -n 2048
 # export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
 # eval $(thefuck --alias)
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+export PATH=$PATH:/Users/rmagatti/.cargo/bin
+export CC=gcc-12

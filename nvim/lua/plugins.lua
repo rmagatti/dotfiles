@@ -1,7 +1,7 @@
 local ensure_packer = function()
-  local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -244,12 +244,6 @@ return require("packer").startup {
       end,
     }
 
-    --    -- TODO: do I really use this?
-    --    --use {
-    --    -- 'michaeljsmith/vim-indent-object',
-    --    -- event = 'BufReadPost'
-    --    --}
-
     use {
       "mg979/vim-visual-multi",
       branch = "master",
@@ -259,22 +253,24 @@ return require("packer").startup {
       end,
     }
 
-    -- LSP
     use {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      {
-        "neovim/nvim-lspconfig",
-        config = function()
-          require "rmagatti.lsp"
-        end,
-      },
-      {
-        "j-hui/fidget.nvim",
-        config = function()
-          require "rmagatti.fidget"
-        end,
-      },
+      "neovim/nvim-lspconfig",
+      config = function()
+        require "rmagatti.lsp"
+      end,
+    }
+
+    -- LSP
+    use "williamboman/mason.nvim"
+
+
+    use "williamboman/mason-lspconfig.nvim"
+
+    use {
+      "j-hui/fidget.nvim",
+      config = function()
+        require "rmagatti.fidget"
+      end,
     }
 
     use {
@@ -297,7 +293,7 @@ return require("packer").startup {
       run = "make install_jsregexp",
       config = function()
         require "rmagatti.luasnip"
-      end
+      end,
     }
 
     use "rafamadriz/friendly-snippets"
@@ -330,9 +326,7 @@ return require("packer").startup {
 
     -- Lua plugin dev
     use {
-      "folke/neodev.nvim",
-      module = "neodev",
-      ft = "lua",
+      "folke/neodev.nvim"
     }
 
     -- -- -- Snippets
@@ -800,12 +794,20 @@ return require("packer").startup {
       end,
     }
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+    use {
+      "nvim-neorg/neorg",
+      config = function()
+        require("rmagatti.neorg").setup()
+      end,
+      run = ":Neorg sync-parsers",
+      requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
+    }
 
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end,
   config = config,
 }
