@@ -2,4 +2,4 @@ tags
 .DS_Store
 undodir
 .luarc.json
-./nvim/plugin/packer_compiled.lua
+nvim/plugin/packer_compiled.lua
