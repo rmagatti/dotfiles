@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ronnieandrewmagatti/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -321,10 +321,10 @@ export EDITOR=nvim
 # load-nvmrc() {
 #   local node_version="$(nvm version)"
 #   local nvmrc_path="$(nvm_find_nvmrc)"
-# 
+#
 #   if [ -n "$nvmrc_path" ]; then
 #     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-# 
+#
 #     if [ "$nvmrc_node_version" = "N/A" ]; then
 #       nvm install
 #     elif [ "$nvmrc_node_version" != "$node_version" ]; then
@@ -352,8 +352,9 @@ ulimit -S -n 2048
 
 # eval $(thefuck --alias)
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-export PATH=$PATH:/Users/rmagatti/.cargo/bin
+export PATH=$PATH:$HOME/.cargo/bin
 export CC=gcc-12
+source $(brew --prefix nvm)/nvm.sh
