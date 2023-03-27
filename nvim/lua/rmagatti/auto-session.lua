@@ -3,7 +3,7 @@ require("auto-session").setup {
   auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
   auto_session_use_git_branch = false,
 
-  cwd_change_handling = false, -- Should be false if you use session-lens
+  -- cwd_change_handling = false, -- Should be false if you use session-lens
 
   auto_session_enable_last_session = false,
 
