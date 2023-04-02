@@ -66,7 +66,6 @@ cmp.setup.filetype("lua", {
   },
 })
 
--- TODO: enable me? disabling to try and debug input lag/freeze on insert mode
 -- cmp.setup.cmdline("/", {
 --   sources = {
 --     { name = "buffer" },

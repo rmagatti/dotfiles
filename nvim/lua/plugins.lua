@@ -22,18 +22,10 @@ return require("packer").startup {
   function(use)
     use {
       "wbthomason/packer.nvim",
-      -- commit = '8bee5e4ce13691fcb040eced2a219e637b7ef1a1',
     }
 
     use { "tpope/vim-commentary" }
     use { "tpope/vim-abolish" }
-
-    -- use {
-    --   "numToStr/Comment.nvim",
-    --   config = function()
-    --     require "rmagatti.comment"
-    --   end,
-    -- }
 
     use {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -58,9 +50,9 @@ return require("packer").startup {
       },
     }
 
-    -- use {
-    --   "tpope/vim-repeat",
-    -- }
+    use {
+      "tpope/vim-repeat",
+    }
 
     use {
       "akinsho/toggleterm.nvim",
@@ -69,16 +61,6 @@ return require("packer").startup {
         require "rmagatti.toggleterm"
       end,
     }
-
-    --    use {
-    --      "dbeniamine/cheat.sh-vim",
-    --      keys = {
-    --        { "n", "<leader>KB" },
-    --        { "n", "<leader>KK" },
-    --        { "n", "<leader>KP" },
-    --      },
-    --      cmd = { "Cheat", "CheatPaste" },
-    --    }
 
     use {
       "mbbill/undotree",
@@ -188,11 +170,10 @@ return require("packer").startup {
       end,
     }
 
-    --    use {
-    --      "kristijanhusak/vim-dirvish-git",
-    --      opt = true,
-    --      requires = { "justinmk/vim-dirvish" },
-    --    }
+    use {
+      "kristijanhusak/vim-dirvish-git",
+      requires = { "justinmk/vim-dirvish" },
+    }
 
     use {
       "ggandor/leap.nvim",
@@ -208,24 +189,25 @@ return require("packer").startup {
       },
     }
 
-    use {
-      "vimwiki/vimwiki",
-      branch = "dev",
-      setup = function()
-        -- let gwiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}
-        vim.cmd "let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'nested_syntaxes':{'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}}]"
-        vim.cmd [[
-           let g:vimwiki_listsyms = '✗○◐●✓'
-         ]]
-      end,
-      keys = {
-        { "n", "<leader>ww" },
-        { "n", "<leader>wi" },
-        { "n", "<leader>w<leader>w" },
-        { "n", "<leader>ws" },
-      },
-      ft = { "vimwiki", "markdown" },
-    }
+    -- -- TODO: testing out Neorg
+    -- use {
+    --   "vimwiki/vimwiki",
+    --   branch = "dev",
+    --   setup = function()
+    --     -- let gwiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}
+    --     vim.cmd "let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'nested_syntaxes':{'python': 'python', 'c++': 'cpp', 'typescript': 'typescript'}}]"
+    --     vim.cmd [[
+    --        let g:vimwiki_listsyms = '✗○◐●✓'
+    --      ]]
+    --   end,
+    --   keys = {
+    --     { "n", "<leader>ww" },
+    --     { "n", "<leader>wi" },
+    --     { "n", "<leader>w<leader>w" },
+    --     { "n", "<leader>ws" },
+    --   },
+    --   ft = { "vimwiki", "markdown" },
+    -- }
 
     use {
       "tommcdo/vim-exchange",
@@ -264,7 +246,6 @@ return require("packer").startup {
     -- LSP
     use "williamboman/mason.nvim"
 
-
     use "williamboman/mason-lspconfig.nvim"
 
     use {
@@ -301,11 +282,18 @@ return require("packer").startup {
 
     use { "saadparwaiz1/cmp_luasnip" }
 
+    -- TODO: testing out luasnip, remove if test succeeds
     -- use { "hrsh7th/cmp-vsnip", after = "nvim-cmp" }
+    -- -- -- Snippets
+    -- use {
+    --   "hrsh7th/vim-vsnip",
+    -- }
+
     use { "hrsh7th/cmp-nvim-lsp" }
     use { "hrsh7th/cmp-buffer", after = "nvim-cmp" }
     use { "hrsh7th/cmp-path", after = "nvim-cmp" }
-    -- use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
+    -- TODO: is this necessary now that folke/neodev.nvim is installed?
+    --  use { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }
     use { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }
     use { "lukas-reineke/cmp-rg", after = "nvim-cmp" }
 
@@ -327,13 +315,8 @@ return require("packer").startup {
 
     -- Lua plugin dev
     use {
-      "folke/neodev.nvim"
+      "folke/neodev.nvim",
     }
-
-    -- -- -- Snippets
-    -- use {
-    --   "hrsh7th/vim-vsnip",
-    -- }
 
     -- -- Telescope
     use { "nvim-lua/plenary.nvim" }
