@@ -1,3 +1,3 @@
-require "rmagatti.mappings.gx-github-plugins"
+require "rmagatti.mappings.gx-extended"
 require "rmagatti.mappings.neorg"
 require "rmagatti.mappings.sg"

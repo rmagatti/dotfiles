@@ -23,11 +23,13 @@ local function run_bypassing_clipboard(fn)
   return to_return
 end
 
+local group = vim.api.nvim_create_augroup("gx-extended", {
+  clear = false,
+})
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "plugins.lua" },
-  group = vim.api.nvim_create_augroup("gxplugins", {
-    clear = false,
-  }),
+  group = group,
   callback = function()
     vim.keymap.set("n", "gx", function()
       run_bypassing_clipboard(function()
@@ -39,11 +41,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
           local line_string = vim.api.nvim_get_current_line()
           -- Not a great match, but it's good enough for now as well
           local match = line_string:match "(https?%S+)"
-
-          -- print(vim.inspect {
-          --   line_string = line_string,
-          --   match = match,
-          -- })
 
           if not match then
             print "No URL found on current line"
@@ -57,7 +54,24 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
         local github_url = "https://github.com/" .. yanked_string
         vim.api.nvim_call_function("netrw#BrowseX", { github_url, 0 })
-        print(github_url)
+      end)
+    end, {})
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = { "package.json" },
+  group = group,
+  callback = function()
+    vim.keymap.set("n", "gx", function()
+      run_bypassing_clipboard(function()
+        local line_string = vim.api.nvim_get_current_line()
+
+        local line = string.match(line_string, '".*":.*".*"')
+        local pkg = vim.split(line, ":")[1]:gsub('"', "")
+
+        local npm_url = "https://www.npmjs.com/package/" .. pkg
+        vim.api.nvim_call_function("netrw#BrowseX", { npm_url, 0 })
       end)
     end, {})
   end,
