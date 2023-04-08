@@ -787,6 +787,13 @@ return require("packer").startup {
       requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
     }
 
+    use {
+      'rmagatti/gx-extended.nvim',
+      config = function()
+        require('rmagatti.gx-extended')
+      end,
+    }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
