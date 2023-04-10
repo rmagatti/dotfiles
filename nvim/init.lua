@@ -1,4 +1,4 @@
--- require "impatient"
+require "impatient"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
@@ -12,10 +12,6 @@ vim.opt.swapfile = false
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
 local font = "JetBrains_Mono:h"
-
-if vim.g.started_by_firenvim then
-  vim.opt.guifont = font .. tostring(13)
-end
 
 if vim.g.neovide then
   vim.opt.guifont = font .. tostring(13)
@@ -75,7 +71,7 @@ vim.opt.backup = false
 vim.opt.writebackup = false
 
 -- Give more space for displaying messages.
-vim.opt.cmdheight = 3
+vim.opt.cmdheight = 1
 
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 -- delays and poor user experience.
@@ -198,26 +194,6 @@ vim.cmd [[
   source $HOME/.config/nvim/mappings.vim
 ]]
 
--- -- TODO: this mappingg isn't working, conflicts with global toggleterm mapping, fix it
--- vim.keymap.set('t', [[<C-_>]], [[<C-\><C-n>]], { noremap = true })
-
-function _G.delete_hidden_buffers(force)
-  local buffers = vim.api.nvim_list_bufs()
-  for _, buffer in ipairs(buffers) do
-    if vim.fn.buflisted(buffer) and vim.fn.bufwinnr(buffer) == -1 then
-      if not force then
-        vim.api.nvim_command("bwipeout " .. buffer)
-      else
-        vim.api.nvim_command("bwipeout! " .. buffer)
-      end
-    end
-  end
-end
-
-vim.keymap.set("n", "<leader>cab", ":call v:lua.delete_hidden_buffers()<CR>")
-vim.keymap.set("n", "<leader>cab!", ":call v:lua.delete_hidden_buffers(1)<CR>")
-
--- TODO: remove me?
 vim.opt.syntax = "off"
 
 require "plugins"
