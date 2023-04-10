@@ -662,10 +662,9 @@ return require("packer").startup {
     -- Local
     use {
       "rmagatti/auto-session",
-      branch = "merge-session-lens",
+      tag = "v2.0.0",
       config = function()
         require "rmagatti.auto-session"
-        require "rmagatti.session-lens"
       end,
     }
 
@@ -689,7 +688,7 @@ return require("packer").startup {
     use {
       "rmagatti/goto-preview",
       config = function()
-        require "rmagatti.goto-preview"
+        require("rmagatti.goto-preview").setup()
       end,
       keys = {
         { "n", "gpd" },
@@ -788,9 +787,9 @@ return require("packer").startup {
     }
 
     use {
-      'rmagatti/gx-extended.nvim',
+      "rmagatti/gx-extended.nvim",
       config = function()
-        require('rmagatti.gx-extended')
+        require "rmagatti.gx-extended"
       end,
     }
 

@@ -62,5 +62,5 @@ require("telescope").setup {
 
 require("rmagatti.telescope.buffers").setup()
 require("rmagatti.telescope.dotfiles").setup()
-require("rmagatti.telescope.session-searching").setup()
-require("rmagatti.telescope.mappings")
+require "rmagatti.telescope.mappings"
+require("telescope").load_extension "session-lens"
