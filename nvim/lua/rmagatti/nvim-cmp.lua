@@ -52,6 +52,7 @@ cmp.setup {
     { name = "npm", keyword_length = 4 },
     { name = "copilot", group_index = 2 },
     { name = "neorg" },
+    { name = "rg" },
   }, {
     { name = "buffer" },
   }),

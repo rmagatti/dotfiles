@@ -13,3 +13,4 @@ require("rmagatti.lsp.lsp-vimscript").setup()
 require("rmagatti.lsp.lsp-rust").setup()
 
 require("rmagatti.lsp.null-ls").setup(common_on_attach)
+require("rmagatti.lsp.terraform").setup()

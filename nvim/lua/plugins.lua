@@ -789,7 +789,7 @@ return require("packer").startup {
     use {
       "rmagatti/gx-extended.nvim",
       config = function()
-        require "rmagatti.gx-extended"
+        require("rmagatti.gx-extended").setup()
       end,
     }
 
