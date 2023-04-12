@@ -662,7 +662,7 @@ return require("packer").startup {
     -- Local
     use {
       "rmagatti/auto-session",
-      tag = "v2.0.0",
+      branch = "merge-session-lens",
       config = function()
         require "rmagatti.auto-session"
       end,
