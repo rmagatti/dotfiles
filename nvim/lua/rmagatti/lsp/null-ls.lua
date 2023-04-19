@@ -23,6 +23,7 @@ local sources = {
   builtins.code_actions.eslint_d.with(eslint_opts),
   builtins.formatting.stylua,
   builtins.formatting.trim_whitespace.with { filetypes = { "tmux", "teal", "zsh" } },
+  require("typescript.extensions.null-ls.code-actions"),
   -- b.formatting.shfmt,
   -- b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,

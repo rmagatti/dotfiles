@@ -14,11 +14,12 @@ M.setup = function()
       vim.keymap.set("n", "<leader>oi", typescript.actions.organizeImports, { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>ai", typescript.actions.addMissingImports, { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>fa", typescript.actions.fixAll, { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>ru", typescript.actions.removeUnused, { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>", { silent = false, buffer = bufnr })
 
       common_on_attach(client, bufnr)
     end,
+
     -- Undocumented: typescript.nvim does not document this but passing in `init_options` into the server initialization works to set things like relative imports as the default.
     -- Reading this file is what gave me the clue: https://github.com/jose-elias-alvarez/typescript.nvim/blob/main/src/lsp.ts
     init_options = vim.tbl_deep_extend("force", {}, {
@@ -26,7 +27,6 @@ M.setup = function()
         importModuleSpecifierPreference = "relative",
       },
     }),
-
     -- I had this added to test out https://github.com/typescript-language-server/typescript-language-server/issues/206
     -- No need for it if things are working properly
     -- cmd = { "/Users/ronnieandrewmagatti/Projects/typescript-language-server/lib/cli.js", "--stdio" },
@@ -34,7 +34,10 @@ M.setup = function()
 
   require("typescript").setup {
     disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false, -- enable debug logging for commands
+    debug = false,            -- enable debug logging for commands
+    go_to_source_definition = {
+      fallback = true,        -- fall back to standard LSP definition on failure
+    },
     server = tsserver_opts,
   }
 end
