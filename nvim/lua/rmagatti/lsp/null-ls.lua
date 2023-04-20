@@ -37,7 +37,7 @@ local sources = {
 local M = {}
 
 M.setup = function(on_attach)
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+  -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
   null_ls.setup {
     sources = sources,
