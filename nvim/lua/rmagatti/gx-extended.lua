@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
   require("gx-extended").setup {
+    log_level = vim.log.levels.ERROR,
     extensions = {
       {
         autocmd_pattern = { "*.tf" },

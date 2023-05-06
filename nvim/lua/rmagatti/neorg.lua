@@ -11,6 +11,7 @@ M.setup = function()
       ["core.integrations.telescope"] = {},
       ["core.defaults"] = {}, -- Loads default behaviour
       ["core.concealer"] = {}, -- Adds pretty icons to your documents
+      ["core.keybinds"] = {},
       ["core.dirman"] = { -- Manages Neorg workspaces
         config = {
           workspaces = {

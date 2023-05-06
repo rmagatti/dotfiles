@@ -81,7 +81,7 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
-" Open alternate - powered by https://github.com/uptech/alt
+" Open alternate - powered by github.com/uptech/alt
 " Mnemonic open alternate
 " Mnemonic Open Vertical split Alternate
 " Mnemonic Open Split Alternate
