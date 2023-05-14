@@ -661,8 +661,7 @@ return require("packer").startup {
 
     -- Local
     use {
-      "rmagatti/auto-session",
-      branch = "merge-session-lens",
+      "~/Projects/auto-session",
       config = function()
         require "rmagatti.auto-session"
       end,

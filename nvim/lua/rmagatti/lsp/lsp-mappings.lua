@@ -3,7 +3,21 @@ local M = {}
 
 do
   local on = false
+  local has_autocmd = false
+  local autocmd_id
+
   function M.toggle_symbol_highlight()
+    if not has_autocmd then
+      autocmd_id = vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+        pattern = "*",
+        callback = require("rmagatti.lsp.lsp-mappings").highlight_symbol,
+      })
+      has_autocmd = true
+    else
+      vim.api.nvim_del_autocmd(autocmd_id)
+      has_autocmd = false
+    end
+
     if on then
       vim.lsp.buf.clear_references()
       on = false
@@ -116,11 +130,6 @@ M.on_attach = function(client, bufnr)
     vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = colors.fg_gutter })
     vim.api.nvim_set_hl(0, "LspReferenceText", { bg = colors.fg_gutter })
     vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = colors.bg_visual })
-
-    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-      pattern = "*",
-      callback = require("rmagatti.lsp.lsp-mappings").highlight_symbol,
-    })
 
     -- vim.api.nvim_exec(
     --   [[
