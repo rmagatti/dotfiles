@@ -37,10 +37,6 @@ return require("packer").startup {
     --    }
 
     use {
-      "lewis6991/impatient.nvim",
-    }
-
-    use {
       "tpope/vim-surround",
       keys = {
         { "n", "cs" },
