@@ -1,5 +1,5 @@
 local function current_session()
-  return require("auto-session-library").current_session_name()
+  return require("auto-session.lib").current_session_name()
 end
 
 require("lualine").setup {
