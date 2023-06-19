@@ -14,7 +14,7 @@ function M.setup()
         end,
       },
       {
-        patterns = { "*.ts" },
+        patterns = { "*" },
         match_to_url = function(line_string)
           local row_col = vim.api.nvim_win_get_cursor(0)
           local relative_path = vim.fn.expand "%"

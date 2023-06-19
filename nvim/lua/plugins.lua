@@ -246,6 +246,7 @@ return require("packer").startup {
 
     use {
       "j-hui/fidget.nvim",
+      tag = "legacy",
       config = function()
         require "rmagatti.fidget"
       end,
