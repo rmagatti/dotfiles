@@ -1,22 +1,11 @@
-local refactor = require "refactoring"
-refactor.setup()
+local M = {}
 
-_G.list_refactors = function()
-  local opts = require("telescope.themes").get_cursor() -- set personal telescope options
+function M.setup()
+  require("refactoring").setup()
+  require("telescope").load_extension "refactoring"
 
-  require("telescope.pickers").new(opts, {
-    prompt_title = "Refactors",
-    finder = require("telescope.finders").new_table {
-      results = require("refactoring").get_refactors(),
-    },
-    sorter = require("telescope.config").values.generic_sorter(opts),
-    attach_mappings = function()
-      require("telescope.actions").select_default:replace(function(prompt_bufnr)
-        local content = require("telescope.actions.state").get_selected_entry()
-        require("telescope.actions").close(prompt_bufnr)
-        require("refactoring").refactor(content.value)
-      end)
-      return true
-    end,
-  }):find()
+  -- remap to open the Telescope refactoring menu in visual mode
+  vim.keymap.set("v", "<C-r>", require("telescope").extensions.refactoring.refactors, { noremap = true })
 end
+
+return M

@@ -213,15 +213,15 @@ function gitsqi() {
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/ronnieandrewmagatti/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# __conda_setup="$('/Users/rmagatti/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 # if [ $? -eq 0 ]; then
-  # eval "$__conda_setup"
+#     eval "$__conda_setup"
 # else
-  # if [ -f "/Users/ronnieandrewmagatti/.miniconda3/etc/profile.d/conda.sh" ]; then
-#     . "/Users/ronnieandrewmagatti/.miniconda3/etc/profile.d/conda.sh"
-#   else
-#     export PATH="/Users/ronnieandrewmagatti/.miniconda3/bin:$PATH"
-#   fi
+#     if [ -f "/Users/rmagatti/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/rmagatti/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/rmagatti/anaconda3/bin:$PATH"
+#     fi
 # fi
 # unset __conda_setup
 # <<< conda initialize <<<
@@ -344,6 +344,11 @@ ulimit -S -n 2048
 # Pyenv
 # eval "$(pyenv init -)"
 # export PATH="/Users/ronnieandrewmagatti/.pyenv/shims:${PATH}"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Data stuff
 # export PATH=$PATH:~/.local/bin

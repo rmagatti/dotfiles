@@ -19,3 +19,7 @@ vim.keymap.set("n", "<leader>cab", delete_hidden_buffers)
 vim.keymap.set("n", "<leader>cab!", function()
   delete_hidden_buffers { force = true }
 end)
+
+if vim.g.neovide then
+  vim.keymap.set("n", "<D-p>", require("telescope.builtin").git_files, {})
+end
