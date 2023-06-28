@@ -190,7 +190,7 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v="CC=gcc-12 nvim"
-alias vv="neovide --multigrid"
+alias vv="neovide"
 
 function gitsqa() {
   git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&

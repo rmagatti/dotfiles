@@ -15,6 +15,7 @@ local font = "JetBrains_Mono:h"
 
 if vim.g.neovide then
   vim.opt.guifont = font .. tostring(13)
+  vim.g.neovide_refresh_rate = 60
 
   vim.g.neovide_cursor_animation_length = 0.015
   vim.g.neovide_cursor_trail_length = 0.15
