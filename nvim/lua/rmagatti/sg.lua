@@ -7,7 +7,7 @@ M.setup = function()
     on_attach = on_attach,
   }
 
-  vim.keymap.set("n", "<leader>sg", require("sg.telescope").fuzzy_search_results, { noremap = true, silent = true })
+  vim.keymap.set("n", "<leader>sg", require("sg.extensions.telescope").fuzzy_search_results, { noremap = true, silent = true })
 end
 
 return M
