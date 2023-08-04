@@ -766,9 +766,11 @@ return require("packer").startup {
 
     use {
       "sourcegraph/sg.nvim",
+      run = "nvim -l build/init.lua",
       config = require("rmagatti.sg").setup,
-      run = "cargo build --workspace",
-      requires = { "nvim-lua/plenary.nvim" },
+      requires = {
+        "nvim-lua/plenary.nvim",
+      },
     }
 
     use "wakatime/vim-wakatime"
