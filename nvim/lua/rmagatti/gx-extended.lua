@@ -13,23 +13,23 @@ function M.setup()
           return url
         end,
       },
-      {
-        patterns = { "*" },
-        match_to_url = function(line_string)
-          local row_col = vim.api.nvim_win_get_cursor(0)
-          local relative_path = vim.fn.expand "%"
-          local proj_name = require("auto-session.lib").current_session_name()
+      -- {
+      --   patterns = { "*" },
+      --   match_to_url = function(line_string)
+      --     local row_col = vim.api.nvim_win_get_cursor(0)
+      --     local relative_path = vim.fn.expand "%"
+      --     local proj_name = require("auto-session.lib").current_session_name()
 
-          local url = "https://neofinancial.sourcegraph.com/github.com/neofinancial/"
-            .. proj_name
-            .. "/-/blob/"
-            .. relative_path
-            .. "?L"
-            .. tostring(row_col[1])
+      --     local url = "https://neofinancial.sourcegraph.com/github.com/neofinancial/"
+      --       .. proj_name
+      --       .. "/-/blob/"
+      --       .. relative_path
+      --       .. "?L"
+      --       .. tostring(row_col[1])
 
-          return url
-        end,
-      },
+      --     return url
+      --   end,
+      -- },
     },
   }
 end

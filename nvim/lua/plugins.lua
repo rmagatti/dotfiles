@@ -553,11 +553,11 @@ return require("packer").startup {
       "kevinhwang91/nvim-bqf",
       requires = { { "junegunn/fzf", opt = true }, { "junegunn/fzf.vim", opt = true } },
       ft = { "qf" },
-      config = function()
-        require("bqf").setup {
-          auto_enable = true,
-        }
-      end,
+      -- config = function()
+      --   require("bqf").setup {
+      --     auto_enable = true,
+      --   }
+      -- end,
     }
 
     -- Aligning
