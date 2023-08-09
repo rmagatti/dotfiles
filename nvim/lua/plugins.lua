@@ -531,14 +531,26 @@ return require("packer").startup {
       cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
     }
 
-    -- Typescript utils
+    -- -- Typescript utils
+    -- use {
+    --   "jose-elias-alvarez/null-ls.nvim",
+    -- }
+
+    -- use {
+    --   "jose-elias-alvarez/typescript.nvim",
+    --   requires = { "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim" },
+    -- }
+
     use {
-      "jose-elias-alvarez/null-ls.nvim",
+      "pmizio/typescript-tools.nvim",
+      requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     }
 
     use {
-      "jose-elias-alvarez/typescript.nvim",
-      requires = { "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim" },
+      'mfussenegger/nvim-lint',
+      config = function()
+        require('rmagatti.nvim-lint').setup()
+      end
     }
 
     use {

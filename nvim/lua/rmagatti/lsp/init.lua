@@ -1,7 +1,5 @@
 require("neodev").setup()
 
-local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
-
 require("mason").setup {}
 require("mason-lspconfig").setup {}
 require("rmagatti.lsp.lsp-lua").setup()
@@ -13,5 +11,4 @@ require("rmagatti.lsp.lsp-rust").setup()
 require("rmagatti.lsp.lsp-prisma").setup()
 require("rmagatti.lsp.lsp-python").setup()
 
-require("rmagatti.lsp.null-ls").setup(common_on_attach)
 require("rmagatti.lsp.terraform").setup()
