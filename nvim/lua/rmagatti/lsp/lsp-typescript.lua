@@ -3,7 +3,6 @@ local M = {}
 M.setup = function()
   local capabilities = require("rmagatti.lsp.lsp-common").capabilities
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
-  local typescript = require "typescript"
 
   local tsserver_opts = vim.tbl_deep_extend("force", {}, {
     capabilities = vim.tbl_deep_extend("force", capabilities, {
@@ -11,11 +10,12 @@ M.setup = function()
       documentHighlightProvider = true,
     }),
     on_attach = function(client, bufnr)
-      vim.keymap.set("n", "<leader>oi", typescript.actions.organizeImports, { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>ai", typescript.actions.addMissingImports, { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>fa", typescript.actions.fixAll, { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>ru", typescript.actions.removeUnused, { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>oi", ":TSToolsOrganizeImports", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>ai", ":TSToolsAddMissingImports", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>fa", ":TSToolsFixAll", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>ru", ":TSToolsRemoveUnused", { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>gD", ":TSToolsGoToSourceDefinition<CR>", { silent = false, buffer = bufnr })
 
       common_on_attach(client, bufnr)
     end,
@@ -32,13 +32,28 @@ M.setup = function()
     -- cmd = { "/Users/ronnieandrewmagatti/Projects/typescript-language-server/lib/cli.js", "--stdio" },
   })
 
-  require("typescript").setup {
-    disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false,            -- enable debug logging for commands
-    go_to_source_definition = {
-      fallback = true,        -- fall back to standard LSP definition on failure
+  require("typescript-tools").setup {
+    capabilities = tsserver_opts.capabilities,
+    on_attach = tsserver_opts.on_attach,
+    init_options = tsserver_opts.init_options,
+
+    settings = {
+      tsserver_file_preferences = {
+        includeInlayParameterNameHints = "all",
+        includeCompletionsForModuleExports = true,
+        quotePreference = "auto",
+      },
+      tsserver_format_options = {
+        allowIncompleteCompletions = false,
+        allowRenameOfImportPath = false,
+      },
+      tsserver_plugins = {
+        -- for TypeScript v4.9+
+        "@styled/typescript-styled-plugin",
+        -- or for older TypeScript versions
+        -- "typescript-styled-plugin",
+      },
     },
-    server = tsserver_opts,
   }
 end
 

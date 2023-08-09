@@ -46,7 +46,6 @@ M.on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { buffer = bufnr, silent = true }
   -- Code navigation
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -68,7 +67,7 @@ M.on_attach = function(client, bufnr)
   -- Refactoring and actions
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<localleader>a", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<M-CR>", vim.lsp.buf.code_action, opts)
+  vim.keymap.set({"n", "x", "v"}, "<M-CR>", vim.lsp.buf.code_action, opts)
 
   if
     type(client.server_capabilities.codeActionProvider) == "table"
@@ -79,7 +78,7 @@ M.on_attach = function(client, bufnr)
       return
     end
 
-    vim.keymap.set("n", "<CR>", vim.lsp.buf.code_action, opts)
+    vim.keymap.set({"n", "x", "v"}, "<CR>", vim.lsp.buf.code_action, opts)
   end
 
   -- Diagnostics
