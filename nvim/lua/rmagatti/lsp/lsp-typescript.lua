@@ -10,11 +10,11 @@ M.setup = function()
       documentHighlightProvider = true,
     }),
     on_attach = function(client, bufnr)
-      vim.keymap.set("n", "<leader>oi", ":TSToolsOrganizeImports", { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>ai", ":TSToolsAddMissingImports", { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>fa", ":TSToolsFixAll", { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>ru", ":TSToolsRemoveUnused", { silent = false, buffer = bufnr })
-      vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>oi", ":TSToolsOrganizeImports<CR>", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>ai", ":TSToolsAddMissingImports<CR>", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>fa", ":TSToolsFixAll<CR>", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>ru", ":TSToolsRemoveUnused<CR>", { silent = false, buffer = bufnr })
+      -- vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>gD", ":TSToolsGoToSourceDefinition<CR>", { silent = false, buffer = bufnr })
 
       common_on_attach(client, bufnr)

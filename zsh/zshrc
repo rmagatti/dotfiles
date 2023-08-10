@@ -109,8 +109,8 @@ source $ZSH/oh-my-zsh.sh
 function gitc() {
   if [ -z "$1" ];
   then
-    echo ERROR: No commit message was given. Please enter a commit message 1>&2
-    echo gitc \"Add something somewhere because of something\"
+    echo WARN: No commit message was given. Running git commit without a message.
+    git commit
   else
     branch="$(git symbolic-ref --short HEAD)"
     ticket="$(grep -Eo '(?i)sc[0-9]+|sc-[0-9]+|ENG.*-[0-9]+' <<< \"$branch\")"
