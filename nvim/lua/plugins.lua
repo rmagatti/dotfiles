@@ -54,20 +54,16 @@ require("lazy").setup({
     "jremmen/vim-ripgrep",
     cmd = { "Rg" },
   },
-  -- {
-  --   "mhinz/vim-grepper",
-  --   lazy = false,
-  --   config = function()
-  --     vim.cmd [[
-  --       nmap gs <Plug>(GrepperOperator)
-  --       xmap gs <Plug>(GrepperOperator)
-  --     ]]
-  --   end,
-  --   cmd = { "Grepper", "<Plug>(GrepperOperator)" },
-  --   keys = {
-  --     { "gs" },
-  --   },
-  -- },
+  {
+    "mhinz/vim-grepper",
+    lazy = false,
+    init = function()
+      vim.cmd [[
+        nmap gs <plug>(GrepperOperator)
+        xmap gs <plug>(GrepperOperator)
+      ]]
+    end,
+  },
   {
     "nvim-tree/nvim-web-devicons",
     config = function()
