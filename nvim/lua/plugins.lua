@@ -561,6 +561,7 @@ require("lazy").setup({
   },
   {
     "rmagatti/gx-extended.nvim",
+    event = "VeryLazy",
     config = function()
       require("rmagatti.gx-extended").setup()
     end,
