@@ -35,5 +35,5 @@ vim.keymap.set(
   function()
     require("goto-preview").goto_preview_definition { focus_on_open = false, dismiss_on_move = true }
   end,
-  { noremap = true }
+  { noremap = true, describe = "Peek definition" }
 )

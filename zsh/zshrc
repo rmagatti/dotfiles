@@ -364,3 +364,6 @@ export PATH=$PATH:$HOME/.cargo/bin
 export CC=gcc-12
 source $(brew --prefix nvm)/nvm.sh
 export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
+
+# Add ssh agent
+ssh-add
