@@ -157,7 +157,8 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim",
   {
     "j-hui/fidget.nvim",
-    version = "legacy",
+    tag = "legacy",
+    event = "LspAttach",
     config = function()
       require "rmagatti.fidget"
     end,
@@ -323,7 +324,7 @@ require("lazy").setup({
   },
   {
     "nvim-lualine/lualine.nvim",
-    lazy = false,
+    event = "VeryLazy",
     dependencies = { { "nvim-tree/nvim-web-devicons", optional = true } },
     config = function()
       require "rmagatti.lualine"
@@ -452,10 +453,11 @@ require("lazy").setup({
   },
   {
     "AckslD/nvim-neoclip.lua",
-    dependencies = { "tami5/sqlite.lua", },
+    -- dependencies = { "tami5/sqlite.lua", },
+    event = "BufReadPost",
     config = function()
       require("neoclip").setup {
-        enable_persistant_history = true,
+        -- enable_persistant_history = true,
       }
       vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
     end,
@@ -503,6 +505,7 @@ require("lazy").setup({
   {
     "rmagatti/igs.nvim",
     event = { "BufReadPost" },
+    dev = true,
     config = function()
       require "rmagatti.igs"
     end,
@@ -510,7 +513,6 @@ require("lazy").setup({
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
     config = function()
       require("rmagatti.copilot").setup()
     end,
@@ -518,6 +520,7 @@ require("lazy").setup({
   {
     "zbirenbaum/copilot-cmp",
     dependencies = { "zbirenbaum/copilot.lua" },
+    event = { "InsertEnter", "LspAttach" },
     config = function()
       require("rmagatti.copilot-cmp").setup()
     end,
@@ -537,6 +540,9 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/cmp-nvim-lsp"
+    },
+    keys = {
+      { "<leader>sg" },
     },
   },
   {
@@ -558,6 +564,10 @@ require("lazy").setup({
     end,
     build = ":Neorg sync-parsers",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
+    cmd = { "Neorg" },
+    keys = {
+      { "<leader>nn" }
+    }
   },
   {
     "rmagatti/gx-extended.nvim",

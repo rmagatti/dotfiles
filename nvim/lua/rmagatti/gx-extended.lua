@@ -6,6 +6,7 @@ function M.setup()
     extensions = {
       {
         patterns = { "*.tf" },
+        name = "neo terraform modules",
         match_to_url = function(line_string)
           local module_name = string.match(line_string, "s3::.*/modules/([^/].*)/.*.zip")
           local url = "https://github.com/neofinancial/terraform-modules/tree/master/modules/" .. module_name
@@ -14,8 +15,8 @@ function M.setup()
         end,
       },
       {
-        patterns = { "*" },
-        name = "neofinancial sourcegraph",
+        patterns = { "**/Projects/Neo/**" },
+        name = "neo sourcegraph",
         match_to_url = function(line_string)
           local row_col = vim.api.nvim_win_get_cursor(0)
           local relative_path = vim.fn.expand "%"
