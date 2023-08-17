@@ -267,14 +267,14 @@ require("lazy").setup({
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false, -- make sure we load this during startup
     priority = 1000,
     config = function()
       require "rmagatti.tokyonight"
     end,
   },
   {
-    "nvim-treesitter/nvim-treesitter", -- TODO: lazy load me! (maybe)
+    "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
       require "rmagatti.treesitter"
