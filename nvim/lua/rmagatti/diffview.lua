@@ -3,9 +3,11 @@ local cb = require("diffview.config").diffview_callback
 
 require("diffview").setup {
   diff_binaries = false, -- Show diffs for binaries
+  use_icons = true, -- Requires nvim-web-devicons
   file_panel = {
-    width = 35,
-    use_icons = true, -- Requires nvim-web-devicons
+    win_config = {
+      width = 35,
+    }
   },
   key_bindings = {
     -- The `view` bindings are active in the diff buffers, only when the current
@@ -33,6 +35,6 @@ require("diffview").setup {
 }
 
 vim.cmd [[
-nnoremap <leader>ddo :DiffviewOpen<CR>
-nnoremap <leader>ddc :DiffviewClose<CR>
+  nnoremap <leader>ddo :DiffviewOpen<CR>
+  nnoremap <leader>ddc :DiffviewClose<CR>
 ]]

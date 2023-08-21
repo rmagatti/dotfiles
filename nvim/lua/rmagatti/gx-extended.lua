@@ -2,7 +2,8 @@ local M = {}
 
 function M.setup()
   require("gx-extended").setup {
-    log_level = vim.log.levels.ERROR,
+    log_level = vim.log.levels.INFO,
+    open_fn = require'lazy.util'.open,
     extensions = {
       {
         patterns = { "*.tf" },

@@ -242,19 +242,24 @@ require("lazy").setup({
     dependencies = "vim-fugitive",
   },
   {
-    "TimUntersberger/neogit",
-    optional = true,
+    "NeogitOrg/neogit",
     cmd = { "Neogit" },
     keys = {
       { "<leader>gg" },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",                 -- required
+      "nvim-telescope/telescope.nvim",         -- optional
+      "sindrets/diffview.nvim",                -- optional
     },
     config = function()
       require("neogit").setup {
         integrations = {
           diffview = true,
+          telescope = true
         },
       }
-      vim.cmd [[nnoremap <leader>gg <cmd>Neogit<CR>]]
+      vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<CR>', {})
     end,
   },
   {
