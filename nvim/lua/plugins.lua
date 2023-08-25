@@ -128,6 +128,7 @@ require("lazy").setup({
   },
   {
     "glacambre/firenvim",
+    lazy = false,
     build = function()
       vim.fn["firenvim#install"](0)
     end,
@@ -359,6 +360,7 @@ require("lazy").setup({
   },
   {
     'mfussenegger/nvim-lint',
+    event = "BufReadPost",
     config = function()
       require('rmagatti.nvim-lint').setup()
     end
