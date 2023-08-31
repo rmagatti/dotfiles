@@ -1,5 +1,5 @@
-require "rmagatti.mappings.neorg"
 require "rmagatti.mappings.sg"
+require "rmagatti.mappings.neorg"
 
 local function delete_hidden_buffers(options)
   local force = options and options.force or false
