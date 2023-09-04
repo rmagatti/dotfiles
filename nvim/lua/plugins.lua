@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  { "tpope/vim-eunuch" },
   {
     "tpope/vim-commentary",
     keys = {
