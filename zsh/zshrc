@@ -367,3 +367,10 @@ export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
 
 # Add ssh agent
 ssh-add
+
+# bun completions
+[ -s "/Users/ronnieandrewmagatti/.bun/_bun" ] && source "/Users/ronnieandrewmagatti/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
