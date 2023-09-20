@@ -4,7 +4,15 @@ vim.keymap.set(
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
   {}
 )
-vim.keymap.set("n", "<C-p>", require("telescope.builtin").git_files, {})
+
+vim.keymap.set("n", "<C-p>", function()
+  local success, _ = pcall(require("telescope.builtin").git_files)
+  if not success then
+    require("telescope.builtin").find_files()
+    return
+  end
+end, {})
+
 vim.keymap.set("n", "<C-f>", require("telescope.builtin").find_files, {})
 vim.keymap.set("n", "<leader>ps", require("telescope.builtin").live_grep, {})
 vim.keymap.set(

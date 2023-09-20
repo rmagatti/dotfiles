@@ -21,5 +21,12 @@ vim.keymap.set("n", "<leader>cab!", function()
 end)
 
 if vim.g.neovide then
-  vim.keymap.set("n", "<D-p>", require("telescope.builtin").git_files, {})
+  vim.keymap.set("n", "<D-p>", function()
+    local success, _ = pcall(require("telescope.builtin").git_files)
+    if not success then
+      require("telescope.builtin").find_files()
+      return
+    end
+  end
+  , {})
 end
