@@ -189,8 +189,8 @@ alias gitb="git branch --sort=committerdate"
 alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
-alias v="CC=gcc-12 nvim"
-alias vv="CC=gcc-12 neovide"
+alias v="nvim"
+alias vv="neovide"
 
 function gitsqa() {
   git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&
@@ -374,3 +374,4 @@ ssh-add
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export CC=gcc-12 
