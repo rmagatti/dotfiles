@@ -190,7 +190,7 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v="nvim"
-alias vv="neovide"
+alias vv="neovide --multigrid"
 
 function gitsqa() {
   git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&
@@ -227,7 +227,7 @@ function gitsqi() {
 # <<< conda initialize <<<
 
 # Set fzf installation directory path
-export FZF_BASE=/usr/local/bin/fzf
+export FZF_BASE=/opt/homebrew/bin/fzf
 enable-fzf-tab
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -279,6 +279,8 @@ alias gn=goneovim --exttabline --extcmdline --extmessages --extpopupmenu
 if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
   export COLORTERM="truecolor"
 fi
+
+bindkey '^r' fzf-history-widget
 
 # Add bindings to the vicmd keymap
 bindkey -a j backward-char
@@ -345,10 +347,10 @@ ulimit -S -n 2048
 # eval "$(pyenv init -)"
 # export PATH="/Users/ronnieandrewmagatti/.pyenv/shims:${PATH}"
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# # eval "$(pyenv virtualenv-init -)"
 
 # Data stuff
 # export PATH=$PATH:~/.local/bin
