@@ -147,10 +147,10 @@ require("lazy").setup({
   },
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
     dependencies = {
       "j-hui/fidget.nvim"
     },
+    event = "BufReadPost",
     config = function()
       require "rmagatti.lsp"
     end,
