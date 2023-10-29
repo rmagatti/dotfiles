@@ -9,7 +9,7 @@ M.setup = function()
         },
       },
       ["core.integrations.telescope"] = {},
-      ["core.defaults"] = {}, -- Loads default behaviour
+      ["core.defaults"] = {},  -- Loads default behaviour
       ["core.concealer"] = {}, -- Adds pretty icons to your documents
       ["core.keybinds"] = {
         config = {
@@ -24,7 +24,6 @@ M.setup = function()
         config = {
           workspaces = {
             notes = "~/.notes",
-            origami = "~/.notes/origami_notes",
           },
           default_workspace = "notes",
           index = "index.norg",
@@ -32,6 +31,9 @@ M.setup = function()
       },
     },
   }
+
+  vim.keymap.set("n", "<leader>nn", ":Neorg index<CR>", { silent = true, noremap = true })
+  vim.keymap.set("n", "<leader>nr", ":Neorg return<CR>", { silent = true, noremap = true })
 
   vim.api.nvim_create_autocmd({ "BufEnter" }, {
     pattern = "*.norg",

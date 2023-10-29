@@ -64,3 +64,4 @@ require("rmagatti.telescope.buffers").setup()
 require("rmagatti.telescope.dotfiles").setup()
 require "rmagatti.telescope.mappings"
 require("telescope").load_extension "session-lens"
+require("telescope").load_extension "fzf"

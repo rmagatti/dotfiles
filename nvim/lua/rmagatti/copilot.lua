@@ -41,6 +41,7 @@ M.setup = function()
         prev = "<C-l>",
       },
     },
+    copilot_node_command = "node",
     panel = { enabled = false },
   }
 end

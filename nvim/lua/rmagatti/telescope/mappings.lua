@@ -4,7 +4,15 @@ vim.keymap.set(
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
   {}
 )
-vim.keymap.set("n", "<C-p>", require("telescope.builtin").git_files, {})
+
+vim.keymap.set("n", "<C-p>", function()
+  local success, _ = pcall(require("telescope.builtin").git_files)
+  if not success then
+    require("telescope.builtin").find_files()
+    return
+  end
+end, {})
+
 vim.keymap.set("n", "<C-f>", require("telescope.builtin").find_files, {})
 vim.keymap.set("n", "<leader>ps", require("telescope.builtin").live_grep, {})
 vim.keymap.set(
@@ -25,8 +33,8 @@ vim.keymap.set("n", "<localleader>ht", require("telescope.builtin").help_tags, {
 vim.keymap.set("n", "<localleader>mp", require("telescope.builtin").man_pages, {})
 vim.keymap.set("n", "<localleader>ma", require("telescope.builtin").marks, {})
 vim.keymap.set("n", "<localleader>cs", require("telescope.builtin").colorscheme, {})
-vim.keymap.set("n", "<localleader>qf", require("telescope.builtin").quickfix, {})
-vim.keymap.set("n", "<localleader>qfh", require("telescope.builtin").quickfixhistory, {})
+vim.keymap.set("n", "<localleader>qs", require("telescope.builtin").quickfix, {})
+vim.keymap.set("n", "<localleader>qh", require("telescope.builtin").quickfixhistory, {})
 vim.keymap.set("n", "<localleader>ll", require("telescope.builtin").loclist, {})
 vim.keymap.set("n", "<localleader>jl", require("telescope.builtin").jumplist, {})
 vim.keymap.set("n", "<localleader>vo", require("telescope.builtin").vim_options, {})
