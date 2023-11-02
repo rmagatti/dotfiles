@@ -134,7 +134,7 @@ function gitca() {
 }
 
 function gclone() {
-  git clone git@github.com:neofinancial/$1.git ~/Projects/Neo/$1
+  git clone git@github.com:Montra/$1.git ~/Projects/Montra/$1
 }
 
 

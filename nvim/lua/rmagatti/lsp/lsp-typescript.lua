@@ -14,7 +14,7 @@ M.setup = function()
       vim.keymap.set("n", "<leader>ai", ":TSToolsAddMissingImports<CR>", { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>fa", ":TSToolsFixAll<CR>", { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>ru", ":TSToolsRemoveUnused<CR>", { silent = false, buffer = bufnr })
-      -- vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", { silent = false, buffer = bufnr })
+      vim.keymap.set("n", "<leader>rf", ":TSToolsRenameFile<CR>", { silent = false, buffer = bufnr })
       vim.keymap.set("n", "<leader>gD", ":TSToolsGoToSourceDefinition<CR>", { silent = false, buffer = bufnr })
 
       common_on_attach(client, bufnr)
