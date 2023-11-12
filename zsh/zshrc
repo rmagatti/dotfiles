@@ -134,7 +134,7 @@ function gitca() {
 }
 
 function gclone() {
-  git clone git@github.com:Montra/$1.git ~/Projects/Montra/$1
+  git clone git@github.com:Montra-Interactive/$1.git ~/Projects/Montra/$1
 }
 
 
@@ -376,4 +376,5 @@ ssh-add
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+PATH=$PATH:~/.local/bin
 export CC=gcc-12 
