@@ -30,3 +30,16 @@ if vim.g.neovide then
   end
   , {})
 end
+
+local function close_fugitive_buffers()
+  local buffers = vim.api.nvim_list_bufs()
+
+  for _, buffer in ipairs(buffers) do
+    local buffer_name = vim.api.nvim_buf_get_name(buffer)
+    if string.find(buffer_name, "fugitive:") then
+      vim.api.nvim_buf_delete(buffer, { force = true })
+    end
+  end
+end
+
+vim.keymap.set("n", "<localleader>cd", close_fugitive_buffers, { desc = "Close diff (fugitive) buffers" })
