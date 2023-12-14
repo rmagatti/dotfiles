@@ -11,17 +11,25 @@ vim.opt.swapfile = false
 
 vim.opt.mouse = "a"
 -- set shada (print shada file contents)
-local font = "JetBrains_Mono:h"
+local font = "JetBrainsMono Nerd Font:h"
 
 if vim.g.neovide then
-  vim.opt.guifont = font .. tostring(13)
-  vim.g.neovide_refresh_rate = 60
+  vim.opt.guifont = font .. tostring(11)
+  vim.g.neovide_refresh_rate = 120
 
   vim.g.neovide_cursor_animation_length = 0.015
   vim.g.neovide_cursor_trail_length = 0.15
   vim.g.neovide_input_macos_alt_is_meta = true
   vim.g.neovide_floating_blur_amount_x = 3.0
   vim.g.neovide_floating_blur_amount_y = 3.0
+  vim.g.neovide_underline_stroke_scale = 1
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_padding_top = 55
+
+  vim.g.neovide_floating_shadow = true
+  vim.g.neovide_floating_z_height = 10
+  vim.g.neovide_light_angle_degrees = 45
+  vim.g.neovide_light_radius = 5
 
   -- Allow clipboard copy paste in Neovide
   vim.g.neovide_input_use_logo = 1

@@ -102,8 +102,8 @@ nnoremap <leader>q :q<CR>
 " " Delete all commented lines then save to reformat
 nnoremap <leader>dac :g/\v^(\/\/<bar>.*\/\/)/d_<CR>:w<CR>:noh<CR>
 
-" Select line
-nnoremap vv V
+" " Select line
+" nnoremap vv V
 
 " Buffer next/previous
 nnoremap <leader>; <cmd>bn<CR>

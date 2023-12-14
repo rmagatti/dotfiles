@@ -67,41 +67,37 @@ M.on_attach = function(client, bufnr)
   -- Refactoring and actions
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<localleader>a", vim.lsp.buf.code_action, opts)
-  vim.keymap.set({"n", "x", "v"}, "<M-CR>", vim.lsp.buf.code_action, opts)
+  vim.keymap.set({ "n", "x", "v" }, "<M-CR>", vim.lsp.buf.code_action, opts)
 
   if
-    type(client.server_capabilities.codeActionProvider) == "table"
+      type(client.server_capabilities.codeActionProvider) == "table"
       and not vim.tbl_isempty(client.server_capabilities.codeActionProvider)
-    or client.server_capabilities.codeActionProvider ~= nil
+      or client.server_capabilities.codeActionProvider ~= nil
   then
     if vim.bo.filetype == "vimwiki" then
       return
     end
 
-    vim.keymap.set({"n", "x", "v"}, "<CR>", vim.lsp.buf.code_action, opts)
+    vim.keymap.set({ "n", "x", "v" }, "<CR>", vim.lsp.buf.code_action, opts)
   end
 
   -- Diagnostics
   vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts) -- not mneumonic
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts) -- diagnostic next (not mneumonic but [ and ] work as next/previous)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts) -- diagnostic previous (not mneumonic)
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)         -- diagnostic next (not mneumonic but [ and ] work as next/previous)
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)         -- diagnostic previous (not mneumonic)
   vim.keymap.set("n", "<leader>dl", function()
     require("telescope.builtin").diagnostics()
-  end, opts) -- diagnostics telescope list
+  end, opts)                                                        -- diagnostics telescope list
   vim.keymap.set("n", "<leader>dq", vim.diagnostic.setqflist, opts) -- diagnostic quickfix list
 
   -- Symbols
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>o", "<cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
   vim.keymap.set("n", "<leader>ws", function()
-    return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" } }
-  end, opts)
-  vim.keymap.set("n", "<leader>ws", function()
-    return require("telescope.builtin").lsp_dynamic_workspace_symbols { file_ignore_patterns = { "node_modules/**" } }
+    return require("telescope.builtin").lsp_dynamic_workspace_symbols { ignore_symbols = { "node_modules/**" } }
   end, opts)
   vim.keymap.set("n", "<leader>wsf", function()
     return require("telescope.builtin").lsp_dynamic_workspace_symbols {
-      file_ignore_patterns = { "node_modules/**" },
-      tag = { "function" },
+      symbols = { "function" },
     }
   end, opts)
   vim.keymap.set("n", "<leader>ds", function()
@@ -114,8 +110,12 @@ M.on_attach = function(client, bufnr)
     end, opts)
   end
 
-  vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format, opts)
-  vim.keymap.set("v", "<leader>fo", vim.lsp.buf.format, opts)
+  vim.keymap.set("n", "<leader>fo", function()
+    vim.lsp.buf.format { async = true }
+  end, opts)
+  vim.keymap.set("v", "<leader>fo", function()
+    vim.lsp.buf.format { async = true }
+  end, opts)
 
   -- buf_set_keymap("n", "<leader>dac", function()
   --   vim.cmd "g/\v^(//<bar>.*//)/d_<CR>:w<CR>:noh<CR>"
@@ -123,12 +123,12 @@ M.on_attach = function(client, bufnr)
 
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlightProvider then
-    local colors = require("tokyonight.colors").setup {}
+    -- local colors = require("tokyonight.colors").setup {}
 
     -- Says fg_gutter is not a valid color but it either exists or nil is handled as what I want here.
-    vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = colors.fg_gutter })
-    vim.api.nvim_set_hl(0, "LspReferenceText", { bg = colors.fg_gutter })
-    vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = colors.bg_visual })
+    -- vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = colors.fg_gutter })
+    -- vim.api.nvim_set_hl(0, "LspReferenceText", { bg = colors.fg_gutter })
+    -- vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = colors.bg_visual })
 
     -- vim.api.nvim_exec(
     --   [[

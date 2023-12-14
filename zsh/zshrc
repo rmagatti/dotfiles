@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -15,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -75,7 +68,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf fzf-tab aws fast-syntax-highlighting zsh-vim-mode)
+plugins=(git fzf fzf-tab aws fast-syntax-highlighting poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -154,7 +147,7 @@ function gitm() {
 }
 
 function gitmdev() {
-  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout develop && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
 }
 
 function gitmalpha() {
@@ -190,7 +183,7 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v="nvim"
-alias vv="neovide --multigrid"
+alias vv="neovide --frame='transparent' --no-vsync"
 
 function gitsqa() {
   git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&
@@ -200,9 +193,6 @@ function gitsqa() {
 function gitsqi() {
   git rebase -i $(git merge-base master $(git rev-parse --abbrev-ref HEAD)) &&
 }
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -237,9 +227,6 @@ enable-fzf-tab
 
 # Add goneovim to path
 export PATH="/Applications/goneovim.app/Contents/MacOS:$PATH"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 # ====== Brew
 # Uninstall
@@ -378,3 +365,9 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 PATH=$PATH:~/.local/bin
 export CC=gcc-12 
+
+# Created by `pipx` on 2023-12-05 03:57:18
+export PATH="$PATH:/Users/ronniemagatti/.local/bin"
+
+# bun completions
+[ -s "/Users/ronniemagatti/.bun/_bun" ] && source "/Users/ronniemagatti/.bun/_bun"

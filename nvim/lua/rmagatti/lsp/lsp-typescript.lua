@@ -8,6 +8,9 @@ M.setup = function()
     capabilities = vim.tbl_deep_extend("force", capabilities, {
       formatting = false,
       documentHighlightProvider = true,
+      -- Offloading formatting to biomejs
+      documentFormattingProvider = false,
+      documentRangeFormattingProvider = false
     }),
     on_attach = function(client, bufnr)
       vim.keymap.set("n", "<leader>oi", ":TSToolsOrganizeImports<CR>", { silent = false, buffer = bufnr })

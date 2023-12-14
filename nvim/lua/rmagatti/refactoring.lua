@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-  require("refactoring").setup()
+  require("refactoring").setup {}
   require("telescope").load_extension "refactoring"
 
   -- remap to open the Telescope refactoring menu in visual mode

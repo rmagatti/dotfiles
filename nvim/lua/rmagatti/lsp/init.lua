@@ -10,5 +10,6 @@ require("rmagatti.lsp.lsp-vimscript").setup()
 require("rmagatti.lsp.lsp-rust").setup()
 require("rmagatti.lsp.lsp-prisma").setup()
 require("rmagatti.lsp.lsp-python").setup()
+require("rmagatti.lsp.lsp-biome").setup()
 
 require("rmagatti.lsp.terraform").setup()
