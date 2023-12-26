@@ -267,14 +267,8 @@ require("lazy").setup({
       "sindrets/diffview.nvim",        -- optional
     },
     config = function()
-      require("neogit").setup {
-        integrations = {
-          diffview = true,
-          telescope = true
-        },
-      }
-      vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<CR>', {})
-    end,
+      require("rmagatti.neogit")
+    end
   }),
   add_if_vscode(false, {
     "sindrets/diffview.nvim",
@@ -397,11 +391,9 @@ require("lazy").setup({
     "kevinhwang91/nvim-bqf",
     dependencies = { { "junegunn/fzf", optional = true }, { "junegunn/fzf.vim", optional = true } },
     ft = { "qf" },
-    -- config = function()
-    --   require("bqf").setup {
-    --     auto_enable = true,
-    --   }
-    -- end,
+    config = function()
+      require "rmagatti.bqf"
+    end,
   }),
   add_if_vscode(false, {
     "junegunn/vim-easy-align",

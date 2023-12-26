@@ -14,7 +14,7 @@ vim.opt.mouse = "a"
 local font = "JetBrainsMono Nerd Font:h"
 
 if vim.g.neovide then
-  vim.opt.guifont = font .. tostring(11)
+  vim.opt.guifont = font .. tostring(12)
   vim.g.neovide_refresh_rate = 120
 
   vim.g.neovide_cursor_animation_length = 0.015
@@ -171,32 +171,24 @@ vim.opt.foldenable = true
 -- Protip: zi toggles folding
 vim.cmd [[
   function! Fold()
-    set foldenable
-    " normal zM
+    normal zM
   endfunction
 
   function! Unfold()
-    " normal zR
-    set nofoldenable
+    normal zR
   endfunction
 ]]
 
--- -- Add `:Fold` command to fold current buffer.
--- vim.cmd [[
---   command! -nargs=? Fold :call Fold()
---   command! -nargs=? Unfold :call Unfold()
+local function Fold()
+  vim.cmd [[normal zM]]
+end
 
---   " TODO: testing https://github.com/rmagatti/auto-session/issues/109
---   set foldmethod=expr
---   set foldexpr=nvim_treesitter#foldexpr()
---   set foldlevelstart=99
--- ]]
+local function Unfold()
+  vim.cmd [[normal zR]]
+end
 
--- -- Attempt to fix press enter message on starting Firenvim
--- if vim.g.started_by_firenvim == 1 then
---   vim.g.auto_session_enabled = false
---   vim.cmd [[set guifont=JetBrains_Mono:h18]]
--- end
+vim.api.nvim_create_user_command("Fold", Fold, { desc = "Fold current buffer", nargs = "?" })
+vim.api.nvim_create_user_command("Unfold", Unfold, { desc = "Unfold current buffer", nargs = '?' })
 
 -- load mappings
 vim.cmd [[
