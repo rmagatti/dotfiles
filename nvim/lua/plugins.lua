@@ -33,7 +33,10 @@ require("lazy").setup({
       { "gc", mode = "v" },
     }
   }),
-  add_if_vscode(true, { "tpope/vim-abolish" }),
+  add_if_vscode(true, {
+    "tpope/vim-abolish",
+    event = "VeryLazy",
+  }),
   add_if_vscode(true, { "JoosepAlviste/nvim-ts-context-commentstring" }),
   add_if_vscode(true, {
     "tpope/vim-surround",
@@ -181,7 +184,7 @@ require("lazy").setup({
   }),
   add_if_vscode(false, {
     "hrsh7th/nvim-cmp",
-    event = {"InsertEnter", "CmdlineEnter"},
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",

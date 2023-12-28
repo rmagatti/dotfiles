@@ -14,7 +14,7 @@ return {
     keymaps = {
       ["af"] = { query = "@function.outer", desc = "Select outer part of a function region" },
       ["if"] = { query = "@function.inner", desc = "Select inner part of a function region" },
-      ["as"] = { query = "@statement.outer", desc = "Select outer part of a statement region" },
+      ["as"] = { query = "@scope", query_group = "locals", desc = "Select inner part of a scope region" },
       ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop region" },
       ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop region" },
       ["ib"] = { query = "@block.inner", desc = "Select inner part of a block region" },
