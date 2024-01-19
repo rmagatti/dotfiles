@@ -7,6 +7,20 @@ M.setup = function()
   local opts = {
     on_attach = common_on_attach,
     capabilities = capabilities,
+    settings = {
+      ['rust-analyzer'] = {
+        cargo = { allFeatures = true },
+        checkOnSave = true,
+        check = {
+          enable = true,
+          command = 'clippy',
+          features = 'all',
+        },
+        procMacro = {
+          enable = true,
+        },
+      },
+    }
   }
 
   vim.g.rustaceanvim = {
