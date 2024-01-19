@@ -125,13 +125,15 @@ require("lazy").setup({
   add_if_vscode(true, {
     "ggandor/leap.nvim",
     config = function()
-      require("leap").add_default_mappings()
+      require("leap").create_default_mappings()
+      vim.keymap.set({ "n", "x", "o" }, "<localleader>s", '<Plug>(leap-from-window)')
     end,
     keys = {
       { "s" },
       { "S" },
       { "f" },
       { "F" },
+      { "<localleader>s", mode = { "n", "x", "o" } }
     },
   }),
   -- add_if_vscode(true, {
@@ -603,7 +605,7 @@ require("lazy").setup({
   }),
   add_if_vscode(false, {
     'mrcjkb/rustaceanvim',
-    version = '^3',   -- Recommended
+    version = '^3', -- Recommended
     ft = { 'rust' },
   }),
   add_if_vscode(false, {

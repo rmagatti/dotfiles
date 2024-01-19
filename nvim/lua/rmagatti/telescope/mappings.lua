@@ -1,8 +1,10 @@
 vim.keymap.set(
   "n",
   "<D-f>",
-  "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>",
-  {}
+  function()
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())
+  end,
+  { desc = "Current buffer fuzzy find" }
 )
 
 vim.keymap.set("n", "<C-p>", function()
@@ -28,7 +30,7 @@ vim.keymap.set("n", "<localleader>of", "<cmd>lua require('telescope.builtin').ol
 vim.keymap.set("n", "<localleader>cm", require("telescope.builtin").commands, {})
 vim.keymap.set("n", "<localleader>tgs", require("telescope.builtin").tags, {})
 vim.keymap.set("n", "<localleader>cmh", require("telescope.builtin").command_history, {})
-vim.keymap.set("n", "<localleader>sh", require("telescope.builtin").search_history, {})
+vim.keymap.set("n", "<leader>/", require("telescope.builtin").search_history, {})
 vim.keymap.set("n", "<localleader>ht", require("telescope.builtin").help_tags, {})
 vim.keymap.set("n", "<localleader>mp", require("telescope.builtin").man_pages, {})
 vim.keymap.set("n", "<localleader>ma", require("telescope.builtin").marks, {})
@@ -46,7 +48,7 @@ vim.keymap.set("n", "<localleader>ft", require("telescope.builtin").filetypes, {
 vim.keymap.set("n", "<localleader>hl", require("telescope.builtin").highlights, {})
 vim.keymap.set("n", "<localleader>/", function()
   require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown())
-end, {})
+end, { desc = "Find in current buffer" })
 vim.keymap.set("n", "<localleader>bt", require("telescope.builtin").current_buffer_tags, {})
 vim.keymap.set("n", "<localleader>res", require("telescope.builtin").resume, {})
 -- vim.keymap.set("n", "<C-M>p", require("telescope.builtin").resume, {})
