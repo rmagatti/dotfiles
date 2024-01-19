@@ -43,3 +43,22 @@ local function close_fugitive_buffers()
 end
 
 vim.keymap.set("n", "<localleader>cd", close_fugitive_buffers, { desc = "Close diff (fugitive) buffers" })
+
+vim.keymap.set('n', '<localleader>qq',
+  function()
+    if vim.fn.empty(vim.fn.getwininfo()) == 1 then
+      vim.cmd('copen')
+    else
+      local quickfix_open = false
+      ---@diagnostic disable-next-line: param-type-mismatch
+      for _, win in pairs(vim.fn.getwininfo()) do
+        if win['quickfix'] == 1 then
+          quickfix_open = true
+          vim.cmd('cclose')
+        end
+      end
+      if not quickfix_open then
+        vim.cmd('copen')
+      end
+    end
+  end, { noremap = true, silent = true })
