@@ -1,6 +1,9 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+-- Global Statusline
+vim.opt.laststatus = 3
+-- Winbar per buffer with the filename and modified status
 vim.opt.winbar = [[%=%m %f]]
 
 vim.opt.relativenumber = true
