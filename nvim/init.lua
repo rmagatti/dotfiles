@@ -1,6 +1,7 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+vim.opt.winbar = [[%=%m %f]]
 
 vim.opt.relativenumber = true
 vim.opt.number = true

@@ -9,9 +9,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  vim.g.rustaceanvim = {
-    server = opts,
-  }
+  require("lspconfig").gopls.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M

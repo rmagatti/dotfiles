@@ -602,6 +602,11 @@ require("lazy").setup({
     dev = true
   }),
   add_if_vscode(false, {
+    'mrcjkb/rustaceanvim',
+    version = '^3',   -- Recommended
+    ft = { 'rust' },
+  }),
+  add_if_vscode(false, {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
       { "nvim-lua/plenary.nvim" },

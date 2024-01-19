@@ -176,5 +176,5 @@ nnoremap ]q :cnext<CR>
 nnoremap [q :cprev<CR>
 nnoremap <localleader>q :copen<CR>
 
-" Global statusline
+" " Global statusline
 set laststatus=3
