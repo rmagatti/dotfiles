@@ -366,16 +366,6 @@ require("lazy").setup({
     event = { "BufReadPost" },
   }),
   add_if_vscode(false, {
-    "simrat39/symbols-outline.nvim",
-    config = function()
-      require("symbols-outline").setup {
-        highlight_hovered_item = true,
-        show_guides = true,
-      }
-    end,
-    cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
-  }),
-  add_if_vscode(false, {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   }),
