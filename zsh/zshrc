@@ -89,6 +89,19 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+function kc() {
+  local ENV=${1:-"dev"}
+
+  if [ "$ENV" = "dev" ]; then
+    gcloud container clusters get-credentials montra-development-env-gke-cluster --project montra-development-env --region us-east1
+  elif [ "$ENV" = "staging" ]; then
+    gcloud container clusters get-credentials montra-staging-env-gke-cluster --project montra-staging-env --region us-east1
+  else
+    echo "Defaulting to development-env"
+    gcloud container clusters get-credentials montra-development-env-gke-cluster --project montra-development-env --region us-east1
+  fi
+}
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -368,6 +381,7 @@ export CC=gcc-12
 
 # Created by `pipx` on 2023-12-05 03:57:18
 export PATH="$PATH:/Users/ronniemagatti/.local/bin"
+export PATH="/Library/Frameworks/GStreamer.framework/Versions/1.0/bin${PATH:+:$PATH}"
 
 # bun completions
 [ -s "/Users/ronniemagatti/.bun/_bun" ] && source "/Users/ronniemagatti/.bun/_bun"

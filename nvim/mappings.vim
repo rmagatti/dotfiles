@@ -17,6 +17,10 @@ noremap k j
 noremap l k
 noremap ; l
 
+" Navigate folds
+nnoremap zk zj
+nnoremap zl zk
+
 " Copy to system clipboard mapping
 nnoremap cp "+y
 vnoremap cp "+y

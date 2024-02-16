@@ -85,29 +85,29 @@ require("lazy").setup({
       require "rmagatti.nvim-web-devicons"
     end,
   }),
-  add_if_vscode(false, {
-    "vim-test/vim-test",
-    config = function()
-      require("rmagatti.vim-test").setup()
-    end,
-    keys = {
-      { "<leader>tf" },
-      { "<leader>tt" },
-      { "<leader>ts" },
-      { "<leader>tl" },
-      { "<leader>tv" },
-      { "<leader>wtf" },
-      { "<leader>wtt" },
-      { "<leader>wts" },
-      { "<leader>wtl" },
-      { "<leader>wtv" },
-      { "<leader>tdt" },
-      { "<leader>tdf" },
-      { "<leader>tds" },
-      { "<leader>tdl" },
-      { "<leader>tdv" },
-    },
-  }),
+  -- add_if_vscode(false, {
+  --   "vim-test/vim-test",
+  --   config = function()
+  --     require("rmagatti.vim-test").setup()
+  --   end,
+  --   keys = {
+  --     { "<leader>tf" },
+  --     { "<leader>tt" },
+  --     { "<leader>ts" },
+  --     { "<leader>tl" },
+  --     { "<leader>tv" },
+  --     { "<leader>wtf" },
+  --     { "<leader>wtt" },
+  --     { "<leader>wts" },
+  --     { "<leader>wtl" },
+  --     { "<leader>wtv" },
+  --     { "<leader>tdt" },
+  --     { "<leader>tdf" },
+  --     { "<leader>tds" },
+  --     { "<leader>tdl" },
+  --     { "<leader>tdv" },
+  --   },
+  -- }),
   add_if_vscode(false, {
     "windwp/nvim-autopairs",
     config = function()
@@ -136,13 +136,13 @@ require("lazy").setup({
       { "<localleader>s", mode = { "n", "x", "o" } }
     },
   }),
-  -- add_if_vscode(true, {
-  --   "tommcdo/vim-exchange",
-  --   keys = {
-  --     { "cx" },
-  --     { "X", mode = "x" },
-  --   },
-  -- }),
+  add_if_vscode(true, {
+    "tommcdo/vim-exchange",
+    keys = {
+      { "cx" },
+      { "X", mode = "x" },
+    },
+  }),
   add_if_vscode(false, {
     "glacambre/firenvim",
     lazy = false,
@@ -595,7 +595,7 @@ require("lazy").setup({
   }),
   add_if_vscode(false, {
     'mrcjkb/rustaceanvim',
-    version = '^3', -- Recommended
+    version = '^4', -- Recommended
     ft = { 'rust' },
   }),
   add_if_vscode(false, {
@@ -606,6 +606,47 @@ require("lazy").setup({
     },
     config = function()
       require("rmagatti.refactoring").setup()
+    end,
+  }),
+  add_if_vscode(false, {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    -- ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+      "BufReadPre " .. vim.fn.expand "~" .. "/Documents/second_brain/**.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/Documents/second_brain/**.md",
+    },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "Vault",
+          path = vim.fn.expand "~" .. "/Documents/second_brain",
+        },
+      },
+
+      -- see below for full list of options 👇
+    },
+
+  }),
+  add_if_vscode(false, {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter"
+    },
+    event = "VeryLazy",
+    config = function()
+      require("rmagatti.neotest").setup()
     end,
   })
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })

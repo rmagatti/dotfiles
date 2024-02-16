@@ -1,6 +1,41 @@
 ---@diagnostic disable: undefined-field
 local M = {}
 
+-- TODO: finish this
+-- do
+--   local on = false
+--   local has_autocmd = false
+--   local autocmd_id
+
+--   function M.toggle_inlay_hints()
+--     if not has_autocmd then
+--       autocmd_id = vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+--         pattern = "*",
+--         callback = require("rmagatti.lsp.lsp-mappings").highlight_symbol,
+--       })
+--       has_autocmd = true
+--     else
+--       vim.api.nvim_del_autocmd(autocmd_id)
+--       has_autocmd = false
+--     end
+
+--     if on then
+--       vim.lsp.buf.clear_references()
+--       on = false
+--     else
+--       vim.lsp.buf.document_highlight()
+--       on = true
+--     end
+--   end
+
+--   function M.inlay_hints()
+--     if not on then
+--       return
+--     end
+--     vim.lsp.inlay_hint.enable(0, false)
+--   end
+-- end
+
 do
   local on = false
   local has_autocmd = false

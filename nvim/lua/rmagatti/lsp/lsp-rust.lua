@@ -7,7 +7,7 @@ M.setup = function()
   local opts = {
     on_attach = common_on_attach,
     capabilities = capabilities,
-    settings = {
+    default_settings = {
       ['rust-analyzer'] = {
         cargo = { allFeatures = true },
         checkOnSave = true,
