@@ -178,3 +178,9 @@ nnoremap <leader>dt <cmd>call ToggleDiff()<CR>
 " Quickfix next/prev/open
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprev<CR>
+
+" Conceal level for markdown
+augroup markdown
+  autocmd!
+  autocmd FileType markdown setlocal conceallevel=2
+augroup end

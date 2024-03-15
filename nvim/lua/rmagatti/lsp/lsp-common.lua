@@ -6,9 +6,9 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- @param client the lsp client
 -- @param bufnr the buffer number
 local common_on_attach = function(client, bufnr)
-  -- if vim.lsp.inlay_hint then
-  --   vim.lsp.inlay_hint.enable(bufnr, true)
-  -- end
+  if vim.lsp.inlay_hint then
+    vim.lsp.inlay_hint.enable(bufnr, true)
+  end
   mappings.on_attach(client, bufnr)
   signature.on_attach()
 end

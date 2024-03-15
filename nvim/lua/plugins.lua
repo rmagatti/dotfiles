@@ -307,9 +307,10 @@ require("lazy").setup({
       require "rmagatti.treesitter"
     end,
   }),
-  add_if_vscode(true, {
+  add_if_vscode(false, {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost" },
   }),
   add_if_vscode(false, {
     "nvim-treesitter/playground",
@@ -617,8 +618,9 @@ require("lazy").setup({
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      "BufReadPre " .. vim.fn.expand "~" .. "/Documents/second_brain/**.md",
-      "BufNewFile " .. vim.fn.expand "~" .. "/Documents/second_brain/**.md",
+      "BufReadPre " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
+      "VeryLazy"
     },
     dependencies = {
       -- Required.
@@ -630,13 +632,22 @@ require("lazy").setup({
       workspaces = {
         {
           name = "Vault",
-          path = vim.fn.expand "~" .. "/Documents/second_brain",
+          path = vim.fn.expand "~" .. "/Documents/vault",
         },
       },
 
-      -- see below for full list of options 👇
+      daily_notes = {
+        folder = "Daily Notes",
+        template = "Templates/Daily Note Template.md"
+      }
     },
 
+  }),
+  add_if_vscode(false, {
+    "m00qek/baleia.nvim",
+    config = function()
+      require("baleia").setup {}
+    end
   }),
   add_if_vscode(false, {
     "nvim-neotest/neotest",
