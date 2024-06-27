@@ -171,7 +171,7 @@ require("lazy").setup({
       require "rmagatti.lsp"
     end,
   },
-  { "williamboman/mason.nvim" },
+  { "williamboman/mason.nvim", },
   { "williamboman/mason-lspconfig.nvim" },
   {
     "j-hui/fidget.nvim",
@@ -264,6 +264,7 @@ require("lazy").setup({
     "NeogitOrg/neogit",
     -- dev = true,
     lazy = false,
+    branch = "master",
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "nvim-telescope/telescope.nvim", -- optional
@@ -273,14 +274,14 @@ require("lazy").setup({
       require("rmagatti.neogit")
     end
   },
-  {
-    "sindrets/diffview.nvim",
-    config = function()
-      require "rmagatti.diffview"
-    end,
-    cmd = { "DiffviewOpen" },
-    keys = "<leader>ddo",
-  },
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   config = function()
+  --     require "rmagatti.diffview"
+  --   end,
+  --   cmd = { "DiffviewOpen" },
+  --   keys = "<leader>ddo",
+  -- },
   -- add_if_vscode(false, {
   --   "folke/tokyonight.nvim",
   --   lazy = false, -- make sure we load this during startup
@@ -399,6 +400,7 @@ require("lazy").setup({
   -- DAP
   {
     "mfussenegger/nvim-dap",
+    dependencies = { "williamboman/mason-lspconfig.nvim", "williamboman/mason.nvim" },
     config = function()
       require("telescope").load_extension "dap"
       require "rmagatti.dap"
@@ -572,14 +574,21 @@ require("lazy").setup({
     end,
   },
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    config = true,
+    lazy = false
+  },
+  {
     "nvim-neorg/neorg",
     ft = "norg",
     config = function()
       require("rmagatti.neorg").setup()
     end,
-    build = ":Neorg sync-parsers",
+    -- build = ":Neorg sync-parsers",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
     cmd = { "Neorg" },
+    lazy = false,
     keys = {
       { "<leader>nn" }
     }
@@ -596,6 +605,7 @@ require("lazy").setup({
     'mrcjkb/rustaceanvim',
     version = '^4', -- Recommended
     ft = { 'rust' },
+    lazy = true
   },
   {
     "ThePrimeagen/refactoring.nvim",
@@ -647,15 +657,16 @@ require("lazy").setup({
       require("baleia").setup {}
     end
   },
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter"
-    },
-    event = "VeryLazy",
-    config = function()
-      require("rmagatti.neotest").setup()
-    end,
-  }
+  -- {
+  --   "nvim-neotest/neotest",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-neotest/nvim-nio"
+  --   },
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("rmagatti.neotest").setup()
+  --   end,
+  -- }
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })

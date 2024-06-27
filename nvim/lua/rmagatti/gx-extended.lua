@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
   require("gx-extended").setup {
     log_level = vim.log.levels.INFO,
-    open_fn = require'lazy.util'.open,
+    open_fn = require 'lazy.util'.open,
     extensions = {
       {
         patterns = { "*.js", "*.jsx", "*.ts", "*.tsx" },
@@ -14,7 +14,7 @@ function M.setup()
 
           return url
         end,
-      }
+      },
       -- {
       --   patterns = { "*.tf" },
       --   name = "terraform modules",
@@ -25,24 +25,34 @@ function M.setup()
       --     return url
       --   end,
       -- },
-      -- {
-      --   patterns = { "**/Projects/Neo/**" },
-      --   name = "neo sourcegraph",
-      --   match_to_url = function(line_string)
-      --     local row_col = vim.api.nvim_win_get_cursor(0)
-      --     local relative_path = vim.fn.expand "%"
-      --     local proj_name = require("auto-session.lib").current_session_name()
+      {
+        patterns = { "**/Projects/Montra/**" },
+        name = "montra github",
+        match_to_url = function(line_string)
+          local row_col = vim.api.nvim_win_get_cursor(0)
+          local relative_path = vim.fn.expand "%"
+          local proj_name = require("auto-session.lib").current_session_name()
 
-      --     local url = "https://neofinancial.sourcegraph.com/github.com/neofinancial/"
-      --       .. proj_name
-      --       .. "/-/blob/"
-      --       .. relative_path
-      --       .. "?L"
-      --       .. tostring(row_col[1])
+          -- Fetch the current git branch
+          local handle = io.popen("git rev-parse --abbrev-ref HEAD")
+          local current_branch = handle and handle:read("*a"):gsub("%s+", "") -- trim whitespace
 
-      --     return url
-      --   end,
-      -- },
+          if handle then
+            handle:close()
+          end
+
+          local url = "https://github.com/Montra-Interactive/"
+              .. proj_name
+              .. "/blob/"
+              .. current_branch
+              .. "/"
+              .. relative_path
+              .. "#L"
+              .. tostring(row_col[1])
+
+          return url
+        end,
+      },
     },
   }
 end

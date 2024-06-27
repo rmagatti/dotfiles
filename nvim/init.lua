@@ -17,13 +17,21 @@ vim.opt.mouse = "a"
 -- set shada (print shada file contents)
 local font = "JetBrainsMono Nerd Font:h"
 
+-- TODO: Remove me when this Neovide issue is closed
+-- https://github.com/neovide/neovide/issues/2330
+if vim.g.neovide then
+  vim.defer_fn(function()
+    vim.cmd("NeovideFocus")
+  end, 200)
+end
+
 if vim.g.neovide then
   vim.opt.guifont = font .. tostring(12)
   vim.g.neovide_refresh_rate = 120
 
   vim.g.neovide_cursor_animation_length = 0.015
   vim.g.neovide_cursor_trail_length = 0.15
-  vim.g.neovide_input_macos_alt_is_meta = true
+  vim.g.neovide_input_macos_option_key_is_meta = "both"
   vim.g.neovide_floating_blur_amount_x = 3.0
   vim.g.neovide_floating_blur_amount_y = 3.0
   vim.g.neovide_underline_stroke_scale = 1

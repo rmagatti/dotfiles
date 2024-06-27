@@ -1,4 +1,4 @@
--- Lua
+-- TODOO: Probably remove diffview unless it does something bad to Neoogit
 local cb = require("diffview.config").diffview_callback
 
 require("diffview").setup {
@@ -34,7 +34,7 @@ require("diffview").setup {
   },
 }
 
-vim.cmd [[
-  nnoremap <leader>ddo :DiffviewOpen<CR>
-  nnoremap <leader>ddc :DiffviewClose<CR>
-]]
+-- vim.cmd [[
+--   nnoremap <leader>ddo :DiffviewOpen<CR>
+--   nnoremap <leader>ddc :DiffviewClose<CR>
+-- ]]

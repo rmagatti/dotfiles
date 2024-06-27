@@ -162,7 +162,7 @@ function gitm() {
 }
 
 function gitmdev() {
-  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git branch -D development && git fetch origin development && git checkout development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
 }
 
 function gitmalpha() {
@@ -203,7 +203,7 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v="nvim"
-alias vv="neovide --frame='transparent' --no-vsync"
+alias vv="neovide --frame='transparent' --no-vsync&"
 
 function gitsqa() {
   git reset $(git merge-base origin/master $(git rev-parse --abbrev-ref HEAD)) &&
