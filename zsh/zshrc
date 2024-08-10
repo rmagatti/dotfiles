@@ -174,7 +174,12 @@ function gitchb() {
 }
 
 function gitchr() {
-  git fetch && git checkout --track $(git branch --sort=-committerdate -r | fzf)
+  local branch=$(git branch --sort=-committerdate -r | fzf | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git checkout "$branch"
+  else
+    git fetch && git checkout --track "$branch"
+  fi
 }
 
 function gitdc() {

@@ -53,6 +53,7 @@ cmp.setup {
     { name = "copilot", group_index = 2 },
     { name = "neorg" },
     { name = "rg" },
+    { name = "cody" },
   }, {
     { name = "buffer" },
   }),

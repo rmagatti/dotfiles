@@ -118,8 +118,8 @@ M.on_attach = function(client, bufnr)
 
   -- Diagnostics
   vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts) -- not mneumonic
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)         -- diagnostic next (not mneumonic but [ and ] work as next/previous)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)         -- diagnostic previous (not mneumonic)
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)         -- diagnostic next (not mneumonic but [ and ] work as next/previous)
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)         -- diagnostic previous (not mneumonic)
   vim.keymap.set("n", "<leader>dl", function()
     require("telescope.builtin").diagnostics()
   end, opts)                                                        -- diagnostics telescope list
@@ -128,7 +128,7 @@ M.on_attach = function(client, bufnr)
   -- Symbols
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>o", "<cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
   vim.keymap.set("n", "<leader>ws", function()
-    return require("telescope.builtin").lsp_dynamic_workspace_symbols { ignore_symbols = { "node_modules/**" } }
+    return require("telescope.builtin").lsp_dynamic_workspace_symbols { ignore_symbols = { "node_modules/**", "target/" } }
   end, opts)
   vim.keymap.set("n", "<leader>wsf", function()
     return require("telescope.builtin").lsp_dynamic_workspace_symbols {

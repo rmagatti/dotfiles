@@ -70,7 +70,8 @@ xnoremap p "_dP
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Copy file name or path
-nmap <leader>crp :let @+=expand("%")<CR>:echo "Copied relativepath: ".@+<CR>
+nmap <leader>crp :let @+ = fnamemodify(expand("%"), ":.")<CR>:echo "Copied relativepath: ".@+<CR>
+
 nmap <leader>cap :let @+=expand("%:p")<CR>:echo "Copied absolutepath: ".@+<CR>
 nmap <leader>cfn :let @+=expand("%:t")<CR>:echo "Copied filename: ".@+<CR>
 

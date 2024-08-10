@@ -12,6 +12,9 @@ require("gitsigns").setup {
     map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
     map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
+    map("n", "]h", "<cmd>Gitsigns next_hunk<CR>")
+    map("n", "[h", "<cmd>Gitsigns prev_hunk<CR>")
+
     -- Actions
     map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
     map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
