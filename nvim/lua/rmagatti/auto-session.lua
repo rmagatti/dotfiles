@@ -1,7 +1,7 @@
 require("auto-session").setup {
   log_level = vim.log.levels.ERROR,
-  auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-  auto_session_use_git_branch = false,
+  suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+  use_git_branch = false,
   -- no_restore_cmds = {
   --   function()
   --     vim.notify("!!!WASABI!!!", vim.log.levels.DEBUG)

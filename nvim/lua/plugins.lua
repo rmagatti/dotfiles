@@ -484,6 +484,7 @@ require("lazy").setup({
   },
   {
     "rmagatti/auto-session",
+    lazy = false,
     config = function()
       require "rmagatti.auto-session"
     end,
@@ -595,10 +596,12 @@ require("lazy").setup({
   },
   {
     "rmagatti/gx-extended.nvim",
-    event = "VeryLazy",
     config = function()
       require("rmagatti.gx-extended").setup()
     end,
+    keys = {
+      { "gx" },
+    },
     dev = true
   },
   {

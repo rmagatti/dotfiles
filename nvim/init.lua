@@ -73,7 +73,7 @@ vim.opt.ts = 2
 vim.opt.sw = 2
 vim.opt.expandtab = true
 vim.opt.signcolumn = "yes"
-vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos" }
+vim.opt.sessionoptions = { "blank", "buffers", "curdir", "help", "tabpages", "winsize", "winpos", "localoptions" }
 
 -- " performance tweaks
 vim.opt.cursorline = false
