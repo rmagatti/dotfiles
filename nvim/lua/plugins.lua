@@ -612,6 +612,9 @@ require("lazy").setup({
     }
   },
   {
+    "benlubas/neorg-interim-ls",
+  },
+  {
     "rmagatti/gx-extended.nvim",
     config = function()
       require("rmagatti.gx-extended").setup()
