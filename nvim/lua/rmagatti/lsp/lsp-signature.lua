@@ -24,7 +24,7 @@ M.conf = {
 }
 
 M.on_attach = function()
-  require("lsp_signature").on_attach(M.conf)
+  -- require("lsp_signature").on_attach(M.conf)
 end
 
 return M
