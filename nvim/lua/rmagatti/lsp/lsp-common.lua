@@ -1,6 +1,8 @@
 local mappings = require "rmagatti.lsp.lsp-mappings"
 local signature = require "rmagatti.lsp.lsp-signature"
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 --- function already defines common mappings and `lsp_signature.nvim`
 -- @param client the lsp client

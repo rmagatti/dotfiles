@@ -184,18 +184,26 @@ require("lazy").setup({
   {
     "ray-x/lsp_signature.nvim",
   },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   event = { "InsertEnter", "CmdlineEnter" },
+  --   dependencies = {
+  --     "hrsh7th/cmp-nvim-lsp",
+  --     "hrsh7th/cmp-buffer",
+  --     "hrsh7th/cmp-path",
+  --     "hrsh7th/cmp-cmdline",
+  --     "lukas-reineke/cmp-rg",
+  --   },
+  --   config = function()
+  --     require "rmagatti.nvim-cmp"
+  --   end,
+  -- },
   {
-    "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "lukas-reineke/cmp-rg",
-    },
+    "Saghen/blink.cmp",
+    dependencies = 'rafamadriz/friendly-snippets',
+    version = 'v0.*',
     config = function()
-      require "rmagatti.nvim-cmp"
+      require("rmagatti.blink-cmp").setup()
     end,
   },
   {
@@ -209,22 +217,22 @@ require("lazy").setup({
     end,
   },
   { "rafamadriz/friendly-snippets" },
-  { "saadparwaiz1/cmp_luasnip" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
-  { "hrsh7th/cmp-cmdline" },
-  { "lukas-reineke/cmp-rg" },
-  {
-    "David-Kunz/cmp-npm",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp"
-    },
-    config = function()
-      require("cmp-npm").setup {}
-    end,
-  },
+  -- { "saadparwaiz1/cmp_luasnip" },
+  -- { "hrsh7th/cmp-nvim-lsp" },
+  -- { "hrsh7th/cmp-buffer" },
+  -- { "hrsh7th/cmp-path" },
+  -- { "hrsh7th/cmp-cmdline" },
+  -- { "lukas-reineke/cmp-rg" },
+  -- {
+  --   "David-Kunz/cmp-npm",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp"
+  --   },
+  --   config = function()
+  --     require("cmp-npm").setup {}
+  --   end,
+  -- },
   {
     "onsails/lspkind-nvim",
   },
@@ -265,6 +273,15 @@ require("lazy").setup({
     -- dev = true,
     lazy = false,
     branch = "master",
+    mappings = {
+      popup = {
+        ["L"] = "LogPopup"
+      },
+      status = {
+        ["k"] = "MoveDown",
+        ["l"] = "MoveUp",
+      }
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "nvim-telescope/telescope.nvim", -- optional
@@ -535,14 +552,14 @@ require("lazy").setup({
       require("rmagatti.copilot").setup()
     end,
   },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = { "zbirenbaum/copilot.lua" },
-    event = { "InsertEnter", "LspAttach" },
-    config = function()
-      require("rmagatti.copilot-cmp").setup()
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   dependencies = { "zbirenbaum/copilot.lua" },
+  --   event = { "InsertEnter", "LspAttach" },
+  --   config = function()
+  --     require("rmagatti.copilot-cmp").setup()
+  --   end,
+  -- },
   {
     "eandrju/cellular-automaton.nvim",
     config = function()
@@ -552,17 +569,17 @@ require("lazy").setup({
       { "<leader>fml" },
     },
   },
-  {
-    "sourcegraph/sg.nvim",
-    config = require("rmagatti.sg").setup,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/cmp-nvim-lsp"
-    },
-    keys = {
-      { "<leader>sg" },
-    },
-  },
+  -- {
+  --   "sourcegraph/sg.nvim",
+  --   config = require("rmagatti.sg").setup,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/cmp-nvim-lsp"
+  --   },
+  --   keys = {
+  --     { "<leader>sg" },
+  --   },
+  -- },
   {
     "wakatime/vim-wakatime",
     event = "VeryLazy"
