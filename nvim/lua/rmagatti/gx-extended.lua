@@ -27,11 +27,13 @@ function M.setup()
       -- },
       {
         patterns = { "**/Projects/Montra/**" },
-        name = "montra github",
+        name = "github.com/Montra-Interactive",
         match_to_url = function(line_string)
           local row_col = vim.api.nvim_win_get_cursor(0)
           local relative_path = vim.fn.expand "%"
           local proj_name = require("auto-session.lib").current_session_name()
+          -- proj_name is vim.fn.getcwd(). I need only the last part of the path
+          proj_name = string.match(proj_name, ".*/(.*)")
 
           -- Fetch the current git branch
           local handle = io.popen("git rev-parse --abbrev-ref HEAD")

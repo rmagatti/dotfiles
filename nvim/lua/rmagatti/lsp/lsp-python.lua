@@ -13,7 +13,7 @@ M.setup = function()
     settings = {
       pylsp = {
         plugins = {
-          ruff = { enabled = true },
+          ruff = { enabled = false },
           pylsp_mypy = { enabled = true },
           rope = { enabled = true },
           pylint = { enabled = false },
@@ -31,7 +31,7 @@ M.setup = function()
     },
   }))
 
-  require("lspconfig").ruff_lsp.setup(vim.tbl_deep_extend("force", opts, {}))
+  -- require("lspconfig").ruff_lsp.setup(vim.tbl_deep_extend("force", opts, {}))
 end
 
 return M
