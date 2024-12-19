@@ -191,8 +191,13 @@ function unstringify() {
   echo "Unstringified copied to clipboard"
 }
 
+# Rust tools aliases
+alias ls="eza"
+alias l="eza -lh"
+alias du="dust"
+alias grep="rg"
+
 # Aliases
-alias l="ls -lh"
 alias gits="git status"
 alias gitch="git checkout"
 alias gitnb="git checkout -b"
@@ -401,3 +406,11 @@ export PATH="/Library/Frameworks/GStreamer.framework/Versions/1.0/bin${PATH:+:$P
 
 export SUPABASE_URL=https://hjtxndtruiwltvdvfpdv.supabase.co/rest/v1
 export SUPABASE_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU 
+
+# =============================================================================
+#
+# To initialize zoxide, add this to your configuration (usually ~/.zshrc):
+#
+eval "$(zoxide init zsh --cmd cd)"
+
+bindkey -s ç 'cd $(find ~/Projects/ -maxdepth 2 -type d | fzf)\n'
