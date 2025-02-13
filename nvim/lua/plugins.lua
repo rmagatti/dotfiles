@@ -630,6 +630,7 @@ require("lazy").setup({
     ft = { 'rust' },
     lazy = true
   },
+  { "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" }, ft = 'rust' },
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {

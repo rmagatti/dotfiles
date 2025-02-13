@@ -1,16 +1,16 @@
 " !IMPORTANT! Config maps HJKL to JKL:
 
 " Move between splits
-map <C-j> :wincmd h<CR>
-map <C-k> :wincmd j<CR>
-map <C-l> :wincmd k<CR>
-map <C-;> :wincmd l<CR>
+nmap <C-j> :wincmd h<CR>
+nmap <C-k> :wincmd j<CR>
+nmap <C-l> :wincmd k<CR>
+nmap <C-;> :wincmd l<CR>
 
 " Move splits
-map <A-j> :wincmd H<CR>
-map <A-k> :wincmd J<CR>
-map <A-l> :wincmd K<CR>
-map <A-;> :wincmd L<CR>
+nmap <A-j> :wincmd H<CR>
+nmap <A-k> :wincmd J<CR>
+nmap <A-l> :wincmd K<CR>
+nmap <A-;> :wincmd L<CR>
 
 noremap j h
 noremap k j

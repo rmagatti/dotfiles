@@ -11,7 +11,7 @@ M.setup = function()
     -- your own keymap.
     keymap = {
       preset = 'default',
-      ['<CR>'] = { 'select_and_accept' },
+      ['<C-;>'] = { 'select_and_accept' },
     },
 
     appearance = {
