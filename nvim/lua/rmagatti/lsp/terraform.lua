@@ -9,7 +9,7 @@ function M.setup()
     capabilities = capabilities,
   }
 
-  require("lspconfig").terraformls.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").terraformls.setup(opts)
 end
 
 return M

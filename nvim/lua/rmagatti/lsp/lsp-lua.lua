@@ -16,7 +16,7 @@ M.setup = function()
     },
   }
 
-  require("lspconfig").lua_ls.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").lua_ls.setup(opts)
 end
 
 return M

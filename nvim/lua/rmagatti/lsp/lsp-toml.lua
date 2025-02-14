@@ -9,7 +9,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").taplo.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").taplo.setup(opts)
 end
 
 return M

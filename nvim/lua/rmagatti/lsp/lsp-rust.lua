@@ -5,7 +5,6 @@ M.setup = function()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   vim.keymap.set("n", "<leader>x", function()
-    -- "<cmd>RustLsp explainError<CR>"
     vim.cmd.RustLsp("explainError")
   end, { silent = true })
 

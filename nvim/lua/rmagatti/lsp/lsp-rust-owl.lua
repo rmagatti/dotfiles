@@ -9,7 +9,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig")["rust-owl"].setup(opts)
+  require("lspconfig")["rustowlsp"].setup(opts)
 end
 
 return M

@@ -164,7 +164,8 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "j-hui/fidget.nvim"
+      "j-hui/fidget.nvim",
+      "cordx56/rustowl"
     },
     event = "BufReadPost",
     config = function()
@@ -628,9 +629,16 @@ require("lazy").setup({
     'mrcjkb/rustaceanvim',
     version = '^4', -- Recommended
     ft = { 'rust' },
-    lazy = true
+    lazy = true,
   },
-  { "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" }, ft = 'rust' },
+  {
+    "cordx56/rustowl",
+    ft = 'rust',
+    config = function()
+      vim.notify("Loading rustowl")
+    end,
+    enable = false,
+  },
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {

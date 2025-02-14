@@ -394,7 +394,7 @@ ssh-add
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 PATH=$PATH:~/.local/bin
-# export CC=gcc-12 
+export CC=gcc-12 
 
 # Created by `pipx` on 2023-12-05 03:57:18
 export PATH="$PATH:/Users/ronniemagatti/.local/bin"

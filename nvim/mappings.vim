@@ -12,10 +12,22 @@ nmap <A-k> :wincmd J<CR>
 nmap <A-l> :wincmd K<CR>
 nmap <A-;> :wincmd L<CR>
 
-noremap j h
-noremap k j
-noremap l k
-noremap ; l
+" Remap movement keys HJKL -> JKL; (all modes)
+nnoremap j h
+vnoremap j h
+onoremap j h
+
+nnoremap k j
+vnoremap k j
+onoremap k j
+
+nnoremap l k
+vnoremap l k
+onoremap l k
+
+nnoremap ; l
+vnoremap ; l
+onoremap ; l
 
 " Navigate folds
 nnoremap zk zj

@@ -9,7 +9,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").biome.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").biome.setup(opts)
 end
 
 return M

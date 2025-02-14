@@ -9,7 +9,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").gopls.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").gopls.setup(opts)
 end
 
 return M

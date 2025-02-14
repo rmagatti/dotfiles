@@ -9,7 +9,7 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").prismals.setup(vim.tbl_deep_extend("force", opts, {}))
+  require("lspconfig").prismals.setup(opts)
 end
 
 return M
