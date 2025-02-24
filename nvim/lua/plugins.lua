@@ -11,19 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local is_vscode = vim.g.vscode == 1
-
-local function add_if_vscode(should_add, plugin)
-  if not is_vscode then
-    return plugin
-  end
-
-  if is_vscode and should_add then
-    return plugin
-  end
-  return nil
-end
-
 require("lazy").setup({
   { "tpope/vim-eunuch" },
   {
@@ -330,11 +317,6 @@ require("lazy").setup({
     event = { "BufReadPost" },
   },
   {
-    "nvim-treesitter/playground",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    cmd = "TSPlaygroundToggle",
-  },
-  {
     "p00f/nvim-ts-rainbow",
     event = "BufReadPost",
   },
@@ -347,6 +329,17 @@ require("lazy").setup({
     "RRethy/nvim-treesitter-textsubjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "BufReadPost" },
+    enabled = true,
+    config = function ()
+      require('nvim-treesitter-textsubjects').configure({
+        prev_selection = ',',
+        keymaps = {
+              ['.'] = 'textsubjects-smart',
+              ["'"] = 'textsubjects-container-outer',
+              ["i'"] = 'textsubjects-container-inner',
+          },
+      })
+    end
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -631,14 +624,14 @@ require("lazy").setup({
     ft = { 'rust' },
     lazy = true,
   },
-  {
-    "cordx56/rustowl",
-    ft = 'rust',
-    config = function()
-      vim.notify("Loading rustowl")
-    end,
-    enable = false,
-  },
+  -- {
+  --   "cordx56/rustowl",
+  --   ft = 'rust',
+  --   config = function()
+  --     vim.notify("Loading rustowl")
+  --   end,
+  --   enable = false,
+  -- },
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {

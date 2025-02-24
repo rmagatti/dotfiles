@@ -17,13 +17,13 @@ vim.opt.mouse = "a"
 -- set shada (print shada file contents)
 local font = "JetBrainsMono Nerd Font:h"
 
--- TODO: Remove me when this Neovide issue is closed
--- https://github.com/neovide/neovide/issues/2330
-if vim.g.neovide then
-  vim.defer_fn(function()
-    vim.cmd("NeovideFocus")
-  end, 200)
-end
+-- -- TODO: Remove me when this Neovide issue is closed
+-- -- https://github.com/neovide/neovide/issues/2330
+-- if vim.g.neovide then
+--   vim.defer_fn(function()
+--     vim.cmd("NeovideFocus")
+--   end, 200)
+-- end
 
 if vim.g.neovide then
   vim.opt.guifont = font .. tostring(12)
@@ -149,25 +149,6 @@ vim.cmd [[
 ]]
 
 -- Presentation Mode
-vim.g.in_presentation_mode = 0
-
-vim.cmd [[
-  function! TogglePresentationMode()
-    if g:in_presentation_mode
-      let g:in_presentation_mode = 0
-      set guifont=FiraCode\ Nerd\ Font:h12
-      Goyo!
-    else
-      let g:in_presentation_mode = 1
-      set guifont=FiraCode\ Nerd\ Font:h30
-      " Default Goyo options, just need to use them since I don't want the toggling behaviour to trigger at all.
-      Goyo 80x85%
-    endif
-  endfunction
-]]
-
-vim.cmd [[command! TogglePresentationMode :call TogglePresentationMode()<CR>]]
-
 vim.cmd [[
   augroup highlight_yank
     autocmd!
@@ -175,8 +156,17 @@ vim.cmd [[
   augroup end
 ]]
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- Aparently treesitter foldexpr needs to be set in FileType autocmd
+-- see: https://github.com/neovim/neovim/issues/28692
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(args)
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.cmd("normal! zx")
+  end,
+})
+
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
@@ -211,3 +201,4 @@ vim.opt.syntax = "off"
 
 require "plugins"
 require "rmagatti.mappings"
+require "rmagatti.rust-test-folding"
