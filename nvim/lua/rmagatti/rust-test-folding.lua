@@ -3,11 +3,11 @@ local function fold_rust_tests_cfg()
 
   local query = vim.treesitter.query.parse("rust", [[
       (
-            (attribute_item ; [34, 0] - [34, 12]
-                  (attribute ; [34, 2] - [34, 11]
-                          (identifier) @cfgName ; [34, 2] - [34, 5]
-                              arguments: (token_tree ; [34, 5] - [34, 11]
-                                                     (identifier) @testName))) ; [34, 6] - [34, 10]
+            (attribute_item
+                  (attribute
+                          (identifier) @cfgName
+                              arguments: (token_tree
+                                                     (identifier) @testName)))
             (mod_item
               name: (identifier) @modName)
             (#eq? @testName "test")
@@ -56,6 +56,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.defer_fn(function()
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
       vim.cmd("normal! zx")
       -- vim.notify("Auto-folding `tests` modules with #[cfg(test)]", vim.log.levels.DEBUG)
       fold_rust_tests_cfg()
