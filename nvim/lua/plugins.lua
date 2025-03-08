@@ -202,8 +202,9 @@ require("lazy").setup({
     dependencies = "vim-fugitive",
   },
   {
+    -- TODO: Try to get neogit diffs to be colored
     "NeogitOrg/neogit",
-    lazy = false,
+    lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "nvim-telescope/telescope.nvim", -- optional
@@ -211,7 +212,11 @@ require("lazy").setup({
     },
     config = function()
       require("rmagatti.neogit")
-    end
+    end,
+    keys = {
+      { "<leader>gg" },
+    },
+    cmd = { "Neogit" },
   },
   {
     "sindrets/diffview.nvim",
@@ -421,6 +426,7 @@ require("lazy").setup({
   {
     "rmagatti/goto-preview",
     dev = true,
+    dependencies = { "rmagatti/logger.nvim" },
     config = function()
       require("rmagatti.goto-preview").setup()
     end,
@@ -565,7 +571,7 @@ require("lazy").setup({
     ---@type snacks.Config
     opts = {
       indent = { enabled = false },
-      input = { enabled = true },
+      input = { enabled = false },
       picker = { enabled = true },
       dim = { enabled = true },
       notifier = { enabled = true },

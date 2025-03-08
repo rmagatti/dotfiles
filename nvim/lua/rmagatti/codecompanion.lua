@@ -42,6 +42,9 @@ M.setup = function()
           }
         })
       end
+    },
+    opts = {
+      log_level = "TRACE",     -- or "TRACE"
     }
   })
 
