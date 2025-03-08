@@ -165,6 +165,10 @@ function gitmdev() {
   BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git branch -D development && git fetch origin development && git checkout development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
 }
 
+function gitmDev() {
+  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git branch -D Development && git fetch origin Development && git checkout Development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+}
+
 function gitmalpha() {
   BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git checkout alpha && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
 }

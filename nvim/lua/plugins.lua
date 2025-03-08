@@ -72,29 +72,6 @@ require("lazy").setup({
       require "rmagatti.nvim-web-devicons"
     end,
   },
-  -- add_if_vscode(false, {
-  --   "vim-test/vim-test",
-  --   config = function()
-  --     require("rmagatti.vim-test").setup()
-  --   end,
-  --   keys = {
-  --     { "<leader>tf" },
-  --     { "<leader>tt" },
-  --     { "<leader>ts" },
-  --     { "<leader>tl" },
-  --     { "<leader>tv" },
-  --     { "<leader>wtf" },
-  --     { "<leader>wtt" },
-  --     { "<leader>wts" },
-  --     { "<leader>wtl" },
-  --     { "<leader>wtv" },
-  --     { "<leader>tdt" },
-  --     { "<leader>tdf" },
-  --     { "<leader>tds" },
-  --     { "<leader>tdl" },
-  --     { "<leader>tdv" },
-  --   },
-  -- }),
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -172,20 +149,6 @@ require("lazy").setup({
   {
     "ray-x/lsp_signature.nvim",
   },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   event = { "InsertEnter", "CmdlineEnter" },
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "hrsh7th/cmp-buffer",
-  --     "hrsh7th/cmp-path",
-  --     "hrsh7th/cmp-cmdline",
-  --     "lukas-reineke/cmp-rg",
-  --   },
-  --   config = function()
-  --     require "rmagatti.nvim-cmp"
-  --   end,
-  -- },
   {
     "Saghen/blink.cmp",
     dependencies = 'rafamadriz/friendly-snippets',
@@ -196,31 +159,13 @@ require("lazy").setup({
   },
   {
     "L3MON4D3/LuaSnip",
-    -- follow latest release.
     version = "v1.*",
-    -- install jsregexp (optional!:).
     build = "make install_jsregexp",
     config = function()
       require "rmagatti.luasnip"
     end,
   },
   { "rafamadriz/friendly-snippets" },
-  -- { "saadparwaiz1/cmp_luasnip" },
-  -- { "hrsh7th/cmp-nvim-lsp" },
-  -- { "hrsh7th/cmp-buffer" },
-  -- { "hrsh7th/cmp-path" },
-  -- { "hrsh7th/cmp-cmdline" },
-  -- { "lukas-reineke/cmp-rg" },
-  -- {
-  --   "David-Kunz/cmp-npm",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp"
-  --   },
-  --   config = function()
-  --     require("cmp-npm").setup {}
-  --   end,
-  -- },
   {
     "onsails/lspkind-nvim",
   },
@@ -258,18 +203,7 @@ require("lazy").setup({
   },
   {
     "NeogitOrg/neogit",
-    -- dev = true,
     lazy = false,
-    branch = "master",
-    mappings = {
-      popup = {
-        ["L"] = "LogPopup"
-      },
-      status = {
-        ["k"] = "MoveDown",
-        ["l"] = "MoveUp",
-      }
-    },
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required
       "nvim-telescope/telescope.nvim", -- optional
@@ -279,22 +213,17 @@ require("lazy").setup({
       require("rmagatti.neogit")
     end
   },
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   config = function()
-  --     require "rmagatti.diffview"
-  --   end,
-  --   cmd = { "DiffviewOpen" },
-  --   keys = "<leader>ddo",
-  -- },
-  -- add_if_vscode(false, {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false, -- make sure we load this during startup
-  --   priority = 1000,
-  --   config = function()
-  --     require "rmagatti.tokyonight"
-  --   end,
-  -- }),
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      require "rmagatti.diffview"
+    end,
+    cmd = { "DiffviewOpen" },
+    keys = {
+      { "<leader>dvo" },
+      { "<leader>dvc" },
+    },
+  },
   {
     "rebelot/kanagawa.nvim",
     lazy = false, -- make sure we load this during startup
@@ -330,14 +259,14 @@ require("lazy").setup({
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "BufReadPost" },
     enabled = true,
-    config = function ()
+    config = function()
       require('nvim-treesitter-textsubjects').configure({
         prev_selection = ',',
         keymaps = {
-              ['.'] = 'textsubjects-smart',
-              ["'"] = 'textsubjects-container-outer',
-              ["i'"] = 'textsubjects-container-inner',
-          },
+          ['.'] = 'textsubjects-smart',
+          ["'"] = 'textsubjects-container-outer',
+          ["i'"] = 'textsubjects-container-inner',
+        },
       })
     end
   },
@@ -380,13 +309,6 @@ require("lazy").setup({
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
-  -- add_if_vscode(false, {
-  --   'mfussenegger/nvim-lint',
-  --   event = "BufReadPost",
-  --   config = function()
-  --     require('rmagatti.nvim-lint').setup()
-  --   end
-  -- }),
   {
     "heavenshell/vim-jsdoc",
     ft = { "javascript", "javascript.jsx", "typescript" },
@@ -448,44 +370,23 @@ require("lazy").setup({
     end,
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "InsertEnter" },
-    init = function()
-      vim.g.indent_blankline_buftype_exclude = { "terminal" }
-      vim.g.indent_blankline_filetype_exclude = { "toggleterm" }
-    end,
-  },
-  {
     "AndrewRadev/bufferize.vim",
     cmd = { "Bufferize" },
   },
   {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup {
-        plugins = {
-          -- to make this work, you need to set the following kitty options:
-          -- - allow_remote_control socket-only
-          -- - listen_on unix:/tmp/kitty
-          kitty = {
-            enabled = true,
-            font = "+4", -- font size increment
-          },
-        },
-      }
-      vim.cmd [[
-        nnoremap <leader>zz :lua require("zen-mode").toggle({ window = { width = .40 }})<CR>
-      ]]
-    end,
-    keys = "<leader>zz",
-  },
-  {
     "AckslD/nvim-neoclip.lua",
-    -- dependencies = { "tami5/sqlite.lua", },
+    dependencies = { "tami5/sqlite.lua", },
     event = "BufReadPost",
     config = function()
       require("neoclip").setup {
-        -- enable_persistant_history = true,
+        enable_persistent_history = true,
+        keys = {
+          telescope = {
+            i = {
+              paste = false --will restore telescope default <c-p> action to move to prev item
+            }
+          }
+        }
       }
       vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
     end,
@@ -546,14 +447,6 @@ require("lazy").setup({
       require("rmagatti.copilot").setup()
     end,
   },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   dependencies = { "zbirenbaum/copilot.lua" },
-  --   event = { "InsertEnter", "LspAttach" },
-  --   config = function()
-  --     require("rmagatti.copilot-cmp").setup()
-  --   end,
-  -- },
   {
     "eandrju/cellular-automaton.nvim",
     config = function()
@@ -563,27 +456,9 @@ require("lazy").setup({
       { "<leader>fml" },
     },
   },
-  -- {
-  --   "sourcegraph/sg.nvim",
-  --   config = require("rmagatti.sg").setup,
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/cmp-nvim-lsp"
-  --   },
-  --   keys = {
-  --     { "<leader>sg" },
-  --   },
-  -- },
   {
     "wakatime/vim-wakatime",
     event = "VeryLazy"
-  },
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("rmagatti.dressing").setup()
-    end,
   },
   {
     "vhyrro/luarocks.nvim",
@@ -597,7 +472,6 @@ require("lazy").setup({
     config = function()
       require("rmagatti.neorg").setup()
     end,
-    -- build = ":Neorg sync-parsers",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
     cmd = { "Neorg" },
     lazy = false,
@@ -624,14 +498,6 @@ require("lazy").setup({
     ft = { 'rust' },
     lazy = true,
   },
-  -- {
-  --   "cordx56/rustowl",
-  --   ft = 'rust',
-  --   config = function()
-  --     vim.notify("Loading rustowl")
-  --   end,
-  --   enable = false,
-  -- },
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
@@ -653,12 +519,11 @@ require("lazy").setup({
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
       "BufReadPre " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
       "BufNewFile " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
-      "VeryLazy"
+      -- "VeryLazy"
     },
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
-
       -- see below for full list of optional dependencies 👇
     },
     opts = {
@@ -682,16 +547,38 @@ require("lazy").setup({
       require("baleia").setup {}
     end
   },
-  -- {
-  --   "nvim-neotest/neotest",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "nvim-neotest/nvim-nio"
-  --   },
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("rmagatti.neotest").setup()
-  --   end,
-  -- }
+  {
+    "olimorris/codecompanion.nvim",
+    event = { "InsertEnter" },
+    config = function()
+      require("rmagatti.codecompanion").setup()
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      indent = { enabled = false },
+      input = { enabled = true },
+      picker = { enabled = true },
+      dim = { enabled = true },
+      notifier = { enabled = true },
+      zen = { enabled = true }
+      -- TODO: Add mappings for dimming and zen
+    },
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+    ft = { 'markdown', 'codecompanion' },
+  }
 }, { defaults = { lazy = true }, dev = { path = "~/Projects" } })
