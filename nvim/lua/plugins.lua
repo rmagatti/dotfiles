@@ -315,12 +315,6 @@ require("lazy").setup({
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
   },
   {
-    "heavenshell/vim-jsdoc",
-    ft = { "javascript", "javascript.jsx", "typescript" },
-    cmd = "JsDoc",
-    build = "make install",
-  },
-  {
     "kevinhwang91/nvim-bqf",
     dependencies = { { "junegunn/fzf", optional = true }, { "junegunn/fzf.vim", optional = true } },
     ft = { "qf" },
@@ -328,13 +322,13 @@ require("lazy").setup({
       require "rmagatti.bqf"
     end,
   },
-  {
-    "junegunn/vim-easy-align",
-    config = function()
-      require "rmagatti.easyalign"
-    end,
-    cmd = { "EasyAlign" },
-  },
+  -- {
+  --   "junegunn/vim-easy-align",
+  --   config = function()
+  --     require "rmagatti.easyalign"
+  --   end,
+  --   cmd = { "EasyAlign" },
+  -- },
   -- DAP
   {
     "mfussenegger/nvim-dap",

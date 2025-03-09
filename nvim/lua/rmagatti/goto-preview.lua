@@ -1,11 +1,10 @@
 local M = {}
 
 M.setup = function()
-  local mapping_func = function(wincmd_direction, bufr)
+  local mapping_fn = function(wincmd_direction, bufr)
     local function close()
       vim.cmd("wincmd " .. wincmd_direction)
       require("goto-preview").close_all_win { skip_curr_window = true }
-      -- vim.lsp.buf.definition()
     end
 
     vim.keymap.set("n", "<C-w>" .. wincmd_direction, close, {
@@ -21,10 +20,10 @@ M.setup = function()
     winblend = 10,
     debug = false,
     post_open_hook = function(bufr)
-      mapping_func("H", bufr)
-      mapping_func("J", bufr)
-      mapping_func("K", bufr)
-      mapping_func("L", bufr)
+      mapping_fn("H", bufr)
+      mapping_fn("J", bufr)
+      mapping_fn("K", bufr)
+      mapping_fn("L", bufr)
     end,
   }
 
