@@ -129,7 +129,7 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     dependencies = {
       "j-hui/fidget.nvim",
-      "cordx56/rustowl"
+      -- "cordx56/rustowl"
     },
     event = "BufReadPost",
     config = function()
@@ -430,6 +430,8 @@ require("lazy").setup({
       { "gpr" },
       { "gP" },
       { "L" },
+      -- This is the rename keymap. Since goto-preview is providing vim.ui.input functionality we need to lazy load goto-preview when the keymap is used.
+      { "<leader>rn" },
     },
   },
   {
@@ -556,6 +558,9 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      { "<localleader>," },
     },
   },
   {
