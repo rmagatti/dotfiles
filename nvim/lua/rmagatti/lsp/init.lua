@@ -1,5 +1,3 @@
-require("neodev").setup()
-
 require("mason").setup()
 require("mason-lspconfig").setup {}
 require("rmagatti.lsp.lsp-lua").setup()

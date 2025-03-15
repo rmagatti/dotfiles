@@ -19,6 +19,8 @@ M.setup = function()
     resizing_mappings = true,
     winblend = 10,
     debug = false,
+    vim_ui_input = true,
+    preview_window_title = { enable = false, position = "left" },
     post_open_hook = function(bufr)
       mapping_fn("H", bufr)
       mapping_fn("J", bufr)

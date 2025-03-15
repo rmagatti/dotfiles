@@ -1,5 +1,5 @@
 require("auto-session").setup {
-  log_level = vim.log.levels.ERROR,
+  log_level = vim.log.levels.INFO,
   suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
   use_git_branch = false,
 }

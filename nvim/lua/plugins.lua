@@ -87,19 +87,33 @@ require("lazy").setup({
     end,
   },
   {
-    "ggandor/leap.nvim",
-    config = function()
-      require("leap").create_default_mappings()
-      vim.keymap.set({ "n", "x", "o" }, "<localleader>s", '<Plug>(leap-from-window)')
-    end,
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
     keys = {
-      { "s" },
-      { "S" },
-      { "f" },
-      { "F" },
-      { "<localleader>s", mode = { "n", "x", "o" } }
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   config = function()
+  --     require("leap").create_default_mappings()
+  --     vim.keymap.set({ "n", "x", "o" }, "<localleader>s", '<Plug>(leap-from-window)')
+  --   end,
+  --   keys = {
+  --     { "s" },
+  --     { "S" },
+  --     { "f" },
+  --     { "F" },
+  --     { "<localleader>s", mode = { "n", "x", "o" } }
+  --   },
+  -- },
   {
     "tommcdo/vim-exchange",
     keys = {
@@ -170,7 +184,15 @@ require("lazy").setup({
     "onsails/lspkind-nvim",
   },
   {
-    "folke/neodev.nvim"
+    "folke/lazydev.nvim",
+    ft = "lua",       -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
   { "nvim-lua/plenary.nvim" },
   {
