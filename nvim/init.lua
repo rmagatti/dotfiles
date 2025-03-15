@@ -207,38 +207,37 @@ require "rmagatti.rust-test-folding"
 local debug_file = io.open("/tmp/nvim_bufnew_debug.log", "w")
 
 -- Set up a trace for BufNew events
-vim.api.nvim_create_autocmd("BufNew", {
-  callback = function()
-    local bufname = vim.api.nvim_buf_get_name(0)
-    local bufnr = vim.api.nvim_get_current_buf()
+-- vim.api.nvim_create_autocmd("BufNew", {
+--   callback = function()
+--     local bufname = vim.api.nvim_buf_get_name(0)
+--     local bufnr = vim.api.nvim_get_current_buf()
 
-    -- Get stack trace
-    local info = debug.getinfo(2, "Sl")
-    local source = info.source:sub(2)   -- Remove the '@' prefix
-    local line = info.currentline
+--     -- Get stack trace
+--     local info = debug.getinfo(2, "Sl")
+--     local source = info.source:sub(2)   -- Remove the '@' prefix
+--     local line = info.currentline
 
-    -- Log the event with stack info
-    local msg = string.format(
-      "[%s] BufNew triggered for buffer %d (%s) from %s:%d\n",
-      os.date("%Y-%m-%d %H:%M:%S"),
-      bufnr,
-      bufname,
-      source,
-      line
-    )
+--     -- Log the event with stack info
+--     local msg = string.format(
+--       "[%s] BufNew triggered for buffer %d (%s) from %s:%d\n",
+--       os.date("%Y-%m-%d %H:%M:%S"),
+--       bufnr,
+--       bufname,
+--       source,
+--       line
+--     )
 
-    debug_file:write(msg)
-    debug_file:flush()
-  end
-})
+--     debug_file:write(msg)
+--     debug_file:flush()
+--   end
+-- })
 
--- Remember to close the file when Neovim exits
-vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function()
-    debug_file:close()
-  end
-})
-
+-- -- Remember to close the file when Neovim exits
+-- vim.api.nvim_create_autocmd("VimLeave", {
+--   callback = function()
+--     debug_file:close()
+--   end
+-- })
 
 -- vim.api.nvim_create_autocmd("BufNew", {
 --   callback = function()
