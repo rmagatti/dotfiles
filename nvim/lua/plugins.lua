@@ -1,17 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
+return {
   { "tpope/vim-eunuch" },
   {
     "tpope/vim-commentary",
@@ -24,7 +11,12 @@ require("lazy").setup({
     "tpope/vim-abolish",
     event = "VeryLazy",
   },
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      require("rmagatti.treesitter-context-commentstring").setup()
+    end,
+  },
   {
     "tpope/vim-surround",
     keys = {
@@ -143,6 +135,7 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     dependencies = {
       "j-hui/fidget.nvim",
+      "williamboman/mason-lspconfig.nvim",
       -- "cordx56/rustowl"
     },
     event = "BufReadPost",
@@ -150,8 +143,19 @@ require("lazy").setup({
       require "rmagatti.lsp"
     end,
   },
-  { "williamboman/mason.nvim", },
-  { "williamboman/mason-lspconfig.nvim" },
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = "williamboman/mason.nvim",
+    config = function()
+      require("mason-lspconfig").setup()
+    end
+  },
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
@@ -185,7 +189,7 @@ require("lazy").setup({
   },
   {
     "folke/lazydev.nvim",
-    ft = "lua",       -- only load on lua files
+    ft = "lua", -- only load on lua files
     opts = {
       library = {
         -- See the configuration section for more details
@@ -271,10 +275,6 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost" },
-  },
-  {
-    "p00f/nvim-ts-rainbow",
-    event = "BufReadPost",
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
@@ -518,15 +518,16 @@ require("lazy").setup({
   },
   {
     'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
+    version = '^5', -- Recommended
     ft = { 'rust' },
-    lazy = true,
+    lazy = false,
   },
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" },
+
     },
     config = function()
       require("rmagatti.refactoring").setup()
@@ -607,5 +608,26 @@ require("lazy").setup({
     ---@type render.md.UserConfig
     opts = {},
     ft = { 'markdown', 'codecompanion' },
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- Adapter plugins
+      "marilari88/neotest-vitest",
+      -- 'mrcjkb/rustaceanvim',
+    },
+    config = function()
+      require("rmagatti.neotest").setup()
+    end,
+    keys = {
+      { "<leader>tt" },
+      { "<leader>tf" },
+      { "<leader>ts" },
+      { "<leader>ta" },
+    }
   }
-}, { defaults = { lazy = true }, dev = { path = "~/Projects" } })
+}

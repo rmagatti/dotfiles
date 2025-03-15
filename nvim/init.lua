@@ -199,6 +199,64 @@ vim.cmd [[
 
 vim.opt.syntax = "off"
 
-require "plugins"
+require "rmagatti.lazy"
 require "rmagatti.mappings"
 require "rmagatti.rust-test-folding"
+
+-- Create a debug log file
+local debug_file = io.open("/tmp/nvim_bufnew_debug.log", "w")
+
+-- Set up a trace for BufNew events
+vim.api.nvim_create_autocmd("BufNew", {
+  callback = function()
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    -- Get stack trace
+    local info = debug.getinfo(2, "Sl")
+    local source = info.source:sub(2)   -- Remove the '@' prefix
+    local line = info.currentline
+
+    -- Log the event with stack info
+    local msg = string.format(
+      "[%s] BufNew triggered for buffer %d (%s) from %s:%d\n",
+      os.date("%Y-%m-%d %H:%M:%S"),
+      bufnr,
+      bufname,
+      source,
+      line
+    )
+
+    debug_file:write(msg)
+    debug_file:flush()
+  end
+})
+
+-- Remember to close the file when Neovim exits
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    debug_file:close()
+  end
+})
+
+
+-- vim.api.nvim_create_autocmd("BufNew", {
+--   callback = function()
+--     local bufname = vim.api.nvim_buf_get_name(0)
+--     if bufname ~= "" then
+--       vim.notify("New buffer created: " .. bufname, vim.log.levels.DEBUG)
+--     end
+--   end
+-- })
+
+-- --- Load neotest and run tests when a test file is detected
+-- vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+--   pattern = "*.test.*",
+--   once = true,
+--   callback = function()
+--     vim.defer_fn(function()
+--       vim.notify("Test file detected. Running tests", vim.log.levels.INFO)
+--       require("neotest").run.run(vim.fn.expand "%")
+--     end, 1000)
+--   end,
+-- })

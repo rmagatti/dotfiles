@@ -13,7 +13,6 @@ require("nvim-treesitter.configs").setup {
   },
 
   textobjects = require("rmagatti.treesitter-textobjects"),
-  context_commentstring = require("rmagatti.treesitter-context-commentstring"),
   textsubjects = require("rmagatti.treesitter-textsubjects"),
   incremental_selection = require("rmagatti.treesitter-incremental-selection"),
 
