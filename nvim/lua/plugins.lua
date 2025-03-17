@@ -157,6 +157,10 @@ return {
     end
   },
   {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" }
+  },
+  {
     "j-hui/fidget.nvim",
     tag = "legacy",
     event = "LspAttach",
@@ -305,17 +309,17 @@ return {
     end,
     event = "BufRead",
   },
-  {
-    "junegunn/fzf",
-    build = function()
-      vim.fn["fzf#install"]()
-    end,
-    event = { "BufReadPost" },
-  },
-  {
-    "junegunn/fzf.vim",
-    dependencies = { "kevinhwang91/nvim-bqf", "junegunn/fzf" },
-  },
+  -- {
+  --   "junegunn/fzf",
+  --   build = function()
+  --     vim.fn["fzf#install"]()
+  --   end,
+  --   event = { "BufReadPost" },
+  -- },
+  -- {
+  --   "junegunn/fzf.vim",
+  --   dependencies = { "kevinhwang91/nvim-bqf", "junegunn/fzf" },
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -332,31 +336,22 @@ return {
     "wellle/targets.vim",
     event = { "BufReadPost" },
   },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  -- },
   {
     "kevinhwang91/nvim-bqf",
-    dependencies = { { "junegunn/fzf", optional = true }, { "junegunn/fzf.vim", optional = true } },
     ft = { "qf" },
     config = function()
       require "rmagatti.bqf"
     end,
   },
-  -- {
-  --   "junegunn/vim-easy-align",
-  --   config = function()
-  --     require "rmagatti.easyalign"
-  --   end,
-  --   cmd = { "EasyAlign" },
-  -- },
   -- DAP
   {
     "mfussenegger/nvim-dap",
-    dependencies = { "williamboman/mason-lspconfig.nvim", "williamboman/mason.nvim" },
+    -- dependencies = { "williamboman/mason-lspconfig.nvim", "williamboman/mason.nvim" },
     config = function()
-      require("telescope").load_extension "dap"
       require "rmagatti.dap"
     end,
     keys = { { "<leader>db" }, { "<leader>dB" } },
@@ -379,6 +374,7 @@ return {
       require "rmagatti.dap.dap-ui"
     end,
   },
+  -- DAP END
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -437,7 +433,7 @@ return {
         require("alternate-toggler").toggleAlternate
       )
     end,
-    event = { "BufReadPost" },
+    event = { "VeryLazy" },
   },
   {
     "rmagatti/goto-preview",
@@ -458,7 +454,7 @@ return {
   },
   {
     "rmagatti/igs.nvim",
-    event = { "BufReadPost" },
+    event = { "VeryLazy" },
     dev = true,
     config = function()
       require "rmagatti.igs"
@@ -484,28 +480,27 @@ return {
     "wakatime/vim-wakatime",
     event = "VeryLazy"
   },
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-    config = true,
-    lazy = false
-  },
-  {
-    "nvim-neorg/neorg",
-    ft = "norg",
-    config = function()
-      require("rmagatti.neorg").setup()
-    end,
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
-    cmd = { "Neorg" },
-    lazy = false,
-    keys = {
-      { "<leader>nn" }
-    }
-  },
-  {
-    "benlubas/neorg-interim-ls",
-  },
+  -- {
+  --   "vhyrro/luarocks.nvim",
+  --   priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+  --   config = true,
+  --   lazy = false
+  -- },
+  -- {
+  --   "nvim-neorg/neorg",
+  --   ft = "norg",
+  --   config = function()
+  --     require("rmagatti.neorg").setup()
+  --   end,
+  --   dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
+  --   cmd = { "Neorg" },
+  --   keys = {
+  --     { "<leader>nn" }
+  --   }
+  -- },
+  -- {
+  --   "benlubas/neorg-interim-ls",
+  -- },
   {
     "rmagatti/gx-extended.nvim",
     config = function()
@@ -520,52 +515,51 @@ return {
     'mrcjkb/rustaceanvim',
     version = '^5', -- Recommended
     ft = { 'rust' },
-    lazy = false,
   },
-  {
-    "ThePrimeagen/refactoring.nvim",
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
+  -- {
+  --   "ThePrimeagen/refactoring.nvim",
+  --   dependencies = {
+  --     { "nvim-lua/plenary.nvim" },
+  --     { "nvim-treesitter/nvim-treesitter" },
 
-    },
-    config = function()
-      require("rmagatti.refactoring").setup()
-    end,
-  },
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
-    -- ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    event = {
-      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      "BufReadPre " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
-      "BufNewFile " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
-      -- "VeryLazy"
-    },
-    dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-      -- see below for full list of optional dependencies 👇
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "Vault",
-          path = vim.fn.expand "~" .. "/Documents/vault",
-        },
-      },
+  --   },
+  --   config = function()
+  --     require("rmagatti.refactoring").setup()
+  --   end,
+  -- },
+  -- {
+  --   "epwalsh/obsidian.nvim",
+  --   version = "*", -- recommended, use latest release instead of latest commit
+  --   lazy = true,
+  --   -- ft = "markdown",
+  --   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+  --   event = {
+  --     -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+  --     -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+  --     "BufReadPre " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
+  --     "BufNewFile " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
+  --     -- "VeryLazy"
+  --   },
+  --   dependencies = {
+  --     -- Required.
+  --     "nvim-lua/plenary.nvim",
+  --     -- see below for full list of optional dependencies 👇
+  --   },
+  --   opts = {
+  --     workspaces = {
+  --       {
+  --         name = "Vault",
+  --         path = vim.fn.expand "~" .. "/Documents/vault",
+  --       },
+  --     },
 
-      daily_notes = {
-        folder = "Daily Notes",
-        template = "Templates/Daily Note Template.md"
-      }
-    },
+  --     daily_notes = {
+  --       folder = "Daily Notes",
+  --       template = "Templates/Daily Note Template.md"
+  --     }
+  --   },
 
-  },
+  -- },
   {
     "m00qek/baleia.nvim",
     config = function()
@@ -582,6 +576,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+    cmd = { "CodeCompanion" },
     keys = {
       { "<localleader>," },
     },

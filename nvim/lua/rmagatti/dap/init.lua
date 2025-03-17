@@ -5,112 +5,35 @@ vim.g.dap_virtual_text = true
 -- request variable values for all frames (experimental)
 -- vim.g.dap_virtual_text = 'all frames'
 
-vim.cmd [[
-nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>
-nnoremap <silent> <leader>dk :lua require'dap'.step_over()<CR>
-nnoremap <silent> <leader>d; :lua require'dap'.step_into()<CR>
-nnoremap <silent> <leader>dj :lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>db :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>dB :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <leader>dl :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
-nnoremap <silent> <leader>du :lua require'dapui'.toggle()<CR>
-]]
+-- DAP keybindings
+-- Movement
+vim.keymap.set('n', '<leader>dc', require('dap').continue, { silent = true, desc = "Continue" })
+vim.keymap.set('n', '<leader>dk', require('dap').step_over, { silent = true, desc = "Step over" })
+vim.keymap.set('n', '<leader>d;', require('dap').step_into, { silent = true, desc = "Step into" })
+vim.keymap.set('n', '<leader>dj', require('dap').step_out, { silent = true, desc = "Step out" })
 
--- Configs
-dap.adapters.node2 = {
-  type = "executable",
-  command = "node",
-  args = { os.getenv "HOME" .. "/Projects/vscode-node-debug2/out/src/nodeDebug.js" },
-}
+-- Breakpoints
+vim.keymap.set('n', '<leader>db', require('dap').toggle_breakpoint, { silent = true, desc = "Toggle breakpoint" })
+vim.keymap.set('n', '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+  { silent = true, desc = "Conditional breakpoint" })
+vim.keymap.set('n', '<leader>dl',
+  function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+  { silent = true, desc = "Log point" })
+vim.keymap.set('n', '<leader>dr', require('dap').repl.open, { silent = true, desc = "Open REPL" })
+vim.keymap.set('n', '<leader>du', require('dapui').toggle, { silent = true, desc = "Toggle UI" })
 
-dap.configurations.typescript = {
-  {
-    type = "node2",
-    request = "launch",
-    program = "${file}",
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = "inspector",
-    console = "integratedTerminal",
-  },
-}
+-- vim.fn.sign_define("DapBreakpoint", { text = "🛑" })
+-- vim.fn.sign_define("DapStopped", { text = "🟢" })
 
-vim.fn.sign_define("DapBreakpoint", { text = "🛑" })
-vim.fn.sign_define("DapStopped", { text = "🟢" })
+vim.fn.sign_define("DapBreakpoint", { text = "🔵", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointRejected", { text = "🔴", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapConditionalBreakpoint", { text = "🟡", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = "🟢", texthl = "", linehl = "", numhl = "" })
+
+-- Hover mapping
+vim.keymap.set('n', '<leader>dh', function() require('dap.ui.widgets').hover() end)
 
 -- Custom behaviour
 local M = {}
-
-M.attach_typescript = function()
-  dap.run {
-    type = "node2",
-    request = "attach",
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = "inspector",
-    skipFiles = { "<node_internals>/**/*.ts" },
-  }
-end
-
-M.debug_mocha = function(cmd)
-  local test_cmd = "./node_modules/ts-mocha/bin/ts-mocha"
-  local prefix_removed = (cmd:gsub("yarn test ", ""))
-  local final_cmd = test_cmd .. " " .. prefix_removed
-
-  print("==== cmd", final_cmd)
-
-  local split_cmd = vim.split(prefix_removed, "--grep")
-  local file_or_grep_split = split_cmd[2] and { vim.trim(split_cmd[1]), "--grep", vim.trim(split_cmd[2]) }
-    or split_cmd[1]
-  local args = cmd and { test_cmd, "--inspect-brk", "--no-parallel", file_or_grep_split }
-    or { test_cmd, "--inspect-brk" }
-
-  print("args", args)
-
-  dap.run {
-    type = "node2",
-    request = "launch",
-    cwd = vim.fn.getcwd(),
-    runtimeArgs = args,
-    sourceMaps = true,
-    protocol = "inspector",
-    skipFiles = { "<node_internals>/**/*.js" },
-    console = "integratedTerminal",
-    port = 9229,
-  }
-end
-
-M.debug = function(runner, cmd)
-  if runner:find "javascript#mocha" then
-    M.debug_mocha(cmd)
-  end
-  if runner:find "javascript#jest" then
-    M.debug_jest(cmd)
-  end
-end
-
--- TODO: setup jest debugging
-M.debug_jest = function(cmd)
-  local test_cmd = "./node_modules/jest/bin/jest.js"
-  local args = cmd and { "./node_modules/ts-node/dist/bin.js", "--inspect-brk", test_cmd, "--runInBand", (cmd:gsub("yarn test ", "")) }
-    or { test_cmd, "--inspect-brk" }
-  print(vim.inspect(table.concat(args, " ")))
-
-  dap.run {
-    type = "node2",
-    request = "launch",
-    cwd = vim.fn.getcwd(),
-    runtimeArgs = args,
-    sourceMaps = true,
-    protocol = "inspector",
-    skipFiles = { "<node_internals>/**/*.js" },
-    console = "integratedTerminal",
-    port = 9229,
-  }
-end
-
--- Hover mapping
-vim.cmd [[nnoremap <leader>dh <cmd>lua require('dap.ui.widgets').hover()<CR>]]
 
 return M

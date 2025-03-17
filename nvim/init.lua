@@ -204,7 +204,7 @@ require "rmagatti.mappings"
 require "rmagatti.rust-test-folding"
 
 -- Create a debug log file
-local debug_file = io.open("/tmp/nvim_bufnew_debug.log", "w")
+-- local debug_file = io.open("/tmp/nvim_bufnew_debug.log", "w")
 
 -- Set up a trace for BufNew events
 -- vim.api.nvim_create_autocmd("BufNew", {

@@ -19,12 +19,28 @@ M.setup = function()
       { noremap = true, silent = true, desc = description and description or 'Neotest: unknown mapping' })
   end
 
-  local test_file = function()
+  local function debug_nearest()
+    require("neotest").run.run({ strategy = "dap" })
+  end
+
+  local function debug_file()
+    require("neotest").run.run({ vim.fn.expand("%"), strategy = "dap" })
+  end
+
+  local run_nearest = function()
+    require('neotest').run.run()
+  end
+
+  local run_file = function()
     require('neotest').run.run(vim.fn.expand("%"))
   end
 
-  map('n', '<leader>tt', require('neotest').run.run, 'Run nearest test')
-  map('n', '<leader>tf', test_file, 'Run the current test file')
+  map('n', '<leader>tt', run_nearest, 'Run nearest test')
+  map('n', '<leader>tf', run_file, 'Run the current test file')
+
+  map('n', '<leader>tdt', debug_nearest, 'Debug nearest test')
+  map('n', '<leader>tdf', debug_file, 'Debug the current test file')
+
   map('n', '<leader>ts', require('neotest').summary.open, 'Summary of test results')
   map('n', '<leader>ta', require('neotest').run.attach, 'Attach to the nearest test, see :h neotest.run.attach()')
   map('n', '<leader>top', require('neotest').output_panel.open, 'Open the output panel')
