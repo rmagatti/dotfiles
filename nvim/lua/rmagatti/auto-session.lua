@@ -3,8 +3,14 @@ require("auto-session").setup {
   suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
   use_git_branch = false,
   show_auto_restore_notif = true,
+  session_lens = {
+    load_on_setup = false
+  }
 }
 
-vim.keymap.set("n", "<C-s>", require("auto-session.session-lens").search_session, {
+vim.keymap.set("n", "<C-s>", function()
+  require("telescope").load_extension "session-lens"
+  require("auto-session.session-lens").search_session({})
+end, {
   noremap = true,
 })

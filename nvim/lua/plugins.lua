@@ -1,5 +1,6 @@
 return {
-  { "tpope/vim-eunuch" },
+  -- Tim Pope plugins - minimal impact
+  { "tpope/vim-eunuch", event = "VeryLazy" },
   {
     "tpope/vim-commentary",
     keys = {
@@ -13,6 +14,12 @@ return {
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = {
+      { "gcs" },
+      { "gcb" },
+      { "gcc" },
+    },
     config = function()
       require("rmagatti.treesitter-context-commentstring").setup()
     end,
@@ -28,7 +35,10 @@ return {
   },
   {
     "tpope/vim-repeat",
+    event = "VeryLazy",
   },
+
+  -- Terminal and file management
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -39,10 +49,11 @@ return {
   },
   {
     "mbbill/undotree",
+    cmd = "UndotreeShow",
+    keys = "<leader>u",
     config = function()
       vim.cmd [[nnoremap <leader>u :UndotreeShow<CR>]]
     end,
-    keys = "<leader>u",
   },
   {
     "jremmen/vim-ripgrep",
@@ -50,40 +61,42 @@ return {
   },
   {
     "mhinz/vim-grepper",
-    lazy = false,
+    event = "VeryLazy",
     init = function()
       vim.cmd [[
-        nmap gs <plug>(GrepperOperator)
-        xmap gs <plug>(GrepperOperator)
-      ]]
+          nmap gs <plug>(GrepperOperator)
+          xmap gs <plug>(GrepperOperator)
+        ]]
     end,
   },
   {
     "nvim-tree/nvim-web-devicons",
+    event = "VeryLazy",
     config = function()
       require "rmagatti.nvim-web-devicons"
     end,
   },
   {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = function()
       require "rmagatti.nvim-autopairs"
     end,
-    event = "InsertEnter",
   },
   {
     "stevearc/oil.nvim",
-    lazy = false,
+    cmd = "Oil",
+    keys = "-",
     config = function()
       require("rmagatti.oil").setup()
     end,
   },
+
+  -- Navigation and motion
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {},
-    -- stylua: ignore
     keys = {
       { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
       { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
@@ -92,20 +105,6 @@ return {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-  -- {
-  --   "ggandor/leap.nvim",
-  --   config = function()
-  --     require("leap").create_default_mappings()
-  --     vim.keymap.set({ "n", "x", "o" }, "<localleader>s", '<Plug>(leap-from-window)')
-  --   end,
-  --   keys = {
-  --     { "s" },
-  --     { "S" },
-  --     { "f" },
-  --     { "F" },
-  --     { "<localleader>s", mode = { "n", "x", "o" } }
-  --   },
-  -- },
   {
     "tommcdo/vim-exchange",
     keys = {
@@ -115,7 +114,9 @@ return {
   },
   {
     "glacambre/firenvim",
-    lazy = false,
+    cond = function()
+      return vim.g.started_by_firenvim ~= nil
+    end,
     build = function()
       vim.fn["firenvim#install"](0)
     end,
@@ -123,20 +124,82 @@ return {
       require "rmagatti.firenvim"
     end,
   },
+  -- {
+  --   "mg979/vim-visual-multi",
+  --   branch = "master",
+  --   keys = "<C-n>",
+  --   config = function()
+  --     vim.cmd [[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
+  --   end,
+  -- },
   {
-    "mg979/vim-visual-multi",
-    branch = "master",
-    keys = "<C-n>",
+    "jake-stewart/multicursor.nvim",
+    branch = "1.0",
     config = function()
-      vim.cmd [[let g:VM_custom_motions  = {'h': 'j', 'j': 'k', 'k':'l', 'l':';'}]]
-    end,
+      local mc = require("multicursor-nvim")
+      mc.setup()
+
+      local set = vim.keymap.set
+
+      -- TODO: Fix these mappings or goto-preview's mappings for growing the window which area also using directional keys
+      -- Add or skip cursor above/below the main cursor.
+      set({ "n", "x" }, "<up>", function() mc.lineAddCursor(-1) end)
+      set({ "n", "x" }, "<down>", function() mc.lineAddCursor(1) end)
+      set({ "n", "x" }, "<leader><up>", function() mc.lineSkipCursor(-1) end)
+      set({ "n", "x" }, "<leader><down>", function() mc.lineSkipCursor(1) end)
+
+      -- Add or skip adding a new cursor by matching word/selection
+      set({ "n", "x" }, "<leader>n", function() mc.matchAddCursor(1) end)
+      set({ "n", "x" }, "<leader>s", function() mc.matchSkipCursor(1) end)
+      set({ "n", "x" }, "<leader>N", function() mc.matchAddCursor(-1) end)
+      set({ "n", "x" }, "<leader>S", function() mc.matchSkipCursor(-1) end)
+
+      -- Add and remove cursors with control + left click.
+      set("n", "<c-leftmouse>", mc.handleMouse)
+      set("n", "<c-leftdrag>", mc.handleMouseDrag)
+      set("n", "<c-leftrelease>", mc.handleMouseRelease)
+
+      -- Disable and enable cursors.
+      set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+
+      -- Mappings defined in a keymap layer only apply when there are
+      -- multiple cursors. This lets you have overlapping mappings.
+      mc.addKeymapLayer(function(layerSet)
+        -- Select a different cursor as the main one.
+        layerSet({ "n", "x" }, "<left>", mc.prevCursor)
+        layerSet({ "n", "x" }, "<right>", mc.nextCursor)
+
+        -- Delete the main cursor.
+        layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
+
+        -- Enable and clear cursors using escape.
+        layerSet("n", "<esc>", function()
+          if not mc.cursorsEnabled() then
+            mc.enableCursors()
+          else
+            mc.clearCursors()
+          end
+        end)
+      end)
+
+      -- Customize how cursors look.
+      local hl = vim.api.nvim_set_hl
+      hl(0, "MultiCursorCursor", { link = "Cursor" })
+      hl(0, "MultiCursorVisual", { link = "Visual" })
+      hl(0, "MultiCursorSign", { link = "SignColumn" })
+      hl(0, "MultiCursorMatchPreview", { link = "Search" })
+      hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+      hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+      hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+    end
   },
+
+  -- LSP and completion
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       "j-hui/fidget.nvim",
       "williamboman/mason-lspconfig.nvim",
-      -- "cordx56/rustowl"
     },
     event = "BufReadPost",
     config = function()
@@ -145,6 +208,8 @@ return {
   },
   {
     "williamboman/mason.nvim",
+    cmd = "Mason",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("mason").setup()
     end
@@ -152,14 +217,17 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = "williamboman/mason.nvim",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("mason-lspconfig").setup()
     end
   },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" }
-  },
+  -- {
+  --   "jay-babu/mason-nvim-dap.nvim",
+  --   dependencies = "williamboman/mason.nvim",
+  --   event = "BufReadPost",
+  --   cmd = { "DapInstall", "DapUninstall" },
+  -- },
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
@@ -170,11 +238,13 @@ return {
   },
   {
     "ray-x/lsp_signature.nvim",
+    event = "LspAttach",
   },
   {
     "Saghen/blink.cmp",
     dependencies = 'rafamadriz/friendly-snippets',
     version = 'v0.*',
+    event = "InsertEnter",
     config = function()
       require("rmagatti.blink-cmp").setup()
     end,
@@ -183,42 +253,64 @@ return {
     "L3MON4D3/LuaSnip",
     version = "v1.*",
     build = "make install_jsregexp",
+    event = "InsertEnter",
     config = function()
       require "rmagatti.luasnip"
     end,
   },
-  { "rafamadriz/friendly-snippets" },
+  {
+    "rafamadriz/friendly-snippets",
+    event = "InsertEnter",
+  },
   {
     "onsails/lspkind-nvim",
+    event = "InsertEnter",
   },
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
       library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
   },
-  { "nvim-lua/plenary.nvim" },
+
+  -- Core utilities
+  {
+    "nvim-lua/plenary.nvim",
+    lazy = true,
+  },
   {
     "nvim-telescope/telescope.nvim",
-    lazy = false,
-    dependencies = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
+    cmd = "Telescope",
+    keys = {
+      { "<leader>ff" },
+      { "<leader>fg" },
+      { "<leader>fb" },
+      { "<leader>fh" },
+      { "<leader>ps" },
+    },
+    dependencies = {
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build =
+        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
+      }
+    },
     config = function()
       require "rmagatti.telescope"
     end
   },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build =
-    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-    dependencies = { "nvim-telescope/telescope.nvim" },
-  },
+  -- Git
   {
     "tpope/vim-fugitive",
+    cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull" },
     config = function()
       require("rmagatti.fugitive").setup()
     end,
@@ -230,15 +322,15 @@ return {
   {
     "tpope/vim-rhubarb",
     dependencies = "vim-fugitive",
+    cmd = { "GBrowse" },
   },
   {
-    -- TODO: Try to get neogit diffs to be colored
     "NeogitOrg/neogit",
     lazy = true,
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "nvim-telescope/telescope.nvim", -- optional
-      "sindrets/diffview.nvim",        -- optional
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "sindrets/diffview.nvim",
     },
     config = function()
       require("rmagatti.neogit")
@@ -259,14 +351,18 @@ return {
       { "<leader>dvc" },
     },
   },
+
+  -- UI and themes
   {
     "rebelot/kanagawa.nvim",
-    lazy = false, -- make sure we load this during startup
+    lazy = false, -- Keep this for immediate theme loading
     priority = 1000,
     config = function()
       require "rmagatti.kanagawa"
     end,
   },
+
+  -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -277,7 +373,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    dependencies = "nvim-treesitter/nvim-treesitter-context",
+    dependencies = "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost" },
   },
   {
@@ -309,17 +405,6 @@ return {
     end,
     event = "BufRead",
   },
-  -- {
-  --   "junegunn/fzf",
-  --   build = function()
-  --     vim.fn["fzf#install"]()
-  --   end,
-  --   event = { "BufReadPost" },
-  -- },
-  -- {
-  --   "junegunn/fzf.vim",
-  --   dependencies = { "kevinhwang91/nvim-bqf", "junegunn/fzf" },
-  -- },
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -330,16 +415,12 @@ return {
   },
   {
     "hashivim/vim-terraform",
-    ft = { "terraform" },
+    ft = { "terraform", "hcl" },
   },
   {
     "wellle/targets.vim",
     event = { "BufReadPost" },
   },
-  -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  -- },
   {
     "kevinhwang91/nvim-bqf",
     ft = { "qf" },
@@ -347,22 +428,39 @@ return {
       require "rmagatti.bqf"
     end,
   },
-  -- DAP
+
+  -- DAP (Debug Adapter Protocol)
   {
     "mfussenegger/nvim-dap",
-    -- dependencies = { "williamboman/mason-lspconfig.nvim", "williamboman/mason.nvim" },
+    cmd = {
+      "DapToggleBreakpoint",
+      "DapContinue",
+      "DapStepOver",
+      "DapStepInto",
+      "DapStepOut",
+      "DapTerminate"
+    },
+    keys = {
+      { "<leader>db" },
+      { "<leader>dB" },
+    },
     config = function()
       require "rmagatti.dap"
     end,
-    keys = { { "<leader>db" }, { "<leader>dB" } },
   },
   {
     "theHamsta/nvim-dap-virtual-text",
     dependencies = "mfussenegger/nvim-dap",
+    event = "BufReadPost",
+    cond = function()
+      return package.loaded["dap"] ~= nil
+    end,
   },
   {
     "nvim-telescope/telescope-dap.nvim",
     dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
+    cmd = { "Telescope dap" },
+    keys = { "<leader>df" },
     config = function()
       require("telescope").load_extension "dap"
     end,
@@ -370,11 +468,14 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap" },
+    cmd = { "DapUIToggle", "DapUIOpen" },
+    keys = { "<leader>du" },
     config = function()
       require "rmagatti.dap.dap-ui"
     end,
   },
-  -- DAP END
+
+  -- Utilities
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -392,8 +493,9 @@ return {
   },
   {
     "AckslD/nvim-neoclip.lua",
-    dependencies = { "tami5/sqlite.lua", },
+    dependencies = { "tami5/sqlite.lua" },
     event = "BufReadPost",
+    keys = { "<leader>y" },
     config = function()
       require("neoclip").setup {
         enable_persistent_history = true,
@@ -407,13 +509,10 @@ return {
       }
       vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
     end,
-    keys = {
-      { "<leader>y" },
-    },
   },
   {
     "rmagatti/auto-session",
-    lazy = false,
+    event = "VimEnter",
     config = function()
       require "rmagatti.auto-session"
     end,
@@ -421,6 +520,7 @@ return {
   },
   {
     "rmagatti/alternate-toggler",
+    keys = "<leader><space>",
     config = function()
       require("alternate-toggler").setup {
         alternates = {
@@ -429,28 +529,26 @@ return {
       }
       vim.keymap.set(
         "n",
-        "<leader><space>", -- <space><space>
+        "<leader><space>",
         require("alternate-toggler").toggleAlternate
       )
     end,
-    event = { "VeryLazy" },
   },
   {
     "rmagatti/goto-preview",
     dev = true,
     dependencies = { "rmagatti/logger.nvim" },
-    config = function()
-      require("rmagatti.goto-preview").setup()
-    end,
     keys = {
       { "gpd" },
       { "gpi" },
       { "gpr" },
       { "gP" },
       { "L" },
-      -- This is the rename keymap. Since goto-preview is providing vim.ui.input functionality we need to lazy load goto-preview when the keymap is used.
       { "<leader>rn" },
     },
+    config = function()
+      require("rmagatti.goto-preview").setup()
+    end,
   },
   {
     "rmagatti/igs.nvim",
@@ -469,123 +567,56 @@ return {
   },
   {
     "eandrju/cellular-automaton.nvim",
-    config = function()
-      vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { noremap = true })
-    end,
+    cmd = "CellularAutomaton",
     keys = {
       { "<leader>fml" },
     },
+    config = function()
+      vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { noremap = true })
+    end,
   },
   {
     "wakatime/vim-wakatime",
     event = "VeryLazy"
   },
-  -- {
-  --   "vhyrro/luarocks.nvim",
-  --   priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-  --   config = true,
-  --   lazy = false
-  -- },
-  -- {
-  --   "nvim-neorg/neorg",
-  --   ft = "norg",
-  --   config = function()
-  --     require("rmagatti.neorg").setup()
-  --   end,
-  --   dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
-  --   cmd = { "Neorg" },
-  --   keys = {
-  --     { "<leader>nn" }
-  --   }
-  -- },
-  -- {
-  --   "benlubas/neorg-interim-ls",
-  -- },
   {
     "rmagatti/gx-extended.nvim",
+    keys = { "gx" },
     config = function()
       require("rmagatti.gx-extended").setup()
     end,
-    keys = {
-      { "gx" },
-    },
     dev = true
   },
   {
     'mrcjkb/rustaceanvim',
-    version = '^5', -- Recommended
+    version = '^5',
     ft = { 'rust' },
   },
+  -- Term color codes when looking at logs
   -- {
-  --   "ThePrimeagen/refactoring.nvim",
-  --   dependencies = {
-  --     { "nvim-lua/plenary.nvim" },
-  --     { "nvim-treesitter/nvim-treesitter" },
-
-  --   },
+  --   "m00qek/baleia.nvim",
   --   config = function()
-  --     require("rmagatti.refactoring").setup()
-  --   end,
+  --     require("baleia").setup {}
+  --   end
   -- },
-  -- {
-  --   "epwalsh/obsidian.nvim",
-  --   version = "*", -- recommended, use latest release instead of latest commit
-  --   lazy = true,
-  --   -- ft = "markdown",
-  --   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  --   event = {
-  --     -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --     -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --     "BufReadPre " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
-  --     "BufNewFile " .. vim.fn.expand "~" .. "/Documents/vault/**.md",
-  --     -- "VeryLazy"
-  --   },
-  --   dependencies = {
-  --     -- Required.
-  --     "nvim-lua/plenary.nvim",
-  --     -- see below for full list of optional dependencies 👇
-  --   },
-  --   opts = {
-  --     workspaces = {
-  --       {
-  --         name = "Vault",
-  --         path = vim.fn.expand "~" .. "/Documents/vault",
-  --       },
-  --     },
-
-  --     daily_notes = {
-  --       folder = "Daily Notes",
-  --       template = "Templates/Daily Note Template.md"
-  --     }
-  --   },
-
-  -- },
-  {
-    "m00qek/baleia.nvim",
-    config = function()
-      require("baleia").setup {}
-    end
-  },
   {
     "olimorris/codecompanion.nvim",
     event = { "InsertEnter" },
-    config = function()
-      require("rmagatti.codecompanion").setup()
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
     cmd = { "CodeCompanion" },
     keys = {
       { "<localleader>," },
     },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("rmagatti.codecompanion").setup()
+    end,
   },
   {
     "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
+    event = "VeryLazy",
     opts = {
       indent = { enabled = false },
       input = { enabled = false },
@@ -593,16 +624,13 @@ return {
       dim = { enabled = true },
       notifier = { enabled = true },
       zen = { enabled = true }
-      -- TODO: Add mappings for dimming and zen
     },
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     ft = { 'markdown', 'codecompanion' },
+    opts = {},
   },
   {
     "nvim-neotest/neotest",
@@ -611,10 +639,9 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
-      -- Adapter plugins
       "marilari88/neotest-vitest",
-      -- 'mrcjkb/rustaceanvim',
     },
+    cmd = { "Neotest" },
     config = function()
       require("rmagatti.neotest").setup()
     end,
