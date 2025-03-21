@@ -91,7 +91,6 @@ return {
       require("rmagatti.oil").setup()
     end,
   },
-
   -- Navigation and motion
   {
     "folke/flash.nvim",
@@ -222,12 +221,6 @@ return {
       require("mason-lspconfig").setup()
     end
   },
-  -- {
-  --   "jay-babu/mason-nvim-dap.nvim",
-  --   dependencies = "williamboman/mason.nvim",
-  --   event = "BufReadPost",
-  --   cmd = { "DapInstall", "DapUninstall" },
-  -- },
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
@@ -248,19 +241,6 @@ return {
     config = function()
       require("rmagatti.blink-cmp").setup()
     end,
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    version = "v1.*",
-    build = "make install_jsregexp",
-    event = "InsertEnter",
-    config = function()
-      require "rmagatti.luasnip"
-    end,
-  },
-  {
-    "rafamadriz/friendly-snippets",
-    event = "InsertEnter",
   },
   {
     "onsails/lspkind-nvim",
@@ -428,7 +408,6 @@ return {
       require "rmagatti.bqf"
     end,
   },
-
   -- DAP (Debug Adapter Protocol)
   {
     "mfussenegger/nvim-dap",
@@ -442,6 +421,7 @@ return {
     },
     keys = {
       { "<leader>db" },
+      { "<leader>dc" },
       { "<leader>dB" },
     },
     config = function()
@@ -474,7 +454,6 @@ return {
       require "rmagatti.dap.dap-ui"
     end,
   },
-
   -- Utilities
   {
     "folke/which-key.nvim",
@@ -617,14 +596,9 @@ return {
   {
     "folke/snacks.nvim",
     event = "VeryLazy",
-    opts = {
-      indent = { enabled = false },
-      input = { enabled = false },
-      picker = { enabled = true },
-      dim = { enabled = true },
-      notifier = { enabled = true },
-      zen = { enabled = true }
-    },
+    config = function()
+      require("rmagatti.snacks").setup()
+    end,
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -655,18 +629,7 @@ return {
   {
     'mfussenegger/nvim-lint',
     config = function()
-      require('lint').linters_by_ft = {
-        typescript = { 'eslint_d' },
-        typescriptreact = { 'eslint_d' },
-      }
-
-      vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
-        callback = function()
-          -- try_lint without arguments runs the linters defined in `linters_by_ft`
-          -- for the current filetype
-          require("lint").try_lint()
-        end,
-      })
+      require("rmagatti.nvim-lint").setup()
     end
   }
 }

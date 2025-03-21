@@ -1,6 +1,50 @@
 local dap = require "dap"
 
--- Virtual text
+for _, language in ipairs({ "typescript", "javascript" }) do
+  dap.configurations[language] = {
+    -- Node.js configuration
+    {
+      type = "node",
+      request = "attach",
+      name = "Next.js: Attach to Node",
+      port = 9230,
+      cwd = "${workspaceFolder}",
+      sourceMaps = true,
+      skipFiles = { "<node_internals>/**", "node_modules/**" },
+      timeout = 10000, -- 10 second timeout
+    },
+    -- Add a Chrome configuration for client-side
+    {
+      type = "chrome",
+      request = "attach",
+      name = "Next.js: Client-side",
+      port = 9222, -- Chrome's default remote debugging port
+      webRoot = "${workspaceFolder}",
+      sourceMaps = true,
+      sourceMapPathOverrides = {
+        ["webpack://_N_E/*"] = "${webRoot}/*",
+        ["webpack:///*"] = "${webRoot}/*",
+      },
+    }
+  }
+end
+
+dap.adapters.chrome = {
+  type = "executable",
+  command = "js-debug-adapter",
+  args = { "9231" },
+}
+
+dap.adapters.node = {
+  type = "server",
+  host = "localhost",
+  port = "${port}", -- Dynamic port
+  executable = {
+    command = "js-debug-adapter",
+    args = { "${port}" }
+  }
+}
+
 vim.g.dap_virtual_text = true
 -- request variable values for all frames (experimental)
 -- vim.g.dap_virtual_text = 'all frames'
@@ -21,9 +65,6 @@ vim.keymap.set('n', '<leader>dl',
   { silent = true, desc = "Log point" })
 vim.keymap.set('n', '<leader>dr', require('dap').repl.open, { silent = true, desc = "Open REPL" })
 vim.keymap.set('n', '<leader>du', require('dapui').toggle, { silent = true, desc = "Toggle UI" })
-
--- vim.fn.sign_define("DapBreakpoint", { text = "🛑" })
--- vim.fn.sign_define("DapStopped", { text = "🟢" })
 
 vim.fn.sign_define("DapBreakpoint", { text = "🔵", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointRejected", { text = "🔴", texthl = "", linehl = "", numhl = "" })
