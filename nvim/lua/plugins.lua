@@ -236,7 +236,7 @@ return {
   {
     "Saghen/blink.cmp",
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    version = 'v1.*',
     event = "InsertEnter",
     config = function()
       require("rmagatti.blink-cmp").setup()
@@ -517,6 +517,7 @@ return {
     "rmagatti/goto-preview",
     dev = true,
     dependencies = { "rmagatti/logger.nvim" },
+    event = { "VeryLazy" },
     keys = {
       { "gpd" },
       { "gpi" },
