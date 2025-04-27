@@ -4,15 +4,13 @@ local function fold_rust_tests_cfg()
   local query = vim.treesitter.query.parse("rust", [[
       (
         (attribute_item
-          (attribute
-            (identifier) @cfgName
-            arguments: (token_tree
-              (identifier) @testName)))
+          (attribute) @attr (#contains? @attr "test")
+          ) @attrItem
         (mod_item
           name: (identifier) @modName)
-        (#eq? @testName "test")
-        ) @captureName
-      ]])
+        (#contains? @modName "test")
+      ) @captureName
+    ]])
 
   -- vim.notify("Folding Rust test modules based on #[cfg(test)]...", vim.log.levels.DEBUG)
 

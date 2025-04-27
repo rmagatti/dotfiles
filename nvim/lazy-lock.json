@@ -4,7 +4,7 @@
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "bufferize.vim": { "branch": "main", "commit": "ec7c4445a97f19e5784a6fb6ad3c3d4a8ff505ac" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
-  "codecompanion.nvim": { "branch": "main", "commit": "c861811f8b825d30c0343951336d2bb8c8f6d990" },
+  "codecompanion.nvim": { "branch": "main", "commit": "9c8c55a16597ac3880740632d14bc15b3d2e786d" },
   "copilot.lua": { "branch": "master", "commit": "a5c390f8d8e85b501b22dcb2f30e0cbbd69d5ff0" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
