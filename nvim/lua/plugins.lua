@@ -492,7 +492,7 @@ return {
   },
   {
     "rmagatti/auto-session",
-    event = "VimEnter",
+    lazy = false,
     config = function()
       require "rmagatti.auto-session"
     end,
