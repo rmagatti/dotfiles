@@ -2,6 +2,11 @@ local M = {}
 
 function M.setup()
   require('oil').setup {
+    default_file_explorer = true,
+    skip_confirm_for_simple_edits = true,
+    view_options = {
+      natural_order = true,
+    },
 
     keymaps = {
       ["g?"] = "actions.show_help",

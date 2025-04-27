@@ -156,31 +156,6 @@ vim.cmd [[
   augroup end
 ]]
 
--- Aparently treesitter foldexpr needs to be set in FileType autocmd
--- see: https://github.com/neovim/neovim/issues/28692
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function(args)
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.cmd("normal! zx")
-  end,
-})
-
-vim.opt.foldlevel = 99
-vim.opt.foldenable = true
-
--- Protip: zi toggles folding
-vim.cmd [[
-  function! Fold()
-    normal zM
-  endfunction
-
-  function! Unfold()
-    normal zR
-  endfunction
-]]
-
 local function Fold()
   vim.cmd [[normal zM]]
 end
@@ -201,6 +176,7 @@ vim.opt.syntax = "off"
 
 require "rmagatti.lazy"
 require "rmagatti.mappings"
+require "rmagatti.folding"
 require "rmagatti.rust-test-folding"
 
 -- Create a debug log file

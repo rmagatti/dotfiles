@@ -3,16 +3,16 @@ local function fold_rust_tests_cfg()
 
   local query = vim.treesitter.query.parse("rust", [[
       (
-            (attribute_item
-                  (attribute
-                          (identifier) @cfgName
-                              arguments: (token_tree
-                                                     (identifier) @testName)))
-            (mod_item
-              name: (identifier) @modName)
-            (#eq? @testName "test")
+        (attribute_item
+          (attribute
+            (identifier) @cfgName
+            arguments: (token_tree
+              (identifier) @testName)))
+        (mod_item
+          name: (identifier) @modName)
+        (#eq? @testName "test")
         ) @captureName
-  ]])
+      ]])
 
   -- vim.notify("Folding Rust test modules based on #[cfg(test)]...", vim.log.levels.DEBUG)
 
@@ -54,13 +54,24 @@ vim.api.nvim_create_autocmd("FileType", {
     -- Delay a bit to ensure Tree‑sitter has parsed the file.
 
     vim.defer_fn(function()
-      vim.opt.foldmethod = "expr"
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+      -- Save original fold settings and apply them after the fold.
+      local original_foldmethod = vim.opt_local.foldmethod
+      local original_foldexpr = vim.opt_local.foldexpr
+      local original_foldtext = vim.opt_local.foldtext
+
+      -- Set buffer-local fold settings
+      vim.opt_local.foldmethod = "expr"
+      vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt_local.foldtext = "v:lua.vim.treesitter.foldtext()"
       vim.cmd("normal! zx")
-      -- vim.notify("Auto-folding `tests` modules with #[cfg(test)]", vim.log.levels.DEBUG)
+
+      -- Apply the folding
       fold_rust_tests_cfg()
+
+      -- Restore original fold settings
+      vim.opt_local.foldmethod = original_foldmethod
+      vim.opt_local.foldexpr = original_foldexpr
+      vim.opt_local.foldtext = original_foldtext
     end, 500)
   end,
 })

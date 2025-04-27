@@ -1,4 +1,3 @@
-require "rmagatti.mappings.sg"
 require "rmagatti.mappings.neorg"
 
 local function delete_hidden_buffers(options)

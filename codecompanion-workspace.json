@@ -1,0 +1,337 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "Neovim Configuration",
+  "version": "1.0.0",
+  "system_prompt": "You are an expert Neovim user assisting with configuration questions. Use the provided file context to understand the user's setup. The configuration is Lua-based and uses lazy.nvim for plugin management. Configuration modules are located under lua/rmagatti/.",
+  "vars": {
+    "config_root": "lua/rmagatti"
+  },
+  "groups": [
+    {
+      "name": "Core & Plugin Management",
+      "system_prompt": "Focus on the core Neovim setup, plugin management (lazy.nvim), and the main entry points. The user might ask about startup, plugin loading, or general options.",
+      "data": [
+        "core-init",
+        "plugin-spec",
+        "lazy-config",
+        "lazy-lock",
+        "legacy-init"
+      ]
+    },
+    {
+      "name": "Key Mappings",
+      "system_prompt": "Focus on key bindings and related plugins like which-key. The user might ask how to perform an action, change a binding, or understand existing mappings.",
+      "data": [
+        "mappings-core",
+        "mappings-neorg",
+        "whichkey-config",
+        "legacy-mappings"
+      ]
+    },
+    {
+      "name": "LSP",
+      "system_prompt": "Focus on Language Server Protocol integration, diagnostics (linting/formatting), and related UI elements like fidget or signature help. The user might ask about language server setup, error highlighting, or code actions.",
+      "data": [
+        "lsp-core",
+        "lsp-common",
+        "lsp-mappings",
+        "lsp-signature",
+        "fidget-config",
+        "lint-config"
+      ]
+    },
+    {
+      "name": "Completion",
+      "system_prompt": "Focus on code completion setup using nvim-cmp, snippets (luasnip), and AI assistance (Copilot). The user might ask about completion sources, snippet expansion, or Copilot behavior.",
+      "data": [
+        "cmp-config",
+        "luasnip-config",
+        "copilot-config",
+        "copilot-cmp-config",
+        "blink-cmp-config"
+      ]
+    },
+    {
+      "name": "UI & Appearance",
+      "system_prompt": "Focus on the visual aspects of Neovim: themes, status line, icons, and UI enhancements like dressing or floating windows. The user might ask about changing colors, customizing the status line, or general aesthetics.",
+      "data": [
+        "lualine-config",
+        "theme-kanagawa",
+        "theme-tokyonight",
+        "devicons-config",
+        "dressing-config",
+        "floating-config"
+      ]
+    },
+    {
+      "name": "File Navigation & Fuzzy Finding",
+      "system_prompt": "Focus on tools for finding and navigating files and buffers, primarily Telescope and oil.nvim. The user might ask about finding files, searching text, or managing buffers.",
+      "data": [
+        "telescope-core",
+        "telescope-buffers",
+        "telescope-dotfiles",
+        "telescope-grep",
+        "telescope-mappings",
+        "oil-config",
+        "bqf-config"
+      ]
+    },
+    {
+      "name": "Treesitter",
+      "system_prompt": "Focus on Treesitter configuration for syntax parsing, highlighting, text objects, and navigation. The user might ask about language support, text object selection, or syntax-aware features.",
+      "data": [
+        "treesitter-core",
+        "treesitter-context-commentstring",
+        "treesitter-incremental-selection",
+        "treesitter-move",
+        "treesitter-textobjects",
+        "treesitter-textsubjects"
+      ]
+    },
+    {
+      "name": "Git Integration",
+      "system_prompt": "Focus on Git integration plugins like gitsigns, fugitive, neogit, and diffview. The user might ask about viewing diffs, staging changes, committing, or blaming lines.",
+      "data": [
+        "gitsigns-config",
+        "fugitive-config",
+        "neogit-config",
+        "diffview-config"
+      ]
+    },
+    {
+      "name": "Debugging (DAP)",
+      "system_prompt": "Focus on the Debug Adapter Protocol (DAP) setup for code debugging. The user might ask about setting breakpoints, inspecting variables, or configuring debug sessions.",
+      "data": [
+        "dap-core",
+        "dap-ui-config"
+      ]
+    }
+  ],
+  "data": {
+    "core-init": {
+      "type": "file",
+      "path": "init.lua",
+      "description": "Main Neovim configuration entry point (Lua)."
+    },
+    "plugin-spec": {
+      "type": "file",
+      "path": "lua/plugins.lua",
+      "description": "Plugin specifications defined for lazy.nvim."
+    },
+    "lazy-config": {
+      "type": "file",
+      "path": "${config_root}/lazy.lua",
+      "description": "Configuration options for the lazy.nvim plugin manager."
+    },
+    "lazy-lock": {
+      "type": "file",
+      "path": "lazy-lock.json",
+      "description": "Lockfile for lazy.nvim, specifying exact plugin versions."
+    },
+    "legacy-init": {
+      "type": "file",
+      "path": "__init.vim",
+      "description": "Legacy Vimscript initialization file (may contain settings loaded before Lua)."
+    },
+    "mappings-core": {
+      "type": "file",
+      "path": "${config_root}/mappings/init.lua",
+      "description": "Core key mapping definitions."
+    },
+    "mappings-neorg": {
+      "type": "file",
+      "path": "${config_root}/mappings/neorg.lua",
+      "description": "Key mappings specific to the Neorg plugin."
+    },
+    "whichkey-config": {
+      "type": "file",
+      "path": "${config_root}/which-key.lua",
+      "description": "Configuration for the which-key plugin (shows key binding hints)."
+    },
+    "legacy-mappings": {
+      "type": "file",
+      "path": "mappings.vim",
+      "description": "Legacy Vimscript key mapping definitions."
+    },
+    "lsp-core": {
+      "type": "file",
+      "path": "${config_root}/lsp/init.lua",
+      "description": "Core Language Server Protocol (LSP) setup using nvim-lspconfig."
+    },
+    "lsp-common": {
+      "type": "file",
+      "path": "${config_root}/lsp/lsp-common.lua",
+      "description": "Common utility functions and settings shared across LSP configurations."
+    },
+    "lsp-mappings": {
+      "type": "file",
+      "path": "${config_root}/lsp/lsp-mappings.lua",
+      "description": "Key mappings specifically for LSP actions (e.g., go to definition, find references)."
+    },
+    "lsp-signature": {
+      "type": "file",
+      "path": "${config_root}/lsp/lsp-signature.lua",
+      "description": "Configuration for LSP signature help display."
+    },
+    "fidget-config": {
+      "type": "file",
+      "path": "${config_root}/fidget.lua",
+      "description": "Configuration for fidget.nvim (displays LSP progress)."
+    },
+    "lint-config": {
+      "type": "file",
+      "path": "${config_root}/nvim-lint.lua",
+      "description": "Configuration for nvim-lint (asynchronous linting integration)."
+    },
+    "cmp-config": {
+      "type": "file",
+      "path": "${config_root}/nvim-cmp.lua",
+      "description": "Configuration for nvim-cmp (completion engine)."
+    },
+    "luasnip-config": {
+      "type": "file",
+      "path": "${config_root}/luasnip.lua",
+      "description": "Configuration for LuaSnip (snippet engine)."
+    },
+    "copilot-config": {
+      "type": "file",
+      "path": "${config_root}/copilot.lua",
+      "description": "Configuration for the Copilot plugin."
+    },
+    "copilot-cmp-config": {
+      "type": "file",
+      "path": "${config_root}/copilot-cmp.lua",
+      "description": "Configuration for integrating Copilot with nvim-cmp."
+    },
+    "blink-cmp-config": {
+      "type": "file",
+      "path": "${config_root}/blink-cmp.lua",
+      "description": "Configuration for blink-cmp (nvim-cmp enhancement)."
+    },
+    "lualine-config": {
+      "type": "file",
+      "path": "${config_root}/lualine.lua",
+      "description": "Configuration for lualine.nvim (status line)."
+    },
+    "theme-kanagawa": {
+      "type": "file",
+      "path": "${config_root}/kanagawa.lua",
+      "description": "Configuration and setup for the Kanagawa theme."
+    },
+    "theme-tokyonight": {
+      "type": "file",
+      "path": "${config_root}/tokyonight.lua",
+      "description": "Configuration and setup for the Tokyo Night theme."
+    },
+    "devicons-config": {
+      "type": "file",
+      "path": "${config_root}/nvim-web-devicons.lua",
+      "description": "Configuration for nvim-web-devicons (file icons)."
+    },
+    "dressing-config": {
+      "type": "file",
+      "path": "${config_root}/dressing.lua",
+      "description": "Configuration for dressing.nvim (UI enhancement for vim.ui)."
+    },
+    "floating-config": {
+      "type": "file",
+      "path": "${config_root}/floating.lua",
+      "description": "Configuration related to floating windows."
+    },
+    "telescope-core": {
+      "type": "file",
+      "path": "${config_root}/telescope/init.lua",
+      "description": "Core configuration for Telescope.nvim (fuzzy finder)."
+    },
+    "telescope-buffers": {
+      "type": "file",
+      "path": "${config_root}/telescope/buffers.lua",
+      "description": "Telescope configuration specific to listing buffers."
+    },
+    "telescope-dotfiles": {
+      "type": "file",
+      "path": "${config_root}/telescope/dotfiles.lua",
+      "description": "Telescope configuration specific to finding dotfiles."
+    },
+    "telescope-grep": {
+      "type": "file",
+      "path": "${config_root}/telescope/live_multigrep.lua",
+      "description": "Telescope configuration specific to live/multi-grep searching."
+    },
+    "telescope-mappings": {
+      "type": "file",
+      "path": "${config_root}/telescope/mappings.lua",
+      "description": "Key mappings related to Telescope actions."
+    },
+    "oil-config": {
+      "type": "file",
+      "path": "${config_root}/oil.lua",
+      "description": "Configuration for oil.nvim (file navigation)."
+    },
+    "bqf-config": {
+      "type": "file",
+      "path": "${config_root}/bqf.lua",
+      "description": "Configuration for bqf.nvim (quickfix list enhancements)."
+    },
+    "treesitter-core": {
+      "type": "file",
+      "path": "${config_root}/treesitter.lua",
+      "description": "Core configuration for nvim-treesitter (parsing, highlighting)."
+    },
+    "treesitter-context-commentstring": {
+      "type": "file",
+      "path": "${config_root}/treesitter-context-commentstring.lua",
+      "description": "Treesitter configuration for context-aware commentstring."
+    },
+    "treesitter-incremental-selection": {
+      "type": "file",
+      "path": "${config_root}/treesitter-incremental-selection.lua",
+      "description": "Treesitter configuration for incremental selection."
+    },
+    "treesitter-move": {
+      "type": "file",
+      "path": "${config_root}/treesitter-move.lua",
+      "description": "Treesitter configuration for syntax-aware movement."
+    },
+    "treesitter-textobjects": {
+      "type": "file",
+      "path": "${config_root}/treesitter-textobjects.lua",
+      "description": "Treesitter configuration for defining text objects."
+    },
+    "treesitter-textsubjects": {
+      "type": "file",
+      "path": "${config_root}/treesitter-textsubjects.lua",
+      "description": "Treesitter configuration for text subjects."
+    },
+    "gitsigns-config": {
+      "type": "file",
+      "path": "${config_root}/gitsigns.lua",
+      "description": "Configuration for gitsigns.nvim (Git decorations in the sign column)."
+    },
+    "fugitive-config": {
+      "type": "file",
+      "path": "${config_root}/fugitive.lua",
+      "description": "Configuration or settings related to vim-fugitive (Git wrapper)."
+    },
+    "neogit-config": {
+      "type": "file",
+      "path": "${config_root}/neogit.lua",
+      "description": "Configuration for Neogit (Magit-like Git interface)."
+    },
+    "diffview-config": {
+      "type": "file",
+      "path": "${config_root}/diffview.lua",
+      "description": "Configuration for diffview.nvim (Git diff viewer)."
+    },
+    "dap-core": {
+      "type": "file",
+      "path": "${config_root}/dap/init.lua",
+      "description": "Core configuration for nvim-dap (Debug Adapter Protocol)."
+    },
+    "dap-ui-config": {
+      "type": "file",
+      "path": "${config_root}/dap/dap-ui.lua",
+      "description": "Configuration for dap-ui (UI companion for nvim-dap)."
+    }
+  }
+}

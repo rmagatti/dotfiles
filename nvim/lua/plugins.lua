@@ -270,6 +270,7 @@ return {
       { "<leader>fb" },
       { "<leader>fh" },
       { "<leader>ps" },
+      { "<leader>b" },
     },
     dependencies = {
       "nvim-lua/popup.nvim",

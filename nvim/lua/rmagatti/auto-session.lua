@@ -1,7 +1,7 @@
 require("auto-session").setup {
   log_level = vim.log.levels.INFO,
   suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-  use_git_branch = true,
+  use_git_branch = false,
   show_auto_restore_notif = true,
   session_lens = {
     load_on_setup = false

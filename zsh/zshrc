@@ -178,6 +178,7 @@ function gitchb() {
 }
 
 function gitchr() {
+  git fetch
   local branch=$(git branch --sort=-committerdate -r | fzf | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
   if git show-ref --verify --quiet "refs/heads/$branch"; then
     git checkout "$branch"
