@@ -133,6 +133,27 @@ function gitc() {
   fi
 }
 
+function gitf () {
+    git for-each-ref --format='%(refname:short)' refs/heads/ | while read branch; do
+    # Find the merge base between the potential parent branch and the current HEAD
+    base=$(git merge-base --all $branch HEAD)
+
+    # Check if the merge base is the commit immediately before the current HEAD.
+    # Note: This specific check might not always align with the common understanding
+    # of "branched off from", which is typically the commit the branch was created *at*.
+    # A more common check related to merge-base and branching might involve
+    # looking for a common ancestor that represents the point of divergence.
+    # However, this function implements the logic you requested.
+
+    # We should iterate over merge bases if there are multiple, though typically one.
+        for b in $base; do
+            if [ "$b" = "$(git rev-parse HEAD^)" ]; then
+                echo "Current branch might have branched from $branch (based on HEAD^ merge base)"
+            fi
+        done
+    done
+}
+
 function gitcan() {
   git commit --amend --no-edit
 }
@@ -385,7 +406,7 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export PATH=$PATH:$HOME/.cargo/bin
-export CC=/usr/bin/clang
+# export CC=/usr/bin/clang
 source $(brew --prefix nvm)/nvm.sh
 export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
 
@@ -399,7 +420,7 @@ ssh-add
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 PATH=$PATH:~/.local/bin
-export CC=gcc-12 
+# export CC=gcc-12 
 
 # Created by `pipx` on 2023-12-05 03:57:18
 export PATH="$PATH:/Users/ronniemagatti/.local/bin"
@@ -408,9 +429,6 @@ export PATH="/Library/Frameworks/GStreamer.framework/Versions/1.0/bin${PATH:+:$P
 # bun completions
 [ -s "/Users/ronniemagatti/.bun/_bun" ] && source "/Users/ronniemagatti/.bun/_bun"
 
-
-export SUPABASE_URL=https://hjtxndtruiwltvdvfpdv.supabase.co/rest/v1
-export SUPABASE_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU 
 
 # =============================================================================
 #

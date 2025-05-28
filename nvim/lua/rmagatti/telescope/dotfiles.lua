@@ -11,7 +11,7 @@ M.setup = function()
   vim.keymap.set(
     "n",
     "<leader>sdf",
-    ":lua require('rmagatti.telescope.dotfiles').search_dotfiles()<CR>",
+    require('rmagatti.telescope.dotfiles').search_dotfiles,
     { noremap = true }
   )
 end
