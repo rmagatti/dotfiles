@@ -633,5 +633,24 @@ return {
     config = function()
       require("rmagatti.nvim-lint").setup()
     end
+  },
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+    config = function()
+      require("mcphub").setup()
+    end
+  },
+  {
+    "Marskey/telescope-sg",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("rmagatti.ast-grep").setup()
+    end,
   }
 }
