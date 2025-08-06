@@ -35,3 +35,6 @@ require("nvim-treesitter.configs").setup {
 vim.cmd [[
   nnoremap <leader>rt <cmd>w <bar> e <bar> TSBufEnable highlight <bar> set syntax=off<CR>
 ]]
+
+-- Load additional parsers
+require("tree-sitter-rstml").setup()

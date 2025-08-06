@@ -105,7 +105,7 @@ automatically-unhide-macos-hidden-apps = false
     ctrl-alt-j = 'focus left'
     ctrl-alt-k = 'focus down'
     ctrl-alt-l = 'focus up'
-    alt-semicolon = 'focus right'
+    ctrl-alt-semicolon = 'focus right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-j = 'move left'
