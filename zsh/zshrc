@@ -439,3 +439,7 @@ eval "$(zoxide init zsh --cmd cd)"
 
 bindkey -s ç 'cd $(find ~/Projects/ -maxdepth 2 -type d | fzf)\n'
 alias gemini="GOOGLE_CLOUD_PROJECT=\"montra-development-env\" gemini"
+
+# OpenCode profiles
+alias ocw="OPENCODE_CONFIG_DIR=~/.config/opencode-work opencode"
+alias ocp="OPENCODE_CONFIG_DIR=~/.config/opencode-personal opencode"

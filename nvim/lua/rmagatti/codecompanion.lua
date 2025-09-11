@@ -37,7 +37,8 @@ M.setup = function()
         return require("codecompanion.adapters").extend("copilot", {
           schema = {
             model = {
-              default = "claude-sonnet-4"
+              default = "gpt-5"
+              -- default = "claude-sonnet-4"
               -- default = "gemini-2.5-pro"
             }
           }
