@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").biome.setup(opts)
+  vim.lsp.config("biome", opts)
+  vim.lsp.enable("biome")
 end
 
 return M

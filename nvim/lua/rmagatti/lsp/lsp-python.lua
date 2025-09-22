@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").basedpyright.setup(vim.tbl_deep_extend("force", opts, {}))
+  vim.lsp.config("basedpyright", vim.tbl_deep_extend("force", opts, {}))
+  vim.lsp.enable("basedpyright")
 
   -- require("lspconfig").ruff_lsp.setup(vim.tbl_deep_extend("force", opts, {}))
 end

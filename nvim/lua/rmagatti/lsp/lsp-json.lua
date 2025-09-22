@@ -62,7 +62,8 @@ M.setup = function()
     },
   })
 
-  require("lspconfig").jsonls.setup(opts)
+  vim.lsp.config("jsonls", opts)
+  vim.lsp.enable("jsonls")
 end
 
 return M

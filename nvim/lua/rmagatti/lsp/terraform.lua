@@ -9,7 +9,8 @@ function M.setup()
     capabilities = capabilities,
   }
 
-  require("lspconfig").terraformls.setup(opts)
+  vim.lsp.config("terraformls", opts)
+  vim.lsp.enable("terraformls")
 end
 
 return M
