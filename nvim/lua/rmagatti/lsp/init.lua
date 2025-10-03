@@ -1,5 +1,4 @@
 require("mason").setup()
-require("mason-lspconfig").setup {}
 require("rmagatti.lsp.lsp-lua").setup()
 require("rmagatti.lsp.lsp-typescript").setup()
 require("rmagatti.lsp.lsp-yaml").setup()

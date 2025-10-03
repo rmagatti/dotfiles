@@ -198,7 +198,6 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "j-hui/fidget.nvim",
-      "williamboman/mason-lspconfig.nvim",
     },
     event = "BufReadPost",
     config = function()
@@ -213,14 +212,7 @@ return {
       require("mason").setup()
     end
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = "williamboman/mason.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("mason-lspconfig").setup()
-    end
-  },
+
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
@@ -656,23 +648,4 @@ return {
   {
     "rayliwell/tree-sitter-rstml"
   },
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    name = "tailwind-tools",
-    build = ":UpdateRemotePlugins",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig",         -- optional
-    },
-    opts = {
-      extension = {
-        queries = { "rust" },
-        patterns = { -- a map of filetypes to Lua pattern lists
-          rust = { "class=[\"']([^\"']+)[\"']" },
-          -- javascript = { "clsx%(([^)]+)%)" },
-        }
-      }
-    }
-  }
 }
