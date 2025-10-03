@@ -570,7 +570,7 @@ return {
   },
   {
     'mrcjkb/rustaceanvim',
-    version = '^5',
+    version = '^6',
     ft = { 'rust' },
   },
   -- Term color codes when looking at logs
@@ -633,5 +633,46 @@ return {
     config = function()
       require("rmagatti.nvim-lint").setup()
     end
+  },
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+    config = function()
+      require("mcphub").setup()
+    end
+  },
+  {
+    "Marskey/telescope-sg",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("rmagatti.ast-grep").setup()
+    end,
+  },
+  {
+    "rayliwell/tree-sitter-rstml"
+  },
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig",         -- optional
+    },
+    opts = {
+      extension = {
+        queries = { "rust" },
+        patterns = { -- a map of filetypes to Lua pattern lists
+          rust = { "class=[\"']([^\"']+)[\"']" },
+          -- javascript = { "clsx%(([^)]+)%)" },
+        }
+      }
+    }
   }
 }

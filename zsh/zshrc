@@ -239,6 +239,7 @@ alias gitst="git stash"
 alias gitstp="git stash pop"
 alias gitcl="git clone"
 alias v="nvim"
+alias vim="nvim"
 alias vv="neovide --frame='transparent' --no-vsync&"
 
 function gitsqa() {
@@ -437,3 +438,8 @@ export PATH="/Library/Frameworks/GStreamer.framework/Versions/1.0/bin${PATH:+:$P
 eval "$(zoxide init zsh --cmd cd)"
 
 bindkey -s ç 'cd $(find ~/Projects/ -maxdepth 2 -type d | fzf)\n'
+alias gemini="GOOGLE_CLOUD_PROJECT=\"montra-development-env\" gemini"
+
+# OpenCode profiles
+alias ocw="OPENCODE_CONFIG_DIR=~/.config/opencode-work opencode"
+alias ocp="OPENCODE_CONFIG_DIR=~/.config/opencode-personal opencode"

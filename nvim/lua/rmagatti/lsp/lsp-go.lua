@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").gopls.setup(opts)
+  vim.lsp.config("gopls", opts)
+  vim.lsp.enable("gopls")
 end
 
 return M

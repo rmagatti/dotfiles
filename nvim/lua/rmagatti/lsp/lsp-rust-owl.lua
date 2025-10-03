@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig")["rustowlsp"].setup(opts)
+  vim.lsp.config("rustowlsp", opts)
+  vim.lsp.enable("rustowlsp")
 end
 
 return M

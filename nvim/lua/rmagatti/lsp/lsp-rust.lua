@@ -14,6 +14,7 @@ M.setup = function()
     default_settings = {
       ['rust-analyzer'] = {
         cargo = { allFeatures = true },
+        -- cargo = { features = { "ssr", "hydrate" } },
         checkOnSave = true,
         check = {
           enable = true,
@@ -22,6 +23,13 @@ M.setup = function()
         },
         procMacro = {
           enable = true,
+          ignored = {
+            leptos_macro = {
+              -- optional: --
+              -- "component",
+              "server",
+            },
+          },
         },
       },
     }

@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").yamlls.setup(opts)
+  vim.lsp.config("yamlls", opts)
+  vim.lsp.enable("yamlls")
 end
 
 return M

@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").prismals.setup(opts)
+  vim.lsp.config("prismals", opts)
+  vim.lsp.enable("prismals")
 end
 
 return M

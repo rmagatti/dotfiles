@@ -179,6 +179,30 @@ require "rmagatti.mappings"
 require "rmagatti.folding"
 require "rmagatti.rust-test-folding"
 
+vim.notify = function(msg, level, opts)
+  -- Always ensure messages go to the message log
+  -- Use vim.api.nvim_echo for reliable message display
+  local log_level = level or vim.log.levels.INFO
+
+  -- Convert level to string if it's a number
+  local level_name = type(log_level) == "number" and
+      (log_level == vim.log.levels.ERROR and "ERROR" or
+        log_level == vim.log.levels.WARN and "WARN" or
+        log_level == vim.log.levels.INFO and "INFO" or
+        "DEBUG") or tostring(log_level)
+
+  -- Format message for the message log
+  local formatted_msg = string.format("[%s] %s", level_name, msg)
+
+  -- Add to message history using vim.api.nvim_echo
+  vim.api.nvim_echo({ { formatted_msg, "Normal" } }, true, {})
+
+  -- Also call original notify if it exists and isn't nil
+  if original_notify and type(original_notify) == "function" then
+    return original_notify(msg, level, opts)
+  end
+end
+
 -- Create a debug log file
 -- local debug_file = io.open("/tmp/nvim_bufnew_debug.log", "w")
 

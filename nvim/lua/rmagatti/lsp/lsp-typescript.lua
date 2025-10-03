@@ -43,7 +43,8 @@ M.setup = function()
     end,
   })
 
-  require("lspconfig").vtsls.setup(tsserver_opts)
+  vim.lsp.config("vtsls", tsserver_opts)
+  vim.lsp.enable("vtsls")
 end
 
 return M

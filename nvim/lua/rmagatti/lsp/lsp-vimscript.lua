@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").vimls.setup(opts)
+  vim.lsp.config("vimls", opts)
+  vim.lsp.enable("vimls")
 end
 
 return M

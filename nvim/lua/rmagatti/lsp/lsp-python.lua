@@ -9,27 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").pylsp.setup(vim.tbl_deep_extend("force", opts, {
-    settings = {
-      pylsp = {
-        plugins = {
-          ruff = { enabled = false },
-          pylsp_mypy = { enabled = true },
-          rope = { enabled = true },
-          pylint = { enabled = false },
-
-          black = { enabled = false },
-          isort = { enabled = false },
-          pycodestyle = { enabled = false },
-          pyflakes = { enabled = false },
-          mccabe = { enabled = false },
-          preload = { enabled = false },
-          pydocstyle = { enabled = false },
-          yapf = { enabled = false },
-        },
-      },
-    },
-  }))
+  vim.lsp.config("basedpyright", vim.tbl_deep_extend("force", opts, {}))
+  vim.lsp.enable("basedpyright")
 
   -- require("lspconfig").ruff_lsp.setup(vim.tbl_deep_extend("force", opts, {}))
 end

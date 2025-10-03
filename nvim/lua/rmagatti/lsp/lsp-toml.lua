@@ -9,7 +9,8 @@ M.setup = function()
     capabilities = capabilities,
   }
 
-  require("lspconfig").taplo.setup(opts)
+  vim.lsp.config("taplo", opts)
+  vim.lsp.enable("taplo")
 end
 
 return M

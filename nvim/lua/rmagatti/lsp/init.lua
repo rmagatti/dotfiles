@@ -13,6 +13,7 @@ require("rmagatti.lsp.lsp-biome").setup()
 require("rmagatti.lsp.lsp-go").setup()
 require("rmagatti.lsp.lsp-toml").setup()
 require("rmagatti.lsp.terraform").setup()
+require("rmagatti.lsp.tailwind").setup()
 
 vim.diagnostic.config({
   virtual_text = true,   -- Show inline error/warning messages
