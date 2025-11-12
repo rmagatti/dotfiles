@@ -1,0 +1,38 @@
+# Test artifacts and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# Test output
+test-output/
+coverage/
+.coverage
+
+# Temporary test files
+tmp/
+temp/
+.test/
+
+# Lua bytecode
+*.luac
+
+# Tree-sitter parsers (if downloaded during tests)
+parser/
+
+# Editor files
+.DS_Store
+.idea/
+*.iml
+
+# Test data that shouldn't be committed
+test-data/
+scratch/
+
+# Plenary test results
+plenary_test_results.txt
+test_results.xml
+
+# Any locally generated fixtures
+fixtures/generated/

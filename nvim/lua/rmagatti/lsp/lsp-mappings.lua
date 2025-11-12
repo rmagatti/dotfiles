@@ -1,41 +1,6 @@
 ---@diagnostic disable: undefined-field
 local M = {}
 
--- TODO: finish this
--- do
---   local on = false
---   local has_autocmd = false
---   local autocmd_id
-
---   function M.toggle_inlay_hints()
---     if not has_autocmd then
---       autocmd_id = vim.api.nvim_create_autocmd({ "CursorMoved" }, {
---         pattern = "*",
---         callback = require("rmagatti.lsp.lsp-mappings").highlight_symbol,
---       })
---       has_autocmd = true
---     else
---       vim.api.nvim_del_autocmd(autocmd_id)
---       has_autocmd = false
---     end
-
---     if on then
---       vim.lsp.buf.clear_references()
---       on = false
---     else
---       vim.lsp.buf.document_highlight()
---       on = true
---     end
---   end
-
---   function M.inlay_hints()
---     if not on then
---       return
---     end
---     vim.lsp.inlay_hint.enable(0, false)
---   end
--- end
-
 do
   local on = false
   local has_autocmd = false
@@ -71,12 +36,12 @@ do
   end
 end
 
-M.on_attach = function(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+vim.keymap.set("n", "ih", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
 
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+M.on_attach = function(client, bufnr)
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
   -- Mappings.
   local opts = { buffer = bufnr, silent = true }
@@ -118,8 +83,12 @@ M.on_attach = function(client, bufnr)
 
   -- Diagnostics
   vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts) -- not mneumonic
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)         -- diagnostic next (not mneumonic but [ and ] work as next/previous)
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)         -- diagnostic previous (not mneumonic)
+  vim.keymap.set("n", "]d", function()
+    vim.diagnostic.jump({ count = 1, float = true })
+  end, opts) -- diagnostic next (not mneumonic but [ and ] work as next/previous)
+  vim.keymap.set("n", "[d", function()
+    vim.diagnostic.jump({ count = -1, float = true })
+  end, opts) -- diagnostic previous (not mneumonic)
   vim.keymap.set("n", "<leader>dl", function()
     require("telescope.builtin").diagnostics()
   end, opts)                                                        -- diagnostics telescope list
@@ -151,31 +120,6 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("v", "<leader>fo", function()
     vim.lsp.buf.format { async = true }
   end, opts)
-
-  -- buf_set_keymap("n", "<leader>dac", function()
-  --   vim.cmd "g/\v^(//<bar>.*//)/d_<CR>:w<CR>:noh<CR>"
-  -- end, opts)
-
-  -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.documentHighlightProvider then
-    -- local colors = require("tokyonight.colors").setup {}
-
-    -- Says fg_gutter is not a valid color but it either exists or nil is handled as what I want here.
-    -- vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = colors.fg_gutter })
-    -- vim.api.nvim_set_hl(0, "LspReferenceText", { bg = colors.fg_gutter })
-    -- vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = colors.bg_visual })
-
-    -- vim.api.nvim_exec(
-    --   [[
-    --     augroup lsp_document_highlight
-    --     autocmd! * <buffer>
-    --     autocmd CursorHold <buffer> lua require('rmagatti.lsp.lsp-mappings').highlight_symbol()
-    --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    --     augroup END
-    -- ]],
-    --   false
-    -- )
-  end
 end
 
 return M
