@@ -4,10 +4,6 @@ M.setup = function()
   local capabilities = require("rmagatti.lsp.lsp-common").capabilities
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
-  vim.keymap.set("n", "<leader>x", function()
-    vim.cmd.RustLsp("explainError")
-  end, { silent = true })
-
   local opts = {
     on_attach = common_on_attach,
     capabilities = capabilities,
@@ -25,8 +21,6 @@ M.setup = function()
           enable = true,
           ignored = {
             leptos_macro = {
-              -- optional: --
-              -- "component",
               "server",
             },
           },

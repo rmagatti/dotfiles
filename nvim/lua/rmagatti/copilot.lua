@@ -12,6 +12,15 @@ M.setup = function()
       },
     },
     copilot_node_command = "node",
+    nes = {
+      enabled = true,
+      auto_trigger = true,
+      keymap = {
+        accept_and_goto = "<tab>",
+        accept = false,
+        dismiss = "<esc>",
+      },
+    },
     panel = { enabled = false },
   }
 end

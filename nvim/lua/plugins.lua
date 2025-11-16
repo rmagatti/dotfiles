@@ -534,7 +534,15 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    event = { "InsertEnter" },
+    event = { "BufEnter" },
+    dependencies = {
+      {
+        "copilotlsp-nvim/copilot-lsp",
+        config = function()
+          require("rmagatti.copilot-lsp").setup()
+        end,
+      }
+    },
     config = function()
       require("rmagatti.copilot").setup()
     end,
@@ -564,7 +572,7 @@ return {
   {
     'mrcjkb/rustaceanvim',
     version = '^6',
-    ft = { 'rust' },
+    lazy = false
   },
   -- Term color codes when looking at logs
   -- {
