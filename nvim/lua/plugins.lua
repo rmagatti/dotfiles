@@ -599,6 +599,15 @@ return {
     opts = {},
   },
   {
+    "NickvanDyke/opencode.nvim",
+    dependencies = {
+      "folke/snacks.nvim",
+    },
+    config = function()
+      require("rmagatti.opencode").setup()
+    end,
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
