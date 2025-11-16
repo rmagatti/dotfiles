@@ -38,6 +38,7 @@ end
 
 vim.keymap.set("n", "ih", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  vim.notify("Inlay Hints " .. (vim.lsp.inlay_hint.is_enabled() and "Enabled" or "Disabled"))
 end, { desc = "Toggle Inlay Hints" })
 
 M.on_attach = function(client, bufnr)
