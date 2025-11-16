@@ -5,6 +5,9 @@ M.setup = function()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   local tsserver_opts = vim.tbl_deep_extend("force", {}, {
+    cmd = { 'vtsls', '--stdio' },
+    filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+    root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
     capabilities = vim.tbl_deep_extend("force", capabilities, {
       formatting = false,
       documentHighlightProvider = true,

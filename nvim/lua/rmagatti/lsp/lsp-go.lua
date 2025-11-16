@@ -5,6 +5,9 @@ M.setup = function()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   local opts = {
+    cmd = { 'gopls' },
+    filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+    root_markers = { 'go.mod', 'go.work', '.git' },
     on_attach = common_on_attach,
     capabilities = capabilities,
   }

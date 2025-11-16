@@ -33,6 +33,7 @@ function M.setup()
   }
 
   local opts = {
+    cmd = { 'tailwindcss-language-server', '--stdio' },
     on_attach = common_on_attach,
     capabilities = capabilities,
     filetypes = filetypes,

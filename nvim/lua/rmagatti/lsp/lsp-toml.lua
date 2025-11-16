@@ -5,6 +5,9 @@ M.setup = function()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   local opts = {
+    cmd = { 'taplo', 'lsp', 'stdio' },
+    filetypes = { 'toml' },
+    root_markers = { '*.toml', '.git' },
     on_attach = common_on_attach,
     capabilities = capabilities,
   }

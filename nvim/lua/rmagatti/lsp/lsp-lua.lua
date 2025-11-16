@@ -5,6 +5,9 @@ M.setup = function()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   local opts = {
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
     on_attach = common_on_attach,
     capabilities = capabilities,
     settings = {

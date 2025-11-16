@@ -162,6 +162,7 @@ vim.cmd [[
 vim.opt.syntax = "off"
 
 require "rmagatti.lazy"
+require "rmagatti.lsp"
 require "rmagatti.mappings"
 require "rmagatti.folding"
 require "rmagatti.rust-test-folding"

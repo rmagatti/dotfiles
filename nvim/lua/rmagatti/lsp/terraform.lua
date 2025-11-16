@@ -5,6 +5,9 @@ function M.setup()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   local opts = {
+    cmd = { 'terraform-ls', 'serve' },
+    filetypes = { 'terraform', 'terraform-vars' },
+    root_markers = { '.terraform', '*.tf', '.git' },
     on_attach = common_on_attach,
     capabilities = capabilities,
   }

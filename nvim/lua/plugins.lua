@@ -195,16 +195,6 @@ return {
 
   -- LSP and completion
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "j-hui/fidget.nvim",
-    },
-    event = "BufReadPost",
-    config = function()
-      require "rmagatti.lsp"
-    end,
-  },
-  {
     "williamboman/mason.nvim",
     cmd = "Mason",
     event = { "BufReadPost", "BufNewFile" },
@@ -212,7 +202,6 @@ return {
       require("mason").setup()
     end
   },
-
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
@@ -644,15 +633,6 @@ return {
     config = function()
       require("mcphub").setup()
     end
-  },
-  {
-    "Marskey/telescope-sg",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      require("rmagatti.ast-grep").setup()
-    end,
   },
   {
     "rayliwell/tree-sitter-rstml"

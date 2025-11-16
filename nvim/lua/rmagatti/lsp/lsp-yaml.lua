@@ -5,6 +5,9 @@ M.setup = function()
   local common_on_attach = require("rmagatti.lsp.lsp-common").common_on_attach
 
   local opts = {
+    cmd = { 'yaml-language-server', '--stdio' },
+    filetypes = { 'yaml', 'yaml.docker-compose' },
+    root_markers = { '.git' },
     on_attach = common_on_attach,
     capabilities = capabilities,
   }
