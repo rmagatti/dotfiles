@@ -5,7 +5,6 @@ require("rmagatti.lsp.lsp-yaml").setup()
 require("rmagatti.lsp.lsp-json").setup()
 require("rmagatti.lsp.lsp-vimscript").setup()
 require("rmagatti.lsp.lsp-rust").setup()
--- require("rmagatti.lsp.lsp-rust-owl").setup()
 require("rmagatti.lsp.lsp-prisma").setup()
 require("rmagatti.lsp.lsp-python").setup()
 require("rmagatti.lsp.lsp-biome").setup()
@@ -15,8 +14,8 @@ require("rmagatti.lsp.terraform").setup()
 require("rmagatti.lsp.tailwind").setup()
 
 vim.diagnostic.config({
-  virtual_text = true,   -- Show inline error/warning messages
-  signs = true,          -- Show signs in the gutter
-  underline = true,      -- Underline problematic code
+  virtual_text = true, -- Show inline error/warning messages
+  signs = true,        -- Show signs in the gutter
+  underline = true,    -- Underline problematic code
   update_in_insert = false,
 })

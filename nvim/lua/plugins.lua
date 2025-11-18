@@ -343,6 +343,9 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",
     event = { "BufReadPost" },
+    config = function()
+      require "rmagatti.treesitter-textobjects"
+    end,
   },
   {
     "RRethy/nvim-treesitter-textsubjects",

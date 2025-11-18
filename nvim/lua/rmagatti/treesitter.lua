@@ -12,7 +12,6 @@ require("nvim-treesitter.configs").setup {
     enable = true,
   },
 
-  textobjects = require("rmagatti.treesitter-textobjects"),
   textsubjects = require("rmagatti.treesitter-textsubjects"),
   incremental_selection = require("rmagatti.treesitter-incremental-selection"),
 
