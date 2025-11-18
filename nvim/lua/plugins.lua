@@ -195,11 +195,30 @@ return {
 
   -- LSP and completion
   {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPost", "BufNewFile" },
+  },
+  {
     "williamboman/mason.nvim",
     cmd = "Mason",
     event = { "BufReadPost", "BufNewFile" },
+    opts = {}
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
     config = function()
-      require("mason").setup()
+      require("rmagatti.mason-lspconfig")
+    end,
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    config = function()
+      require("rmagatti.mason-tool-installer")
     end
   },
   {
@@ -564,6 +583,7 @@ return {
   {
     'mrcjkb/rustaceanvim',
     version = '^6',
+    dev = false,
     lazy = false
   },
   -- Term color codes when looking at logs

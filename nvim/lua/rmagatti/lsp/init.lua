@@ -1,17 +1,19 @@
 require("mason").setup()
-require("rmagatti.lsp.lsp-lua").setup()
-require("rmagatti.lsp.lsp-typescript").setup()
-require("rmagatti.lsp.lsp-yaml").setup()
-require("rmagatti.lsp.lsp-json").setup()
-require("rmagatti.lsp.lsp-vimscript").setup()
-require("rmagatti.lsp.lsp-rust").setup()
-require("rmagatti.lsp.lsp-prisma").setup()
-require("rmagatti.lsp.lsp-python").setup()
-require("rmagatti.lsp.lsp-biome").setup()
-require("rmagatti.lsp.lsp-go").setup()
-require("rmagatti.lsp.lsp-toml").setup()
-require("rmagatti.lsp.terraform").setup()
-require("rmagatti.lsp.tailwind").setup()
+
+-- vim.lsp.enable({
+--   "lua_ls",
+--   "vtsls",
+--   "yamlls",
+--   "jsonls",
+--   "vimls",
+--   -- "rust_analyzer", -- rustaceanvim handles rust_analyzer setup so we don't need to manually enable it here
+--   "basedpyright",
+--   "biome",
+--   "gopls",
+--   "taplo",
+--   "terraformls",
+--   "tailwindcss"
+-- })
 
 vim.diagnostic.config({
   virtual_text = true, -- Show inline error/warning messages

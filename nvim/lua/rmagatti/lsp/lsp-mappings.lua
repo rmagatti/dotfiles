@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-field
 local M = {}
 
 do
@@ -121,6 +120,55 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("v", "<leader>fo", function()
     vim.lsp.buf.format { async = true }
   end, opts)
+
+  vim.keymap.set("n", "<leader>oi", function()
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.organizeImports" },
+        diagnostics = vim.diagnostic.get(bufnr)
+      },
+      apply = true
+    })
+  end, { desc = "Organize imports", buffer = bufnr })
+
+  -- Add missing imports
+  vim.keymap.set("n", "<leader>ai", function()
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.addMissingImports" },
+        diagnostics = vim.diagnostic.get(bufnr)
+      },
+      apply = true
+    })
+  end, { desc = "Add missing imports", buffer = bufnr })
+
+  -- Fix all issues
+  vim.keymap.set("n", "<leader>fa", function()
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.fixAll" },
+        diagnostics = vim.diagnostic.get(bufnr)
+      }
+      ,
+      apply = true
+    })
+  end, { desc = "Fix all issues", buffer = bufnr })
+
+  -- Remove unused imports
+  vim.keymap.set("n", "<leader>ru", function()
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.removeUnused", "source.removeUnusedImports" },
+        diagnostics = vim.diagnostic.get(bufnr)
+      },
+      apply = true
+    })
+  end, { desc = "Remove unused imports", buffer = bufnr })
+
+  -- Go to source definition
+  vim.keymap.set("n", "<leader>gD", function()
+    vim.lsp.buf.type_definition()
+  end, { desc = "Go to type definition", buffer = bufnr })
 end
 
 return M
