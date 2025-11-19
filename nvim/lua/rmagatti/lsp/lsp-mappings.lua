@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch
 local M = {}
 
 do
@@ -40,7 +41,7 @@ vim.keymap.set("n", "ih", function()
   vim.notify("Inlay Hints " .. (vim.lsp.inlay_hint.is_enabled() and "Enabled" or "Disabled"))
 end, { desc = "Toggle Inlay Hints" })
 
-M.on_attach = function(client, bufnr)
+M.on_attach = function(client, bufnr, augroup)
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
   -- Mappings.
@@ -66,7 +67,7 @@ M.on_attach = function(client, bufnr)
 
   -- Refactoring and actions
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("n", "<localleader>a", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "g.", vim.lsp.buf.code_action, opts)
   vim.keymap.set({ "n", "x", "v" }, "<M-CR>", vim.lsp.buf.code_action, opts)
 
   if
@@ -125,7 +126,7 @@ M.on_attach = function(client, bufnr)
     vim.lsp.buf.code_action({
       context = {
         only = { "source.organizeImports" },
-        diagnostics = vim.diagnostic.get(bufnr)
+        diagnostics = {}
       },
       apply = true
     })
@@ -136,7 +137,7 @@ M.on_attach = function(client, bufnr)
     vim.lsp.buf.code_action({
       context = {
         only = { "source.addMissingImports" },
-        diagnostics = vim.diagnostic.get(bufnr)
+        diagnostics = {}
       },
       apply = true
     })
@@ -147,7 +148,7 @@ M.on_attach = function(client, bufnr)
     vim.lsp.buf.code_action({
       context = {
         only = { "source.fixAll" },
-        diagnostics = vim.diagnostic.get(bufnr)
+        diagnostics = {}
       }
       ,
       apply = true
@@ -159,7 +160,7 @@ M.on_attach = function(client, bufnr)
     vim.lsp.buf.code_action({
       context = {
         only = { "source.removeUnused", "source.removeUnusedImports" },
-        diagnostics = vim.diagnostic.get(bufnr)
+        diagnostics = {}
       },
       apply = true
     })

@@ -1,19 +1,31 @@
 require("mason").setup()
 
--- vim.lsp.enable({
---   "lua_ls",
---   "vtsls",
---   "yamlls",
---   "jsonls",
---   "vimls",
---   -- "rust_analyzer", -- rustaceanvim handles rust_analyzer setup so we don't need to manually enable it here
---   "basedpyright",
---   "biome",
---   "gopls",
---   "taplo",
---   "terraformls",
---   "tailwindcss"
--- })
+local augroup = vim.api.nvim_create_augroup('PreSaveActions', { clear = true })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    if not client then
+      return
+    end
+
+    -- Enable inlay hints if supported
+    if client:supports_method('textDocument/inlayHint', bufnr) then
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
+
+
+    require('rmagatti.lsp.lsp-mappings').on_attach(client, bufnr)
+
+    -- Each module tracks its own setup state per buffer
+    require("rmagatti.lsp.removed-unused").on_attach(client, bufnr, augroup)
+    require("rmagatti.lsp.format-on-save").on_attach(client, bufnr, augroup)
+    require("rmagatti.lsp.biome").on_attach(client, bufnr, augroup)
+  end,
+})
 
 vim.diagnostic.config({
   virtual_text = true, -- Show inline error/warning messages

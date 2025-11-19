@@ -166,7 +166,6 @@ require "rmagatti.lsp"
 require "rmagatti.mappings"
 require "rmagatti.folding"
 require "rmagatti.rust-test-folding"
-require "rmagatti.autocmds"
 
 local original_notify = vim.notify
 

@@ -199,17 +199,17 @@ return {
     event = { "BufReadPost", "BufNewFile" },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
     cmd = "Mason",
     event = { "BufReadPost", "BufNewFile" },
     opts = {}
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig"
     },
     config = function()
       require("rmagatti.mason-lspconfig")

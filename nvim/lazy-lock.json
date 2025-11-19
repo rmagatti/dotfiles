@@ -6,7 +6,7 @@
   "cellular-automaton.nvim": { "branch": "main", "commit": "1606e9d5d04ff254023c3f3c62842d065708d6d3" },
   "codecompanion.nvim": { "branch": "main", "commit": "68fcda022fce25ee380e267d4b0fe98113b3957d" },
   "copilot-lsp": { "branch": "main", "commit": "884034b23c3716d55b417984ad092dc2b011115b" },
-  "copilot.lua": { "branch": "master", "commit": "e919876a5523b06406f0bc7285477da87a338a61" },
+  "copilot.lua": { "branch": "master", "commit": "4383e05a47493d7ff77b058c0548129eb38ec7fb" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "firenvim": { "branch": "master", "commit": "f8a5fa6f1ed42536490acf0840497c40331c184f" },
