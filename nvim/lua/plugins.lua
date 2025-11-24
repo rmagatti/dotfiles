@@ -347,7 +347,8 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
+    branch = "main",
+    lazy = false,
     config = function()
       require "rmagatti.treesitter"
     end,
@@ -370,8 +371,18 @@ return {
     "RRethy/nvim-treesitter-textsubjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "BufReadPost" },
-    enabled = true,
+    -- Disabled: incompatible with nvim-treesitter main branch
+    -- The plugin requires nvim-treesitter.query module which was removed in main branch
+    -- TODO: Re-enable when plugin is updated for main branch compatibility
+    enabled = false,
+    init = function()
+      -- Disable the plugin's automatic loading via plugin/nvim-treesitter-textsubjects.vim
+      -- We'll configure it manually in the config function after treesitter is ready
+      vim.g.loaded_nvim_treesitter_textsubjects = 1
+    end,
     config = function()
+      -- Manually initialize after treesitter is ready
+      require('nvim-treesitter-textsubjects').init()
       require('nvim-treesitter-textsubjects').configure({
         prev_selection = ',',
         keymaps = {

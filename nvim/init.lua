@@ -23,16 +23,17 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0.015
   vim.g.neovide_cursor_trail_length = 0.15
   vim.g.neovide_input_macos_option_key_is_meta = "both"
-  vim.g.neovide_floating_blur_amount_x = 3.0
-  vim.g.neovide_floating_blur_amount_y = 3.0
+  vim.g.neovide_floating_blur_amount_x = 5.0
+  vim.g.neovide_floating_blur_amount_y = 5.0
   vim.g.neovide_underline_stroke_scale = 1
   vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_padding_top = 0
 
   vim.g.neovide_floating_shadow = true
-  vim.g.neovide_floating_z_height = 10
+  vim.g.neovide_floating_z_height = 15
   vim.g.neovide_light_angle_degrees = 45
-  vim.g.neovide_light_radius = 5
+  vim.g.neovide_light_radius = 8
+  vim.g.neovide_floating_corner_radius = 0.2
 
   -- Allow clipboard copy paste in Neovide
   vim.g.neovide_input_use_logo = 1

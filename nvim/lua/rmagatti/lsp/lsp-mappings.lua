@@ -36,7 +36,7 @@ do
   end
 end
 
-vim.keymap.set("n", "ih", function()
+vim.keymap.set("n", "<leader>ih", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
   vim.notify("Inlay Hints " .. (vim.lsp.inlay_hint.is_enabled() and "Enabled" or "Disabled"))
 end, { desc = "Toggle Inlay Hints" })

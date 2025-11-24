@@ -1,6 +1,5 @@
----@diagnostic disable-next-line: missing-fields
-require("nvim-treesitter.configs").setup {
-  ensure_installed = { "lua", "typescript", "terraform" },
+require("nvim-treesitter").setup {
+  ensure_installed = { "lua", "typescript", "terraform", "svelte", "html", "css", "json", "bash", "yaml", "markdown", "markdown_inline", "rust", "gitcommit" },
   sync_install = false,
   ignore_install = { "" },
   auto_install = true,
@@ -12,28 +11,18 @@ require("nvim-treesitter.configs").setup {
     enable = true,
   },
 
-  textsubjects = require("rmagatti.treesitter-textsubjects"),
+  -- textsubjects = require("rmagatti.treesitter-textsubjects"), -- Disabled: incompatible with main branch
   incremental_selection = require("rmagatti.treesitter-incremental-selection"),
 
   -- TODO: Figure out how to use move
   move = require("rmagatti.treesitter-move"),
 }
 
--- TODO: enable when I need ejs
--- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
--- parser_config.ejs = {
---   install_info = {
---     url = "https://github.com/tree-sitter/tree-sitter-embedded-template",
---     files = { "src/parser.c" },
---     requires_generate_from_grammar = true,
---   },
---   filetype = "ejs",
--- }
-
--- Reset treesitter
-vim.cmd [[
-  nnoremap <leader>rt <cmd>w <bar> e <bar> TSBufEnable highlight <bar> set syntax=off<CR>
-]]
-
--- Load additional parsers
-require("tree-sitter-rstml").setup()
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'lua', 'typescript', 'terraform', 'svelte', 'html', 'css', 'json', 'bash', 'yaml', 'markdown', 'rust', "gitcommit" },
+  callback = function()
+    vim.treesitter.start()
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})

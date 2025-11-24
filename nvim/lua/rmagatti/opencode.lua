@@ -30,7 +30,8 @@ M.setup = function()
     require("opencode").prompt("@this")
   end, { desc = "Add to opencode (prompt)" })
 
-  vim.keymap.set({ "n", "t" }, "<leader>oo", function()
+  -- Only in normal mode - removed 't' to avoid space delay in terminal insert mode
+  vim.keymap.set("n", "<leader>oo", function()
     require("opencode").toggle()
   end, { desc = "Toggle opencode" })
 

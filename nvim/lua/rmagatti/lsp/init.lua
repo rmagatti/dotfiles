@@ -14,16 +14,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Enable inlay hints if supported
     if client:supports_method('textDocument/inlayHint', bufnr) then
-      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
     end
 
 
     require('rmagatti.lsp.lsp-mappings').on_attach(client, bufnr)
 
-    -- Each module tracks its own setup state per buffer
-    require("rmagatti.lsp.removed-unused").on_attach(client, bufnr, augroup)
-    require("rmagatti.lsp.format-on-save").on_attach(client, bufnr, augroup)
-    require("rmagatti.lsp.biome").on_attach(client, bufnr, augroup)
+    -- Single module handles all save actions synchronously
+    require("rmagatti.lsp.on-save").on_attach(client, bufnr, augroup)
   end,
 })
 

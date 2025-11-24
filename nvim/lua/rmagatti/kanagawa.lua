@@ -24,9 +24,9 @@ require('kanagawa').setup({
       TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
       TelescopePreviewNormal = { bg = theme.ui.bg_dim },
       TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-      NormalFloat = { bg = "none" },
-      FloatBorder = { bg = "none" },
-      FloatTitle = { bg = "none" },
+      NormalFloat = { bg = theme.ui.bg_m1 },
+      FloatBorder = { bg = theme.ui.bg_m1, fg = theme.ui.fg_dim },
+      FloatTitle = { bg = theme.ui.bg_m1, fg = theme.ui.special, bold = true },
 
       -- Save an hlgroup with dark background and dimmed foreground
       -- so that you can use it where your still want darker windows.
