@@ -24,9 +24,10 @@ require('kanagawa').setup({
       TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
       TelescopePreviewNormal = { bg = theme.ui.bg_dim },
       TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-      NormalFloat = { bg = theme.ui.bg_m1 },
-      FloatBorder = { bg = theme.ui.bg_m1, fg = theme.ui.fg_dim },
-      FloatTitle = { bg = theme.ui.bg_m1, fg = theme.ui.special, bold = true },
+      -- Make floating windows pop out more with darker background and visible borders
+      NormalFloat = { bg = theme.ui.bg_m3 },
+      FloatBorder = { bg = theme.ui.bg_m3, fg = theme.syn.identifier },
+      FloatTitle = { bg = theme.ui.bg_m3, fg = theme.ui.special, bold = true },
 
       -- Save an hlgroup with dark background and dimmed foreground
       -- so that you can use it where your still want darker windows.

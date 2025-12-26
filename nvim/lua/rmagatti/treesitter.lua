@@ -1,5 +1,5 @@
 require("nvim-treesitter").setup {
-  ensure_installed = { "lua", "typescript", "terraform", "svelte", "html", "css", "json", "bash", "yaml", "markdown", "markdown_inline", "rust", "gitcommit" },
+  ensure_installed = { "lua", "typescript", "terraform", "svelte", "html", "css", "json", "bash", "yaml", "markdown", "markdown_inline", "rust", "gitcommit", "terraform" },
   sync_install = false,
   ignore_install = { "" },
   auto_install = true,
@@ -19,7 +19,7 @@ require("nvim-treesitter").setup {
 }
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'lua', 'typescript', 'terraform', 'svelte', 'html', 'css', 'json', 'bash', 'yaml', 'markdown', 'rust', "gitcommit" },
+  pattern = { 'lua', 'typescript', 'terraform', 'svelte', 'html', 'css', 'json', 'bash', 'yaml', 'markdown', 'rust', "gitcommit", "terraform" },
   callback = function()
     vim.treesitter.start()
     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

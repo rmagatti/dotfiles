@@ -443,3 +443,6 @@ alias gemini="GOOGLE_CLOUD_PROJECT=\"montra-development-env\" gemini"
 # OpenCode profiles
 alias ocw="OPENCODE_CONFIG_DIR=~/.config/opencode-work opencode"
 alias ocp="OPENCODE_CONFIG_DIR=~/.config/opencode-personal opencode"
+
+# opencode
+export PATH=/Users/ronniemagatti/.opencode/bin:$PATH

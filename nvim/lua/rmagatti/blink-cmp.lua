@@ -12,6 +12,7 @@ M.setup = function()
     keymap = {
       preset = 'default',
       ['<C-;>'] = { 'select_and_accept' },
+      ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
     },
 
     appearance = {
@@ -22,6 +23,19 @@ M.setup = function()
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = 'mono'
+    },
+
+    completion = {
+      menu = {
+        border = 'rounded',
+        winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+      },
+      documentation = {
+        window = {
+          border = 'rounded',
+          winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder',
+        },
+      },
     },
 
     -- default list of enabled providers defined so that you can extend it
@@ -41,7 +55,13 @@ M.setup = function()
     },
 
     -- experimental signature help support
-    signature = { enabled = true }
+    signature = {
+      enabled = true,
+      window = {
+        border = 'rounded',
+        winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder',
+      },
+    }
   }
 
   require("blink.cmp").setup(opts)

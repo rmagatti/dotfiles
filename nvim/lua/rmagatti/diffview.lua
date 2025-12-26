@@ -21,7 +21,6 @@ require("diffview").setup {
   },
 }
 
-vim.cmd [[
-  nnoremap <leader>dvo :DiffviewOpen<CR>
-  nnoremap <leader>dvc :DiffviewClose<CR>
-]]
+vim.keymap.set("n", "<leader>dvo", "<cmd>DiffviewOpen<CR>", { desc = "Diffview open" })
+vim.keymap.set("n", "<leader>dvc", "<cmd>DiffviewClose<CR>", { desc = "Diffview close" })
+vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", { desc = "Diffview file history" })

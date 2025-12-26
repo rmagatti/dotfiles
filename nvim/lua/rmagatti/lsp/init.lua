@@ -1,5 +1,25 @@
 require("mason").setup()
 
+-- Configure LSP floating window borders
+local border = {
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+
+-- Override LSP floating window handlers to use borders
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 local augroup = vim.api.nvim_create_augroup('PreSaveActions', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -30,4 +50,10 @@ vim.diagnostic.config({
   signs = true,        -- Show signs in the gutter
   underline = true,    -- Underline problematic code
   update_in_insert = false,
+  float = {
+    border = border,
+    source = "always",
+    header = "",
+    prefix = "",
+  },
 })

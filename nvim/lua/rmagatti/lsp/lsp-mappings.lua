@@ -51,7 +51,7 @@ M.on_attach = function(client, bufnr, augroup)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "gr", function()
-    require("telescope.builtin").lsp_references()
+    require("snacks").picker.lsp_references()
   end, opts)
 
   -- Type helpers
@@ -91,22 +91,20 @@ M.on_attach = function(client, bufnr, augroup)
     vim.diagnostic.jump({ count = -1, float = true })
   end, opts) -- diagnostic previous (not mneumonic)
   vim.keymap.set("n", "<leader>dl", function()
-    require("telescope.builtin").diagnostics()
+    require("snacks").picker.diagnostics()
   end, opts)                                                        -- diagnostics telescope list
   vim.keymap.set("n", "<leader>dq", vim.diagnostic.setqflist, opts) -- diagnostic quickfix list
 
   -- Symbols
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>o", "<cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
   vim.keymap.set("n", "<leader>ws", function()
-    return require("telescope.builtin").lsp_dynamic_workspace_symbols { ignore_symbols = { "node_modules/**", "target/" } }
+    return require("snacks").picker.lsp_workspace_symbols()
   end, opts)
   vim.keymap.set("n", "<leader>wsf", function()
-    return require("telescope.builtin").lsp_dynamic_workspace_symbols {
-      symbols = { "function" },
-    }
+    return require("snacks").picker.lsp_workspace_symbols()
   end, opts)
   vim.keymap.set("n", "<leader>ds", function()
-    return require("telescope.builtin").lsp_document_symbols()
+    return require("snacks").picker.lsp_symbols()
   end, opts)
 
   if client.server_capabilities.documentHighlightProvider then

@@ -60,7 +60,7 @@ M.on_attach = function(client, bufnr, augroup)
       end
 
       -- Step 3: Remove unused imports/variables (synchronously)
-      if has_code_action and not has_biome then
+      if has_code_action then
         vim.lsp.buf.code_action({
           context = {
             only = { "source.removeUnused", "source.removeUnusedImports" },

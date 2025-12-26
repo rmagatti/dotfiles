@@ -21,13 +21,8 @@ end)
 
 if vim.g.neovide then
   vim.keymap.set("n", "<D-p>", function()
-    local success, _ = pcall(require("telescope.builtin").git_files)
-    if not success then
-      require("telescope.builtin").find_files()
-      return
-    end
-  end
-  , {})
+    require("snacks").picker.git_files()
+  end, { desc = "Git files" })
 end
 
 local function close_fugitive_buffers()

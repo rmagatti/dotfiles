@@ -7,7 +7,17 @@ M.setup = function()
   require("snacks").setup {
     indent = { enabled = false },
     input = { enabled = false },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      win = {
+        input = {
+          keys = {
+            ["<C-i>"] = { "history_next", mode = { "i", "n" } },
+            ["<C-o>"] = { "history_prev", mode = { "i", "n" } },
+          },
+        },
+      },
+    },
     dim = { enabled = true },
     notifier = { enabled = true },
     zen = { enabled = true }
@@ -23,6 +33,13 @@ M.setup = function()
       is_dimmed = true
     end
   end, { noremap = true, silent = true })
+
+  -- Load picker mappings
+  require("rmagatti.mappings.picker")
+  
+  -- Load custom pickers
+  require("rmagatti.snacks.buffers").setup()
+  require("rmagatti.snacks.dotfiles").setup()
 end
 
 return M

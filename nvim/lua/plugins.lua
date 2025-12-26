@@ -261,33 +261,7 @@ return {
     "nvim-lua/plenary.nvim",
     lazy = true,
   },
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    keys = {
-      { "<leader>ff" },
-      { "<leader>fg" },
-      { "<leader>fb" },
-      { "<leader>fh" },
-      { "<leader>ps" },
-      { "<leader>b" },
-    },
-    dependencies = {
-      "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build =
-        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-        config = function()
-          require("telescope").load_extension("fzf")
-        end,
-      }
-    },
-    config = function()
-      require "rmagatti.telescope"
-    end
-  },
+  -- Telescope removed - using Snacks picker instead
   -- Git
   {
     "tpope/vim-fugitive",
@@ -310,7 +284,6 @@ return {
     lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
       "sindrets/diffview.nvim",
     },
     config = function()
@@ -326,10 +299,11 @@ return {
     config = function()
       require "rmagatti.diffview"
     end,
-    cmd = { "DiffviewOpen" },
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     keys = {
       { "<leader>dvo" },
       { "<leader>dvc" },
+      { "<leader>gh" },
     },
   },
 
@@ -452,15 +426,7 @@ return {
       return package.loaded["dap"] ~= nil
     end,
   },
-  {
-    "nvim-telescope/telescope-dap.nvim",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
-    cmd = { "Telescope dap" },
-    keys = { "<leader>df" },
-    config = function()
-      require("telescope").load_extension "dap"
-    end,
-  },
+  -- telescope-dap removed - DAP functionality available through nvim-dap directly
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap" },
@@ -494,15 +460,11 @@ return {
     config = function()
       require("neoclip").setup {
         enable_persistent_history = true,
-        keys = {
-          telescope = {
-            i = {
-              paste = false --will restore telescope default <c-p> action to move to prev item
-            }
-          }
-        }
       }
-      vim.cmd [[nnoremap <leader>y <cmd>lua require('telescope').extensions.neoclip.default()<CR>]]
+      -- Use registers picker from snacks instead
+      vim.keymap.set("n", "<leader>y", function()
+        require("snacks").picker.registers()
+      end, { desc = "Neoclip / Registers" })
     end,
   },
   {
