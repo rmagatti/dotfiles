@@ -238,7 +238,7 @@ return {
     "Saghen/blink.cmp",
     dependencies = 'rafamadriz/friendly-snippets',
     version = 'v1.*',
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdwinEnter" },
     config = function()
       require("rmagatti.blink-cmp").setup()
     end,
