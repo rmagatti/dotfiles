@@ -134,6 +134,12 @@ return {
   {
     "jake-stewart/multicursor.nvim",
     branch = "1.0",
+    keys = {
+      { "<up>",          mode = { "n", "x" } },
+      { "<down>",        mode = { "n", "x" } },
+      { "<leader>n",     mode = { "n", "x" } },
+      { "<c-leftmouse>", mode = "n" },
+    },
     config = function()
       local mc = require("multicursor-nvim")
       mc.setup()
@@ -196,17 +202,11 @@ return {
   -- LSP and completion
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    cmd = "Mason",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {}
-  },
-  {
-    "mason-org/mason-lspconfig.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig"
@@ -217,6 +217,7 @@ return {
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = false,
     config = function()
       require("rmagatti.mason-tool-installer")
     end
@@ -323,6 +324,7 @@ return {
     build = ":TSUpdate",
     branch = "main",
     lazy = false,
+    priority = 900, -- Load before other plugins that depend on it (after colorscheme at 1000)
     config = function()
       require "rmagatti.treesitter"
     end,
@@ -518,7 +520,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    event = { "BufEnter" },
+    event = "InsertEnter",
     dependencies = {
       {
         "copilotlsp-nvim/copilot-lsp",
@@ -557,7 +559,7 @@ return {
     'mrcjkb/rustaceanvim',
     version = '^6',
     dev = false,
-    lazy = false
+    ft = { "rust" },
   },
   -- Term color codes when looking at logs
   -- {
@@ -596,6 +598,9 @@ return {
   },
   {
     "NickvanDyke/opencode.nvim",
+    keys = {
+      { "<leader>oo" },
+    },
     dependencies = {
       "folke/snacks.nvim",
     },
@@ -625,6 +630,7 @@ return {
   },
   {
     'mfussenegger/nvim-lint',
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("rmagatti.nvim-lint").setup()
     end
@@ -634,12 +640,14 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    cmd = { "MCPHub" },
     build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
     config = function()
       require("mcphub").setup()
     end
   },
   {
-    "rayliwell/tree-sitter-rstml"
+    "rayliwell/tree-sitter-rstml",
+    ft = { "rust" },
   },
 }
