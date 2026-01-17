@@ -2,8 +2,12 @@ local Snacks = require("snacks")
 
 -- File pickers
 vim.keymap.set("n", "<D-f>", function()
-  Snacks.picker.grep_buffers()
-end, { desc = "Current buffer fuzzy find" })
+  Snacks.picker.lines()
+end, { desc = "Search lines in current buffer" })
+
+vim.keymap.set("n", "<D-S-f>", function()
+  Snacks.picker.grep()
+end, { desc = "Live grep across all files" })
 
 vim.keymap.set("n", "<C-p>", function()
   Snacks.picker.git_files()
@@ -16,6 +20,10 @@ end, { desc = "Find files" })
 vim.keymap.set("n", "<leader>ps", function()
   Snacks.picker.grep()
 end, { desc = "Live grep" })
+
+vim.keymap.set("n", "<leader>sb", function()
+  Snacks.picker.grep_buffers()
+end, { desc = "Search across all open buffers" })
 
 vim.keymap.set("n", "<leader>pg", function()
   local search = vim.fn.input("Search: ")
@@ -90,8 +98,8 @@ vim.keymap.set("n", "<localleader>hl", function()
 end, { desc = "Search syntax highlights" })
 
 vim.keymap.set("n", "<localleader>/", function()
-  Snacks.picker.grep_buffers()
-end, { desc = "Find in current buffer" })
+  Snacks.picker.lines()
+end, { desc = "Search lines in current buffer" })
 
 vim.keymap.set("n", "<localleader>res", function()
   Snacks.picker.resume()

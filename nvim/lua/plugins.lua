@@ -335,6 +335,14 @@ return {
     event = { "BufReadPost" },
   },
   {
+    "HiPhish/rainbow-delimiters.nvim",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost" },
+    config = function()
+      require("rmagatti.rainbow-delimiters").setup()
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     branch = "main",

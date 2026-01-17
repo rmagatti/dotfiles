@@ -209,7 +209,7 @@ function gitchr() {
 }
 
 function gitdc() {
-  code $(git diff --name-only)
+  nvim $(git diff --name-only)
 }
 
 function unstringify() {
@@ -441,6 +441,7 @@ bindkey -s ç 'cd $(find ~/Projects/ -maxdepth 2 -type d | fzf)\n'
 alias gemini="GOOGLE_CLOUD_PROJECT=\"montra-development-env\" gemini"
 
 # OpenCode profiles
+alias oc="opencode"
 alias ocw="OPENCODE_CONFIG_DIR=~/.config/opencode-work opencode"
 alias ocp="OPENCODE_CONFIG_DIR=~/.config/opencode-personal opencode"
 
