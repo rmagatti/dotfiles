@@ -32,6 +32,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
+    -- Disable LSP for oil.nvim buffers
+    if vim.bo[bufnr].filetype == "oil" then
+      vim.lsp.buf_detach_client(bufnr, client.id)
+      return
+    end
+
     -- Enable inlay hints if supported
     if client:supports_method('textDocument/inlayHint', bufnr) then
       vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
