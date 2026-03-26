@@ -21,6 +21,9 @@ M.setup = function()
     debug = false,
     vim_ui_input = true,
     preview_window_title = { enable = false, position = "left" },
+    references = {
+      provider = "snacks",
+    },
     post_open_hook = function(bufr)
       mapping_fn("H", bufr)
       mapping_fn("J", bufr)
