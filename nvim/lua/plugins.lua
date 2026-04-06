@@ -491,7 +491,26 @@ return {
     config = function()
       require("alternate-toggler").setup {
         alternates = {
-          ["=="] = "!=",
+          -- Defaults
+          { "true", "false" },
+          { "True", "False" },
+          { "TRUE", "FALSE" },
+          { "Yes", "No" },
+          { "YES", "NO" },
+          { "1", "0" },
+          { "<", ">" },
+          { "(", ")" },
+          { "[", "]" },
+          { "{", "}" },
+          { '"', "'" },
+          { '""', "''" },
+          { "+", "-" },
+          { "===", "!==" },
+          { "==", "!=" },
+          { "public", "private", "protected" },
+          -- Logging levels (tracing, log4j, Python logging, etc.)
+          { "trace", "debug", "info", "warn", "error" },
+          { "TRACE", "DEBUG", "INFO", "WARN", "ERROR" },
         },
       }
       vim.keymap.set(
