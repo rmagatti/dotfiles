@@ -2,7 +2,7 @@ require("auto-session").setup {
   log_level = vim.log.levels.INFO,
   suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
   use_git_branch = false,
-  show_auto_restore_notif = true,
+  show_auto_restore_notif = false,
   picker = "snacks", -- Use Snacks picker instead of Telescope
 }
 

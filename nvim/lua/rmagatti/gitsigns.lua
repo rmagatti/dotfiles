@@ -16,20 +16,20 @@ require("gitsigns").setup {
     map("n", "[h", "<cmd>Gitsigns prev_hunk<CR>")
 
     -- Actions
-    map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-    map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-    map("n", "<leader>hS", gs.stage_buffer)
-    map("n", "<leader>hu", gs.undo_stage_hunk)
-    map("n", "<leader>hR", gs.reset_buffer)
-    map("n", "<leader>hp", gs.preview_hunk)
+    map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Stage hunk" })
+    map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Reset hunk" })
+    map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage buffer" })
+    map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+    map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
+    map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
     map("n", "<leader>hb", function()
       gs.blame_line { full = true }
-    end)
-    map("n", "<leader>ib", gs.toggle_current_line_blame)
-    map("n", "<leader>hd", gs.diffthis)
+    end, { desc = "Blame line" })
+    map("n", "<leader>ib", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
+    map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
     map("n", "<leader>hD", function()
       gs.diffthis "~"
-    end)
+    end, { desc = "Diff this (cached)" })
     map("n", "<leader>gtd", gs.toggle_deleted)
 
     -- Text object

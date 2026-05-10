@@ -9,13 +9,11 @@ return {
     codeActionProvider = true,
   },
   settings = {
-    vtsls = {
-      -- Project-wide diagnostics (equivalent to VS Code's
-      -- js/ts.tsserver.experimental.enableProjectDiagnostics)
-      tsserver = {
-        experimental = {
-          enableProjectDiagnostics = true,
-        },
+    -- Project-wide diagnostics (equivalent to VS Code's
+    -- js/ts.tsserver.experimental.enableProjectDiagnostics)
+    tsserver = {
+      experimental = {
+        enableProjectDiagnostics = true,
       },
     },
     typescript = {
