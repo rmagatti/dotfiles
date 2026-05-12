@@ -42,7 +42,7 @@
     "show": "never",
   },
   "agent": {
-    "dock": "right",
+    "dock": "left",
     "tool_permissions": {
       "default": "allow",
     },
