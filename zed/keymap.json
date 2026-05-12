@@ -1,0 +1,194 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "l": "vim::Up",
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "k": "vim::Down",
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "j": "vim::Left",
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      ";": "vim::Right",
+    },
+  },
+  {
+    "context": "FileFinder",
+    "bindings": {
+      "ctrl-v": "pane::SplitRight",
+      "ctrl-x": "pane::SplitDown",
+    },
+  },
+  // Project panel
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "ctrl-v": "project_panel::OpenSplitVertical",
+      "ctrl-x": "project_panel::OpenSplitHorizontal",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "k": "menu::SelectNext",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "l": "menu::SelectPrevious",
+    },
+  },
+  // "Window" mappings
+  {
+    "context": "ProjectPanel || vim_mode == normal",
+    "bindings": {
+      "ctrl-j": "workspace::ActivatePaneLeft",
+    },
+  },
+  {
+    "context": "ProjectPanel || vim_mode == normal",
+    "bindings": {
+      "ctrl-k": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "ProjectPanel || vim_mode == normal",
+    "bindings": {
+      "ctrl-l": "workspace::ActivatePaneUp",
+    },
+  },
+  {
+    "context": "ProjectPanel || vim_mode == normal",
+    "bindings": {
+      "ctrl-;": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space q": "pane::CloseActiveItem",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space g g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space g b": "git::Blame",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space v s p": "pane::SplitRight",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space s p": "pane::SplitDown",
+    },
+  },
+  // Editor
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space e": "editor::Hover",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space w s": "project_symbols::Toggle",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space d s": "outline::Toggle",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space w e": "diagnostics::Deploy",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space d e": "diagnostics::DeployCurrentFile",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space c a b": "pane::CloseOtherItems",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "z f": "editor::FoldFunctionBodies",
+    },
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "s": "vim::PushSneak",
+      "shift-s": "vim::PushSneakBackward",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-alt-cmd-shift-space": "collab::Mute",
+    },
+  },
+  {
+    "context": "GitPanel >Editor && VimControl && vim_mode == normal",
+    "bindings": {
+      "space c c": "git::GenerateCommitMessage",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-shift-b": ["task::Spawn", { "task_name": "Copy branch name" }],
+    },
+  },
+]

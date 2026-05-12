@@ -1,0 +1,7 @@
+# Ignore everything
+*
+# Track key config files
+!.gitignore
+!settings.json
+!keymap.json
+!tasks.json
