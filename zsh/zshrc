@@ -141,7 +141,7 @@ function gitm() {
 }
 
 function gitmdev() {
-  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && git branch -D development && git fetch origin development && git checkout development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
+  BRANCH_TO_MERGE=$(git symbolic-ref --short HEAD) && (git branch -D development 2>/dev/null || true) && git fetch origin development && git checkout development && git pull && git merge $BRANCH_TO_MERGE && git push && git checkout $BRANCH_TO_MERGE
 }
 
 function gitmDev() {
@@ -234,3 +234,9 @@ function bri() {
     done
   fi
 }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/completion.zsh.inc'; fi
