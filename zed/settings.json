@@ -1,0 +1,237 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "right",
+  },
+  "outline_panel": {
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "right",
+  },
+  "git_panel": {
+    "dock": "right",
+  },
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "colorize_brackets": true,
+  "audio": {
+    "experimental.auto_microphone_volume": true,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "agent": {
+    "dock": "right",
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4-6-latest",
+    },
+    "play_sound_when_agent_done": "always",
+    "default_profile": "write",
+    "default_model": {
+      "enable_thinking": false,
+      "provider": "openai",
+      "model": "gpt-5.5",
+    },
+  },
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "context_servers": {
+    "supabase-montra-production": {
+      "enabled": false,
+      "url": "https://mcp.supabase.com/mcp?project_ref=mmuarwdsipvltgyohujq&read_only=true",
+      "headers": {
+"Authorization": "Bearer {env:SUPABASE_ACCESS_TOKEN_MONTRA}",
+      },
+    },
+    "supabase-callassi-production": {
+      "enabled": false,
+      "url": "https://mcp.supabase.com/mcp?project_ref=ugntnjjrklrwmjimpcsk&read_only=true",
+      "headers": {
+        "Authorization": "Bearer {env:SUPABASE_ACCESS_TOKEN_CALLASSI}",
+      },
+    },
+    "supabase-callassi-deployed": {
+      "enabled": false,
+      "url": "https://mcp.supabase.com/mcp?project_ref=ugntnjjrklrwmjimpcsk",
+      "headers": {
+        "Authorization": "Bearer {env:SUPABASE_ACCESS_TOKEN_CALLASSI}",
+      },
+    },
+    "sentry-callassi": {
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.sentry.dev/mcp/ronnie-magatti/callassi",
+      ],
+      "env": {},
+    },
+    "montra-dev-supabase": {
+      "enabled": true,
+      "settings": {
+        "project_ref": "hjtxndtruiwltvdvfpdv",
+        "read_only": false,
+        "supabase_access_token": "{env:SUPABASE_ACCESS_TOKEN_MONTRA}",
+      },
+    },
+    "supabase-callassi-local": {
+      "enabled": false,
+      "url": "http://127.0.0.1:54321/mcp",
+    },
+    "mcp-obsidian": {
+      "enabled": true,
+      "env": {
+        "OBSIDIAN_KEY": "{env:OBSIDIAN_KEY}",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124",
+      },
+      "command": "uvx",
+      "args": ["mcp-obsidian"],
+      "settings": {
+        "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124",
+      },
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "settings": {},
+    },
+    "supabase-callassi": {
+      "enabled": false,
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "{env:SUPABASE_ACCESS_TOKEN_CALLASSI}",
+      },
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref",
+        "ugntnjjrklrwmjimpcsk",
+      ],
+    },
+    "supabase-montra-dev": {
+      "headers": {
+        "Authorization": "Bearer {env:SUPABASE_ACCESS_TOKEN_MONTRA}",
+      },
+      "url": "https://mcp.supabase.com/mcp?project_ref=hjtxndtruiwltvdvfpdv&read_only=true",
+      "enabled": false,
+    },
+    "supabase-montra-staging": {
+      "enabled": false,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref",
+        "hcjqqlnkyzfhcxgptrfn",
+      ],
+      "settings": {
+        "SUPABASE_ACCESS_TOKEN": "$SUPABASE_ACCESS_TOKEN",
+      },
+    },
+    "linear": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+    },
+    "vercel": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.vercel.com"],
+    },
+    "posthog": {
+      "enabled": false,
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:POSTHOG_API_KEY}",
+      },
+    },
+  },
+  "vim": {
+    "use_system_clipboard": "never",
+  },
+  "vim_mode": true,
+  "ui_font_size": 15,
+  "buffer_font_size": 12,
+  "relative_line_numbers": "enabled",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Kanagawa",
+  },
+  "languages": {
+    "Svelte": {
+      "language_servers": ["svelte-language-server", "!biome"],
+    },
+    "JavaScript": {
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.organizeImports.biome": false,
+        "source.fixAll.biome": false,
+        "source.removeUnusedImports.biome": false,
+      },
+    },
+    "TypeScript": {
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.organizeImports.biome": true,
+        "source.fixAll.biome": true,
+        "source.removeUnusedImports.biome": true,
+      },
+    },
+    "TSX": {
+      "formatter": {
+        "language_server": {
+          "name": "biome",
+        },
+      },
+      "code_actions_on_format": {
+        "source.organizeImports.biome": true,
+        "source.fixAll.biome": true,
+        "source.removeUnusedImports": true,
+      },
+    },
+  },
+  "calls": {
+    // Join calls with the microphone live by default
+    "mute_on_join": true,
+    // Share your project when you are the first to join a channel
+    "share_on_join": true,
+  },
+  "extend_comment_on_newline": false,
+}
