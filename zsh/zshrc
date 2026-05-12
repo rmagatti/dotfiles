@@ -1,3 +1,11 @@
+# Prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' %F{yellow}%b%f'
+zstyle ':vcs_info:*' enable git
+setopt PROMPT_SUBST
+PS1='%F{blue}%~%f${vcs_info_msg_0_} %F{%(?.green.red)}❯%f '
+
 # History
 HISTSIZE=10000
 SAVEHIST=10000
