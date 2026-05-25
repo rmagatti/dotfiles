@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   "cli_default_open_behavior": "new_window",
   "project_panel": {
     "dock": "right",
@@ -31,6 +36,11 @@
       "type": "registry",
     },
     "opencode": {
+      "favorite_config_option_values": {
+        "effort": [
+          "high"
+        ]
+      },
       "type": "registry",
     },
   },
@@ -53,9 +63,9 @@
     "play_sound_when_agent_done": "always",
     "default_profile": "write",
     "default_model": {
-      "enable_thinking": false,
-      "provider": "openai",
-      "model": "gpt-5.5",
+      "enable_thinking": true,
+      "provider": "ollama",
+      "model": "qwen3.6:35b",
     },
   },
   "buffer_font_family": "JetBrainsMono Nerd Font",
@@ -81,16 +91,6 @@
         "Authorization": "Bearer {env:SUPABASE_ACCESS_TOKEN_CALLASSI}",
       },
     },
-    "sentry-callassi": {
-      "enabled": true,
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://mcp.sentry.dev/mcp/ronnie-magatti/callassi",
-      ],
-      "env": {},
-    },
     "montra-dev-supabase": {
       "enabled": true,
       "settings": {
@@ -103,22 +103,8 @@
       "enabled": false,
       "url": "http://127.0.0.1:54321/mcp",
     },
-    "mcp-obsidian": {
-      "enabled": true,
-      "env": {
-        "OBSIDIAN_KEY": "{env:OBSIDIAN_KEY}",
-        "OBSIDIAN_HOST": "127.0.0.1",
-        "OBSIDIAN_PORT": "27124",
-      },
-      "command": "uvx",
-      "args": ["mcp-obsidian"],
-      "settings": {
-        "OBSIDIAN_API_KEY": "{env:OBSIDIAN_API_KEY}",
-        "OBSIDIAN_HOST": "127.0.0.1",
-        "OBSIDIAN_PORT": "27124",
-      },
-    },
     "context7": {
+      "enabled": false,
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp@latest"],
       "settings": {},
@@ -182,7 +168,7 @@
   "buffer_font_size": 12,
   "relative_line_numbers": "enabled",
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "One Light",
     "dark": "Kanagawa",
   },
