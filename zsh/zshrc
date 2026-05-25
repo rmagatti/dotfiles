@@ -248,3 +248,7 @@ if [ -f '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/magatti/Projects/ThinkAlpha/nexus/google-cloud-sdk/completion.zsh.inc'; fi
+eval "$(fnm env)"
+
+# bun completions
+[ -s "/Users/magatti/.bun/_bun" ] && source "/Users/magatti/.bun/_bun"
