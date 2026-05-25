@@ -6,6 +6,7 @@
 [user]
 	name = Ronnie Andrew Magatti
 	email = ronniemagatti@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUfQTM2DtCCKi7cEyspzA4mF3iu4tbKpYkDJmTqrmgm
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -30,3 +31,12 @@
   cmd = vimr --nvim --wait -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [core]
 	editor = nvim
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = /Users/magatti/.ssh/allowed_signers
